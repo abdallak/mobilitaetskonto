@@ -14,11 +14,9 @@ sap.ui.jsview("Mobilitaetskonto.Mobilitaetskonto.view.View1", {
 	 */
 	createContent: function (oController) {
 		var oPage = new sap.m.Page({
-<<<<<<< HEAD
+
 			title: "{i18n>MOBIKON}",
-=======
-			title: "{i18n>abcdefghijklmnop}",
->>>>>>> refs/heads/master
+
 			id: "page",
 			content: []
 		});
