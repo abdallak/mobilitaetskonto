@@ -1,7 +1,11 @@
 /*global QUnit*/
 
 sap.ui.define([
+<<<<<<< HEAD
 	"mobilitaetskonto/mobilitaetskonto/controller/View1.controller"
+=======
+	"Mobilitaetskonto/Mobilitaetskonto/controller/View1.controller"
+>>>>>>> refs/heads/master
 ], function (Controller) {
 	"use strict";
 

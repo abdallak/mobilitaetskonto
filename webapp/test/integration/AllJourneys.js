@@ -7,7 +7,11 @@ sap.ui.define([
 
 	Opa5.extendConfig({
 		arrangements: new Startup(),
+<<<<<<< HEAD
 		viewNamespace: "mobilitaetskonto.mobilitaetskonto.view.",
+=======
+		viewNamespace: "Mobilitaetskonto.Mobilitaetskonto.view.",
+>>>>>>> refs/heads/master
 		autoWait: true
 	});
 });

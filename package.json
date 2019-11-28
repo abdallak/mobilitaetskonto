@@ -1,5 +1,9 @@
 {
+<<<<<<< HEAD
   "name": "mobilitaetskonto",
+=======
+  "name": "Mobilitaetskonto",
+>>>>>>> refs/heads/master
   "version": "0.0.1",
   "description": "",
   "private": true,
