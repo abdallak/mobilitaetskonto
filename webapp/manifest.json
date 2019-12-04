@@ -33,10 +33,10 @@
 	"sap.ui5": {
 		"flexEnabled": false,
 		"rootView": {
-			"viewName": "Mobilitaetskonto.Mobilitaetskonto.view.View1",
+			"viewName": "Mobilitaetskonto.Mobilitaetskonto.view.Antrag",
 			"type": "XML",
 			"async": true,
-			"id": "View1"
+			"id": "Antrag"
 		},
 		"dependencies": {
 			"minUI5Version": "1.65.6",
