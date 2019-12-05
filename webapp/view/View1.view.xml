@@ -6,7 +6,7 @@
 					<content>
 					    <sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
 					        <sap.ui.layout:content>
-					            <GenericTile id="antragStellenTile" header="{i18n>startpageAntragStellenTile}" press="action" action:wiring="\{'press':\{'navigation':\{'routeName':'Antrag'\}\}\}" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" subheader="{i18n>startpageAntragStellenTileSub}"/>
+					            <GenericTile id="antragStellenTile" header="{i18n>startpageAntragStellenTile}" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" subheader="{i18n>startpageAntragStellenTileSub}" press="onNavToAntrag"/>
 					            <GenericTile header="Header" subheader="Sub Header" id="tile1"/>
 					        </sap.ui.layout:content>
 					    </sap.ui.layout:HorizontalLayout>

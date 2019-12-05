@@ -84,6 +84,13 @@
 					]
 				},
 				{
+					"name": "View1",
+					"pattern": "View1",
+					"target": [
+						"View1"
+					]
+				},
+				{
 					"name": "Antrag",
 					"pattern": "Antrag",
 					"target": [
@@ -97,6 +104,10 @@
 					"transition": "slide",
 					"clearControlAggregation": false,
 					"viewId": "View1",
+					"viewName": "View1"
+				},
+				"View1": {
+					"viewType": "XML",
 					"viewName": "View1"
 				},
 				"Antrag": {

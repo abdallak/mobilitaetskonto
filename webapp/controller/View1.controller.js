@@ -35,6 +35,10 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 					this.getOwnerComponent().getRouter().navTo(oNavigation.routeName);
 				}
 			}
+		},
+		onNavToAntrag: function() {
+			var oRouter = this.getOwnerComponent().getRouter();
+			oRouter.navTo("Antrag");
 		}
 	});
 });
