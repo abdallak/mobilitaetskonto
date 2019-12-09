@@ -1,0 +1,18 @@
+{
+	"Umsatz": [
+		{
+			"art": "auszahlung",
+			"datum": "29.10.1998",
+			"betrag": 100,
+			"kategorie": "Sonstiges",
+			"status": "in bearbeitung"
+		},
+		{
+			"art": "gutschrift",
+			"datum": "13.12.2005",
+			"betrag": 20,
+			"kategorie": "Sonstiges",
+			"status": "fertig"
+		}
+	]
+}

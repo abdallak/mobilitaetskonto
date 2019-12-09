@@ -36,6 +36,13 @@
         "entryPath": "/test-resources"
       },
       "description": "SAPUI5 Test Resources"
+    }, 
+    {
+      "path": "/HANA",
+      "target": {
+        "type": "destination",
+        "name": "HANA"
+      }
     }
   ],
   "sendWelcomeFileRedirect": true

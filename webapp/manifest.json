@@ -56,6 +56,10 @@
 				"settings": {
 					"bundleName": "Mobilitaetskonto.Mobilitaetskonto.i18n.i18n"
 				}
+			},
+			"JSONUmsatz": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/Umsatz.json"
 			}
 		},
 		"resources": {
@@ -96,6 +100,20 @@
 					"target": [
 						"Antrag"
 					]
+				},
+				{
+					"name": "Umsatz",
+					"pattern": "Umsatz",
+					"target": [
+						"Umsatz"
+					]
+				},
+				{
+					"name": "testview",
+					"pattern": "testview",
+					"target": [
+						"testview"
+					]
 				}
 			],
 			"targets": {
@@ -113,6 +131,14 @@
 				"Antrag": {
 					"viewType": "XML",
 					"viewName": "Antrag"
+				},
+				"Umsatz": {
+					"viewType": "XML",
+					"viewName": "Umsatz"
+				},
+				"testview": {
+					"viewType": "XML",
+					"viewName": "testview"
 				}
 			}
 		}

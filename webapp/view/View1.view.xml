@@ -1,13 +1,13 @@
-<mvc:View controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.View1" xmlns:mvc="sap.ui.core.mvc" displayBlock="true" xmlns="sap.m">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.View1" displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
+				<Page id="page" title="{i18n&gt;title}">
 					<content>
 					    <sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
 					        <sap.ui.layout:content>
-					            <GenericTile id="antragStellenTile" header="{i18n>startpageAntragStellenTile}" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" subheader="{i18n>startpageAntragStellenTileSub}" press="onNavToAntrag"/>
-					            <GenericTile header="Header" subheader="Sub Header" id="tile1"/>
+					            <GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile" header="{i18n&gt;startpageAntragStellenTile}" subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag"/>
+					            <GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" header="Umsatzanzeige" subheader="cool" id="tile1" press="onNavToUmsatz"/>
 					        </sap.ui.layout:content>
 					    </sap.ui.layout:HorizontalLayout>
 					</content>
