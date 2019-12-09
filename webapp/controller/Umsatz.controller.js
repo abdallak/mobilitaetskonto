@@ -12,19 +12,19 @@ sap.ui.define([
 		 */
 		onInit: function () {
 			
-			var that =this;
+			var that = this;
 			
-			var url = "/HANA"; //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
+			var url = "/MOB_UMSATZ"; //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
 			
 			var request = $.get({
 			async: false,
 			url: url,
 			dataType: "json",
 			success: function() {
-				//	sap.m.MessageToast.show("success");
+					sap.m.MessageToast.show("success");
 			},
 			error: function() {
-				//	sap.m.MessageToast.show("error");
+					sap.m.MessageToast.show("error");
 			}
 			});
 			
@@ -33,7 +33,7 @@ sap.ui.define([
 				var UmsatzModel = new sap.ui.model.json.JSONModel(data);
 				that.getView().byId("table0").setModel(UmsatzModel, "UmsatzModel");
 			
-				//console.log("UmsatzModel:", UmsatzModel); nach oben packen:/*eslint-disable no-console, no-alert*/
+			//	console.log("UmsatzModel:", UmsatzModel); //nach oben packen:/*eslint-disable no-console, no-alert*/
 			});
 			
 			

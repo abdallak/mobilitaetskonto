@@ -38,10 +38,10 @@
       "description": "SAPUI5 Test Resources"
     }, 
     {
-      "path": "/HANA",
+      "path": "/MOB_UMSATZ",
       "target": {
         "type": "destination",
-        "name": "HANA"
+        "name": "MOB_UMSATZ"
       }
     }
   ],
