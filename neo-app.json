@@ -43,6 +43,13 @@
         "type": "destination",
         "name": "MOB_UMSATZ"
       }
+    },
+    {
+      "path": "/MOB_ANTRAG",
+      "target": {
+        "type": "destination",
+        "name": "MOB_ANTRAG"
+      }
     }
   ],
   "sendWelcomeFileRedirect": true

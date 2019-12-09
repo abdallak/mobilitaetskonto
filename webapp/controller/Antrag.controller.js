@@ -19,7 +19,31 @@ sap.ui.define([
 			var betrag = this.getView().byId("betrag").getValue();
 			var beschreibung = this.getView().byId("beschreibung").getValue();
 			
-			sap.m.MessageToast.show("Art: " + art + "\nBetrag: " + betrag + "\nBeschreibung: " + beschreibung);
+			
+			// var that = this;
+			
+			var url = "/MOB_ANTRAG?art=" + art +"&betrag="+betrag +"&beschreibung="+beschreibung;  //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
+			
+			var request = $.get({
+			async: false,
+			url: url,
+			dataType: "json",
+			success: function() {
+					sap.m.MessageToast.show("success");
+			},
+			error: function() {
+					sap.m.MessageToast.show("error");
+			}
+			});
+			
+			request.done(function(data){
+				sap.m.MessageToast.show("Art: " + art + "\nBetrag: " + betrag + "\nBeschreibung: " + beschreibung);
+			});
+			
+		
+			
+			
+			
 		},
 		
 		onNavToStartpage: function() {			
