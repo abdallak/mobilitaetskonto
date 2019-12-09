@@ -1,6 +1,6 @@
 sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 	"use strict";
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.View1", {
+	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		onInit: function () {},
 		
 		onNavToUmsatz: function()	{

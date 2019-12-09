@@ -40,7 +40,7 @@ sap.ui.define([
 		},
 		
 		onNavToStartpage: function() {			
-			this.getOwnerComponent().getRouter().navTo("View1");
+			this.getOwnerComponent().getRouter().navTo("Startpage");
 		}
 		
 		/**

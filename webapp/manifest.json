@@ -33,10 +33,10 @@
 	"sap.ui5": {
 		"flexEnabled": false,
 		"rootView": {
-			"viewName": "Mobilitaetskonto.Mobilitaetskonto.view.View1",
+			"viewName": "Mobilitaetskonto.Mobilitaetskonto.view.Startpage",
 			"type": "XML",
 			"async": true,
-			"id": "View1"
+			"id": "Startpage"
 		},
 		"dependencies": {
 			"minUI5Version": "1.65.6",
@@ -88,10 +88,10 @@
 					]
 				},
 				{
-					"name": "View1",
-					"pattern": "View1",
+					"name": "Startpage",
+					"pattern": "Startpage",
 					"target": [
-						"View1"
+						"Startpage"
 					]
 				},
 				{
@@ -121,12 +121,12 @@
 					"viewType": "XML",
 					"transition": "slide",
 					"clearControlAggregation": false,
-					"viewId": "View1",
-					"viewName": "View1"
+					"viewId": "Startpage",
+					"viewName": "Startpage"
 				},
-				"View1": {
+				"Startpage": {
 					"viewType": "XML",
-					"viewName": "View1"
+					"viewName": "Startpage"
 				},
 				"Antrag": {
 					"viewType": "XML",
