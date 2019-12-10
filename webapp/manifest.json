@@ -107,13 +107,6 @@
 					"target": [
 						"Umsatz"
 					]
-				},
-				{
-					"name": "testview",
-					"pattern": "testview",
-					"target": [
-						"testview"
-					]
 				}
 			],
 			"targets": {
