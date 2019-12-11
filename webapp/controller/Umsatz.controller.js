@@ -54,12 +54,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			
 			var paramsString = jQuery.param(params);
 			
-			var url2 = "/MOB_UMSATZ?" + paramsString;//used for 
-			var url = "/MOB_UMSATZ"; //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
+			var url2 = "/MOB_UMSATZ?" + paramsString;
+			//var url = "/MOB_UMSATZ"; //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
 			
 			var request = $.get({
 				async: false,
-				url: url,
+				url: url2,
 				dataType: "json",
 				success: function () {
 					//sap.m.MessageToast.show("success");
@@ -72,14 +72,14 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			request.done(function (data) {
 				
 				var UmsatzModel = new sap.ui.model.json.JSONModel(data);
-				table.setModel(UmsatzModel, "UmsatzModel"); //	console.log("UmsatzModel:", UmsatzModel); //nach oben packen:eslint-disable no-console, no-alert
+				table.setModel(UmsatzModel, "UmsatzModel");
+				//	console.log("UmsatzModel:", UmsatzModel); //nach oben packen:eslint-disable no-console, no-alert
 			});
 			
 		},
 		
 		
 		detailFunc: function (oEvent) {
-			
 			var row = oEvent.getSource();
 			row.getId();
 			sap.m.MessageToast.show("clicked-row" + row.getId().toString());
