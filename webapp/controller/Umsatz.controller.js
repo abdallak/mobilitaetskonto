@@ -13,7 +13,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 		
 		_onRoutePatternMatched: function(oEvent) {
 			var model = this.byId("table0").getModel("UmsatzModel");
-			model.loadData("/MOB_UMSATZ");
+			
+			var params = {};
+			params.mid = 14;
+			var paramsString = jQuery.param(params);
+			
+			model.loadData("/MOB_UMSATZ" + paramsString);
 		},
 		
 		onNavToStartpage: function () {
@@ -73,7 +78,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 				
 				var UmsatzModel = new sap.ui.model.json.JSONModel(data);
 				table.setModel(UmsatzModel, "UmsatzModel");
-				//	console.log("UmsatzModel:", UmsatzModel); //nach oben packen:eslint-disable no-console, no-alert
+				//console.log("UmsatzModel:", UmsatzModel); //nach oben packen:eslint-disable no-console, no-alert
 			});
 			
 		},
