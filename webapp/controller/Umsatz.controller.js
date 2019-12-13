@@ -18,7 +18,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			params.mid = 14;
 			var paramsString = jQuery.param(params);
 			
-			model.loadData("/MOB_UMSATZ" + paramsString);
+			model.loadData("/MOB_UMSATZ?" + paramsString);
 		},
 		
 		onNavToStartpage: function () {
