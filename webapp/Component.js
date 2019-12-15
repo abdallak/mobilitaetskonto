@@ -39,7 +39,7 @@ sap.ui.define([
 			this.oUserModel.attachRequestCompleted(function (oEvent) {
 				// wird die Zeile wirklich gebraucht?
 				// that.oUserModel.setData(this.oUserModel.getData());
-				that.oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", this.oUserModel);
+				that.oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", that.oUserModel.getData());
 			});
 
 			// this.oDbUserModel.attachRequestCompleted(function (data1) {
