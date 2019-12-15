@@ -3,7 +3,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		onInit: function () {
 
-			var url = "/services/userapi/currentUser";
+			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
+			var userModel = sap.ui.getCore().getModel("userModel").getData();
+			
+			// var data = userModel;
+			var data = dbUserModel;
 
 			var request = $.get({
 				async: false,

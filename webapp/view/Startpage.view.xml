@@ -21,9 +21,9 @@
 										<TileContent>
 											<content>
 												<NumericContent
-													scale="%"
+													scale="€"
 													value="{
-													path: 'GuthabenModel>/Nodes',
+													path: 'GuthabenModel>/NUMBER',
 													formatter: '.formatNumber'
 													}" />
 											</content>
