@@ -2,6 +2,8 @@
 sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
+		
+
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -11,16 +13,16 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 			
 			// TODO aktualisieren von daten
-			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			this.getView().byId("nameLabel").setText(dbUserModel.VORNAME + " " + dbUserModel.NAME);
-			this.getView().byId("guthabenLabel").setText(dbUserModel.GUTHABEN + " EUR");
+			this.dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
+			this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
+			this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
 		},
 		
 		_onRoutePatternMatched: function(oEvent) {
 			var model = this.byId("table0").getModel("UmsatzModel");
 			
 			var params = {};
-			params.mid = 14;
+			params.mid = this.dbUserModel.MID;
 			var paramsString = jQuery.param(params);
 			
 			model.loadData("/MOB_UMSATZ?" + paramsString);
@@ -60,7 +62,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			var table = this.getView().byId("table0");
 			
 			var params = {};
-			params.mid = 14;
+			params.mid = this.dbUserModel.MID;
 			
 			var paramsString = jQuery.param(params);
 			
