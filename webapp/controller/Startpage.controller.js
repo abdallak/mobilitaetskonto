@@ -29,7 +29,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			var params = {};
 			params.mid = 14;
 			
-			var url2 = "/MOB_GUTHABEN?" + params.mid;
+			var paramsString = jQuery.param(params);
+			
+			var url2 = "/MOB_GUTHABEN?" + paramsString;
 			
 			var request2 = $.get({
 				async: false,
@@ -43,9 +45,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 				}
 			});
 			
-			request2.done(function (data) {
-				
-				var GuthabenModel = new sap.ui.model.json.JSONModel(data);
+			request2.done(function (data2) {
+				sap.m.MessageToast.show("Guthaben " + data2.GUTHABEN);
+				var GuthabenModel = new sap.ui.model.json.JSONModel(data2);
 				this.getView().setModel(GuthabenModel, "GuthabenModel");
 			});
 
