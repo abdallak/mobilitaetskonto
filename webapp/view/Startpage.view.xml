@@ -14,7 +14,7 @@
 									<tileContent>
 										<TileContent>
 											<content>
-												<NumericContent scale="€" value="{ path: 'GuthabenModel>/NUMBER', formatter: '.formatNumber' }"/>
+												<NumericContent scale="€" value="guthabenstand" id = "guthabenAnzeige"/>
 											</content>
 										</TileContent>
 									</tileContent>
