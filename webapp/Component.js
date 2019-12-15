@@ -37,15 +37,10 @@ sap.ui.define([
 
 			var that = this;
 			this.oUserModel.attachRequestCompleted(function (oEvent) {
-				// wird die Zeile wirklich gebraucht?
-				// that.oUserModel.setData(this.oUserModel.getData());
 				that.oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", that.oUserModel.getData());
 			});
-
-			// this.oDbUserModel.attachRequestCompleted(function (data1) {
-			// 	this.oDbUserModel.setData(this.oDbUserModel.getData());
-			// });
-
+			
+			// make available in other controllers
 			sap.ui.getCore().setModel(this.oDbUserModel, "dbUserModel");
 			sap.ui.getCore().setModel(this.oUserModel, "userModel");
 		}
