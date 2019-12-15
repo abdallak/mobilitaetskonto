@@ -46,6 +46,16 @@
 				        </items>
 				  </Table>
 				</content>
+			<customHeader>
+			    <Bar id="bar0">
+			        <contentLeft>
+			            <Label text="Vorname Nachname" width="100%" id="nameLabel"/>
+			        </contentLeft>
+			    <contentRight>
+			        <Label text="0.00 EUR" width="100%" id="guthabenLabel"/>
+			    </contentRight>
+			    </Bar>
+			</customHeader>
 			</Page>
 		</pages>
 	</App>
