@@ -16,7 +16,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 			
 			var params = {};
-			params.mid = 14;
+			params.mid = dbUserModel.MID;
 			
 			var paramsString = jQuery.param(params);
 			

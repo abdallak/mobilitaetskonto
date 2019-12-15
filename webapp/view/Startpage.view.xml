@@ -1,37 +1,26 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Startpage" displayBlock="true">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Startpage"
+	displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
 				<Page id="page" title="{i18n&gt;title}">
 					<content>
-					    <sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
-					        <sap.ui.layout:content>
-					            <GenericTile 
-					            	xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" 
-					            	id="antragStellenTile" header="{i18n&gt;startpageAntragStellenTile}" 
-					            	subheader="{i18n&gt;startpageAntragStellenTileSub}" 
-					            	press="onNavToAntrag">
-					            </GenericTile>
-					            <GenericTile
-					            	xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1"
-					            	header="Umsatzanzeige"
-					            	subheader="cool" id="tile1"
-					            	press="onNavToUmsatz">
+						<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
+							<sap.ui.layout:content>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
+									header="{i18n&gt;startpageAntragStellenTile}" subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag"></GenericTile>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" header="Umsatzanzeige" subheader="cool"
+									id="tile1" press="onNavToUmsatz">
 									<tileContent>
 										<TileContent>
 											<content>
-												<NumericContent
-													scale="€"
-													value="{
-													path: 'GuthabenModel>/NUMBER',
-													formatter: '.formatNumber'
-													}" />
+												<NumericContent scale="€" value="{ path: 'GuthabenModel>/NUMBER', formatter: '.formatNumber' }"/>
 											</content>
 										</TileContent>
 									</tileContent>
 								</GenericTile>
-					        </sap.ui.layout:content>
-					    </sap.ui.layout:HorizontalLayout>
+							</sap.ui.layout:content>
+						</sap.ui.layout:HorizontalLayout>
 					</content>
 				</Page>
 			</pages>
