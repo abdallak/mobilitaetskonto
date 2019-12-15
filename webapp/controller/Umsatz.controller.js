@@ -9,6 +9,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 		 */
 		onInit: function () {
 			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
+			
+			// TODO aktualisieren von daten
+			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
+			this.getView().byId("nameLabel").setText(dbUserModel.VORNAME + " " + dbUserModel.NAME);
+			this.getView().byId("guthabenLabel").setText(dbUserModel.GUTHABEN + " EUR");
 		},
 		
 		_onRoutePatternMatched: function(oEvent) {
