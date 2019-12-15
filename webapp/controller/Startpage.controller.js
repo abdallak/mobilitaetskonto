@@ -2,29 +2,18 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		onInit: function () {
-
+			
 			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
 			var userModel = sap.ui.getCore().getModel("userModel").getData();
 			
 			// var data = userModel;
 			var data = dbUserModel;
 
-			var request = $.get({
-				async: false,
-				url: url,
-				dataType: "json",
-				success: function () {
-					sap.m.MessageToast.show("success");
-				},
-				error: function () {
-					sap.m.MessageBox.alert("error");
-				}
-			});
-
-			request.done(function (data) {
-				sap.m.MessageToast.show("UserAPI:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
-					"\nEmail: " + data.email + "\nDisplayname: " + data.displayname);
-			});
+			// sap.m.MessageToast.show("dbUserModel:\nMID: " + data.MID + "\nVORNAME: " + data.VORNAME + "\nName: " + data.NAME +
+			//	"\nGuthaben: " + data.GUTHABEN);
+				
+			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
+			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 			
 			var params = {};
 			params.mid = 14;
@@ -45,10 +34,11 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 				}
 			});
 			
+			var that = this;
 			request2.done(function (data2) {
 				sap.m.MessageToast.show("Guthaben " + data2.GUTHABEN);
 				var GuthabenModel = new sap.ui.model.json.JSONModel(data2);
-				this.getView().setModel(GuthabenModel, "GuthabenModel");
+				that.getView().setModel(GuthabenModel, "GuthabenModel");
 			});
 
 		},
