@@ -57,6 +57,13 @@
         "type": "destination",
         "name": "MOB_ANTRAG"
       }
+    },
+    {
+      "path": "/MOB_GUTHABEN",
+      "target": {
+        "type": "destination",
+        "name": "MOB_GUTHABEN"
+      }
     }
   ],
   "sendWelcomeFileRedirect": true

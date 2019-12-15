@@ -21,6 +21,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 				sap.m.MessageToast.show("UserAPI:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 					"\nEmail: " + data.email + "\nDisplayname: " + data.displayname);
 			});
+			
+			var params = {};
+			params.mid = 14;
+			
+			var url2 = "/MOB_GUTHABEN?" + params.mid;
+			
+			var request2 = $.get({
+				async: false,
+				url: url2,
+				dataType: "json",
+				success: function () {
+					sap.m.MessageToast.show("success");
+				},
+				error: function () {
+					sap.m.MessageToast.show("error");
+				}
+			});
+			
+			request2.done(function (data) {
+				
+				var GuthabenModel = new sap.ui.model.json.JSONModel(data);
+				this.getView().setModel(GuthabenModel, "GuthabenModel");
+			});
 
 		},
 
