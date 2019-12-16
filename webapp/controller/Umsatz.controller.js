@@ -2,6 +2,8 @@
 sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
+		
+
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -11,6 +13,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 			
 			// TODO aktualisieren von daten
+<<<<<<< HEAD
 			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
 			this.getView().byId("nameLabel").setText(dbUserModel.VORNAME + " " + dbUserModel.NAME);
 			this.getView().byId("guthabenLabel").setText(dbUserModel.GUTHABEN + " EUR");
@@ -18,14 +21,23 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			
 			this.mid = dbUserModel.MID;
 			this.getTableData();
+=======
+			this.dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
+			this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
+			this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
+>>>>>>> refs/heads/master
 		},
 		
 		_onRoutePatternMatched: function(oEvent) {
 			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
 			
 			var params = {};
+<<<<<<< HEAD
 			params.mid = 14;
 			//params.mid = this.mid;
+=======
+			params.mid = this.dbUserModel.MID;
+>>>>>>> refs/heads/master
 			var paramsString = jQuery.param(params);
 			
 			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
@@ -66,8 +78,13 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			var table = this.getView().byId("table0");
 		
 			var params = {};
+<<<<<<< HEAD
 			params.mid = 14;
 			//params.mid = this.mid;
+=======
+			params.mid = this.dbUserModel.MID;
+			
+>>>>>>> refs/heads/master
 			var paramsString = jQuery.param(params);
 			
 			var url = "/MOB_UMSATZ";
