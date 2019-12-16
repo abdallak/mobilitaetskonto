@@ -107,6 +107,13 @@
 					"target": [
 						"Umsatz"
 					]
+				},
+				{
+					"name": "Detailansicht",
+					"pattern": "Detailansicht",
+					"target": [
+						"Detailansicht"
+					]
 				}
 			],
 			"targets": {
@@ -132,6 +139,10 @@
 				"testview": {
 					"viewType": "XML",
 					"viewName": "testview"
+				},
+				"Detailansicht": {
+					"viewType": "XML",
+					"viewName": "Detailansicht"
 				}
 			}
 		}

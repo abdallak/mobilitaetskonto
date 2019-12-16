@@ -14,20 +14,29 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
 			this.getView().byId("nameLabel").setText(dbUserModel.VORNAME + " " + dbUserModel.NAME);
 			this.getView().byId("guthabenLabel").setText(dbUserModel.GUTHABEN + " EUR");
+			
+			
+			this.mid = dbUserModel.MID;
+			this.getTableData();
 		},
 		
 		_onRoutePatternMatched: function(oEvent) {
-			var model = this.byId("table0").getModel("UmsatzModel");
+			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
 			
 			var params = {};
 			params.mid = 14;
+			//params.mid = this.mid;
 			var paramsString = jQuery.param(params);
 			
-			model.loadData("/MOB_UMSATZ?" + paramsString);
+			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
 		},
 		
 		onNavToStartpage: function () {
 			this.getOwnerComponent().getRouter().navTo("Startpage");
+		},
+		
+		onNavToDetailansicht: function () {
+			this.getOwnerComponent().getRouter().navTo("Detailansicht");
 		},
 		
 		/**
@@ -35,9 +44,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 		 * (NOT before the first rendering! onInit() is used for that one!).
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
 		 */
-		onBeforeRendering: function () {
-			this.updateTable();
-		},
+		//onBeforeRendering: function () {},
 		
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -55,44 +62,34 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 			, */
 		
 		
-		updateTable : function() {
-			
+		getTableData : function() {
 			var table = this.getView().byId("table0");
-			
+		
 			var params = {};
 			params.mid = 14;
-			
+			//params.mid = this.mid;
 			var paramsString = jQuery.param(params);
 			
-			var url2 = "/MOB_UMSATZ?" + paramsString;
-			//var url = "/MOB_UMSATZ"; //in neo-app hinterlegt , refrenced auf destinations in der cloudplatformcockpit
+			var url = "/MOB_UMSATZ";
 			
-			var request = $.get({
-				async: false,
-				url: url2,
-				dataType: "json",
-				success: function () {
-					//sap.m.MessageToast.show("success");
-				},
-				error: function () {
-					//sap.m.MessageToast.show("error");
-				}
-			});
+			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
+			umsatzModel.loadData(url, paramsString);
 			
-			request.done(function (data) {
-				
-				var UmsatzModel = new sap.ui.model.json.JSONModel(data);
-				table.setModel(UmsatzModel, "UmsatzModel");
-				//console.log("UmsatzModel:", UmsatzModel); //nach oben packen:eslint-disable no-console, no-alert
-			});
-			
+			table.setModel(umsatzModel, "umsatzModel");
+			console.log("UmsatzModel:", umsatzModel); //nach oben packen:eslint-disable no-console, no-alert
 		},
 		
 		
 		detailFunc: function (oEvent) {
-			var row = oEvent.getSource();
-			row.getId();
-			sap.m.MessageToast.show("clicked-row" + row.getId().toString());
+    		
+    		var context = oEvent.getSource().getBindingContext("umsatzModel");
+			var path = context.getPath();
+			
+			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
+    		var detailModel = sap.ui.getCore().getModel("detailModel");
+    		detailModel.setData(umsatzModel.getProperty(path));
+    		
+			this.onNavToDetailansicht();
 		}
 		
 	});

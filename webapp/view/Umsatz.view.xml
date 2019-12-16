@@ -3,7 +3,7 @@
 	    <pages>
 			<Page title="Umsatzanzeige" showNavButton="true" floatingFooter="true" navButtonPress="onNavToStartpage">
 				<content>
-				    <Table id="table0" growing="true" items="{ path  : 'UmsatzModel>/'}">
+				    <Table id="table0" growing="true" items="{ path  : 'umsatzModel>/'}">
 				        <columns>
 				            <Column id="column0">
 				                <header>
@@ -35,14 +35,14 @@
 				        	
 				            <ColumnListItem id="item0" press="detailFunc" type="Active">
 				                <cells>
-				                    <Label text="{UmsatzModel>ART}" id="label5"/>
-				                    <Label text="{UmsatzModel>DATUM}" id="label6"/>
-				                    <Label text="{UmsatzModel>BETRAG}" id="label7"/>
-				                    <Label text="{UmsatzModel>KATEGORIE}" id="label8"/>
-				                    <Label text="{UmsatzModel>STATUS}" id="label9"/>
+				                    <Label text="{umsatzModel>ART}" id="label5"/>
+				                    <Label text="{umsatzModel>DATUM}" id="label6"/>
+				                    <Label text="{umsatzModel>BETRAG}" id="label7"/>
+				                    <Label text="{umsatzModel>KATEGORIE}" id="label8"/>
+				                    <Label text="{umsatzModel>STATUS}" id="label9"/>
 				                </cells>    
-				            </ColumnListItem> 
-			            
+				            </ColumnListItem>
+				            
 				        </items>
 				  </Table>
 				</content>
