@@ -1,59 +1,66 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Detailansicht">
 	<App>
 		<pages>
-			<Page title="Detailansicht">
+			<Page title="{i18n>detailTitle}">
 				
 			<content>
 			<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
 				        <sap.ui.layout.form:formContainers>
-				            <sap.ui.layout.form:FormContainer title="Vorgangsnummer: {detailModel>/UID}" id="container1">
+				            <sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}: {detailModel>/UID}" id="container1">
 				            	
 				                <sap.ui.layout.form:formElements>
 				      
 				      
-				    				<sap.ui.layout.form:FormElement label="Mitarbeiter ID">
+				    				<sap.ui.layout.form:FormElement label="{i18n>detailLabelMid}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text width="50%" id="mitarbeiterId" text="{detailModel>/MID}" textAlign="Center"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                    
 				    				
-				    				 <sap.ui.layout.form:FormElement label="Mitarbeiter">
+				    				 <sap.ui.layout.form:FormElement label="{i18n>detailLabelEmployee}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text width="50%" id="mitarbeiternameId" text="" textAlign="Center"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                    
 				      
-				                    <sap.ui.layout.form:FormElement label="Datum">
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelDate}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text width="50%" id="datumId" text="{detailModel>/DATUM}" textAlign="Center"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                    
 				                    
-				                    <sap.ui.layout.form:FormElement label="Art">
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelType}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text xmlns="sap.m" width="50%" id="artId" textAlign="Center" text="{detailModel>/ART}"/>
 				                        </sap.ui.layout.form:fields> 
 				                    </sap.ui.layout.form:FormElement>
 				                    
 				                    
-				                    <sap.ui.layout.form:FormElement label="Betrag in €">
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelCategory}">
+				                        <sap.ui.layout.form:fields>
+				                            <Text xmlns="sap.m" width="50%" id="kategorieId" textAlign="Center" text="{detailModel>/KATEGORIE}"/>
+				                        </sap.ui.layout.form:fields> 
+				                    </sap.ui.layout.form:FormElement>
+				                    
+				                    
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelValue}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text xmlns="sap.m" width="50%" id="betragId" text="{detailModel>/BETRAG}" textAlign="Center"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                    
 				                    
-				                    <sap.ui.layout.form:FormElement label="Status">
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelStatus}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text xmlns="sap.m" width="50%" id="statusId" textAlign="Center" text="{detailModel>/STATUS}"/>
 				                        </sap.ui.layout.form:fields> 
 				                    </sap.ui.layout.form:FormElement> 
 				                    
 				                    
-				                    <sap.ui.layout.form:FormElement label="Beschreibung">
+				                    <sap.ui.layout.form:FormElement label="{i18n>detailLabelDescription}">
 				                        <sap.ui.layout.form:fields>
 				                            <Text xmlns="sap.m" width="50%" id="beschreibungId" textAlign="Center" text="{detailModel>/BESCHREIBUNG}"/>
 				                        </sap.ui.layout.form:fields> 

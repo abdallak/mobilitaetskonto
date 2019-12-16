@@ -7,27 +7,27 @@
 				        <columns>
 				            <Column id="column0">
 				                <header>
-				                    <Label text="Art" id="label0"/>
+				                    <Label text="{i18n>umsatzTableHeaderType}" id="label0"/>
 				                </header>
 				            </Column>
 				            <Column id="column1">
 				                <header>
-				                    <Label text="Datum" id="label1"/>
+				                    <Label text="{i18n>umsatzTableHeaderDate}" id="label1"/>
 				                </header>
 				            </Column>
 				            <Column id="column2">
 				                <header>
-				                    <Label text="Betrag" id="label2"/>
+				                    <Label text="{i18n>umsatzTableHeaderValue}" id="label2"/>
 				                </header>
 				            </Column>
 				            <Column id="column3">
 				            <header>
-				                <Label text="Kategorie" width="100%" id="label3"/>
+				                <Label text="{i18n>umsatzTableHeaderCategory}" id="label3"/>
 				            </header>
 				            </Column>
 				            <Column id="column4">
 				            <header>
-				                <Label text="Status" width="100%" id="label4"/>
+				                <Label text="{i18n>umsatzTableHeaderStatus}" id="label4"/>
 				            </header>
 				            </Column></columns>
 
