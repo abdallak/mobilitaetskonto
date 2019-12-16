@@ -12,20 +12,15 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Detailansicht
 		 */
 		onInit: function () {
+			
+			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
 			var detailModel = sap.ui.getCore().getModel("detailModel");
-			console.log(detailModel);
 			
-			var datum = this.getView().byId("datumId");
-			datum.setModel(detailModel, "detailModel");
+			var container = this.getView().byId("container1");
+			container.setModel(detailModel, "detailModel");
 			
-			var betrag = this.getView().byId("betragId");
-			betrag.setModel(detailModel, "detailModel");
-			
-			var art = this.getView().byId("artId");
-			art.setModel(detailModel, "detailModel");
-			
-			var beschreibung = this.getView().byId("beschreibungId");
-			beschreibung.setModel(detailModel, "detailModel");
+			var text = this.getView().byId("mitarbeiternameId");
+			text.setText(dbUserModel.NAME + ", " + dbUserModel.VORNAME);
 			
 		},
 
@@ -43,9 +38,9 @@ sap.ui.define([
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Detailansicht
 		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
+			onAfterRendering: function() {
+			
+			},
 
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
