@@ -9,7 +9,7 @@
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
 									header="{i18n&gt;startpageAntragStellenTile}" subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag"></GenericTile>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" header="Umsatzanzeige" subheader="cool"
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" header="{i18n&gt;startpageUmsatztabelleTile}" subheader="{i18n&gt;startpageUmsatztabelleTileSub}"
 									id="tile1" press="onNavToUmsatz">
 									<tileContent>
 										<TileContent>
