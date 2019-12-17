@@ -17,7 +17,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
 		},
 
 		onNavToUmsatz: function () {
-			var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			var oRouter = this.getOwnerComponent().getRouter();
 			oRouter.navTo("Umsatz");
 		},
 

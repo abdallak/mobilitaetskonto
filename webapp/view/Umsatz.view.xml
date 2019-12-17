@@ -1,7 +1,7 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz">
 	<App>
 	    <pages>
-			<Page title="Umsatzanzeige" showNavButton="true" floatingFooter="true" navButtonPress="onNavToStartpage">
+			<Page title="Umsatzanzeige" floatingFooter="true">
 				<content>
 				    <Table id="table0" growing="true" items="{ path  : 'umsatzModel>/'}">
 				        <columns>
@@ -48,9 +48,12 @@
 				</content>
 			<customHeader>
 			    <Bar id="bar0">
-			        <contentLeft>
-			            <Label text="Vorname Nachname" width="100%" id="nameLabel"/>
+			    	<contentLeft>
+			            <Button width="100%" id="backButton" press="onNavToStartpage" icon="sap-icon://nav-back"/>
 			        </contentLeft>
+			        <contentMiddle>
+			            <Label text="Vorname Nachname" width="100%" id="nameLabel"/>
+			        </contentMiddle>
 			    <contentRight>
 			        <Label text="0.00 EUR" width="100%" id="guthabenLabel"/>
 			    </contentRight>
