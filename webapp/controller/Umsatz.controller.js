@@ -4,7 +4,6 @@ sap.ui.define([
 ], function (BaseController) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
-		
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -14,13 +13,12 @@ sap.ui.define([
 		onInit: function () {
 			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 			
-			// TODO aktualisieren von daten
+			// TODO bind
 			this.dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
 			this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
 			this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
 			
 			this.getTableData();
-			this.mid = this.dbUserModel.MID;
 		},
 		
 		_onRoutePatternMatched: function(oEvent) {
@@ -42,7 +40,9 @@ sap.ui.define([
 		 * (NOT before the first rendering! onInit() is used for that one!).
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
 		 */
-		//onBeforeRendering: function () {},
+		onBeforeRendering: function () {
+			this.updateUserModel();
+		},
 		
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -51,14 +51,14 @@ sap.ui.define([
 		 */
 		//	onAfterRendering: function() {
 		//	},
-		/**
-			 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-			 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
-			//	onExit: function() {
-			//
-			//	}
-			, */
 		
+		/**
+		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
+		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
+		//	onExit: function() {
+		//
+		//	}
+		, */
 		
 		getTableData : function() {
 			var table = this.getView().byId("table0");
@@ -76,7 +76,6 @@ sap.ui.define([
 			table.setModel(umsatzModel, "umsatzModel");
 			console.log("UmsatzModel:", umsatzModel); //nach oben packen:eslint-disable no-console, no-alert
 		},
-		
 		
 		detailFunc: function (oEvent) {
     		
