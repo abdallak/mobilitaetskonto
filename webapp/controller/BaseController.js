@@ -1,9 +1,10 @@
+/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History"
 ], function (Controller, History) {
 	"use strict";
-	return Controller.extend("sap.ui.Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
+	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 		getRouter: function () {
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},
@@ -16,6 +17,10 @@ sap.ui.define([
 			} else {
 				this.getRouter().navTo("appHome", {}, true /*no history*/ );
 			}
+		}, 
+		updateUserModel: function () {
+			// TODO update Model
+			console.log("updateUserModel!");
 		}
 	});
 });

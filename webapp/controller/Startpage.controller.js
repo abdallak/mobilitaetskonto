@@ -17,6 +17,8 @@ sap.ui.define([
 			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
+
+			// this.updateUserModel();
 		},
 
 		onNavToUmsatz: function () {
