@@ -49,7 +49,7 @@
 			<customHeader>
 			    <Bar id="bar0">
 			    	<contentLeft>
-			            <Button width="100%" id="backButton" press="onNavToStartpage" icon="sap-icon://nav-back"/>
+			            <Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
 			        </contentLeft>
 			        <contentMiddle>
 			            <Label text="Vorname Nachname" width="100%" id="nameLabel"/>

@@ -15,18 +15,24 @@ sap.ui.define([
 
 			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
-			
+
+		},
+
+		/**
+		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
+		 * (NOT before the first rendering! onInit() is used for that one!).
+		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Detailansicht
+		 */
+		onBeforeRendering: function () {
 			this.updateUserModel();
 		},
 
 		onNavToUmsatz: function () {
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Umsatz");
+			this.getRouter().navTo("Umsatz");
 		},
 
 		onNavToAntrag: function () {
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("Antrag");
+			this.getRouter().navTo("Antrag");
 		}
 	});
 });

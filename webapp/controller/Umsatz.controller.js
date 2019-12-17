@@ -33,12 +33,8 @@ sap.ui.define([
 			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
 		},
 		
-		onNavToStartpage: function () {
-			this.getOwnerComponent().getRouter().navTo("Startpage");
-		},
-		
 		onNavToDetailansicht: function () {
-			this.getOwnerComponent().getRouter().navTo("Detailansicht");
+			this.getRouter().navTo("Detailansicht");
 		},
 		
 		/**

@@ -5,9 +5,11 @@ sap.ui.define([
 ], function (Controller, History) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
+		
 		getRouter: function () {
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},
+		
 		onNavBack: function (oEvent) {
 			var oHistory, sPreviousHash;
 			oHistory = History.getInstance();
@@ -15,13 +17,15 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("appHome", {}, true /*no history*/ );
+				this.getRouter().navTo("Startpage", {}, true /*no history*/ );
 			}
-		}, 
+		},
+		
 		updateUserModel: function () {
 			// TODO update Model
 			console.log("updateUserModel!");
 		}
+		
 	});
 });
 

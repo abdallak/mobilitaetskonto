@@ -1,52 +1,49 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Antrag">
 	<App>
 		<pages>
-			<Page title="{i18n>antragTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavToStartpage">
+			<Page title="{i18n>antragTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
 				<content>
-				    <sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
-				        <sap.ui.layout.form:formContainers>
-				            <sap.ui.layout.form:FormContainer title="Mobilitätskonto Antrag " id="container1">
-				                <sap.ui.layout.form:formElements>
-				                    <sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
-				                        <sap.ui.layout.form:fields>
-				                            <SegmentedButton xmlns="sap.m" selectedKey="auszahlung" id="art">
-				                                <items>
-				                                    <SegmentedButtonItem text="Auszahlung" key="auszahlung" id="item2"/>
-				                                    <SegmentedButtonItem text="Gutschrift" key="gutschrift" id="item3"/>
-				                                    </items>
-				                                
-				                            </SegmentedButton>
-				                        </sap.ui.layout.form:fields>
-				                    </sap.ui.layout.form:FormElement>
-				                    
-				                    
-				                    
-				                    <sap.ui.layout.form:FormElement label="Betrag in €" id="element0">
-				                        <sap.ui.layout.form:fields>
-				                            <Input width="100%" id="betrag" placeholder="0,00 €" required="true" type="Number" liveChange="onBetragChanged"/>
-				                        </sap.ui.layout.form:fields>
-				                    </sap.ui.layout.form:FormElement>
-				                    <sap.ui.layout.form:FormElement label="{antragsModel>/beschreibung}" id="element3">
-				                        <sap.ui.layout.form:fields>
-				                            <TextArea xmlns="sap.m" rows="6" id="beschreibung" wrapping="Soft" busyIndicatorSize="Auto" value="{antragsModel>/beschreibung}"/>
-				                        </sap.ui.layout.form:fields>
-				                    </sap.ui.layout.form:FormElement>
-				                </sap.ui.layout.form:formElements>
-				            </sap.ui.layout.form:FormContainer>
-				        </sap.ui.layout.form:formContainers>
-				        <sap.ui.layout.form:layout>
-				            <sap.ui.layout.form:ResponsiveGridLayout id="layout0"/>
-				        </sap.ui.layout.form:layout></sap.ui.layout.form:Form>
+					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
+						<sap.ui.layout.form:formContainers>
+							<sap.ui.layout.form:FormContainer title="Mobilitätskonto Antrag " id="container1">
+								<sap.ui.layout.form:formElements>
+									<sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
+										<sap.ui.layout.form:fields>
+											<SegmentedButton xmlns="sap.m" selectedKey="auszahlung" id="art">
+												<items>
+													<SegmentedButtonItem text="Auszahlung" key="auszahlung" id="item2"/>
+													<SegmentedButtonItem text="Gutschrift" key="gutschrift" id="item3"/>
+												</items>
+											</SegmentedButton>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Betrag in €" id="element0">
+										<sap.ui.layout.form:fields>
+											<Input width="100%" id="betrag" placeholder="0,00 €" required="true" type="Number" liveChange="onBetragChanged"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Beschreibung" id="element3">
+										<sap.ui.layout.form:fields>
+											<TextArea xmlns="sap.m" rows="6" id="beschreibung" wrapping="Soft" busyIndicatorSize="Auto"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+								</sap.ui.layout.form:formElements>
+							</sap.ui.layout.form:FormContainer>
+						</sap.ui.layout.form:formContainers>
+						<sap.ui.layout.form:layout>
+							<sap.ui.layout.form:ResponsiveGridLayout id="layout0"/>
+						</sap.ui.layout.form:layout>
+					</sap.ui.layout.form:Form>
 				</content>
-			<footer>
-			    <OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
-			        <content>
-			            <ToolbarSpacer id="spacer0"/>
-			            <Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="onNavToStartpage"/>
-			            <Button xmlns="sap.m" id="submitButton" type="Accept" press="antragStellen" text="{i18n>antragSubmitButton}"/>
-			        </content>
-			    </OverflowToolbar>
-			</footer>
+				<footer>
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+						<content>
+							<ToolbarSpacer id="spacer0"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="onNavBack"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" press="antragStellen" text="{i18n>antragSubmitButton}"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
 			</Page>
 		</pages>
 	</App>
