@@ -1,6 +1,5 @@
 /* eslint-disable no-console, no-alert */
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
 ], function (BaseController) {
 	"use strict";

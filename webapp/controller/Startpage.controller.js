@@ -1,5 +1,4 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
 ], function (BaseController) {
 	"use strict";
@@ -16,9 +15,8 @@ sap.ui.define([
 
 			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
-
-
-			// this.updateUserModel();
+			
+			this.updateUserModel();
 		},
 
 		onNavToUmsatz: function () {

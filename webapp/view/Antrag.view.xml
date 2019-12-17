@@ -26,9 +26,9 @@
 				                            <Input width="100%" id="betrag" placeholder="0,00 €" required="true" type="Number" liveChange="onBetragChanged"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
-				                    <sap.ui.layout.form:FormElement label="Beschreibung" id="element3">
+				                    <sap.ui.layout.form:FormElement label="{antragsModel>/beschreibung}" id="element3">
 				                        <sap.ui.layout.form:fields>
-				                            <TextArea xmlns="sap.m" rows="6" id="beschreibung" wrapping="Soft" busyIndicatorSize="Auto"/>
+				                            <TextArea xmlns="sap.m" rows="6" id="beschreibung" wrapping="Soft" busyIndicatorSize="Auto" value="{antragsModel>/beschreibung}"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                </sap.ui.layout.form:formElements>

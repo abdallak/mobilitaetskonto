@@ -1,6 +1,5 @@
 /* eslint-disable no-console, no-alert */
 sap.ui.define([
-	"sap/ui/core/mvc/Controller",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
 ], function (BaseController) {
 	"use strict";
@@ -22,7 +21,6 @@ sap.ui.define([
 			
 			var text = this.getView().byId("mitarbeiternameId");
 			text.setText(dbUserModel.NAME + ", " + dbUserModel.VORNAME);
-			
 		},
 
 		/**
