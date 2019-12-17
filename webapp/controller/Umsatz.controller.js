@@ -12,29 +12,40 @@ sap.ui.define([
 		 */
 		onInit: function () {
 			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
-			
-			// TODO bind
+
+			// TODO bind to view?
 			this.dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
-			this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
-			
+			//this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
+			//this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
+
+			// FIXME workaround
+			var that = this;
+			sap.ui.getCore().getModel("dbUserModel").attachRequestCompleted(function (oEvent) {
+				that.dbUserModel = oEvent.getSource().getData();
+
+				that.getView().byId("nameLabel").setText(that.dbUserModel.VORNAME + " " + that.dbUserModel.NAME);
+				that.getView().byId("guthabenLabel").setText(that.dbUserModel.GUTHABEN + " EUR");
+
+				console.log("dbUserModel:", that.dbUserModel);
+			});
+
 			this.getTableData();
 		},
-		
-		_onRoutePatternMatched: function(oEvent) {
+
+		_onRoutePatternMatched: function (oEvent) {
 			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
-			
+
 			var params = {}; //TODO kuerzen
 			params.mid = this.dbUserModel.MID;
 			var paramsString = jQuery.param(params);
-			
+
 			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
 		},
-		
+
 		onNavToDetailansicht: function () {
 			this.getRouter().navTo("Detailansicht");
 		},
-		
+
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 		 * (NOT before the first rendering! onInit() is used for that one!).
@@ -43,7 +54,7 @@ sap.ui.define([
 		onBeforeRendering: function () {
 			this.updateUserModel();
 		},
-		
+
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
@@ -51,7 +62,7 @@ sap.ui.define([
 		 */
 		//	onAfterRendering: function() {
 		//	},
-		
+
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
@@ -59,35 +70,36 @@ sap.ui.define([
 		//
 		//	}
 		, */
-		
-		getTableData : function() {
+
+		getTableData: function () {
 			var table = this.getView().byId("table0");
-		
+
 			var params = {};
 			params.mid = this.dbUserModel.MID;
-			
+
 			var paramsString = jQuery.param(params);
-			
+
 			var url = "/MOB_UMSATZ";
-			
+
 			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
 			umsatzModel.loadData(url, paramsString);
-			
+
 			table.setModel(umsatzModel, "umsatzModel");
 			console.log("UmsatzModel:", umsatzModel); //nach oben packen:eslint-disable no-console, no-alert
+
 		},
-		
+
 		detailFunc: function (oEvent) {
-    		
-    		var context = oEvent.getSource().getBindingContext("umsatzModel");
+
+			var context = oEvent.getSource().getBindingContext("umsatzModel");
 			var path = context.getPath();
-			
+
 			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
-    		var detailModel = sap.ui.getCore().getModel("detailModel");
-    		detailModel.setData(umsatzModel.getProperty(path));
-    		
+			var detailModel = sap.ui.getCore().getModel("detailModel");
+			detailModel.setData(umsatzModel.getProperty(path));
+
 			this.onNavToDetailansicht();
 		}
-		
+
 	});
 });
