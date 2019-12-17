@@ -1,10 +1,11 @@
 /* eslint-disable no-console, no-alert */
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"sap/ui/core/mvc/Controller",
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Detailansicht", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Detailansicht", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.

@@ -1,7 +1,10 @@
 /* eslint-disable no-console, no-alert */
-sap.ui.define(["sap/ui/core/mvc/Controller"], function (Controller) {
+sap.ui.define([
+	"sap/ui/core/mvc/Controller",
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
+], function (BaseController) {
 	"use strict";
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
 		
 
 		/**
