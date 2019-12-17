@@ -21,8 +21,8 @@ sap.ui.define([
 		},
 
 		updateUserModel: function () {
-			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			var userModel = sap.ui.getCore().getModel("userModel").getData();
+			var dbUserModel = sap.ui.getCore().getModel("dbUserModel");
+			var userModel = sap.ui.getCore().getModel("userModel");
 			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
 		}
 
