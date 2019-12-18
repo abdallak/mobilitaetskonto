@@ -14,7 +14,7 @@ sap.ui.define([
 			this.getRouter().getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
-			this.getView().setModel(dbUserModel, "dbUserModel");
+			this.setModel(dbUserModel, "dbUserModel");
 
 			this.getTableData();
 		},
