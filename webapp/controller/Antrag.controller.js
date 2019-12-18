@@ -21,7 +21,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 		antragStellen: function (oEvent) {
 			// FIXME workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
-			
+
 			var oAntragModel = this.getModel("oAntragModel");
 			var oAntragData = oAntragModel.getData();
 			if (oAntragData.betrag === null) {
@@ -46,8 +46,6 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 				oSource.setValueState("Error");
 				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
 			}
-		},
-		onBeschreibungChanged: function (oEvent) {
 		}
 	});
 });
