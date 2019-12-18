@@ -6,7 +6,20 @@ sap.ui.define([
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
+			// return this.getOwnerComponent().getRouter();
 			return sap.ui.core.UIComponent.getRouterFor(this);
+		},
+
+		getModel: function (sName) {
+			return this.getView().getModel(sName);
+		},
+
+		setModel: function (oModel, sName) {
+			return this.getView().setModel(oModel, sName);
+		},
+
+		getResourceBundle: function () {
+			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
 		},
 
 		onNavBack: function (oEvent) {
