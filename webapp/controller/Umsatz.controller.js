@@ -11,32 +11,31 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
 		 */
 		onInit: function () {
-			sap.ui.core.UIComponent.getRouterFor(this).getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 
 			// TODO bind to view?
-			this.dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			//this.getView().byId("nameLabel").setText(this.dbUserModel.VORNAME + " " + this.dbUserModel.NAME);
-			//this.getView().byId("guthabenLabel").setText(this.dbUserModel.GUTHABEN + " EUR");
+			var dbUserModel = this.getGlobalModel("dbUserModel");
 
 			// FIXME workaround
 			var that = this;
-			sap.ui.getCore().getModel("dbUserModel").attachRequestCompleted(function (oEvent) {
-				that.dbUserModel = oEvent.getSource().getData();
+			dbUserModel.attachRequestCompleted(function (oEvent) {
+				var dbUserData = oEvent.getSource().getData();
 
-				that.getView().byId("nameLabel").setText(that.dbUserModel.VORNAME + " " + that.dbUserModel.NAME);
-				that.getView().byId("guthabenLabel").setText(that.dbUserModel.GUTHABEN + " EUR");
+				that.getView().byId("nameLabel").setText(dbUserData.VORNAME + " " + dbUserData.NAME);
+				that.getView().byId("guthabenLabel").setText(dbUserData.GUTHABEN + " EUR");
 
-				console.log("dbUserModel:", that.dbUserModel);
+				console.log("dbUserModel:", dbUserData);
 			});
-
+			
 			this.getTableData();
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var umsatzModel = this.getGlobalModel("umsatzModel");
 
 			var params = {}; //TODO kuerzen
-			params.mid = this.dbUserModel.MID;
+			params.mid = dbUserData.MID;
 			var paramsString = jQuery.param(params);
 
 			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
@@ -72,16 +71,17 @@ sap.ui.define([
 		, */
 
 		getTableData: function () {
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var table = this.getView().byId("table0");
 
 			var params = {};
-			params.mid = this.dbUserModel.MID;
+			params.mid = dbUserData.MID;
 
 			var paramsString = jQuery.param(params);
 
 			var url = "/MOB_UMSATZ";
 
-			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
+			var umsatzModel = this.getGlobalModel("umsatzModel");
 			umsatzModel.loadData(url, paramsString);
 
 			table.setModel(umsatzModel, "umsatzModel");
@@ -94,8 +94,8 @@ sap.ui.define([
 			var context = oEvent.getSource().getBindingContext("umsatzModel");
 			var path = context.getPath();
 
-			var umsatzModel = sap.ui.getCore().getModel("umsatzModel");
-			var detailModel = sap.ui.getCore().getModel("detailModel");
+			var umsatzModel = this.getGlobalModel("umsatzModel");
+			var detailModel = this.getGlobalModel("detailModel");
 			detailModel.setData(umsatzModel.getProperty(path));
 
 			this.onNavToDetailansicht();

@@ -13,8 +13,8 @@ sap.ui.define([
 		 */
 		onInit: function () {
 
-			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			var detailModel = sap.ui.getCore().getModel("detailModel");
+			var dbUserModel = this.getGlobalModel("dbUserModel").getData();
+			var detailModel = this.getGlobalModel("detailModel");
 
 			var container = this.getView().byId("container1");
 			container.setModel(detailModel, "detailModel");

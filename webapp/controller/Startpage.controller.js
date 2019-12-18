@@ -5,18 +5,19 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		onInit: function () {
 
-			var dbUserModel = sap.ui.getCore().getModel("dbUserModel").getData();
-			var userModel = sap.ui.getCore().getModel("userModel").getData();
+			var dbUserModel = this.getGlobalModel("dbUserModel");
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var userModel = this.getGlobalModel("userModel").getData();
 
-			sap.m.MessageToast.show("dbUserModel:\nMID: " + dbUserModel.MID + "\nVORNAME: " + dbUserModel.VORNAME + "\nName: " + dbUserModel.NAME +
-				"\nGuthaben: " + dbUserModel.GUTHABEN);
+			sap.m.MessageToast.show("dbUserModel:\nMID: " + dbUserData.MID + "\nVORNAME: " + dbUserData.VORNAME + "\nName: " + dbUserData.NAME +
+				"\nGuthaben: " + dbUserData.GUTHABEN);
 
 			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
 			// FIXME workaround
 			var that = this;
-			sap.ui.getCore().getModel("dbUserModel").attachRequestCompleted(function (oEvent) {
+			dbUserModel.attachRequestCompleted(function (oEvent) {
 				that.getView().byId("guthabenAnzeige").setValue(oEvent.getSource().getData().GUTHABEN);
 			});
 		},
