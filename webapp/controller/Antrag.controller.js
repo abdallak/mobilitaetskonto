@@ -1,4 +1,3 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
 ], function (BaseController) {
@@ -10,19 +9,14 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Antrag").attachMatched(this._onRoutePatternMatched, this);
 
-			var dbUserModel = this.getGlobalModel("dbUserModel").getData();
-
-			var defaultAntrag = {};
-			defaultAntrag.MID = dbUserModel.MID;
-			defaultAntrag.art = "auszahlung";
-			defaultAntrag.betrag = null;
-			defaultAntrag.beschreibung = null;
-
-			var oAntragModel = new sap.ui.model.json.JSONModel(defaultAntrag);
-			this.setModel(oAntragModel, "oAntragModel");
+			this.resetAntrag();
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
+			this.resetAntrag();
+		},
+
+		resetAntrag: function () {
 			var dbUserModel = this.getGlobalModel("dbUserModel").getData();
 
 			var defaultAntrag = {};
@@ -38,7 +32,6 @@ sap.ui.define([
 		antragStellen: function (oEvent) {
 			var oAntragModel = this.getModel("oAntragModel");
 			var oAntragData = oAntragModel.getData();
-			console.log("oAntragModel " + oAntragData);
 
 			if (oAntragData.betrag === null) {
 				sap.m.MessageToast.show("Bitte Betrag eingeben!");

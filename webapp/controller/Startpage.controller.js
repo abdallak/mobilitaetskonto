@@ -8,7 +8,7 @@ sap.ui.define([
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var userModel = this.getGlobalModel("userModel").getData();
+			// var userModel = this.getGlobalModel("userModel").getData();
 
 			sap.m.MessageToast.show("dbUserModel:\nMID: " + dbUserData.MID + "\nVORNAME: " + dbUserData.VORNAME + "\nName: " + dbUserData.NAME +
 				"\nGuthaben: " + dbUserData.GUTHABEN);
