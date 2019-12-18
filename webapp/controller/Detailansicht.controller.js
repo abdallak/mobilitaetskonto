@@ -13,14 +13,12 @@ sap.ui.define([
 		 */
 		onInit: function () {
 
-			var dbUserModel = this.getGlobalModel("dbUserModel").getData();
+			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var detailModel = this.getGlobalModel("detailModel");
 
 			var container = this.getView().byId("container1");
 			container.setModel(detailModel, "detailModel");
-
-			var text = this.getView().byId("mitarbeiternameId");
-			text.setText(dbUserModel.NAME + ", " + dbUserModel.VORNAME);
+			container.setModel(dbUserModel, "dbUserModel");
 		},
 
 		/**

@@ -20,7 +20,7 @@
 				    				
 				    				 <sap.ui.layout.form:FormElement label="{i18n>detailLabelEmployee}">
 				                        <sap.ui.layout.form:fields>
-				                            <Text width="50%" id="mitarbeiternameId" text="" textAlign="Center"/>
+				                            <Text width="50%" id="mitarbeiternameId" text="{dbUserModel>/NAME}, {dbUserModel>/VORNAME}" textAlign="Center"/>
 				                        </sap.ui.layout.form:fields>
 				                    </sap.ui.layout.form:FormElement>
 				                    
