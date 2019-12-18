@@ -17,6 +17,14 @@ sap.ui.define([
 		setModel: function (oModel, sName) {
 			return this.getView().setModel(oModel, sName);
 		},
+		
+		getGlobalModel: function (sName) {
+			return sap.ui.getCore().getModel(sName);
+		},
+		
+		setGlobalModel: function (oModel, sName) {
+			return sap.ui.getCore().setModel(oModel, sName);
+		},
 
 		getResourceBundle: function () {
 			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -34,8 +42,8 @@ sap.ui.define([
 		},
 
 		updateUserModel: function () {
-			var dbUserModel = sap.ui.getCore().getModel("dbUserModel");
-			var userModel = sap.ui.getCore().getModel("userModel");
+			var dbUserModel = this.getGlobalModel("dbUserModel");
+			var userModel = this.getGlobalModel("userModel");
 			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
 		}
 
