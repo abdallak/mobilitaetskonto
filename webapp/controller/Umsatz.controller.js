@@ -20,6 +20,8 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
+			this.updateUserModel();
+
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var umsatzModel = this.getGlobalModel("umsatzModel");
 
@@ -39,9 +41,8 @@ sap.ui.define([
 		 * (NOT before the first rendering! onInit() is used for that one!).
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
 		 */
-		onBeforeRendering: function () {
-			this.updateUserModel();
-		},
+		// onBeforeRendering: function () {
+		// },
 
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
@@ -55,7 +56,6 @@ sap.ui.define([
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Umsatz
 		//	onExit: function() {
-		//
 		//	}
 		, */
 

@@ -4,6 +4,7 @@ sap.ui.define([
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		onInit: function () {
+			this.getRouter().getRoute("Startpage").attachMatched(this._onRoutePatternMatched, this);
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
@@ -16,14 +17,13 @@ sap.ui.define([
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
 			this.setModel(dbUserModel, "dbUserModel");
+
+			dbUserModel.attachRequestCompleted(function (oEvent) {
+				oEvent.getSource().refresh(true);
+			});
 		},
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Detailansicht
-		 */
-		onBeforeRendering: function () {
+		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 		},
 
