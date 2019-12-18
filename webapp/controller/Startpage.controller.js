@@ -15,11 +15,7 @@ sap.ui.define([
 			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
-			// FIXME workaround
-			var that = this;
-			dbUserModel.attachRequestCompleted(function (oEvent) {
-				that.getView().byId("guthabenAnzeige").setValue(oEvent.getSource().getData().GUTHABEN);
-			});
+			this.getView().setModel(dbUserModel, "dbUserModel");
 		},
 
 		/**
