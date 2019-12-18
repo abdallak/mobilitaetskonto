@@ -13,20 +13,9 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
 
-			// TODO bind to view?
 			var dbUserModel = this.getGlobalModel("dbUserModel");
+			this.getView().setModel(dbUserModel, "dbUserModel");
 
-			// FIXME workaround
-			var that = this;
-			dbUserModel.attachRequestCompleted(function (oEvent) {
-				var dbUserData = oEvent.getSource().getData();
-
-				that.getView().byId("nameLabel").setText(dbUserData.VORNAME + " " + dbUserData.NAME);
-				that.getView().byId("guthabenLabel").setText(dbUserData.GUTHABEN + " EUR");
-
-				console.log("dbUserModel:", dbUserData);
-			});
-			
 			this.getTableData();
 		},
 
