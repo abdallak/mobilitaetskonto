@@ -19,7 +19,7 @@ sap.ui.define([
 			var container = this.getView().byId("container1");
 			container.setModel(detailModel, "detailModel");
 			container.setModel(dbUserModel, "dbUserModel");
-		},
+		}
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -35,9 +35,9 @@ sap.ui.define([
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.Detailansicht
 		 */
-		onAfterRendering: function () {
-
-		},
+		// onAfterRendering: function () {
+		//
+		// },
 
 		/**
 		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
