@@ -16,20 +16,15 @@ sap.ui.define([
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
 
-			this.getTableData();
+			var umsatzModel = new sap.ui.model.json.JSONModel();
+			this.setModel(umsatzModel, "umsatzModel");
+
+			this._onRoutePatternMatched(null);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
-
-			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var umsatzModel = this.getGlobalModel("umsatzModel");
-
-			var params = {}; //TODO kuerzen
-			params.mid = dbUserData.MID;
-			var paramsString = jQuery.param(params);
-
-			umsatzModel.loadData("/MOB_UMSATZ", paramsString);
+			this.getTableData();
 		},
 
 		onNavToDetailansicht: function () {
@@ -61,21 +56,14 @@ sap.ui.define([
 
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var table = this.getView().byId("table0");
+			var umsatzModel = this.getModel("umsatzModel");
 
 			var params = {};
 			params.mid = dbUserData.MID;
 
-			var paramsString = jQuery.param(params);
+			umsatzModel.loadData("/MOB_UMSATZ", params);
 
-			var url = "/MOB_UMSATZ";
-
-			var umsatzModel = this.getGlobalModel("umsatzModel");
-			umsatzModel.loadData(url, paramsString);
-
-			table.setModel(umsatzModel, "umsatzModel");
 			console.log("UmsatzModel:", umsatzModel); //nach oben packen:eslint-disable no-console, no-alert
-
 		},
 
 		detailFunc: function (oEvent) {
@@ -83,7 +71,7 @@ sap.ui.define([
 			var context = oEvent.getSource().getBindingContext("umsatzModel");
 			var path = context.getPath();
 
-			var umsatzModel = this.getGlobalModel("umsatzModel");
+			var umsatzModel = this.getModel("umsatzModel");
 			var detailModel = this.getGlobalModel("detailModel");
 			detailModel.setData(umsatzModel.getProperty(path));
 
