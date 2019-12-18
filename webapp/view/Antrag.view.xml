@@ -9,7 +9,7 @@
 								<sap.ui.layout.form:formElements>
 									<sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
 										<sap.ui.layout.form:fields>
-											<SegmentedButton xmlns="sap.m" selectedKey="auszahlung" id="art">
+											<SegmentedButton xmlns="sap.m" selectedKey="{oAntragModel>/art}" id="art">
 												<items>
 													<SegmentedButtonItem text="Auszahlung" key="auszahlung" id="item2"/>
 													<SegmentedButtonItem text="Gutschrift" key="gutschrift" id="item3"/>
@@ -19,12 +19,12 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="Betrag in €" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" id="betrag" placeholder="0,00 €" required="true" type="Number" liveChange="onBetragChanged"/>
+											<Input width="100%" id="betrag" placeholder="0,00 €" required="true" type="Number" value="{oAntragModel>/betrag}" liveChange="onBetragChanged"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="Beschreibung" id="element3">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" rows="6" id="beschreibung" wrapping="Soft" busyIndicatorSize="Auto"/>
+											<TextArea xmlns="sap.m" rows="6" id="beschreibung" value="{oAntragModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
