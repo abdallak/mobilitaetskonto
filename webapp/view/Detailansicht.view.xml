@@ -37,7 +37,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelValue}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" id="betragId" text="{detailModel>/BETRAG}" textAlign="Center"/>
+											<Text xmlns="sap.m" width="50%" id="betragId" text="{parts: [{path: 'dbUserModel>/GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.typeCurrency'}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelStatus}">
