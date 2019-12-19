@@ -14,7 +14,9 @@
 									<tileContent>
 										<TileContent>
 											<content>
-												<NumericContent scale="€" value="{dbUserModel>/GUTHABEN}" id="guthabenAnzeige"/>
+												<NumericContent 
+												value="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency',formatOptions: {showMeasure:false}}"
+												/>
 											</content>
 										</TileContent>
 									</tileContent>
