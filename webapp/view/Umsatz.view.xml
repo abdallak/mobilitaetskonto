@@ -36,7 +36,9 @@
 							<ColumnListItem id="item0" press="detailFunc" type="Active">
 								<cells>
 									<Label text="{umsatzModel>ART}" id="label5"/>
-									<Label text="{path: 'umsatzModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }" id="label6"/>
+									<Label
+										text="{path: 'umsatzModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+										id="label6"/>
 									<Label text="{umsatzModel>BETRAG}" id="label7"/>
 									<Label text="{umsatzModel>KATEGORIE}" id="label8"/>
 									<Label text="{umsatzModel>STATUS}" id="label9"/>
