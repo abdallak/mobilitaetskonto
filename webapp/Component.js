@@ -29,10 +29,8 @@ sap.ui.define([
 
 			// getOrCreateUser and set Models: userModel + dbUserModel
 			this.getOrCreateUser();
-			
+
 			// set umsatzModel
-			this.createUmsatz();
-			
 			this.createDetail();
 
 		},
@@ -44,20 +42,15 @@ sap.ui.define([
 			this.oUserModel.attachRequestCompleted(function (oEvent) {
 				that.oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", that.oUserModel.getData());
 			});
-			
+
 			// make available in other controllers
 			sap.ui.getCore().setModel(this.oDbUserModel, "dbUserModel");
 			sap.ui.getCore().setModel(this.oUserModel, "userModel");
 		},
-		
-		createUmsatz: function() {
-			this.oUmsatzModel = new sap.ui.model.json.JSONModel();
-			sap.ui.getCore().setModel(this.oUmsatzModel, "umsatzModel");
-		}, 
-		
-		createDetail: function() {
+
+		createDetail: function () {
 			this.oDetailModel = new sap.ui.model.json.JSONModel();
 			sap.ui.getCore().setModel(this.oDetailModel, "detailModel");
-		} 
+		}
 	});
 });
