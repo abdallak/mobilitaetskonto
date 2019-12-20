@@ -3,6 +3,7 @@ sap.ui.define([
 ], function (BaseController) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
+
 		onInit: function () {
 			this.getRouter().getRoute("Startpage").attachMatched(this._onRoutePatternMatched, this);
 
@@ -34,5 +35,6 @@ sap.ui.define([
 		onNavToAntrag: function () {
 			this.getRouter().navTo("Antrag");
 		}
+
 	});
 });

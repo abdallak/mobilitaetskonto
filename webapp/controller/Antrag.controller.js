@@ -1,13 +1,16 @@
 sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], function (BaseController) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Antrag", {
+		
 		onInit: function () {
 			this.getRouter().getRoute("Antrag").attachMatched(this._onRoutePatternMatched, this);
 			this.resetAntrag();
 		},
+		
 		_onRoutePatternMatched: function (oEvent) {
 			this.resetAntrag();
 		},
+		
 		resetAntrag: function () {
 			var dbUserModel = this.getGlobalModel("dbUserModel").getData();
 			var defaultAntrag = {};
@@ -18,6 +21,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 			var oAntragModel = new sap.ui.model.json.JSONModel(defaultAntrag);
 			this.setModel(oAntragModel, "oAntragModel");
 		},
+		
 		antragStellen: function (oEvent) {
 			// FIXME workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
@@ -35,6 +39,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 				that.getRouter().navTo("Umsatz");
 			});
 		},
+		
 		onBetragChanged: function (oEvent) {
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
@@ -47,5 +52,6 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
 			}
 		}
+		
 	});
 });
