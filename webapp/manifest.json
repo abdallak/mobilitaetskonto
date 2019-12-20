@@ -56,10 +56,6 @@
 				"settings": {
 					"bundleName": "Mobilitaetskonto.Mobilitaetskonto.i18n.i18n"
 				}
-			},
-			"JSONUmsatz": {
-				"type": "sap.ui.model.json.JSONModel",
-				"uri": "model/Umsatz.json"
 			}
 		},
 		"resources": {
