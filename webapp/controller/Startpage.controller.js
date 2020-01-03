@@ -12,14 +12,17 @@ sap.ui.define([
 			// var userModel = this.getGlobalModel("userModel").getData();
 			sap.m.MessageToast.show("dbUserModel:\nMID: " + dbUserData.MID + "\nVORNAME: " + dbUserData.VORNAME + "\nName: " + dbUserData.NAME +
 				"\nGuthaben: " + dbUserData.GUTHABEN);
-			if(dbUserData.GUTHABEN < 0){this.getView().byId("NumCont1").setValueColor("Critical");}
-						//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
+			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
 			this.setModel(dbUserModel, "dbUserModel");
 
+			var that = this; 
 			dbUserModel.attachRequestCompleted(function (oEvent) {
 				oEvent.getSource().refresh(true);
+				if (dbUserData.GUTHABEN < 0) {
+					that.getView().byId("NumCont1").setValueColor("Critical");
+				}
 			});
 		},
 
