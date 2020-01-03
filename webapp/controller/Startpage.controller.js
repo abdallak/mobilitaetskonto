@@ -10,11 +10,10 @@ sap.ui.define([
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			// var userModel = this.getGlobalModel("userModel").getData();
-
 			sap.m.MessageToast.show("dbUserModel:\nMID: " + dbUserData.MID + "\nVORNAME: " + dbUserData.VORNAME + "\nName: " + dbUserData.NAME +
 				"\nGuthaben: " + dbUserData.GUTHABEN);
-
-			//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
+			if(dbUserData.GUTHABEN < 0){this.getView().byId("NumCont1").setValueColor("Critical");}
+						//sap.m.MessageToast.show("userModel:\nName: " + data.name + "\nFirstName: " + data.firstName + "\nLastName: " + data.lastName +
 			//	"\nEmail: " + data.email + "\nDisplayname: " + data.displayName);
 
 			this.setModel(dbUserModel, "dbUserModel");

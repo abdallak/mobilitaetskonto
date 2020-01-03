@@ -16,7 +16,9 @@
 											<content>
 												<NumericContent
 													value="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency',formatOptions: {showMeasure:false}}"
-													truncateValueTo="8"/>
+													truncateValueTo="8"
+													id="NumCont1"
+													 />
 											</content>
 										</TileContent>
 									</tileContent>
