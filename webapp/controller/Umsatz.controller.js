@@ -1,8 +1,10 @@
 sap.ui.define([
-	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
-], function (BaseController) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
+], function (BaseController, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
+		formatter: formatter,
 
 		onInit: function () {
 			this.getRouter().getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
