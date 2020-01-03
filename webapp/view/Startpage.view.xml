@@ -18,6 +18,7 @@
 													value="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency',formatOptions: {showMeasure:true}}"
 													truncateValueTo="8"
 													id="NumCont1"
+													valueColor= "{= ${dbUserModel>/GUTHABEN} > 0 ? 'Good' : 'Critical' }"
 													 />
 											</content>
 										</TileContent>

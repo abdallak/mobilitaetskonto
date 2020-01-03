@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (BaseController) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
-		
+
 		onInit: function () {
 			this.getRouter().getRoute("Startpage").attachMatched(this._onRoutePatternMatched, this);
 
@@ -17,14 +17,8 @@ sap.ui.define([
 
 			this.setModel(dbUserModel, "dbUserModel");
 
-			var that = this; 
 			dbUserModel.attachRequestCompleted(function (oEvent) {
 				oEvent.getSource().refresh(true);
-				if (dbUserData.GUTHABEN < 0) {
-					that.getView().byId("NumCont1").setValueColor("Critical");
-				} else {
-					that.getView().byId("NumCont1").setValueColor("Good");
-				}
 			});
 		},
 
