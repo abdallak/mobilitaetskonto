@@ -5,7 +5,7 @@ sap.ui.define([], function () {
 			var resourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
 			switch (sStatus) {
-			case "genehmigt":
+			case "0": // FIXME status als Int
 				return resourceBundle.getText("antragStatusGenehmigt");
 			default:
 				return sStatus;
@@ -16,9 +16,9 @@ sap.ui.define([], function () {
 			var resourceBundle = this.getView().getModel("i18n").getResourceBundle();
 
 			switch (sAntragArt) {
-			case "gutschrift":
+			case "1": // FIXME art als Int
 				return resourceBundle.getText("antragArtGutschrift");
-			case "auszahlung":
+			case "0":
 				return resourceBundle.getText("antragArtAuszahlung");
 			default:
 				return sAntragArt;

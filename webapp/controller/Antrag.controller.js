@@ -15,7 +15,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultAntrag = {
 				"MID": dbUserData.MID,
-				"art": "auszahlung",
+				"art": 0,
 				"betrag": null,
 				"beschreibung": null
 			};

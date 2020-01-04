@@ -12,8 +12,8 @@
 										<sap.ui.layout.form:fields>
 											<SegmentedButton xmlns="sap.m" selectedKey="{oAntragModel>/art}" id="art">
 												<items>
-													<SegmentedButtonItem text="Auszahlung" key="auszahlung" id="item2"/>
-													<SegmentedButtonItem text="Gutschrift" key="gutschrift" id="item3"/>
+													<SegmentedButtonItem text="Auszahlung" key="0" id="item2"/>
+													<SegmentedButtonItem text="Gutschrift" key="1" id="item3"/>
 												</items>
 											</SegmentedButton>
 										</sap.ui.layout.form:fields>
