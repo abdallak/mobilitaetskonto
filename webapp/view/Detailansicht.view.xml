@@ -27,8 +27,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelType}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" id="artId" textAlign="Center" text="{detailModel>/ART}"/>
-											<!--<Text text="{path: 'detailModel>/ART', formatter: '.formatter.antragArtText'}"/>-->
+											<Text xmlns="sap.m" width="50%" id="artId" textAlign="Center" text="{path: 'detailModel>/ART', formatter: '.formatter.antragArtText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelCategory}">
@@ -44,8 +43,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelStatus}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" id="statusId" textAlign="Center" text="{detailModel>/STATUS}"/>
-											<!--<Text text="{path: 'detailModel>/STATUS', formatter: '.formatter.statusText'}"/>-->
+											<Text xmlns="sap.m" width="50%" id="statusId" textAlign="Center" text="{path: 'detailModel>/STATUS', formatter: '.formatter.statusText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>detailLabelDescription}">

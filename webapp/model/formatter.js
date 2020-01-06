@@ -2,7 +2,7 @@ sap.ui.define([], function () {
 	"use strict";
 	return {
 		statusText: function (sStatus) {
-			var resourceBundle = this.getView().getModel("i18n").getResourceBundle();
+			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
 			switch (sStatus) {
 			case "0": // FIXME status als Int
@@ -13,7 +13,7 @@ sap.ui.define([], function () {
 		},
 
 		antragArtText: function (sAntragArt) {
-			var resourceBundle = this.getView().getModel("i18n").getResourceBundle();
+			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
 			switch (sAntragArt) {
 			case "1": // FIXME art als Int
