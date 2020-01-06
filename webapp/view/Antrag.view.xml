@@ -41,7 +41,7 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="onNavBack"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="cancelButton"/>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" press="antragStellen" text="{i18n>antragSubmitButton}"/>
 						</content>
 					</OverflowToolbar>

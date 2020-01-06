@@ -8,7 +8,12 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
+			// this.resetAntrag();
+		},
+
+		cancelButton: function (oEvent) {
 			this.resetAntrag();
+			this.onNavBack();
 		},
 
 		resetAntrag: function () {
@@ -38,6 +43,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 			var that = this;
 			oAntragResponseModel.attachRequestCompleted(function (oEvent1) {
 				that.getRouter().navTo("Umsatz");
+				that.resetAntrag();
 			});
 		},
 
