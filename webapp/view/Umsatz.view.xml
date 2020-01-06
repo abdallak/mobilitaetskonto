@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz">
 	<App>
 		<pages>
-			<Page title="Umsatzanzeige" floatingFooter="true">
+			<Page title="{i18n>umsatzTitle}" floatingFooter="true">
 				<content>
 					<Table id="table0" growing="true" items="{ path : 'umsatzModel>/'}">
 						<columns>
