@@ -15,7 +15,7 @@ sap.ui.define([
 			this.setModel(dbUserModel, "dbUserModel");
 
 			// FIXME: Workaround
-			if (JSON.stringify(detailModel.getData()) === "{}") {
+			if (jQuery.isEmptyObject(detailModel.getData())) {
 				this.onNavBack();
 			}
 		}
