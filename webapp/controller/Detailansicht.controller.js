@@ -13,6 +13,11 @@ sap.ui.define([
 
 			this.setModel(detailModel, "detailModel");
 			this.setModel(dbUserModel, "dbUserModel");
+
+			// FIXME: Workaround
+			if (JSON.stringify(detailModel.getData()) === "{}") {
+				this.onNavBack();
+			}
 		}
 
 	});
