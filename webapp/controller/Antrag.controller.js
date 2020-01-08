@@ -1,4 +1,7 @@
-sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], function (BaseController) {
+sap.ui.define([
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, JSONModel) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Antrag", {
 
@@ -24,7 +27,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 				"betrag": null,
 				"beschreibung": null
 			};
-			var oAntragModel = new sap.ui.model.json.JSONModel(defaultAntrag);
+			var oAntragModel = new JSONModel(defaultAntrag);
 			this.setModel(oAntragModel, "oAntragModel");
 		},
 
@@ -38,7 +41,7 @@ sap.ui.define(["Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"], f
 				sap.m.MessageToast.show("Bitte Betrag eingeben!");
 				return;
 			}
-			var oAntragResponseModel = new sap.ui.model.json.JSONModel();
+			var oAntragResponseModel = new JSONModel();
 			oAntragResponseModel.loadData("/MOB_ANTRAG", oAntragData);
 			var that = this;
 			oAntragResponseModel.attachRequestCompleted(function (oEvent1) {
