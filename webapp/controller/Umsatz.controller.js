@@ -1,7 +1,8 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
-], function (BaseController, formatter) {
+	"sap/ui/model/json/JSONModel",
+	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+], function (BaseController, JSONModel, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
 		formatter: formatter,
@@ -12,7 +13,7 @@ sap.ui.define([
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
 
-			var umsatzModel = new sap.ui.model.json.JSONModel();
+			var umsatzModel = new JSONModel();
 			this.setModel(umsatzModel, "umsatzModel");
 
 			this._onRoutePatternMatched(null);
