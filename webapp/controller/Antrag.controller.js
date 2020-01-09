@@ -20,12 +20,11 @@ sap.ui.define([
 		},
 
 		resetAntrag: function () {
-			var resourceBundle = this.getResourceBundle();                               
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultAntrag = {
 				"MID": dbUserData.MID,
 				"art": "0",
-				"betrag": [0, resourceBundle.getText("currency")],
+				"betrag": null,
 				"beschreibung": null
 			};
 			var oAntragModel = new JSONModel(defaultAntrag);
