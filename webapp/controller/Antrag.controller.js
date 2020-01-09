@@ -25,7 +25,8 @@ sap.ui.define([
 			var defaultAntrag = {
 				"MID": dbUserData.MID,
 				"art": "0",
-				"betrag": [0, resourceBundle.getText("currency")],
+				"betrag": null,
+				"betragValue": null,
 				"beschreibung": null
 			};
 			var oAntragModel = new JSONModel(defaultAntrag);
@@ -38,7 +39,7 @@ sap.ui.define([
 
 			var oAntragModel = this.getModel("oAntragModel");
 			var oAntragData = oAntragModel.getData();
-			if (oAntragData.betrag === null) {
+			if (oAntragData.betragValue === null) {
 				sap.m.MessageToast.show("Bitte Betrag eingeben!");
 				return;
 			}
@@ -46,6 +47,7 @@ sap.ui.define([
 			oAntragResponseModel.loadData("/MOB_ANTRAG", oAntragData);
 			var that = this;
 			oAntragResponseModel.attachRequestCompleted(function (oEvent1) {
+				// TODO Fehlermeldung, wenn fehlgeschlagen
 				that.getRouter().navTo("Umsatz");
 				that.resetAntrag();
 			});
@@ -55,6 +57,11 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
 			var oSource = oEvent.getSource();
+			
+			
+			var oAntragModelData = this.getModel("oAntragModel").getData();
+			oAntragModelData.betragValue = sValue;
+			
 			if (sValue && sValue.trim().length > 0) {
 				oSource.setValueState("Success");
 				oSource.setValueStateText(null);
