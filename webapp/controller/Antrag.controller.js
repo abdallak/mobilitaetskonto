@@ -54,7 +54,9 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
 			var oSource = oEvent.getSource();
-			if (sValue && sValue.trim().length > 0) {
+			
+			var betragValue = parseFloat(sValue);
+			if (!isNaN(betragValue)) {
 				oSource.setValueState("Success");
 				oSource.setValueStateText(null);
 			} else {
@@ -62,6 +64,5 @@ sap.ui.define([
 				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
 			}
 		}
-
 	});
 });
