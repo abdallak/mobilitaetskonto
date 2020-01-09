@@ -106,7 +106,7 @@
 				},
 				{
 					"name": "Detailansicht",
-					"pattern": "Detailansicht",
+					"pattern": "Detailansicht/{UID}",
 					"target": [
 						"Detailansicht"
 					]
