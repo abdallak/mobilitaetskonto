@@ -32,6 +32,8 @@ sap.ui.define([
 
 			// set umsatzModel
 			this.createUmsatz();
+			
+			this.createRole();
 
 		},
 		getOrCreateUser: function () {
@@ -51,6 +53,16 @@ sap.ui.define([
 		createUmsatz: function () {
 			this.oDetailModel = new sap.ui.model.json.JSONModel();
 			sap.ui.getCore().setModel(this.oDetailModel, "umsatzModel");
+		},
+		
+		createRole: function () {
+			//configure roles here
+			var roles = {verwalter: false, mitarbeiter: true};
+			
+			this.oRoleModel = new sap.ui.model.json.JSONModel(roles);
+			
+			//make available for other controllers
+			sap.ui.getCore().setModel(this.oRoleModel, "roleModel");
 		}
 	});
 });
