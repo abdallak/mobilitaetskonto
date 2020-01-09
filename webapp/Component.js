@@ -60,7 +60,7 @@ sap.ui.define([
 			//configure roles here
 			var roles = {
 				verwalter: false,
-				mitarbeiter: false
+				mitarbeiter: true
 			};
 			this.oRoleModel = new JSONModel(roles);
 
