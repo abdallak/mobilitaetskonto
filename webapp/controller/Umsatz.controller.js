@@ -1,7 +1,7 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
+	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 ], function (BaseController, JSONModel, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
@@ -24,6 +24,10 @@ sap.ui.define([
 			this.getTableData();
 		},
 
+		onNavToDetailansicht: function () {
+			this.getRouter().navTo("Detailansicht");
+		},
+
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var umsatzModel = this.getModel("umsatzModel");
@@ -43,9 +47,7 @@ sap.ui.define([
 			var detailModel = this.getGlobalModel("detailModel");
 			detailModel.setData(umsatzModel.getProperty(path));
 
-			this.getRouter().navTo("Detailansicht", {
-				UID: "test"
-			});
+			this.onNavToDetailansicht();
 		}
 
 	});

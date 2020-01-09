@@ -1,4 +1,3 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
@@ -9,8 +8,6 @@ sap.ui.define([
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("Detailansicht").attachMatched(this._onRoutePatternMatched, this);
-
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var detailModel = this.getGlobalModel("detailModel");
 
@@ -21,11 +18,7 @@ sap.ui.define([
 			if (jQuery.isEmptyObject(detailModel.getData())) {
 				this.onNavBack();
 			}
-		},
-
-		_onRoutePatternMatched: function (oEvent) {
-			console.log(oEvent.getParameter("arguments").UID);
-		},
+		}
 
 	});
 
