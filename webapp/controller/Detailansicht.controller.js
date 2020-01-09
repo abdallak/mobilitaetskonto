@@ -12,19 +12,31 @@ sap.ui.define([
 			this.getRouter().getRoute("Detailansicht").attachMatched(this._onRoutePatternMatched, this);
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
-			var detailModel = this.getGlobalModel("detailModel");
+			var detailModel = new sap.ui.model.json.JSONModel();
 
 			this.setModel(detailModel, "detailModel");
 			this.setModel(dbUserModel, "dbUserModel");
-
-			// FIXME: Workaround
-			if (jQuery.isEmptyObject(detailModel.getData())) {
-				this.onNavBack();
-			}
+			
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			console.log(oEvent.getParameter("arguments").UID);
+			
+			var path = "/" + oEvent.getParameter("arguments").Path;
+			
+			var detailModel = this.getModel("detailModel");
+			var umsatzModel = this.getGlobalModel("umsatzModel");
+			
+			detailModel.setData(umsatzModel.getProperty(path));
+			
+			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
+			
+			if (jQuery.isEmptyObject(detailModel.getData())) {
+				detailModel.setData(oStorage.get("umsatzLocalData"));
+			}
+			else {
+				oStorage.put("umsatzLocalData", detailModel.getData());
+			}
+			
 		},
 
 	});

@@ -13,7 +13,8 @@ sap.ui.define([
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
 
-			var umsatzModel = new JSONModel();
+			var umsatzModel = this.getGlobalModel("umsatzModel");
+			umsatzModel.refresh(true);
 			this.setModel(umsatzModel, "umsatzModel");
 
 			this._onRoutePatternMatched(null);
@@ -26,7 +27,7 @@ sap.ui.define([
 
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var umsatzModel = this.getModel("umsatzModel");
+			var umsatzModel = this.getGlobalModel("umsatzModel");
 
 			var params = {};
 			params.mid = dbUserData.MID;
@@ -37,14 +38,15 @@ sap.ui.define([
 		detailFunc: function (oEvent) {
 
 			var context = oEvent.getSource().getBindingContext("umsatzModel");
-			var path = context.getPath();
+			var path = context.getPath().substr(1);
 
-			var umsatzModel = this.getModel("umsatzModel");
+		/*	var umsatzModel = this.getGlobalModel("umsatzModel");
 			var detailModel = this.getGlobalModel("detailModel");
 			detailModel.setData(umsatzModel.getProperty(path));
-
+		*/
+		
 			this.getRouter().navTo("Detailansicht", {
-				UID: "test"
+				Path: path
 			});
 		}
 

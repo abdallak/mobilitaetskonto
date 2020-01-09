@@ -106,7 +106,7 @@
 				},
 				{
 					"name": "Detailansicht",
-					"pattern": "Detailansicht/{UID}",
+					"pattern": "Detailansicht/{Path}",
 					"target": [
 						"Detailansicht"
 					]

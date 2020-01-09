@@ -31,7 +31,7 @@ sap.ui.define([
 			this.getOrCreateUser();
 
 			// set umsatzModel
-			this.createDetail();
+			this.createUmsatz();
 
 		},
 		getOrCreateUser: function () {
@@ -48,9 +48,9 @@ sap.ui.define([
 			sap.ui.getCore().setModel(this.oUserModel, "userModel");
 		},
 
-		createDetail: function () {
+		createUmsatz: function () {
 			this.oDetailModel = new sap.ui.model.json.JSONModel();
-			sap.ui.getCore().setModel(this.oDetailModel, "detailModel");
+			sap.ui.getCore().setModel(this.oDetailModel, "umsatzModel");
 		}
 	});
 });
