@@ -9,7 +9,7 @@
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageAntragStellenTile}"
-									subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag" visible="{= ${roleModel>/mitarbeiter} === true}" />
+									subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag" visible="{= ${roleModel>/mitarbeiter} === true}"/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 									header="{i18n&gt;startpageUmsatztabelleTile}" subheader="{i18n&gt;startpageUmsatztabelleTileSub}" id="tile1" press="onNavToUmsatz" visible="{= ${roleModel>/mitarbeiter} === true}" >
 									<tileContent>

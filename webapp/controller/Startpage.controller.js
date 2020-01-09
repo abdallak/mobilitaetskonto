@@ -9,6 +9,9 @@ sap.ui.define([
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
+			
+			var roleModel = this.getGlobalModel("roleModel");
+			this.setModel(roleModel, "roleModel");
 
 			dbUserModel.attachRequestCompleted(function (oEvent) {
 				oEvent.getSource().refresh(true);
