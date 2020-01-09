@@ -1,8 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/UIComponent",
 	"sap/ui/Device",
+	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/model/models"
-], function (UIComponent, Device, models) {
+], function (UIComponent, Device, JSONModel, models) {
 	"use strict";
 
 	return UIComponent.extend("Mobilitaetskonto.Mobilitaetskonto.Component", {
@@ -32,13 +33,13 @@ sap.ui.define([
 
 			// set umsatzModel
 			this.createUmsatz();
-			
-			this.createRole();
 
+			this.createRole();
 		},
+
 		getOrCreateUser: function () {
-			this.oUserModel = new sap.ui.model.json.JSONModel(this.sUserPath);
-			this.oDbUserModel = new sap.ui.model.json.JSONModel();
+			this.oUserModel = new JSONModel(this.sUserPath);
+			this.oDbUserModel = new JSONModel();
 
 			var that = this;
 			this.oUserModel.attachRequestCompleted(function (oEvent) {
@@ -51,16 +52,18 @@ sap.ui.define([
 		},
 
 		createUmsatz: function () {
-			this.oDetailModel = new sap.ui.model.json.JSONModel();
+			this.oDetailModel = new JSONModel();
 			sap.ui.getCore().setModel(this.oDetailModel, "umsatzModel");
 		},
-		
+
 		createRole: function () {
 			//configure roles here
-			var roles = {verwalter: false, mitarbeiter: true};
-			
-			this.oRoleModel = new sap.ui.model.json.JSONModel(roles);
-			
+			var roles = {
+				verwalter: false,
+				mitarbeiter: false
+			};
+			this.oRoleModel = new JSONModel(roles);
+
 			//make available for other controllers
 			sap.ui.getCore().setModel(this.oRoleModel, "roleModel");
 		}
