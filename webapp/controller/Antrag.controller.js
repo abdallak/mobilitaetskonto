@@ -41,6 +41,10 @@ sap.ui.define([
 				sap.m.MessageToast.show("Bitte Betrag eingeben!");
 				return;
 			}
+			if (oAntragData.beschreibung === null || oAntragData.beschreibung.trim().length === 0) {
+				sap.m.MessageToast.show("Bitte Beschreibung eingeben!");
+				return;
+			}
 			var oAntragResponseModel = new JSONModel();
 			oAntragResponseModel.loadData("/MOB_ANTRAG", oAntragData);
 			var that = this;
