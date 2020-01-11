@@ -1,47 +1,47 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz">
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Sales">
 	<App>
 		<pages>
-			<Page title="{i18n>umsatzTitle}" floatingFooter="true">
+			<Page title="{i18n>salesTitle}" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'umsatzModel>/'}">
+					<Table id="table0" growing="true" items="{ path : 'salesModel>/'}">
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>umsatzTableHeaderType}" id="label0"/>
+									<Label text="{i18n>salesTableHeaderType}" id="label0"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>umsatzTableHeaderDate}" id="label1"/>
+									<Label text="{i18n>salesTableHeaderDate}" id="label1"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>umsatzTableHeaderValue}" id="label2"/>
+									<Label text="{i18n>salesTableHeaderValue}" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="{i18n>umsatzTableHeaderCategory}" id="label3"/>
+									<Label text="{i18n>salesTableHeaderCategory}" id="label3"/>
 								</header>
 							</Column>
 							<Column id="column4">
 								<header>
-									<Label text="{i18n>umsatzTableHeaderStatus}" id="label4"/>
+									<Label text="{i18n>salesTableHeaderStatus}" id="label4"/>
 								</header>
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem id="item0" press="detailFunc" type="Active">
+							<ColumnListItem id="item0" press="onNavToDetail" type="Active">
 								<cells>
-									<Label text="{path: 'umsatzModel>ART', formatter: '.formatter.antragArtText'}" id="label5"/>
+									<Label text="{path: 'salesModel>ART', formatter: '.formatter.antragArtText'}" id="label5"/>
 									<Label
-										text="{path: 'umsatzModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+										text="{path: 'salesModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 										id="label6"/>
-									<Label text="{parts: [{path: 'umsatzModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label7"/>
-									<Label text="{umsatzModel>KATEGORIE}" id="label8"/>
-									<Label text="{path: 'umsatzModel>STATUS', formatter: '.formatter.statusText'}" id="label9"/>
+									<Label text="{parts: [{path: 'salesModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label7"/>
+									<Label text="{salesModel>KATEGORIE}" id="label8"/>
+									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}" id="label9"/>
 								</cells>
 							</ColumnListItem>
 						</items>

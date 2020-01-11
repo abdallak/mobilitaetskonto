@@ -9,9 +9,6 @@ sap.ui.define([
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
-			
-			var roleModel = this.getGlobalModel("roleModel");
-			this.setModel(roleModel, "roleModel");
 
 			dbUserModel.attachRequestCompleted(function (oEvent) {
 				oEvent.getSource().refresh(true);
@@ -22,12 +19,12 @@ sap.ui.define([
 			this.updateUserModel();
 		},
 
-		onNavToUmsatz: function () {
-			this.getRouter().navTo("Umsatz");
+		onNavToSales: function () {
+			this.getRouter().navTo("Sales");
 		},
 
-		onNavToAntrag: function () {
-			this.getRouter().navTo("Antrag");
+		onNavToRequest: function () {
+			this.getRouter().navTo("Request");
 		}
 
 	});

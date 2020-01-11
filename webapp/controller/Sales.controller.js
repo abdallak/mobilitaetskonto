@@ -4,18 +4,18 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
 ], function (BaseController, JSONModel, formatter) {
 	"use strict";
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Umsatz", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Sales", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("Umsatz").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
 
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			this.setModel(dbUserModel, "dbUserModel");
 
-			var umsatzModel = this.getGlobalModel("umsatzModel");
-			umsatzModel.refresh(true);
-			this.setModel(umsatzModel, "umsatzModel");
+			var salesModel = this.getGlobalModel("salesModel");
+			salesModel.refresh(true);
+			this.setModel(salesModel, "salesModel");
 
 			this._onRoutePatternMatched(null);
 		},
@@ -27,25 +27,20 @@ sap.ui.define([
 
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var umsatzModel = this.getGlobalModel("umsatzModel");
+			var salesModel = this.getGlobalModel("salesModel");
 
 			var params = {};
 			params.mid = dbUserData.MID;
 
-			umsatzModel.loadData("/MOB_UMSATZ", params);
+			salesModel.loadData("/MOB_UMSATZ", params);
 		},
 
-		detailFunc: function (oEvent) {
+		onNavToDetail: function (oEvent) {
 
-			var context = oEvent.getSource().getBindingContext("umsatzModel");
+			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath().substr(1);
-
-		/*	var umsatzModel = this.getGlobalModel("umsatzModel");
-			var detailModel = this.getGlobalModel("detailModel");
-			detailModel.setData(umsatzModel.getProperty(path));
-		*/
 		
-			this.getRouter().navTo("Detailansicht", {
+			this.getRouter().navTo("Detail", {
 				Path: path
 			});
 		}

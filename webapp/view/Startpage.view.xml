@@ -8,10 +8,10 @@
 						<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageAntragStellenTile}"
-									subheader="{i18n&gt;startpageAntragStellenTileSub}" press="onNavToAntrag" visible="{= ${roleModel>/mitarbeiter} === true}"/>
+									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTile}"
+									subheader="{i18n&gt;startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter} === true}" />
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-									header="{i18n&gt;startpageUmsatztabelleTile}" subheader="{i18n&gt;startpageUmsatztabelleTileSub}" id="tile1" press="onNavToUmsatz" visible="{= ${roleModel>/mitarbeiter} === true}" >
+									header="{i18n&gt;startpageSalesTile}" subheader="{i18n&gt;startpageSalesTileSub}" id="tile1" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter} === true}" >
 									<tileContent>
 										<TileContent>
 											<content>

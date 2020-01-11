@@ -1,7 +1,8 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Antrag">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request">
 	<App>
 		<pages>
-			<Page title="{i18n>antragTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
+			<Page title="{i18n>requestTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
 				<content>
 					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
 						<sap.ui.layout.form:formContainers>
@@ -9,22 +10,23 @@
 								<sap.ui.layout.form:formElements>
 									<sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
 										<sap.ui.layout.form:fields>
-											<SegmentedButton xmlns="sap.m" selectedKey="{oAntragModel>/art}" id="art">
+											<SegmentedButton xmlns="sap.m" selectedKey="{oRequestModel>/art}" id="art">
 												<items>
-													<SegmentedButtonItem text="{i18n>antragPayout}" key="0" id="item2"/>
-													<SegmentedButtonItem text="{i18n>antragCredit}" key="1" id="item3"/>
+													<SegmentedButtonItem text="{i18n>requestPayout}" key="0" id="item2"/>
+													<SegmentedButtonItem text="{i18n>requestCredit}" key="1" id="item3"/>
 												</items>
 											</SegmentedButton>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>antragAmount}" id="element0">
+									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" id="betrag" placeholder="{i18n>antragPlaceholder}" required="true" type="Number" value="{oAntragModel>/betrag}" liveChange="onBetragChanged"/>
+											<Input width="100%" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
+												liveChange="onValueChanged"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>antragDescription}" id="element3">
+									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" rows="6" id="beschreibung" value="{oAntragModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
+											<TextArea xmlns="sap.m" rows="6" value="{oRequestModel>/beschreibung}"  wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
@@ -40,7 +42,7 @@
 						<content>
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="cancelButton"/>
-							<Button xmlns="sap.m" id="submitButton" type="Accept" press="antragStellen" text="{i18n>antragSubmitButton}"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" press="submitRequest" text="{i18n>requestSubmitButton}"/>
 						</content>
 					</OverflowToolbar>
 				</footer>

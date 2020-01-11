@@ -91,24 +91,24 @@
 					]
 				},
 				{
-					"name": "Antrag",
-					"pattern": "Antrag",
+					"name": "Request",
+					"pattern": "Request",
 					"target": [
-						"Antrag"
+						"Request"
 					]
 				},
 				{
-					"name": "Umsatz",
-					"pattern": "Umsatz",
+					"name": "Sales",
+					"pattern": "Sales",
 					"target": [
-						"Umsatz"
+						"Sales"
 					]
 				},
 				{
-					"name": "Detailansicht",
-					"pattern": "Detailansicht/{Path}",
+					"name": "Detail",
+					"pattern": "Detail/{Path}",
 					"target": [
-						"Detailansicht"
+						"Detail"
 					]
 				}
 			],
@@ -124,21 +124,21 @@
 					"viewType": "XML",
 					"viewName": "Startpage"
 				},
-				"Antrag": {
+				"Request": {
 					"viewType": "XML",
-					"viewName": "Antrag"
+					"viewName": "Request"
 				},
-				"Umsatz": {
+				"Sales": {
 					"viewType": "XML",
-					"viewName": "Umsatz"
+					"viewName": "Sales"
 				},
 				"testview": {
 					"viewType": "XML",
 					"viewName": "testview"
 				},
-				"Detailansicht": {
+				"Detail": {
 					"viewType": "XML",
-					"viewName": "Detailansicht"
+					"viewName": "Detail"
 				}
 			}
 		}
