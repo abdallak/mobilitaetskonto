@@ -17,6 +17,10 @@ sap.ui.define([
 
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
+			var dbUserModel = this.getGlobalModel("dbUserModel");
+			if (dbUserModel.GUTHABEN === null){
+				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
+			}
 		},
 
 		onNavToSales: function () {

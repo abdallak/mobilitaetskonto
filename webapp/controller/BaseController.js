@@ -44,6 +44,10 @@ sap.ui.define([
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var userModel = this.getGlobalModel("userModel");
 			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
+		},
+		
+		handleEmptyModel: function (sMessage) {
+			sap.m.MessageBox.error(sMessage);
 		}
 
 	});

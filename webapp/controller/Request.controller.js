@@ -39,11 +39,11 @@ sap.ui.define([
 			var oRequestModel = this.getModel("oRequestModel");
 			var oRequestData = oRequestModel.getData();
 			if (oRequestData.betrag === null) {
-				sap.m.MessageToast.show("Bitte Betrag eingeben!");
+				this.handleEmptyModel("Bitte Betrag eingeben!");
 				return;
 			}
 			if (oRequestData.beschreibung === null || oRequestData.beschreibung.trim().length === 0) {
-				sap.m.MessageToast.show("Bitte Beschreibung eingeben!");
+				this.handleEmptyModel("Bitte Beschreibung eingeben!");
 				return;
 			}
 

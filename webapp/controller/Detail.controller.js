@@ -36,7 +36,9 @@ sap.ui.define([
 			else {
 				oStorage.put("salesLocalData", detailModel.getData());
 			}
-			
+			if (detailModel.UID === null) {
+				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
+			}
 		}
 
 	});
