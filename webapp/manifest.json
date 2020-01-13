@@ -110,6 +110,13 @@
 					"target": [
 						"Detail"
 					]
+				},
+				{
+					"name": "RequestTable",
+					"pattern": "RequestTable",
+					"target": [
+						"RequestTable"
+					]
 				}
 			],
 			"targets": {
@@ -139,6 +146,10 @@
 				"Detail": {
 					"viewType": "XML",
 					"viewName": "Detail"
+				},
+				"RequestTable": {
+					"viewType": "XML",
+					"viewName": "RequestTable"
 				}
 			}
 		}

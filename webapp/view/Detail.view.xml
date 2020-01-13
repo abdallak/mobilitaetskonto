@@ -8,7 +8,7 @@
 						<sap.ui.layout.form:formContainers>
 							<sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}: {detailModel>/UID}" id="container1">
 								<sap.ui.layout.form:formElements>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelMid}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderMid}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%" text="{detailModel>/MID}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
@@ -18,35 +18,35 @@
 											<Text width="50%" text="{dbUserModel>/NAME}, {dbUserModel>/VORNAME}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelDate}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%"
 												text="{ path: 'detailModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 												textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelType}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailModel>/ART', formatter: '.formatter.antragArtText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelCategory}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/KATEGORIE}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelValue}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%"
 												text="{parts: [{path: 'detailModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelStatus}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailModel>/STATUS', formatter: '.formatter.statusText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelDescription}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>

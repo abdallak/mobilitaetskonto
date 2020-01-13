@@ -62,6 +62,12 @@
 				"type": "destination",
 				"name": "MOB_MITARBEITER_GETCREATE"
 			}
+		}, {
+			"path": "/MOB_ANTRAG_TABELLE",
+			"target": {
+				"type": "destination",
+				"name": "MOB_ANTRAG_TABELLE"
+			}
 		}
 
 	],

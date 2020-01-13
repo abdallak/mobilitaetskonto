@@ -8,27 +8,27 @@
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>salesTableHeaderType}" id="label0"/>
+									<Label text="{i18n>HeaderType}" id="label0"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>salesTableHeaderDate}" id="label1"/>
+									<Label text="{i18n>HeaderDate}" id="label1"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>salesTableHeaderValue}" id="label2"/>
+									<Label text="{i18n>HeaderValue}" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="{i18n>salesTableHeaderCategory}" id="label3"/>
+									<Label text="{i18n>HeaderCategory}" id="label3"/>
 								</header>
 							</Column>
 							<Column id="column4">
 								<header>
-									<Label text="{i18n>salesTableHeaderStatus}" id="label4"/>
+									<Label text="{i18n>HeaderStatus}" id="label4"/>
 								</header>
 							</Column>
 						</columns>

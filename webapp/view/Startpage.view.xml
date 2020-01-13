@@ -9,7 +9,8 @@
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTile}"
-									subheader="{i18n&gt;startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter} === true}" />
+									subheader="{i18n&gt;startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter} === true}" 
+								/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 									header="{i18n&gt;startpageSalesTile}" subheader="{i18n&gt;startpageSalesTileSub}" id="tile1" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter} === true}" >
 									<tileContent>
@@ -22,6 +23,10 @@
 										</TileContent>
 									</tileContent>
 								</GenericTile>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
+									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTableTile}"
+									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter} === true}" 
+								/>
 							</sap.ui.layout:content>
 						</sap.ui.layout:HorizontalLayout>
 					</content>

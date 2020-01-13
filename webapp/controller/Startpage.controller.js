@@ -29,6 +29,10 @@ sap.ui.define([
 
 		onNavToRequest: function () {
 			this.getRouter().navTo("Request");
+		},
+		
+		onNavToRequestTable: function () {
+			this.getRouter().navTo("RequestTable");
 		}
 
 	});
