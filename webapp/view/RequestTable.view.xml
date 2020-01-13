@@ -1,9 +1,9 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable">
 	<App>
 		<pages>
-			<Page title="{i18n>requestTableTitle}" floatingFooter="true" >
+			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'requestTableModel>/'}">
+					<Table id="table0" growing="true" items="{ path : 'requestTableModel>/'}" updateFinished="updateFinished">
 						<columns>
 							<Column id="column0">
 								<header>
@@ -35,7 +35,7 @@
 							        <Text text="{i18n>HeaderCategorie}"/>
 							    </header>
 							</Column>
-							<Column  width="5%" id="column6">
+							<Column width="5%" id="column6">
 							    <header>
 							    </header>
 							</Column>
@@ -45,11 +45,11 @@
 							<ColumnListItem id="item0" press="detailFunc" type="Active">
 								<cells>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }" />
-									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
-									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" />
+									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+									<Label text="{requestTableModel>MID}"/>
+									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}"/>
-									<Label text="{requestTableModel>KATEGORIE}" />
+									<Label text="{requestTableModel>KATEGORIE}"/>
 									<CheckBox selected="false"/>
 								</cells>
 							</ColumnListItem>
@@ -83,7 +83,7 @@
 							<Label text="Ausstehende Anträge" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
 					<contentRight>
-					    <Label text="Unbearbeitet Anträge: modeldata req" width="100%"/>
+					    <Label text="" id="countLabel" width="100%"/>
 					</contentRight>
 					</Bar>
 				</customHeader>
