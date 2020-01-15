@@ -101,6 +101,10 @@
 				"name": "EmployeeRequestTable",
 				"pattern": "EmployeeRequestTable",
 				"target": ["EmployeeRequestTable"]
+			}, {
+				"name": "EmployeeRequestDetail",
+				"pattern": "EmployeeRequestDetail",
+				"target": ["EmployeeRequestDetail"]
 			}],
 			"targets": {
 				"TargetView1": {
@@ -137,6 +141,10 @@
 				"EmployeeRequestTable": {
 					"viewType": "XML",
 					"viewName": "EmployeeRequestTable"
+				},
+				"EmployeeRequestDetail": {
+					"viewType": "XML",
+					"viewName": "EmployeeRequestDetail"
 				}
 			}
 		}

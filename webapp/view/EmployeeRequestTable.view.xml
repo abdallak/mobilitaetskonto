@@ -32,7 +32,7 @@
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem id="item0" press="onNavToRequestDetail" type="Active">
+							<ColumnListItem id="item0" press="onNavToEmployeeRequestDetail" type="Active">
 								<cells>
 									<Label text="{path: 'employeeRequestModel>ART', formatter: '.formatter.antragArtText'}" id="label5"/>
 									<Label

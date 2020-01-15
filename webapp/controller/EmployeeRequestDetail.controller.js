@@ -3,17 +3,14 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
 ],	function(BaseController, formatter) {
 		"use strict";
-		return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.EmployeeRequestTable", {
+		return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.EmployeeRequestDetail", {
 			formatter: formatter,
 			onInit: function() {
 				//this.getRouter().getRoute("EmployeeRequestTable").attachMatched(this._onRoutePatternMatched, this);
-				//TODO employeeRequestTableModel, Service mit Anträge WHERE MID = Antrag.MID
+				//TODO employeeRequestModel
 				
 				var dbUserModel = this.getGlobalModel("dbUserModel");
 				this.setModel(dbUserModel, "dbUserModel");
-			},
-			onNavToEmployeeRequestDetail: function() {
-				this.getRouter().navTo("EmployeeRequestDetail");
 			}
 		});
 	});  
