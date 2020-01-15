@@ -27,42 +27,13 @@ sap.ui.define([
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
 
-			// getOrCreateUser and set Models: userModel + dbUserModel
-			this.getOrCreateUser();
+			// getOrCreateUser and set Model dbUserModel
+			models.getOrCreateUser();
 
 			// set salesModel
-			this.createSales();
-			
-			this.createRole();
+			this.setModel(models.createSales(), "salesModel");
 
-		},
-		getOrCreateUser: function () {
-			this.oUserModel = new sap.ui.model.json.JSONModel(this.sUserPath);
-			this.oDbUserModel = new sap.ui.model.json.JSONModel();
-
-			var that = this;
-			this.oUserModel.attachRequestCompleted(function (oEvent) {
-				that.oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", that.oUserModel.getData());
-			});
-
-			// make available in other controllers
-			sap.ui.getCore().setModel(this.oDbUserModel, "dbUserModel");
-			sap.ui.getCore().setModel(this.oUserModel, "userModel");
-		},
-
-		createSales: function () {
-			this.oDetailModel = new sap.ui.model.json.JSONModel();
-			sap.ui.getCore().setModel(this.oDetailModel, "salesModel");
-		},
-		
-		createRole: function () {
-			//configure roles here
-			var roles = {verwalter: false, mitarbeiter: true};
-			
-			this.oRoleModel = new sap.ui.model.json.JSONModel(roles);
-			
-			//make available for other controllers
-			sap.ui.getCore().setModel(this.oRoleModel, "roleModel");
+			this.setModel(models.createRole(), "roleModel");
 		}
 	});
 });
