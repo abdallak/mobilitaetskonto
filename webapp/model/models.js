@@ -23,6 +23,7 @@ sap.ui.define([
 			});
 
 			oUserModel.loadData(this.sUserPath);
+			sap.ui.getCore().setModel(oUserModel, "userModel");
 		},
 
 		createSales: function () {

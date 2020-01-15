@@ -30,9 +30,9 @@ sap.ui.define([
 			models.getOrCreateUser();
 
 			// set salesModel
-			this.setModel(models.createSales(), "salesModel");
+			sap.ui.getCore().setModel(models.createSales(), "salesModel");
 
-			this.setModel(models.createRole(), "roleModel");
+			sap.ui.getCore().setModel(models.createRole(), "roleModel");
 		}
 	});
 });
