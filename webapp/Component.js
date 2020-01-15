@@ -6,7 +6,6 @@ sap.ui.define([
 	"use strict";
 
 	return UIComponent.extend("Mobilitaetskonto.Mobilitaetskonto.Component", {
-		sUserPath: "/services/userapi/currentUser",
 
 		metadata: {
 			manifest: "json"

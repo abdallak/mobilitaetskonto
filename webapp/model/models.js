@@ -5,6 +5,7 @@ sap.ui.define([
 	"use strict";
 
 	return {
+		sUserPath: "/services/userapi/currentUser",
 
 		createDeviceModel: function () {
 			var oModel = new JSONModel(Device);
@@ -13,19 +14,19 @@ sap.ui.define([
 		},
 
 		getOrCreateUser: function () {
-			var oUserModel = new sap.ui.model.json.JSONModel(this.sUserPath);
+			var oUserModel = new JSONModel(this.sUserPath);
 
 			oUserModel.attachRequestCompleted(function (oEvent) {
-				var oDbUserModel = new sap.ui.model.json.JSONModel();
-				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getData());
-				sap.ui.getCore().setModel(this.oDbUserModel, "dbUserModel");
+				var oDbUserModel = new JSONModel();
+				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
+				sap.ui.getCore().setModel(oDbUserModel, "dbUserModel");
 			});
 
 			oUserModel.loadData(this.sUserPath);
 		},
 
 		createSales: function () {
-			var oDetailModel = new sap.ui.model.json.JSONModel();
+			var oDetailModel = new JSONModel();
 			return oDetailModel;
 		},
 
@@ -35,7 +36,7 @@ sap.ui.define([
 				verwalter: false,
 				mitarbeiter: true
 			};
-			var oRoleModel = new sap.ui.model.json.JSONModel(roles);
+			var oRoleModel = new JSONModel(roles);
 			return oRoleModel;
 		}
 
