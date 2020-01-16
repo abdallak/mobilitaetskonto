@@ -12,24 +12,33 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		},
-		
-		setupGlobalModels: function(component) {
+
+		setupGlobalModels: function (component) {
 			// getOrCreateUser and set Model dbUserModel
 			this.getOrCreateUser(component);
-
-			// set salesModel
-			// component.setModel(this.createSales(), "salesModel");
 
 			this.createRole(component);
 		},
 
 		getOrCreateUser: function (component) {
 			var oUserModel = component.getModel("userModel");
+			var oDbUserModel = component.getModel("dbUserModel");
 
 			oUserModel.attachRequestCompleted(function (oEvent) {
-				var oDbUserModel = component.getModel("dbUserModel");
 				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
 			});
+
+			/*
+			oUserModel.attachRequestFailed(function (oEvent) {
+				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
+					"message") + " " + oEvent.getParameter("responseText"));
+			});
+
+			oDbUserModel.attachRequestFailed(function (oEvent) {
+				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
+					"message") + " " + oEvent.getParameter("responseText"));
+			});
+			*/
 
 			oUserModel.loadData(this.sUserPath);
 		},

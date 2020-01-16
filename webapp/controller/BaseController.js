@@ -44,16 +44,6 @@ sap.ui.define([
 
 		handleEmptyModel: function (sMessage) {
 			sap.m.MessageBox.error(sMessage);
-		},
-
-		setAttachRequestEvents: function (oView, oModel) {
-			oModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter("message") + " " +  oEvent.getParameter("responseText"));
-			});
-
-			oModel.attachRequestCompleted(function (oEvent) {
-				oEvent.getSource().refresh(true);
-			});
 		}
 
 	});
