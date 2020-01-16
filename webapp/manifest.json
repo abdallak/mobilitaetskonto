@@ -12,16 +12,6 @@
 		"sourceTemplate": {
 			"id": "ui5template.basicSAPUI5ApplicationProject",
 			"version": "1.40.12"
-		},
-		"dataSources": {
-			"userData": {
-				"uri": "/services/userapi/currentUser",
-				"type": "JSON"
-			},
-			"dbUserData": {
-				"uri": "/MOB_MITARBEITER_GETCREATE",
-				"type": "JSON"
-			}
 		}
 	},
 	"sap.ui": {
@@ -68,12 +58,10 @@
 				}
 			},
 			"userModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "userata"
+				"type": "sap.ui.model.json.JSONModel"
 			},
 			"dbUserModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "dbUserData"
+				"type": "sap.ui.model.json.JSONModel"
 			}
 		},
 		"resources": {
