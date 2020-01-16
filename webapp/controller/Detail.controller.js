@@ -10,12 +10,8 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Detail").attachMatched(this._onRoutePatternMatched, this);
 
-			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var detailModel = new sap.ui.model.json.JSONModel();
-
 			this.setModel(detailModel, "detailModel");
-			this.setModel(dbUserModel, "dbUserModel");
-			
 		},
 
 		_onRoutePatternMatched: function (oEvent) {

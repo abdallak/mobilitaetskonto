@@ -10,9 +10,6 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
 
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			this.setModel(dbUserModel, "dbUserModel");
-
 			var salesModel = this.getGlobalModel("salesModel");
 			salesModel.refresh(true);
 			this.setModel(salesModel, "salesModel");
