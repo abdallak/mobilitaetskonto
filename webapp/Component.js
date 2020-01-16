@@ -25,14 +25,8 @@ sap.ui.define([
 
 			// set the device model
 			this.setModel(models.createDeviceModel(), "device");
-
-			// getOrCreateUser and set Model dbUserModel
-			models.getOrCreateUser(this);
-
-			// set salesModel
-			this.setModel(models.createSales(), "salesModel");
-
-			this.setModel(models.createRole(), "roleModel");
+			
+			models.setupGlobalModels(this);
 		}
 	});
 });

@@ -12,6 +12,16 @@ sap.ui.define([
 			oModel.setDefaultBindingMode("OneWay");
 			return oModel;
 		},
+		
+		setupGlobalModels: function(component) {
+			// getOrCreateUser and set Model dbUserModel
+			this.getOrCreateUser(component);
+
+			// set salesModel
+			// component.setModel(this.createSales(), "salesModel");
+
+			this.createRole(component);
+		},
 
 		getOrCreateUser: function (component) {
 			var oUserModel = component.getModel("userModel");
@@ -24,19 +34,9 @@ sap.ui.define([
 			oUserModel.loadData(this.sUserPath);
 		},
 
-		createSales: function () {
-			var oDetailModel = new JSONModel();
-			return oDetailModel;
-		},
-
-		createRole: function () {
-			//configure roles here
-			var roles = {
-				verwalter: false,
-				mitarbeiter: true
-			};
-			var oRoleModel = new JSONModel(roles);
-			return oRoleModel;
+		createRole: function (component) {
+			var oUserModel = component.getModel("userModel");
+			oUserModel.loadData();
 		}
 
 	};

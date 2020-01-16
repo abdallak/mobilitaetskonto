@@ -62,7 +62,15 @@
 			},
 			"dbUserModel": {
 				"type": "sap.ui.model.json.JSONModel"
+			},
+			"salesModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"roleModel": {
+				"type": "sap.ui.model.json.JSONModel",
+				"uri": "model/data/roles.json"
 			}
+
 		},
 		"resources": {
 			"css": [{
