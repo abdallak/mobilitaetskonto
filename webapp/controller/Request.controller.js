@@ -31,18 +31,16 @@ sap.ui.define([
 			this.setModel(oRequestModel, "oRequestModel");
 		},
 
-		
 		submitRequest: function (oEvent) {
 			// FIXME workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 
-			var oRequestModel = this.getModel("oRequestModel");
-			var oRequestData = oRequestModel.getData();
-			if (oRequestData.betrag === null) {
+			var oRequestData = this.getModel("oRequestModel").getData();
+			if (!oRequestData.betrag) {
 				this.handleEmptyModel("Bitte Betrag eingeben!");
 				return;
 			}
-			if (oRequestData.beschreibung === null || oRequestData.beschreibung.trim().length === 0) {
+			if (!oRequestData.beschreibung || oRequestData.beschreibung.trim().length === 0) {
 				this.handleEmptyModel("Bitte Beschreibung eingeben!");
 				return;
 			}
@@ -52,14 +50,14 @@ sap.ui.define([
 			oRequestResponseModel.attachEventOnce("requestCompleted", function (oEvent1) {
 				that.getRouter().navTo("Sales");
 				that.resetRequest();
-			}).loadData("/MOB_ANTRAG", oRequestData);;
+			}).loadData("/MOB_ANTRAG", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
 			var oSource = oEvent.getSource();
-			
+
 			var betragValue = parseFloat(sValue);
 			if (!isNaN(betragValue)) {
 				oSource.setValueState("Success");
