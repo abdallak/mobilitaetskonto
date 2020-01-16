@@ -48,12 +48,11 @@ sap.ui.define([
 			}
 
 			var oRequestResponseModel = new JSONModel();
-			oRequestResponseModel.loadData("/MOB_ANTRAG", oRequestData);
 			var that = this;
-			oRequestResponseModel.attachRequestCompleted(function (oEvent1) {
+			oRequestResponseModel.attachEventOnce("requestCompleted", function (oEvent1) {
 				that.getRouter().navTo("Sales");
 				that.resetRequest();
-			});
+			}).loadData("/MOB_ANTRAG", oRequestData);;
 		},
 
 		onValueChanged: function (oEvent) {
