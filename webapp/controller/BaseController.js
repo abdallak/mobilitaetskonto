@@ -18,15 +18,15 @@ sap.ui.define([
 		},
 
 		getGlobalModel: function (sName) {
-			return sap.ui.getCore().getModel(sName);
+			return this.getOwnerComponent().getModel(sName);
 		},
 
 		setGlobalModel: function (oModel, sName) {
-			return sap.ui.getCore().setModel(oModel, sName);
+			return this.getOwnerComponent().setModel(oModel, sName);
 		},
 
 		getResourceBundle: function () {
-			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return this.getGlobalModel("i18n").getResourceBundle();
 		},
 
 		onNavBack: function (oEvent) {
@@ -40,14 +40,24 @@ sap.ui.define([
 			}
 		},
 
-		updateUserModel: function () {
+		updateUserModel: function (first) {
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var userModel = this.getGlobalModel("userModel");
 			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
 		},
-		
+
 		handleEmptyModel: function (sMessage) {
 			sap.m.MessageBox.error(sMessage);
+		},
+
+		setAttachRequestEvents: function (oView, oModel) {
+			oModel.attachRequestFailed(function (oEvent) {
+				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter("message") + " " +  oEvent.getParameter("responseText"));
+			});
+
+			oModel.attachRequestCompleted(function (oEvent) {
+				oEvent.getSource().refresh(true);
+			});
 		}
 
 	});

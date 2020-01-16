@@ -27,12 +27,12 @@ sap.ui.define([
 			this.setModel(models.createDeviceModel(), "device");
 
 			// getOrCreateUser and set Model dbUserModel
-			models.getOrCreateUser();
+			models.getOrCreateUser(this);
 
 			// set salesModel
-			sap.ui.getCore().setModel(models.createSales(), "salesModel");
+			this.setModel(models.createSales(), "salesModel");
 
-			sap.ui.getCore().setModel(models.createRole(), "roleModel");
+			this.setModel(models.createRole(), "roleModel");
 		}
 	});
 });

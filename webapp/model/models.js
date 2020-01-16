@@ -13,17 +13,17 @@ sap.ui.define([
 			return oModel;
 		},
 
-		getOrCreateUser: function () {
+		getOrCreateUser: function (component) {
 			var oUserModel = new JSONModel(this.sUserPath);
 
 			oUserModel.attachRequestCompleted(function (oEvent) {
 				var oDbUserModel = new JSONModel();
 				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
-				sap.ui.getCore().setModel(oDbUserModel, "dbUserModel");
+				component.setModel(oDbUserModel, "dbUserModel");
 			});
 
 			oUserModel.loadData(this.sUserPath);
-			sap.ui.getCore().setModel(oUserModel, "userModel");
+			component.setModel(oUserModel, "userModel");
 		},
 
 		createSales: function () {
