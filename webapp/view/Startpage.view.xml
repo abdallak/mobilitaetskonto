@@ -9,10 +9,10 @@
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="antragStellenTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTile}"
-									subheader="{i18n&gt;startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter} === true}" 
+									subheader="{i18n&gt;startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}" 
 								/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-									header="{i18n&gt;startpageSalesTile}" subheader="{i18n&gt;startpageSalesTileSub}" id="tile1" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter} === true}" >
+									header="{i18n&gt;startpageSalesTile}" subheader="{i18n&gt;startpageSalesTileSub}" id="tile1" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter}}" >
 									<tileContent>
 										<TileContent>
 											<content>
@@ -23,9 +23,13 @@
 										</TileContent>
 									</tileContent>
 								</GenericTile>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+									id="employeeRequestTableTile" header="{i18n&gt;startpageEmployeeRequestTableTile}" subheader="{i18n&gt;startpageEmployeeRequestTableTileSub}"
+									press="onNavToEmployeeRequestTable" visible="{= ${roleModel>/mitarbeiter}}"
+								/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTableTile}"
-									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter} === true}" 
+									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}" 
 								/>
 							</sap.ui.layout:content>
 						</sap.ui.layout:HorizontalLayout>

@@ -9,26 +9,19 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
-
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			this.setModel(dbUserModel, "dbUserModel");
-
-			var salesModel = this.getGlobalModel("salesModel");
-			salesModel.refresh(true);
-			this.setModel(salesModel, "salesModel");
-
 			this._onRoutePatternMatched(null);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 			var dbUserModel = this.getGlobalModel("dbUserModel");
-			if (dbUserModel.GUTHABEN === null){
+			if (!dbUserModel.GUTHABEN) {
 				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
+				return;
 			}
 			this.getTableData();
 			var salesModel = this.getGlobalModel("salesModel");
-			if (salesModel.BETRAG === null){
+			if (!salesModel.BETRAG) {
 				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
 			}
 		},
@@ -44,10 +37,9 @@ sap.ui.define([
 		},
 
 		onNavToDetail: function (oEvent) {
-
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath().substr(1);
-		
+
 			this.getRouter().navTo("Detail", {
 				Path: path
 			});

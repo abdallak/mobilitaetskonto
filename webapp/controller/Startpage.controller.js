@@ -6,21 +6,10 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("Startpage").attachMatched(this._onRoutePatternMatched, this);
-
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			this.setModel(dbUserModel, "dbUserModel");
-
-			dbUserModel.attachRequestCompleted(function (oEvent) {
-				oEvent.getSource().refresh(true);
-			});
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			if (dbUserModel.GUTHABEN === null){
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
 		},
 
 		onNavToSales: function () {
@@ -33,6 +22,10 @@ sap.ui.define([
 		
 		onNavToRequestTable: function () {
 			this.getRouter().navTo("RequestTable");
+		},
+		
+		onNavToEmployeeRequestTable: function() {
+			this.getRouter().navTo("EmployeeRequestTable");
 		}
 
 	});

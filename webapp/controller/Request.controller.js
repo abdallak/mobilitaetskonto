@@ -23,7 +23,7 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultRequest = {
 				"MID": dbUserData.MID,
-				"art": "0",
+				"art": 0,
 				"betrag": null,
 				"beschreibung": null
 			};
@@ -31,36 +31,33 @@ sap.ui.define([
 			this.setModel(oRequestModel, "oRequestModel");
 		},
 
-		
 		submitRequest: function (oEvent) {
 			// FIXME workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 
-			var oRequestModel = this.getModel("oRequestModel");
-			var oRequestData = oRequestModel.getData();
-			if (oRequestData.betrag === null) {
+			var oRequestData = this.getModel("oRequestModel").getData();
+			if (!oRequestData.betrag) {
 				this.handleEmptyModel("Bitte Betrag eingeben!");
 				return;
 			}
-			if (oRequestData.beschreibung === null || oRequestData.beschreibung.trim().length === 0) {
+			if (!oRequestData.beschreibung || oRequestData.beschreibung.trim().length === 0) {
 				this.handleEmptyModel("Bitte Beschreibung eingeben!");
 				return;
 			}
 
 			var oRequestResponseModel = new JSONModel();
-			oRequestResponseModel.loadData("/MOB_ANTRAG", oRequestData);
 			var that = this;
-			oRequestResponseModel.attachRequestCompleted(function (oEvent1) {
+			oRequestResponseModel.attachEventOnce("requestCompleted", function (oEvent1) {
 				that.getRouter().navTo("Sales");
 				that.resetRequest();
-			});
+			}).loadData("/MOB_ANTRAG", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
 			var oSource = oEvent.getSource();
-			
+
 			var betragValue = parseFloat(sValue);
 			if (!isNaN(betragValue)) {
 				oSource.setValueState("Success");

@@ -6,7 +6,7 @@ sap.ui.define([
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
-			return sap.ui.core.UIComponent.getRouterFor(this);
+			return this.getOwnerComponent().getRouter();
 		},
 
 		getModel: function (sName) {
@@ -18,15 +18,11 @@ sap.ui.define([
 		},
 
 		getGlobalModel: function (sName) {
-			return sap.ui.getCore().getModel(sName);
-		},
-
-		setGlobalModel: function (oModel, sName) {
-			return sap.ui.getCore().setModel(oModel, sName);
+			return this.getOwnerComponent().getModel(sName);
 		},
 
 		getResourceBundle: function () {
-			return this.getOwnerComponent().getModel("i18n").getResourceBundle();
+			return this.getGlobalModel("i18n").getResourceBundle();
 		},
 
 		onNavBack: function (oEvent) {
@@ -40,12 +36,12 @@ sap.ui.define([
 			}
 		},
 
-		updateUserModel: function () {
+		updateUserModel: function (first) {
 			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var userModel = this.getGlobalModel("userModel");
 			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
 		},
-		
+
 		handleEmptyModel: function (sMessage) {
 			sap.m.MessageBox.error(sMessage);
 		}

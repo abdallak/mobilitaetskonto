@@ -10,29 +10,24 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Detail").attachMatched(this._onRoutePatternMatched, this);
 
-			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var detailModel = new sap.ui.model.json.JSONModel();
-
 			this.setModel(detailModel, "detailModel");
-			this.setModel(dbUserModel, "dbUserModel");
-			
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			
+
 			var path = "/" + oEvent.getParameter("arguments").Path;
-			
+
 			var detailModel = this.getModel("detailModel");
 			var salesModel = this.getGlobalModel("salesModel");
-			
+
 			detailModel.setData(salesModel.getProperty(path));
-			
+
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
-			
+
 			if (jQuery.isEmptyObject(detailModel.getData())) {
 				detailModel.setData(oStorage.get("salesLocalData"));
-			}
-			else {
+			} else {
 				oStorage.put("salesLocalData", detailModel.getData());
 			}
 			if (detailModel.UID === null) {
