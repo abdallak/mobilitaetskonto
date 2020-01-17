@@ -150,6 +150,10 @@
 				"RequestTable": {
 					"viewType": "XML",
 					"viewName": "RequestTable"
+				},
+				"UserTable": {
+					"viewType": "XML",
+					"viewName": "UserTable"
 				}
 			}
 		}
