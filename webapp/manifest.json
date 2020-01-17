@@ -159,10 +159,6 @@
 				"EmployeeRequestDetail": {
 					"viewType": "XML",
 					"viewName": "EmployeeRequestDetail"
-				},
-                "UserTable": {
-					"viewType": "XML",
-					"viewName": "UserTable"
 				}
 			}
 		}
