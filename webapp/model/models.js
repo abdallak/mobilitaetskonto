@@ -13,39 +13,32 @@ sap.ui.define([
 			return oModel;
 		},
 
-		setupGlobalModels: function (component) {
-			// getOrCreateUser and set Model dbUserModel
-			this.getOrCreateUser(component);
-
-			this.createRole(component);
-		},
-
 		getOrCreateUser: function (component) {
-			var oUserModel = component.getModel("userModel");
-			var oDbUserModel = component.getModel("dbUserModel");
+			var oUserModel = new JSONModel(this.sUserPath);
 
 			oUserModel.attachRequestCompleted(function (oEvent) {
+				var oDbUserModel = new JSONModel();
 				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
+				component.setModel(oDbUserModel, "dbUserModel");
 			});
-
-			/*
-			oUserModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
-					"message") + " " + oEvent.getParameter("responseText"));
-			});
-
-			oDbUserModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
-					"message") + " " + oEvent.getParameter("responseText"));
-			});
-			*/
 
 			oUserModel.loadData(this.sUserPath);
+			component.setModel(oUserModel, "userModel");
 		},
 
-		createRole: function (component) {
-			var oUserModel = component.getModel("userModel");
-			oUserModel.loadData();
+		createSales: function () {
+			var oDetailModel = new JSONModel();
+			return oDetailModel;
+		},
+
+		createRole: function () {
+			//configure roles here
+			var roles = {
+				verwalter: false,
+				mitarbeiter: true
+			};
+			var oRoleModel = new JSONModel(roles);
+			return oRoleModel;
 		}
 
 	};
