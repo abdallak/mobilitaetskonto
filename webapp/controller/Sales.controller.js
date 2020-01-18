@@ -1,3 +1,4 @@
+/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -43,10 +44,12 @@ sap.ui.define([
 		onNavToDetail: function (oEvent) {
 
 			var context = oEvent.getSource().getBindingContext("salesModel");
-			var path = context.getPath().substr(1);
-		
+			var path = context.getPath();
+			
+			var detail = JSON.stringify(context.getProperty(path));
+			
 			this.getRouter().navTo("Detail", {
-				Path: path
+				Detail: detail
 			});
 		}
 

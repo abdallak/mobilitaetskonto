@@ -12,11 +12,10 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.RequestTable
 		 */
 		onInit: function () {
-			
 				var requestTableModel = new sap.ui.model.json.JSONModel();
 				requestTableModel.loadData("/MOB_ANTRAG_TABELLE");
 				this.setModel(requestTableModel, "requestTableModel");
-				
+				console.log(requestTableModel);
 			}
 			/**
 			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
@@ -46,7 +45,19 @@ sap.ui.define([
 		 *@memberOf Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable
 		 */
 		updateFinished: function (oEvent) {
-			var test = oEvent.getParameter("total");
+		//	var test = oEvent.getParameter("total");
+		},
+		
+		onNavToDetail: function (oEvent) {
+
+			var context = oEvent.getSource().getBindingContext("requestTableModel");
+			var path = context.getPath();
+			
+			var detail = JSON.stringify(context.getProperty(path));
+			
+			this.getRouter().navTo("Detail", {
+				Detail: detail
+			});
 		}
 	});
 });

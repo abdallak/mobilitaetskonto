@@ -13,9 +13,9 @@
 											<Text width="50%" text="{detailModel>/MID}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>detailLabelEmployee}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderEmployee}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{dbUserModel>/NAME}, {dbUserModel>/VORNAME}" textAlign="Center"/>
+											<Text width="50%" text="{detailUserModel>/NAME}, {detailUserModel>/VORNAME}" textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">

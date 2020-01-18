@@ -99,7 +99,7 @@
 				"target": ["Sales"]
 			}, {
 				"name": "Detail",
-				"pattern": "Detail/{Path}",
+				"pattern": "Detail/{Detail}",
 				"target": ["Detail"]
 			}, {
 				"name": "RequestTable",
