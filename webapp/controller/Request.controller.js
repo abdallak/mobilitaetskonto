@@ -38,7 +38,7 @@ sap.ui.define([
 
 			var oRequestModel = this.getModel("oRequestModel");
 			var oRequestData = oRequestModel.getData();
-			if (oRequestData.betrag === null) {
+			if (oRequestData.betrag === null || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
 				this.handleEmptyModel("Bitte Betrag eingeben!");
 				return;
 			}
