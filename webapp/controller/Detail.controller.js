@@ -15,19 +15,20 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-
+			
 			var path = "/" + oEvent.getParameter("arguments").Path;
-
+			
 			var detailModel = this.getModel("detailModel");
 			var salesModel = this.getGlobalModel("salesModel");
-
+			
 			detailModel.setData(salesModel.getProperty(path));
-
+			
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
-
+			
 			if (jQuery.isEmptyObject(detailModel.getData())) {
 				detailModel.setData(oStorage.get("salesLocalData"));
-			} else {
+			}
+			else {
 				oStorage.put("salesLocalData", detailModel.getData());
 			}
 			if (detailModel.UID === null) {

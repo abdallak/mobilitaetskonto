@@ -68,7 +68,13 @@
 				"type": "destination",
 				"name": "MOB_ANTRAG_TABELLE"
 			}
-		}
+		}, {
+			"path": "/MOB_ANTRAG_INSERT",
+			"target": {
+				"type" : "destination",
+				"name" : "MOB_ANTRAG_INSERT"
+			}
+			}
 
 	],
 	"sendWelcomeFileRedirect": true
