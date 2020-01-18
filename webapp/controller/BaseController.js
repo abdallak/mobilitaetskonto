@@ -41,9 +41,24 @@ sap.ui.define([
 		},
 
 		updateUserModel: function () {
-			var dbUserModel = this.getGlobalModel("dbUserModel");
 			var userModel = this.getGlobalModel("userModel");
-			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
+
+			var settings = {
+				"url": "/MOB_MITARBEITER_GETCREATE",
+				"method": "GET",
+				"timeout": 0,
+				"data": userModel.getData()
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var dbUserModel = this.getGlobalModel("dbUserModel");
+					dbUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
 		},
 
 		handleEmptyModel: function (sMessage) {
