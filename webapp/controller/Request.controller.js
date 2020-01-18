@@ -36,25 +36,24 @@ sap.ui.define([
 			oEvent.getSource().focus();
 			var oResourceBundle = this.getResourceBundle();
 
-			var oRequestModel = this.getModel("oRequestModel");
-			var oRequestData = oRequestModel.getData();
-			if (oRequestData.betrag === null || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
+			var oRequestData = this.getModel("oRequestModel").getData();
+			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
 			}
-			if (oRequestData.beschreibung === null || oRequestData.beschreibung.trim().length === 0) {
+			if (!oRequestData.beschreibung || oRequestData.beschreibung.trim().length === 0) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBeschreibung"));
 				return;
 			}
 
 			var oRequestResponseModel = new JSONModel();
-			oRequestResponseModel.loadData("/MOB_ANTRAG", oRequestData);
-			oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
+			
 			var that = this;
-			oRequestResponseModel.attachRequestCompleted(function (oEvent1) {
+			oRequestResponseModel.attachEventOnce("requestCompleted", function (oEvent1) {
 				that.getRouter().navTo("Sales");
 				that.resetRequest();
-			});
+			}).loadData("/MOB_ANTRAG", oRequestData);
+			oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {

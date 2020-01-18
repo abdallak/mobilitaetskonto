@@ -6,6 +6,7 @@ sap.ui.define([
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
+			//return this.getOwnerComponent().getRouter();
 			return sap.ui.core.UIComponent.getRouterFor(this);
 		},
 
@@ -52,7 +53,8 @@ sap.ui.define([
 
 		setAttachRequestEvents: function (oView, oModel) {
 			oModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter("message") + " " +  oEvent.getParameter("responseText"));
+				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
+					"message") + " " + oEvent.getParameter("responseText"));
 			});
 
 			oModel.attachRequestCompleted(function (oEvent) {
