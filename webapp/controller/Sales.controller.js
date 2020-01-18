@@ -1,9 +1,7 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
-], function (BaseController, JSONModel, formatter) {
+], function (BaseController, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Sales", {
 		formatter: formatter,
@@ -15,38 +13,41 @@ sap.ui.define([
 
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			if (!dbUserModel.GUTHABEN){
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
 			this.getTableData();
-			var salesModel = this.getGlobalModel("salesModel");
-			if (!salesModel.BETRAG) {
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
 		},
 
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var salesModel = this.getGlobalModel("salesModel");
-
 			var params = {};
 			params.mid = dbUserData.MID;
 
-			salesModel.loadData("/MOB_UMSATZ", params);
+			var settings = {
+				"url": "/MOB_UMSATZ",
+				"method": "GET",
+				"timeout": 0,
+				"data": params
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var salesModel = that.getGlobalModel("salesModel");
+					salesModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
 		},
 
 		onNavToDetail: function (oEvent) {
-
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath();
-			
+
 			var detail = JSON.stringify(context.getProperty(path));
-			
+
 			this.getRouter().navTo("Detail", {
 				Detail: detail
 			});
 		}
-
 	});
 });
