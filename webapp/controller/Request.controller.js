@@ -23,7 +23,7 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultRequest = {
 				"MID": dbUserData.MID,
-				"art": "0",
+				"art": 0,
 				"betrag": null,
 				"beschreibung": null
 			};
@@ -63,7 +63,7 @@ sap.ui.define([
 			var oSource = oEvent.getSource();
 
 			var betragValue = parseFloat(sValue);
-			if (!isNaN(betragValue)) {
+			if (!isNaN(betragValue) && betragValue > 0.0) {
 				oSource.setValueState("Success");
 				oSource.setValueStateText(null);
 			} else {
