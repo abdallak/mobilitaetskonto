@@ -6,7 +6,13 @@ sap.ui.define([], function () {
 
 			switch (sStatus) {
 			case 0:
+				return resourceBundle.getText("antragStatusAbgelehnt");
+			case 1:
+				return resourceBundle.getText("antragStatusAusstehend");
+			case 2:
 				return resourceBundle.getText("antragStatusGenehmigt");
+			case 3:
+				return resourceBundle.getText("antragStatusDurchgefuehrt");
 			default:
 				return sStatus;
 			}
