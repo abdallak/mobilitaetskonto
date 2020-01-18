@@ -16,10 +16,12 @@ sap.ui.define([], function () {
 			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
 			switch (sAntragArt) {
-			case 1:
-				return resourceBundle.getText("antragArtGutschrift");
 			case 0:
 				return resourceBundle.getText("antragArtAuszahlung");
+			case 1:
+				return resourceBundle.getText("antragArtGutschrift");
+			case 2:
+				return resourceBundle.getText("antragArtGuthaben");
 			default:
 				return sAntragArt;
 			}
