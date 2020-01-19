@@ -47,7 +47,8 @@ sap.ui.define([
 		},
 
 		handleEmptyModel: function (sMessage) {
-			sap.m.MessageBox.error(sMessage);
+			var oResourceBundle = this.getResourceBundle();
+			sap.m.MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ": " + sMessage);
 		}
 
 	});
