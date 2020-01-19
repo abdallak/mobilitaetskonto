@@ -1,7 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History"
-], function (Controller, History) {
+	"sap/ui/core/routing/History",
+	"Mobilitaetskonto/Mobilitaetskonto/model/models"
+
+], function (Controller, History, models) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
@@ -41,24 +43,7 @@ sap.ui.define([
 		},
 
 		updateUserModel: function () {
-			var userModel = this.getGlobalModel("userModel");
-
-			var settings = {
-				"url": "/MOB_MITARBEITER_GETCREATE",
-				"method": "GET",
-				"timeout": 0,
-				"data": userModel.getData()
-			};
-
-			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					var dbUserModel = this.getGlobalModel("dbUserModel");
-					dbUserModel.setData(response);
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
-				});
+			models.updateUserModel(this.getOwnerComponent());
 		},
 
 		handleEmptyModel: function (sMessage) {
