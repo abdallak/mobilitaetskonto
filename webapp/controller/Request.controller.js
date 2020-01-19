@@ -23,16 +23,17 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultRequest = {
 				"MID": dbUserData.MID,
-				"art": 0,
+				"art": "0",
 				"betrag": null,
-				"beschreibung": null
+				"beschreibung": null,
+				"kid": "0" // TODO: wenn dynamisch, dann wieder Wert null
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
 		},
 
 		submitRequest: function (oEvent) {
-			// FIXME workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
+			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 			var oResourceBundle = this.getResourceBundle();
 
@@ -46,14 +47,26 @@ sap.ui.define([
 				return;
 			}
 
-			var oRequestResponseModel = new JSONModel();
-			
+			var settings = {
+				"url": "/MOB_ANTRAG",
+				"method": "POST",
+				"timeout": 0,
+				"data": JSON.stringify(oRequestData)
+			};
+
 			var that = this;
-			oRequestResponseModel.attachEventOnce("requestCompleted", function (oEvent1) {
-				that.getRouter().navTo("Sales");
-				that.resetRequest();
-			}).loadData("/MOB_ANTRAG", oRequestData);
-			oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
+			$.ajax(settings)
+				.done(function (response) {
+					that.getRouter().navTo("Sales");
+					that.resetRequest();
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
+
+			// FIXME: Auskommentiert, weil bei mir sonst View nicht geladen wird
+			// var oRequestResponseModel = new JSONModel();
+			// oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
