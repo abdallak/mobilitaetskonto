@@ -21,7 +21,13 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			params.target = target;
+			if (target == "Sales"){
+				params.status1 = 2;
+				params.status2 = 3;
+			} else {
+				params.status1 = 0;
+				params.status2 = 1;
+			}
 
 			var settings = {
 				"url": "/MOB_UMSATZ",
