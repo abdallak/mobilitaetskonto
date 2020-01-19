@@ -25,7 +25,7 @@
 								</GenericTile>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 									id="employeeRequestTableTile" header="{i18n&gt;startpageEmployeeRequestTableTile}" subheader="{i18n&gt;startpageEmployeeRequestTableTileSub}"
-									press="onNavToEmployeeRequestTable" visible="{= ${roleModel>/mitarbeiter}}"
+									press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}"
 								/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTableTile}"
