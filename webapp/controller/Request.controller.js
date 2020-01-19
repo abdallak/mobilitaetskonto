@@ -23,10 +23,10 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var defaultRequest = {
 				"MID": dbUserData.MID,
-				"art": 0,
+				"art": "0",
 				"betrag": null,
 				"beschreibung": null,
-				"kid": 0 // TODO: wenn dynamisch, dann wieder Wert null
+				"kid": "0" // TODO: wenn dynamisch, dann wieder Wert null
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
