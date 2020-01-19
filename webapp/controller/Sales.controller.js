@@ -1,6 +1,7 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
+	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+	"sap/m/MessageToast"
 ], function (BaseController, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Sales", {
@@ -8,18 +9,19 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
-			this._onRoutePatternMatched(null);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
+			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			this.getTableData();
+			this.getTableData(target);
 		},
 
-		getTableData: function () {
+		getTableData: function (target) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
+			params.target = target;
 
 			var settings = {
 				"url": "/MOB_UMSATZ",
