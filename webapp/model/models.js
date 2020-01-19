@@ -34,7 +34,7 @@ sap.ui.define([
 					that.updateUserModel(component);
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 		},
 
@@ -55,7 +55,7 @@ sap.ui.define([
 					dbUserModel.setData(response);
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 		},
 

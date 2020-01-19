@@ -61,7 +61,7 @@ sap.ui.define([
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel("Leider ist ein Fehler aufgetreten: " + jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 
 			// FIXME: Auskommentiert, weil bei mir sonst View nicht geladen wird
