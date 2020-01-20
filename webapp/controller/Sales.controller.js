@@ -1,54 +1,61 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel",
-	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
-], function (BaseController, JSONModel, formatter) {
+	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+	"sap/m/MessageToast"
+], function (BaseController, formatter) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Sales", {
 		formatter: formatter,
 
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
-
-			var salesModel = this.getGlobalModel("salesModel");
-			salesModel.refresh(true);
-			this.setModel(salesModel, "salesModel");
-
-			this._onRoutePatternMatched(null);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
+			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			if (dbUserModel.GUTHABEN === null){
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
-			this.getTableData();
-			var salesModel = this.getGlobalModel("salesModel");
-			if (salesModel.BETRAG === null){
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
+			this.getTableData(target);
 		},
 
-		getTableData: function () {
+		getTableData: function (target) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var salesModel = this.getGlobalModel("salesModel");
-
 			var params = {};
 			params.mid = dbUserData.MID;
+			if (target == "Sales"){
+				params.status1 = 2;
+				params.status2 = 3;
+			} else {
+				params.status1 = 0;
+				params.status2 = 1;
+			}
 
-			salesModel.loadData("/MOB_UMSATZ", params);
+			var settings = {
+				"url": "/MOB_UMSATZ",
+				"method": "GET",
+				"timeout": 0,
+				"data": params
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var salesModel = that.getGlobalModel("salesModel");
+					salesModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
 		},
 
 		onNavToDetail: function (oEvent) {
-
 			var context = oEvent.getSource().getBindingContext("salesModel");
-			var path = context.getPath().substr(1);
-		
+			var path = context.getPath();
+
+			var detail = JSON.stringify(context.getProperty(path));
+
 			this.getRouter().navTo("Detail", {
-				Path: path
+				Detail: detail
 			});
 		}
-
 	});
 });

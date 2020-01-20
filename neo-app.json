@@ -68,14 +68,19 @@
 				"type": "destination",
 				"name": "MOB_ANTRAG_TABELLE"
 			}
+		},{
+			"path": "/MOB_Kategorie",
+			"target": {
+				"type": "destination",
+				"name": "MOB_Kategorie"
+			}
 		}, {
 			"path": "/MOB_ANTRAG_INSERT",
 			"target": {
-				"type" : "destination",
-				"name" : "MOB_ANTRAG_INSERT"
+				"type": "destination",
+				"name": "MOB_ANTRAG_INSERT"
 			}
-			}
-
+		}
 	],
 	"sendWelcomeFileRedirect": true
 }

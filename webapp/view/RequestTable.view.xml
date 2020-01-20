@@ -42,13 +42,13 @@
 						</columns>
 						
 						<items>
-							<ColumnListItem id="item0" press="detailFunc" type="Active">
+							<ColumnListItem id="item0" press="onNavToDetail" type="Active">
 								<cells>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{requestTableModel>MID}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
-									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}"/>
+									<Label text="{path: 'requestTableModell>STATUS', formatter: '.formatter.statusText'}"/>
 									<Label text="{requestTableModel>KATEGORIE}"/>
 									<CheckBox selected="false"/>
 								</cells>
@@ -59,7 +59,6 @@
 					    <Toolbar width="100%" id="toolbar4">
 					        <content>
 					            <SearchField placeholder="Search for ..." id="field2" width="30%"/>
-					            <sap.ui.layout:ResponsiveSplitter xmlns:sap.ui.layout="sap.ui.layout" id="splitter0" width="50%"/>
 					            <ActionSelect id="select0" autoAdjustWidth="true">
 					                <items>
 					                    <core:ListItem text="Ausstehend" id="item0_1578644916584"/>
@@ -82,9 +81,6 @@
 						<contentMiddle>
 							<Label text="Ausstehende Anträge" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
-					<contentRight>
-					    <Label text="" id="countLabel" width="100%"/>
-					</contentRight>
 					</Bar>
 				</customHeader>
 				

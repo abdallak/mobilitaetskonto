@@ -1,12 +1,14 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History"
-], function (Controller, History) {
+	"sap/ui/core/routing/History",
+	"Mobilitaetskonto/Mobilitaetskonto/model/models"
+
+], function (Controller, History, models) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
-			return sap.ui.core.UIComponent.getRouterFor(this);
+			return this.getOwnerComponent().getRouter();
 		},
 
 		getModel: function (sName) {
@@ -40,24 +42,13 @@ sap.ui.define([
 			}
 		},
 
-		updateUserModel: function (first) {
-			var dbUserModel = this.getGlobalModel("dbUserModel");
-			var userModel = this.getGlobalModel("userModel");
-			dbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", userModel.getData());
+		updateUserModel: function () {
+			models.updateUserModel(this.getOwnerComponent());
 		},
 
 		handleEmptyModel: function (sMessage) {
-			sap.m.MessageBox.error(sMessage);
-		},
-
-		setAttachRequestEvents: function (oView, oModel) {
-			oModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter("message") + " " +  oEvent.getParameter("responseText"));
-			});
-
-			oModel.attachRequestCompleted(function (oEvent) {
-				oEvent.getSource().refresh(true);
-			});
+			var oResourceBundle = this.getResourceBundle();
+			sap.m.MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ": " + sMessage);
 		}
 
 	});

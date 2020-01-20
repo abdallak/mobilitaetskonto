@@ -58,12 +58,17 @@
 				}
 			},
 			"userModel": {
-				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "inputsData"
+				"type": "sap.ui.model.json.JSONModel"
 			},
 			"dbUserModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"salesModel": {
+				"type": "sap.ui.model.json.JSONModel"
+			},
+			"roleModel": {
 				"type": "sap.ui.model.json.JSONModel",
-				"dataSource": "inputsData"
+				"uri": "model/data/roles.json"
 			}
 		},
 		"resources": {
@@ -95,24 +100,16 @@
 				"target": ["Request"]
 			}, {
 				"name": "Sales",
-				"pattern": "Sales",
+				"pattern": "Sales/{Target}",
 				"target": ["Sales"]
 			}, {
 				"name": "Detail",
-				"pattern": "Detail/{Path}",
+				"pattern": "Detail/{Detail}",
 				"target": ["Detail"]
 			}, {
 				"name": "RequestTable",
 				"pattern": "RequestTable",
 				"target": ["RequestTable"]
-			}, {
-				"name": "EmployeeRequestTable",
-				"pattern": "EmployeeRequestTable",
-				"target": ["EmployeeRequestTable"]
-			}, {
-				"name": "EmployeeRequestDetail",
-				"pattern": "EmployeeRequestDetail",
-				"target": ["EmployeeRequestDetail"]
 			}],
 			"targets": {
 				"TargetView1": {
@@ -145,14 +142,6 @@
 				"RequestTable": {
 					"viewType": "XML",
 					"viewName": "RequestTable"
-				},
-				"EmployeeRequestTable": {
-					"viewType": "XML",
-					"viewName": "EmployeeRequestTable"
-				},
-				"EmployeeRequestDetail": {
-					"viewType": "XML",
-					"viewName": "EmployeeRequestDetail"
 				}
 			}
 		}

@@ -5,7 +5,6 @@ sap.ui.define([
 	"use strict";
 
 	return {
-		sUserPath: "/services/userapi/currentUser",
 
 		createDeviceModel: function () {
 			var oModel = new JSONModel(Device);
@@ -13,32 +12,56 @@ sap.ui.define([
 			return oModel;
 		},
 
+		setupGlobalModels: function (component) {
+			// getOrCreateUser and set Model dbUserModel
+			this.getOrCreateUser(component);
+
+			this.createRole(component);
+		},
+
 		getOrCreateUser: function (component) {
-			var oUserModel = new JSONModel(this.sUserPath);
-
-			oUserModel.attachRequestCompleted(function (oEvent) {
-				var oDbUserModel = new JSONModel();
-				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
-				component.setModel(oDbUserModel, "dbUserModel");
-			});
-
-			oUserModel.loadData(this.sUserPath);
-			component.setModel(oUserModel, "userModel");
-		},
-
-		createSales: function () {
-			var oDetailModel = new JSONModel();
-			return oDetailModel;
-		},
-
-		createRole: function () {
-			//configure roles here
-			var roles = {
-				verwalter: false,
-				mitarbeiter: true
+			var settings = {
+				"url": "/services/userapi/currentUser",
+				"method": "GET",
+				"timeout": 0
 			};
-			var oRoleModel = new JSONModel(roles);
-			return oRoleModel;
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var oUserModel = component.getModel("userModel");
+					oUserModel.setData(response);
+					that.updateUserModel(component);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
+		},
+
+		updateUserModel: function (component) {
+			var oUserModel = component.getModel("userModel");
+
+			var settings = {
+				"url": "/MOB_MITARBEITER_GETCREATE",
+				"method": "GET",
+				"timeout": 0,
+				"data": oUserModel.getData()
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var dbUserModel = component.getModel("dbUserModel");
+					dbUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
+		},
+
+		createRole: function (component) {
+			var oUserModel = component.getModel("userModel");
+			oUserModel.loadData();
 		}
 
 	};
