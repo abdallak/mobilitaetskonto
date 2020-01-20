@@ -14,6 +14,7 @@ sap.ui.define([
 			// this.resetRequest();
 		},
 
+
 		cancelButton: function (oEvent) {
 			this.resetRequest();
 			this.onNavBack();
@@ -26,7 +27,7 @@ sap.ui.define([
 				"art": "0",
 				"betrag": null,
 				"beschreibung": null,
-				"kid": "0" // TODO: wenn dynamisch, dann wieder Wert null
+				"kid": "3" // TODO: wenn dynamisch, dann wieder Wert null
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
