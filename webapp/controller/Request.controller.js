@@ -57,7 +57,7 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
-					that.getRouter().navTo("Sales");
+					that.getRouter().navTo("Sales",{Target: "SubmittedRequests"});
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
