@@ -1,8 +1,9 @@
 /* eslint-disable no-console, no-alert */
 sap.ui.define([
+	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
-], function (BaseController, formatter) {
+], function (JSONModel, BaseController, formatter) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Detail", {
@@ -11,10 +12,10 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Detail").attachMatched(this._onRoutePatternMatched, this);
 
-			var detailModel = new sap.ui.model.json.JSONModel();
+			var detailModel = new JSONModel();
 			this.setModel(detailModel, "detailModel");
 
-			var detailUserModel = new sap.ui.model.json.JSONModel();
+			var detailUserModel = new JSONModel();
 			this.setModel(detailUserModel, "detailUserModel");
 		},
 
@@ -28,7 +29,7 @@ sap.ui.define([
 			//--
 
 			//USERDATEN
-			//FIXME: workaround fuer dummiedata
+			//FIXME: eigener service
 			var detailUserModel = this.getModel("detailUserModel");
 			detailUserModel.loadData("/MOB_MITARBEITER_GETCREATE", {
 				name: detail.MID,
