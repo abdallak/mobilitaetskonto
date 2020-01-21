@@ -51,6 +51,11 @@
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}"  visible = "{= ${detailModel>/FEEDBACK} !== null}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/FEEDBACK}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
 							</sap.ui.layout.form:FormContainer>
 						</sap.ui.layout.form:formContainers>
