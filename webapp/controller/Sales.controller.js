@@ -12,16 +12,16 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			var target = oEvent.getParameter("arguments").Target;
+			var sTarget = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			this.getTableData(target);
+			this.getTableData(sTarget);
 		},
 
-		getTableData: function (target) {
+		getTableData: function (sTarget) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			if (target == "Sales"){
+			if (sTarget == "Sales"){
 				params.status1 = 2;
 				params.status2 = 3;
 			} else {
