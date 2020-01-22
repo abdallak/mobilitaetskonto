@@ -1,5 +1,6 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable">
-	<App>
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable">
+	<App id="app">
 		<pages>
 			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
 				<content>
@@ -31,21 +32,20 @@
 								</header>
 							</Column>
 							<Column id="column5">
-							    <header>
-							        <Text text="{i18n>HeaderCategorie}"/>
-							    </header>
+								<header>
+									<Text text="{i18n>HeaderCategorie}"/>
+								</header>
 							</Column>
 							<Column width="5%" id="column6">
-							    <header>
-							    </header>
+								<header></header>
 							</Column>
 						</columns>
-						
 						<items>
 							<ColumnListItem id="item0" press="onNavToDetail" type="Active">
 								<cells>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+									<Label
+										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{requestTableModel>MID}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'requestTableModell>STATUS', formatter: '.formatter.statusText'}"/>
@@ -54,24 +54,21 @@
 								</cells>
 							</ColumnListItem>
 						</items>
-						
-					<headerToolbar>
-					    <Toolbar width="100%" id="toolbar4">
-					        <content>
-					            <SearchField placeholder="Search for ..." id="field2" width="30%"/>
-					            <ActionSelect id="select0" autoAdjustWidth="true">
-					                <items>
-					                    <core:ListItem text="Ausstehend" id="item0_1578644916584"/>
-					                    <core:ListItem text="Bestätigt" id="item1"/>
-					                    <core:ListItem text="In Bearbeitung" id="item2"/>
-					                </items>
-					            </ActionSelect>
-					        </content>
-					    </Toolbar>
-					</headerToolbar>
-					
+						<headerToolbar>
+							<Toolbar width="100%" id="toolbar4">
+								<content>
+									<SearchField placeholder="Search for ..." id="field2" width="30%"/>
+									<ActionSelect id="select0" autoAdjustWidth="true">
+										<items>
+											<core:ListItem text="Ausstehend" id="item0_1578644916584"/>
+											<core:ListItem text="Bestätigt" id="item1"/>
+											<core:ListItem text="In Bearbeitung" id="item2"/>
+										</items>
+									</ActionSelect>
+								</content>
+							</Toolbar>
+						</headerToolbar>
 					</Table>
-					
 				</content>
 				<customHeader>
 					<Bar id="bar0">
@@ -83,7 +80,6 @@
 						</contentMiddle>
 					</Bar>
 				</customHeader>
-				
 				<footer>
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
@@ -93,7 +89,6 @@
 						</content>
 					</OverflowToolbar>
 				</footer>
-				
 			</Page>
 		</pages>
 	</App>
