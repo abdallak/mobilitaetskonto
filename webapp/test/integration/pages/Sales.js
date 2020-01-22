@@ -1,12 +1,26 @@
 sap.ui.define([
-	"sap/ui/test/Opa5"
-], function (Opa5) {
+	"sap/ui/test/Opa5",
+	"sap/ui/test/actions/Press"
+], function (Opa5, Press) {
 	"use strict";
+
 	var sViewName = "Sales";
+	var sBackButtonId = "backButton";
+
 	Opa5.createPageObjects({
 		onTheSalesPage: {
 
-			actions: {},
+			actions: {
+
+				iClickOnTheBackButton: function () {
+					return this.waitFor({
+						id: sBackButtonId,
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "back button cannot be pressed"
+					});
+				}
+			},
 
 			assertions: {
 
@@ -23,5 +37,4 @@ sap.ui.define([
 			}
 		}
 	});
-
 });
