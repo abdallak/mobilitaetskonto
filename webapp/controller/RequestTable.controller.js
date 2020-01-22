@@ -17,8 +17,11 @@ sap.ui.define([
 				var requestTableModel = new sap.ui.model.json.JSONModel();
 				requestTableModel.loadData("/MOB_ANTRAG_TABELLE");
 				this.setModel(requestTableModel, "requestTableModel");
+				console.log(requestTableModel);
 				
-				requestTableModel.setSizeLimit(500); // evt kleiner machen?
+				
+				requestTableModel.setSizeLimit(500);// evt kleiner machen?
+				
 				
 				this.filterStatus(1); //Vorfiltern nach Status = ausstehend
 			}
@@ -52,8 +55,6 @@ sap.ui.define([
 		updateFinished: function (oEvent) {
 			//	var test = oEvent.getParameter("total");
 		},
-		
-		
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
 			var path = context.getPath();
@@ -62,58 +63,59 @@ sap.ui.define([
 				Detail: detail
 			});
 		},
+		/**
+		 *@memberOf Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable
+		 */
+		selectionChanged: function (oEvent) {
+			var actionSelectValue = oEvent.getSource().getSelectedItem().getKey();
+			this.filterStatus(actionSelectValue);
+		},
+		
+		
+		filterStatus: function (param) {
+			
+			var statusnummer = parseFloat(param);
+			var table = this.getView().byId("table0");
+			var binding = table.getBinding("items");
+			
+			//problematisch
+			var filters = [];
+			var FO = FilterOperator.EQ;
+			
+			//FIXME: bessere lösung finden? 
+			if (statusnummer === 0.1 || statusnummer === 4) {
+				FO = FilterOperator.LE;
+			}
+			
+			filters.push(new Filter("STATUS", FO, statusnummer));
+			binding.filter(filters);
+		},
 		
 		
 		/**
 		 *@memberOf Mobilitaetskonto.Mobilitaetskonto.controller.RequestTable
 		 */
-		selectionChanged: function (oEvent) {
-
-			var actionSelectValue = oEvent.getSource().getSelectedItem().getText();
-			var filterValue;
-			var filterOperator = FilterOperator.EQ;
+		handleSearch: function (oEvent) {
 			
-			switch(actionSelectValue){
-				case "Abgelehnt":
-				//	filterValue = 0; //scheint nicht zu gehen als filterwert??
-					filterValue = 0.1; //dirty workaround
-					break;
-				case "Ausstehend":
-					filterValue = 1;
-					break;
-				case "Genehmigt":
-					filterValue = 2;
-					break;
-				case "Durchgeführt":
-					filterValue = 3;
-					break;
-				default:
-					filterValue = 5; //was gutes überlegen..
-					break;
-			}
-			
-			this.filterStatus(filterValue);
-			
-		},
-		
-		filterStatus: function(statusnummer) {
-			   
-			var table = this.getView().byId("table0");
-			var binding = table.getBinding("items"); //problematisch
+			var query = oEvent.getParameter("query");
+			console.log(query);
 			var filters = [];
-
-			var FO = FilterOperator.EQ;
 			
-			//FIXME: bessere lösung finden? 
-			if (statusnummer === 0.1){
-				FO = FilterOperator.LE;
+			if (query && query.length > 0) {
+				var filter = new Filter([
+				new Filter("NAME", FilterOperator.Contains, query),
+				new Filter("VORNAME", FilterOperator.Contains, query),
+				//new Filter("ART", FilterOperator.Contains, query),
+				new Filter("DATUM", FilterOperator.Contains, query),
+				//new Filter("BETRAG", FilterOperator.EQ, query),
+				new Filter("KATEGORIE", FilterOperator.Contains, query)] , false);
+				filters.push(filter);
 			}
-			
-			filters.push(new Filter("STATUS", FO , statusnummer));
-			
+
+			// update list binding
+			var list = this.getView().byId("table0");
+			var binding = list.getBinding("items");
 			binding.filter(filters);
-			
-			console.log(binding);
 		}
 	});
 });
