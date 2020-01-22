@@ -38,7 +38,7 @@ module.exports = function (grunt) {
 							resourceroots: resourceroots
 						},
 						tests: [
-							preloadPrefix + '/test/unit/allTests',
+							preloadPrefix + '/test/unit/AllTests',
 						]
 					}
 				},
