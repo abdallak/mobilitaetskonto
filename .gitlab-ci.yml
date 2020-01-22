@@ -50,6 +50,8 @@ build-app:
    artifacts:
     paths:
     - build/
+    dependencies:
+    - init-ci
 
 unit-test: 
    stage: test 

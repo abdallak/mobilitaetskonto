@@ -22,7 +22,7 @@
 		"karma-openui5": "latest",
 		"karma-phantomjs-launcher": "latest",
 		"karma-qunit": "latest",
-		"karma-sinon": "latest",
+		"karma-sinon": "latest"
 	},
 	"scripts": {
 		"build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo"
