@@ -85,7 +85,7 @@
 				"controlAggregation": "pages",
 				"controlId": "app",
 				"clearControlAggregation": false,
-				"transition": "flip"
+				"transition": "fade"
 			},
 			"routes": [{
 				"name": "Startpage",
