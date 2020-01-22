@@ -6,6 +6,7 @@ sap.ui.define([
 
 	var sViewName = "Sales";
 	var sTableId = "table0";
+	var sBackButtonId = "backButton";
 	Opa5.createPageObjects({
 		onTheSalesPage: {
 
