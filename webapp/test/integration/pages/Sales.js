@@ -7,7 +7,6 @@ sap.ui.define([
 	var sViewName = "Sales";
 	var sTableId = "table0";
 	var sBackButtonId = "backButton";
-	var sColumnListItemId = "item0";
 	Opa5.createPageObjects({
 		onTheSalesPage: {
 
@@ -23,7 +22,7 @@ sap.ui.define([
 				},
 				iClickOnTheColumnListItem: function () {
 					return this.waitFor({
-						id: sColumnListItemId,
+						controlType: "sap.m.ColumnListItem",
 						viewName: sViewName,
 						actions: [new Press()],
 						errorMessage: "column list item cannot be pressed"
@@ -69,7 +68,7 @@ sap.ui.define([
 				
 				iShouldSeeTheColumnListItem: function () {
 					return this.waitFor({
-						id: sColumnListItemId,
+						controlType: "sap.m.ColumnListItem",
 						viewName: sViewName,
 						success: function () {
 							Opa5.assert.ok(true, "A column list item is displayed");

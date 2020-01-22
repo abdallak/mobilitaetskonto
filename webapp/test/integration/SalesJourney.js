@@ -11,7 +11,7 @@
 
 		QUnit.module("Sales Journey");
 
-		opaTest("There should be a clickable sales tile on the startpage", function (Given, When, Then) {
+		opaTest("The sales view should be reachable and show the sales table", function (Given, When, Then) {
 			// Arrangements
 			Given.iStartMyApp();
 
@@ -30,13 +30,24 @@
 			Then.onTheSalesPage.iShouldSeeTheColumn("column2");
 			Then.onTheSalesPage.iShouldSeeTheColumn("column3");
 			Then.onTheSalesPage.iShouldSeeTheColumn("column4");
+			Then.onTheSalesPage.iShouldSeeTheColumnListItem();                    
 			
-			//Actions
-			When.onTheSalesPage.iClickOnTheColumnListItem();
-			
-
 			//Cleanup
 			Then.iTeardownMyApp();
+		});
+		
+		opaTest("The detail view should be reachable from the sales view and show the datails", function(Given, When, Then) {
+			//Arrangements
+			Given.iStartMyApp();
+			
+			//Actions
+			When.onTheStartpage.iClickOnTheSalesTile();
+			When.onTheSalesPage.iClickOnTheColumnListItem();
+			
+			//Assertions
+			Then.onTheDetailPage.iShouldSeeTheApp();
+			Then.onTheDetailPage.iShouldSeeTheFormElement("");
+			
 		});
 
 	});
