@@ -98,7 +98,7 @@ sap.ui.define([
 		handleSearch: function (oEvent) {
 			
 			var query = oEvent.getParameter("query");
-			console.log(query);
+			
 			var filters = [];
 			
 			if (query && query.length > 0) {
@@ -107,11 +107,11 @@ sap.ui.define([
 				new Filter("VORNAME", FilterOperator.Contains, query),
 				//new Filter("ART", FilterOperator.Contains, query),
 				new Filter("DATUM", FilterOperator.Contains, query),
-				//new Filter("BETRAG", FilterOperator.EQ, query),
+				new Filter("BETRAG", FilterOperator.EQ, parseFloat(query)), //evt. noch Checken ob Number vorm parsen??
 				new Filter("KATEGORIE", FilterOperator.Contains, query)] , false);
 				filters.push(filter);
 			}
-
+			
 			// update list binding
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");
