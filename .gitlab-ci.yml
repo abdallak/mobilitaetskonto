@@ -39,17 +39,17 @@ code-validation:
     - init-ci
 
 build-app: 
-   stage: build 
-   script: 
+    stage: build 
+    script: 
     - date=`date +%Y%m%d%H%M%S`
     - echo $date
     - sed -ie "s/\${timestamp}/$date/g" mta.yaml
     - mkdir -p build/
     - echo "$date" > build/variables
     - java -jar $MTA_BUILDER_HOME/mta_archive_builder.jar --mtar build/tmp-$date.mtar --build-target=NEO build
-   artifacts:
-    paths:
-    - build/
+    artifacts:
+        paths:
+        - build/
     dependencies:
     - init-ci
 
