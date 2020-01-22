@@ -7,6 +7,7 @@ sap.ui.define([
 	var sViewName = "Sales";
 	var sTableId = "table0";
 	var sBackButtonId = "backButton";
+	var sColumnListItemId = "item0";
 	Opa5.createPageObjects({
 		onTheSalesPage: {
 
@@ -19,7 +20,16 @@ sap.ui.define([
 						actions: [new Press()],
 						errorMessage: "back button cannot be pressed"
 					});
+				},
+				iClickOnTheColumnListItem: function () {
+					return this.waitFor({
+						id: sColumnListItemId,
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "column list item cannot be pressed"
+					});
 				}
+				
 			},
 
 			assertions: {
@@ -55,8 +65,17 @@ sap.ui.define([
 						},
 						errorMessage: "Did not find Sales table" + sId
 					});
+				},
+				
+				iShouldSeeTheColumnListItem: function () {
+					return this.waitFor({
+						id: sColumnListItemId,
+						viewName: sViewName,
+						success: function () {
+							Opa5.assert.ok(true, "A column list item is displayed");
+						}
+					});	
 				}
-
 			}
 		}
 	});
