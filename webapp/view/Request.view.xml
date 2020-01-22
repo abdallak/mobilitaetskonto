@@ -35,13 +35,14 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
+											<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
 												liveChange="onValueChanged"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" rows="6" value="{oRequestModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
+											<TextArea xmlns="sap.m" id="description" rows="6" value="{oRequestModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto"
+												required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
