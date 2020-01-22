@@ -30,24 +30,26 @@
 			Then.onTheSalesPage.iShouldSeeTheColumn("column2");
 			Then.onTheSalesPage.iShouldSeeTheColumn("column3");
 			Then.onTheSalesPage.iShouldSeeTheColumn("column4");
-			Then.onTheSalesPage.iShouldSeeTheColumnListItem();                    
-			
+			Then.onTheSalesPage.iShouldSeeTheColumnListItem();
+
 			//Cleanup
 			Then.iTeardownMyApp();
 		});
-		
-		opaTest("The detail view should be reachable from the sales view and show the datails", function(Given, When, Then) {
+
+		opaTest("The detail view should be reachable from the sales view and show the datails", function (Given, When, Then) {
 			//Arrangements
 			Given.iStartMyApp();
-			
+
+			// FIXME: Cannot read property 'length' of null TypeError: Cannot read property 'length' of null at constructor
+
 			//Actions
 			When.onTheStartpage.iClickOnTheSalesTile();
 			When.onTheSalesPage.iClickOnTheColumnListItem();
-			
+
 			//Assertions
 			Then.onTheDetailPage.iShouldSeeTheApp();
 			Then.onTheDetailPage.iShouldSeeTheFormElement("");
-			
+
 		});
 
 	});
