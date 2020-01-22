@@ -1,12 +1,36 @@
 sap.ui.define([
-	"sap/ui/test/Opa5"
-], function (Opa5) {
+	"sap/ui/test/Opa5",
+	"sap/ui/test/actions/Press"
+], function (Opa5, Press) {
 	"use strict";
-	var sViewName = "Startpage";
-	Opa5.createPageObjects({
-		onTheAppPage: {
 
-			actions: {},
+	var sViewName = "Startpage";
+	var sRequestTileId = "requestTile";
+	var sSalesTileId = "salesTile";
+
+	Opa5.createPageObjects({
+		onTheStartpage: {
+
+			actions: {
+
+				iClickOnTheRequestTile: function () {
+					return this.waitFor({
+						id: sRequestTileId,
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "requestTile cannot be pressed"
+					});
+				},
+
+				iClickOnTheSalesTile: function () {
+					return this.waitFor({
+						id: sSalesTileId,
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "salesTile cannot be pressed"
+					});
+				}
+			},
 
 			assertions: {
 
@@ -19,9 +43,36 @@ sap.ui.define([
 						},
 						errorMessage: "Did not find the Startpage view"
 					});
+				},
+
+				iShouldSeeTheRequestTile: function () {
+					return this.waitFor({
+						id: sRequestTileId,
+						viewName: sViewName,
+						success: function () {
+							Opa5.assert.ok(true, "The Request tile view is displayed");
+						},
+						errorMessage: "Did not find the Request tile view"
+					});
+				},
+
+				iShouldSeeTheSalesTile: function () {
+					return this.waitFor({
+						id: sSalesTileId,
+						viewName: sViewName,
+						success: function () {
+							Opa5.assert.ok(true, "The Sales tile view is displayed");
+						},
+						errorMessage: "Did not find the Sales tile view"
+					});
+				},
+
+				iShouldSeeTheCurrentBalance: function () {
+					return this.waitFor({
+						// TODO: irgendwie pruefen, ob Wert != 0 oder vom Typ Currency oder ob € mit drin ist?
+					});
 				}
 			}
 		}
 	});
-
 });
