@@ -4,6 +4,7 @@ stages:
   - init
   - validation
   - build
+  - test
   - deploy
  
 before_script:
@@ -49,7 +50,14 @@ build-app:
    artifacts:
     paths:
     - build/
-    
+
+unit-test: 
+   stage: test 
+   script: 
+     - node_modules/grunt-cli/bin/grunt -d -v unit-test
+   dependencies:
+    - init-ci
+
 deploy-scp: 
     stage: deploy 
     script:

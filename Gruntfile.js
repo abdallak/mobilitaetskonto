@@ -7,6 +7,15 @@ module.exports = function (grunt) {
 	var webAppDir = "webapp";
 	var targetDir = "dist";
 
+	var preloadPrefix = "Mobilitaetskonto/Mobilitaetskonto/";
+	var namespace = "Mobilitaetskonto.Mobilitaetskonto";
+
+	var resourceroots = {};
+	resourceroots[namespace] = './base';
+	var preprocessorsWebAppDir = {};
+	preprocessorsWebAppDir['{' + webAppDir + ',' + webAppDir + '/!(test)}/*.js'] = ['coverage'];
+
+
 	// Project configuration.
 	var config = {
 		eslint: {
@@ -14,12 +23,75 @@ module.exports = function (grunt) {
 				configFile: ".eslintrc.js"
 			},
 			target: [webAppDir + "/**/*.js"]
+		},
+		karma: {
+			options: {
+				// base path that will be used to resolve all patterns (eg. files, exclude)
+				client: {
+					openui5: {
+						config: {
+							theme: 'sap_belize',
+							language: 'EN',
+							bindingSyntax: 'complex',
+							compatVersion: 'edge',
+							preload: 'async',
+							resourceroots: resourceroots
+						},
+						tests: [
+							preloadPrefix + '/test/unit/allTests',
+						]
+					}
+				},
+				browserNoActivityTimeout: '30000',
+				frameworks: ['qunit', 'openui5'],
+				openui5: {
+					path: "https://<<your-gateway-system>>/sap/public/bc/ui5_ui5/1/resources/sap-ui-core.js" // eslint-disable-line
+				},
+				files: [{
+					pattern: '**',
+					included: false,
+					served: true,
+					watched: true
+				}],
+				reporters: ['progress'],
+				port: 9876,
+				logLevel: 'DEBUG',
+				browserConsoleLogOptions: {
+					level: 'warn'
+				},
+				browsers: ['Chrome'],
+				coverageReporter: {
+					includeAllSources: true,
+					reporters: [{
+						type: 'html',
+						dir: '../coverage/'
+					}, {
+						type: 'text'
+					}],
+					check: {
+						each: {
+							statements: 100,
+							branches: 100,
+							functions: 100,
+							lines: 100
+						}
+					}
+				}
+			},
+			src: {
+				basePath: webAppDir,
+				singleRun: true,
+				browsers: ['PhantomJS'],
+				preprocessors: preprocessorsWebAppDir,
+				reporters: ['progress', 'coverage']
+			}
 		}
 	};
 
 	grunt.loadNpmTasks("grunt-eslint");
 	grunt.loadNpmTasks("@sap/grunt-sapui5-bestpractice-build");
 
+	grunt.loadNpmTasks('grunt-karma');
 	grunt.loadNpmTasks('grunt-openui5');
 
 	grunt.config.merge(config);
@@ -42,7 +114,8 @@ module.exports = function (grunt) {
 			grunt.fail.warn('Errors found during code validation');
 		}
 	});
-
+	
+	grunt.registerTask('unit-test', ['karma:src']);
 	grunt.registerTask("fiori-test", ["lint", "check-lint"]);
 	grunt.registerTask("buildapp", ["build"]);
 	grunt.registerTask("default", ["build"]);
