@@ -1,6 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Sales">
-	<App>
+	<App id="app">
 		<pages>
 			<Page title="{i18n>salesTitle}" floatingFooter="true">
 				<content>
