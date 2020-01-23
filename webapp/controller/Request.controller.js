@@ -39,7 +39,7 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 
 			var oRequestData = this.getModel("oRequestModel").getData();
-			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
+			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
 			}
@@ -64,10 +64,6 @@ sap.ui.define([
 				.fail(function (jqXHR, exception) {
 					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
-
-			// FIXME: Auskommentiert, weil bei mir sonst View nicht geladen wird
-			// var oRequestResponseModel = new JSONModel();
-			// oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
