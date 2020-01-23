@@ -37,6 +37,7 @@ sap.ui.define([
 				firstName: "dummie-Data"
 			});
 
+
 			console.log("testUser==  " + JSON.stringify(detailADUserModel.getData()));
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);

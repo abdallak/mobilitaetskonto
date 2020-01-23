@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.DetailAD">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.DetailAD">
 	<App>
 		<pages>
 			<Page title="DetailAD" showNavButton="true" navButtonPress="onNavBack">
@@ -10,50 +9,53 @@
 								<sap.ui.layout.form:formElements>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderMid}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{detailADModel>/MID}" textAlign="Center"/>
+											<Text width="50%" text="{detailADModel>/MID}" textAlign="Left"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderEmployee}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{detailADUserModel>/NAME}, {detailADUserModel>/VORNAME}" textAlign="Center"/>
+											<Text width="50%" text="{detailADUserModel>/NAME}, {detailADUserModel>/VORNAME}" textAlign="Left"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%"
-												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
-												textAlign="Center"/>
+											<Text width="50%" text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }" textAlign="Left"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailADModel>/ART', formatter: '.formatter.antragArtText'}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{path: 'detailADModel>/ART', formatter: '.formatter.antragArtText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailADModel>/KATEGORIE}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/KATEGORIE}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%"
-												text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Center"/>
+											<Text xmlns="sap.m" width="50%" text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Left"/>
+											<Button xmlns="sap.m" width="10%" text="Edit" id="button0"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderAccountBalance}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{parts: [{path: 'detailADUserModel>/GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusText'}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailADModel>/BESCHREIBUNG}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}"  visible = "{= ${detailADModel>/FEEDBACK} !== null}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailADModel>/FEEDBACK}"/>
+											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="area0" width="50%"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
@@ -64,6 +66,16 @@
 						</sap.ui.layout.form:layout>
 					</sap.ui.layout.form:Form>
 				</content>
+				<footer>
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+						<content>
+							<ToolbarSpacer id="spacer0"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+				
 			</Page>
 		</pages>
 	</App>
