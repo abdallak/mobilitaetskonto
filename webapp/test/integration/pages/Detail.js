@@ -22,7 +22,7 @@ sap.ui.define([
 						errorMessage: "Did not find the Detail view"
 					});
 				},
-				
+
 				iShouldSeeTheFormElement: function (sId) {
 					return this.waitFor({
 						id: sId,
@@ -30,10 +30,10 @@ sap.ui.define([
 						success: function () {
 							Opa5.assert.ok(true, "The form container " + sId + " is displayed");
 						},
-						errorMessage: "Did not the form container" + sId
+						errorMessage: "Did not find the form container " + sId
 					});
 				}
-				
+
 			}
 		}
 	});

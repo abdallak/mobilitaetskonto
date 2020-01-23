@@ -20,6 +20,7 @@ sap.ui.define([
 						errorMessage: "back button cannot be pressed"
 					});
 				},
+
 				iClickOnTheColumnListItem: function () {
 					return this.waitFor({
 						controlType: "sap.m.ColumnListItem",
@@ -28,7 +29,7 @@ sap.ui.define([
 						errorMessage: "column list item cannot be pressed"
 					});
 				}
-				
+
 			},
 
 			assertions: {
@@ -43,7 +44,7 @@ sap.ui.define([
 						errorMessage: "Did not find the Sales view"
 					});
 				},
-				
+
 				iShouldSeeTheTable: function () {
 					return this.waitFor({
 						id: sTableId,
@@ -54,7 +55,7 @@ sap.ui.define([
 						errorMessage: "Did not find Sales table"
 					});
 				},
-				
+
 				iShouldSeeTheColumn: function (sId) {
 					return this.waitFor({
 						id: sId,
@@ -65,7 +66,7 @@ sap.ui.define([
 						errorMessage: "Did not find Sales table" + sId
 					});
 				},
-				
+
 				iShouldSeeTheColumnListItem: function () {
 					return this.waitFor({
 						controlType: "sap.m.ColumnListItem",
@@ -73,7 +74,7 @@ sap.ui.define([
 						success: function () {
 							Opa5.assert.ok(true, "A column list item is displayed");
 						}
-					});	
+					});
 				}
 			}
 		}
