@@ -13,7 +13,7 @@ sap.ui.define([
 
 	var sTypePayoutButtonId = "payout";
 	var sTypeCreditButtonId = "credit";
-	var sCategorySelectId = "select0";
+	var sCategorySelectId = "categorySelect";
 	var sAmountInputId = "amount";
 	var sDescriptionInputId = "description";
 
