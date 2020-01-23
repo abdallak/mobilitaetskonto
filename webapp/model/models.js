@@ -5,7 +5,6 @@ sap.ui.define([
 	"use strict";
 
 	return {
-		sUserPath: "/services/userapi/currentUser",
 
 		createDeviceModel: function () {
 			var oModel = new JSONModel(Device);
@@ -21,29 +20,43 @@ sap.ui.define([
 		},
 
 		getOrCreateUser: function (component) {
+			var settings = {
+				"url": "/services/userapi/currentUser",
+				"method": "GET",
+				"timeout": 0
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var oUserModel = component.getModel("userModel");
+					oUserModel.setData(response);
+					that.updateUserModel(component);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
+		},
+
+		updateUserModel: function (component) {
 			var oUserModel = component.getModel("userModel");
-			var oDbUserModel = component.getModel("dbUserModel");
 
-			oUserModel.attachRequestCompleted(function (oEvent) {
+			var settings = {
+				"url": "/MOB_MITARBEITER_GETCREATE",
+				"method": "GET",
+				"timeout": 0,
+				"data": oUserModel.getData()
+			};
 
-				oDbUserModel.loadData("/MOB_MITARBEITER_GETCREATE", oEvent.getSource().getData());
-
-			});
-
-			/*
-			oUserModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
-					"message") + " " + oEvent.getParameter("responseText"));
-			});
-
-			oDbUserModel.attachRequestFailed(function (oEvent) {
-				sap.m.MessageBox.error("error " + oEvent.getParameter("statusCode") + " " + oEvent.getParameter("statusText") + " " + oEvent.getParameter(
-					"message") + " " + oEvent.getParameter("responseText"));
-			});
-			*/
-
-			oUserModel.loadData(this.sUserPath);
-
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var dbUserModel = component.getModel("dbUserModel");
+					dbUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
 		},
 
 		createRole: function (component) {

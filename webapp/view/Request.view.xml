@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
 	<App>
 		<pages>
 			<Page title="{i18n>requestTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
@@ -18,15 +17,30 @@
 											</SegmentedButton>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Kategorie" id="element1">
+									    <sap.ui.layout.form:fields>
+									        <Select xmlns="sap.m" id="select0" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect" selectedKey="{oRequestModel>/kid}">
+									            <items>
+									                <core:Item xmlns:core="sap.ui.core" key="0" text="Bahncard" id="Bahncard"/>
+									                <core:Item xmlns:core="sap.ui.core" key="1" text="Mietwagen" id="Mietwagen"/>
+									                <core:Item xmlns:core="sap.ui.core" key="2" text="Bike-Sharing Fahrradleasing" id="Fahrradleasing"/>
+									                <core:Item xmlns:core="sap.ui.core" key="3" text="ÖPNV" id="OePNV"/>
+									                <core:Item xmlns:core="sap.ui.core" key="4" text="Car Sharing" id="CarSharing"/>
+									                <core:Item xmlns:core="sap.ui.core" key="5" text="Firmenwagen" id="Firmenwagen"/>
+									                <core:Item xmlns:core="sap.ui.core" key="6" text="Sonstiges" id="Sonstiges"/>
+									                </items>
+									            
+									        </Select>
+									    </sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
-												liveChange="onValueChanged"/>
+											<Input width="100%" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}" liveChange="onValueChanged"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" rows="6" value="{oRequestModel>/beschreibung}"  wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
+											<TextArea xmlns="sap.m" rows="6" value="{oRequestModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>

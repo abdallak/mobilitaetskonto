@@ -1,13 +1,13 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"Mobilitaetskonto/Mobilitaetskonto/controller/View1.controller"
+	"Mobilitaetskonto/Mobilitaetskonto/controller/Startpage.controller"
 ], function (Controller) {
 	"use strict";
 
-	QUnit.module("View1 Controller");
+	QUnit.module("Startpage Controller");
 
-	QUnit.test("I should test the View1 controller", function (assert) {
+	QUnit.test("I should test the Startpage controller", function (assert) {
 		var oAppController = new Controller();
 		oAppController.onInit();
 		assert.ok(oAppController);
