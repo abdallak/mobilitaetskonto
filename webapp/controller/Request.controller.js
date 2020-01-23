@@ -38,7 +38,7 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 
 			var oRequestData = this.getModel("oRequestModel").getData();
-			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
+			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
 			}
