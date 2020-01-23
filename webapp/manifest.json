@@ -69,7 +69,11 @@
 			"roleModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/data/roles.json"
+			},
+			"requestTableModel": {
+				"type": "sap.ui.model.json.JSONModel"
 			}
+			
 		},
 		"resources": {
 			"css": [{
@@ -110,6 +114,11 @@
 				"name": "RequestTable",
 				"pattern": "RequestTable",
 				"target": ["RequestTable"]
+			},
+			{
+				"name": "DetailAD",
+				"pattern": "DetailAD/{Detail}",
+				"target" : ["DetailAD"]
 			}],
 			"targets": {
 				"TargetView1": {
@@ -142,6 +151,10 @@
 				"RequestTable": {
 					"viewType": "XML",
 					"viewName": "RequestTable"
+				},
+				"DetailAD": {
+					"viewType" :"XML",
+					"viewName" : "DetailAD"
 				}
 			}
 		}
