@@ -35,7 +35,7 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Left"/>
-											<Button xmlns="sap.m" width="10%" text="Edit" id="button0"/>
+											<Button xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}" id="button0" />
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAccountBalance}">
