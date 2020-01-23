@@ -40,6 +40,9 @@ sap.ui.define([
 		When.onTheRequestPage.iClickOnTheSubmitButton();
 
 		// Assertions & Cleanup
+		// FIXME: schauen, ob rote error Felder
+		// Then.onTheRequestPage.iShouldSeeInputErrorMessage("amount");
+		// Then.onTheRequestPage.iShouldSeeInputErrorMessage("description");
 		Then.onTheRequestPage.iShouldSeeAnErrorMessage();
 		When.onTheRequestPage.iCloseTheErrorMessage();
 		Then.onTheRequestPage.iTeardownMyApp();
@@ -59,10 +62,8 @@ sap.ui.define([
 			.and.iEnterTextForDescription("valid 1ct test")
 			.and.iClickOnTheSubmitButton();
 
-		// TODO schauen, ob rote error Felder
-
 		// Assertions & Cleanup
-		Then.onTheRequestPage.iShouldSeeInputErrorMessage();
+		// Then.onTheRequestPage.iShouldSeeInputErrorMessage("amount");
 		Then.onTheRequestPage.iShouldSeeAnErrorMessage();
 		When.onTheRequestPage.iCloseTheErrorMessage();
 		Then.onTheRequestPage.iTeardownMyApp();
@@ -86,6 +87,7 @@ sap.ui.define([
 				.and.iClickOnTheSubmitButton();
 
 			// Assertions & Cleanup
+			// Then.onTheRequestPage.iShouldSeeInputErrorMessage("amount");
 			Then.onTheRequestPage.iShouldSeeAnErrorMessage();
 			When.onTheRequestPage.iCloseTheErrorMessage();
 		});
@@ -108,6 +110,7 @@ sap.ui.define([
 			.and.iClickOnTheSubmitButton();
 
 		// Assertions & Cleanup
+		// Then.onTheRequestPage.iShouldSeeInputErrorMessage("description");
 		Then.onTheRequestPage.iShouldSeeAnErrorMessage();
 		When.onTheRequestPage.iCloseTheErrorMessage();
 		Then.onTheRequestPage.iTeardownMyApp();
@@ -131,6 +134,7 @@ sap.ui.define([
 				.and.iClickOnTheSubmitButton();
 
 			// Assertions & Cleanup
+			// Then.onTheRequestPage.iShouldSeeInputErrorMessage("description");
 			Then.onTheRequestPage.iShouldSeeAnErrorMessage();
 			When.onTheRequestPage.iCloseTheErrorMessage();
 		});
