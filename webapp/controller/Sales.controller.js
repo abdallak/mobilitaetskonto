@@ -10,18 +10,18 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
 		},
-
+		
 		_onRoutePatternMatched: function (oEvent) {
-			var sTarget = oEvent.getParameter("arguments").Target;
+			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			this.getTableData(sTarget);
+			this.getTableData(target);
 		},
 
-		getTableData: function (sTarget) {
+		getTableData: function (target) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			if (sTarget == "Sales"){
+			if (target == "Sales"){
 				params.status1 = 2;
 				params.status2 = 3;
 			} else {
