@@ -11,7 +11,8 @@ sap.ui.define([
 	var sCancelButtonId = "cancelButton";
 	var sSubmitButtonId = "submitButton";
 
-	var sTypeSegmentButtonId = "art";
+	var sTypePayoutButtonId = "payout";
+	var sTypeCreditButtonId = "credit";
 	var sCategorySelectId = "select0";
 	var sAmountInputId = "amount";
 	var sDescriptionInputId = "description";
@@ -41,22 +42,10 @@ sap.ui.define([
 
 				iClickOnTheTypeButton: function (sTypeKey) {
 					return this.waitFor({
-						id: sTypeSegmentButtonId,
+						id: sTypeKey === "1" ? sTypeCreditButtonId : sTypePayoutButtonId,
 						viewName: sViewName,
-						actions: new Press(),
-						success: function (oSelect) {
-							this.waitFor({
-								controlType: "sap.ui.core.SegmentedButtonItem",
-								matchers: [
-									new Ancestor(oSelect),
-									new Properties({
-										key: sTypeKey
-									})
-								],
-								actions: new Press(),
-								errorMessage: "Cannot select type: " + sTypeKey
-							});
-						}
+						actions: [new Press()],
+						errorMessage: sTypeKey === "1" ? sTypeCreditButtonId : sTypePayoutButtonId + " button cannot be pressed"
 					});
 				},
 
@@ -104,10 +93,27 @@ sap.ui.define([
 						})],
 						errorMessage: "The decription text cannot be entered"
 					});
+				},
+
+				iCloseTheErrorMessage: function () {
+					return this.waitFor({
+						searchOpenDialogs: true,
+						id: "errorMessageBox",
+
+						autoWait: false,
+						actions: [new Press()]
+
+					});
 				}
 
 			},
 
+			/*
+			success: function (oMessageBox) {
+										oMessageBox.close();
+										Opa5.assert.ok(true, "The MessageBox was closed");
+									}
+									*/
 			assertions: {
 
 				iShouldSeeTheApp: function () {
@@ -121,15 +127,28 @@ sap.ui.define([
 					});
 				},
 
-				// TODO: ?
 				iShouldSeeAnErrorMessage: function () {
 					return this.waitFor({
-						id: "app",
-						viewName: sViewName,
+						id: "errorMessageBox",
+						searchOpenDialogs: true,
 						success: function () {
-							Opa5.assert.ok(true, "The Request view is displayed");
+							Opa5.assert.ok(true, "Error Message Box is shown");
 						},
-						errorMessage: "Did not find the Request view"
+						errorMessage: "Did not find the Error Message Box"
+					});
+				},
+
+				iShouldSeeErrorMessage: function (inputId) {
+					return this.waitFor({
+						id: inputId,
+						controlType: "sap.m.Input",
+						matchers: new sap.ui.test.matchers.Properties({
+							ValueState: "Error"
+						}),
+						success: function () {
+							Opa5.assert.ok(true, "The Error message is displayed");
+						},
+						errorMessage: "Did not see the error message"
 					});
 				}
 			}
