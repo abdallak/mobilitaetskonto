@@ -133,7 +133,7 @@ sap.ui.define([
 					});
 				},
 
-				iShouldSeeErrorMessage: function (inputId) {
+				iShouldSeeInputErrorMessage: function (inputId) {
 					return this.waitFor({
 						id: inputId,
 						controlType: "sap.m.Input",
