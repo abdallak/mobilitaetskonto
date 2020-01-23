@@ -63,10 +63,6 @@ sap.ui.define([
 				.fail(function (jqXHR, exception) {
 					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
-
-			// FIXME: Auskommentiert, weil bei mir sonst View nicht geladen wird
-			// var oRequestResponseModel = new JSONModel();
-			// oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
