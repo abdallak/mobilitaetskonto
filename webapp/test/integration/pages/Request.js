@@ -99,21 +99,16 @@ sap.ui.define([
 					return this.waitFor({
 						searchOpenDialogs: true,
 						id: "errorMessageBox",
-
-						autoWait: false,
-						actions: [new Press()]
-
+						success: function (oMessageBox) {
+							oMessageBox.close();
+							Opa5.assert.ok(true, "The MessageBox was closed");
+						},
+						errorMessage: "Could not close the Error Message Box"
 					});
 				}
 
 			},
 
-			/*
-			success: function (oMessageBox) {
-										oMessageBox.close();
-										Opa5.assert.ok(true, "The MessageBox was closed");
-									}
-									*/
 			assertions: {
 
 				iShouldSeeTheApp: function () {
