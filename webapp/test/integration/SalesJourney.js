@@ -48,6 +48,7 @@
 			Then.onTheDetailPage.iShouldSeeTheApp();
 			Then.onTheDetailPage.iShouldSeeTheFormElement("form0");
 
+			Then.iTeardownMyApp();
 		});
 
 	});
