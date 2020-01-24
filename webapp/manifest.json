@@ -72,9 +72,11 @@
 			}
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -84,41 +86,61 @@
 				"viewPath": "Mobilitaetskonto.Mobilitaetskonto.view",
 				"controlAggregation": "pages",
 				"controlId": "app",
-				"clearControlAggregation": false
+				"clearControlAggregation": false,
+				"transition": "fade"
 			},
-			"routes": [{
-				"name": "RouteView1",
-				"pattern": "RouteView1",
-				"target": ["TargetView1"]
-			}, {
-				"name": "Startpage",
-				"pattern": "Startpage",
-				"target": ["Startpage"]
-			}, {
-				"name": "Request",
-				"pattern": "Request",
-				"target": ["Request"]
-			}, {
-				"name": "Sales",
-				"pattern": "Sales/{Target}",
-				"target": ["Sales"]
-			}, {
-				"name": "Detail",
-				"pattern": "Detail/{Detail}",
-				"target": ["Detail"]
-			}, {
-				"name": "RequestTable",
-				"pattern": "RequestTable",
-				"target": ["RequestTable"]
-			}],
-			"targets": {
-				"TargetView1": {
-					"viewType": "XML",
-					"transition": "slide",
-					"clearControlAggregation": false,
-					"viewId": "Startpage",
-					"viewName": "Startpage"
+			"routes": [
+				{
+					"name": "RouteView1",
+					"pattern": "RouteView1",
+					"target": [
+						"TargetView1"
+					]
 				},
+				{
+					"name": "Startpage",
+					"pattern": "Startpage",
+					"target": [
+						"Startpage"
+					]
+				},
+				{
+					"name": "Request",
+					"pattern": "Request",
+					"target": [
+						"Request"
+					]
+				},
+				{
+					"name": "Sales",
+					"pattern": "Sales/{Target}",
+					"target": [
+						"Sales"
+					]
+				},
+				{
+					"name": "Detail",
+					"pattern": "Detail/{Detail}",
+					"target": [
+						"Detail"
+					]
+				},
+				{
+					"name": "RequestTable",
+					"pattern": "RequestTable",
+					"target": [
+						"RequestTable"
+					]
+				},
+				{
+					"name": "employeeTable",
+					"pattern": "employeeTable",
+					"target": [
+						"employeeTable"
+					]
+				}
+			],
+			"targets": {
 				"Startpage": {
 					"viewType": "XML",
 					"viewName": "Startpage"
@@ -131,10 +153,6 @@
 					"viewType": "XML",
 					"viewName": "Sales"
 				},
-				"testview": {
-					"viewType": "XML",
-					"viewName": "testview"
-				},
 				"Detail": {
 					"viewType": "XML",
 					"viewName": "Detail"
@@ -142,6 +160,10 @@
 				"RequestTable": {
 					"viewType": "XML",
 					"viewName": "RequestTable"
+				},
+				"employeeTable": {
+					"viewType": "XML",
+					"viewName": "employeeTable"
 				}
 			}
 		}
