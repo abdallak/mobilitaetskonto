@@ -59,7 +59,8 @@ sap.ui.define([
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
 			var path = context.getPath();
 			var detail = JSON.stringify(context.getProperty(path));
-			this.getRouter().navTo("Detail", {
+			
+			this.getRouter().navTo("DetailAD", {
 				Detail: detail
 			});
 		},

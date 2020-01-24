@@ -69,7 +69,11 @@
 			"roleModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/data/roles.json"
+			},
+			"requestTableModel": {
+				"type": "sap.ui.model.json.JSONModel"
 			}
+			
 		},
 		"resources": {
 			"css": [
@@ -89,49 +93,31 @@
 				"clearControlAggregation": false,
 				"transition": "fade"
 			},
-			"routes": [
-				{
-					"name": "RouteView1",
-					"pattern": "RouteView1",
-					"target": [
-						"TargetView1"
-					]
-				},
-				{
-					"name": "Startpage",
-					"pattern": "Startpage",
-					"target": [
-						"Startpage"
-					]
-				},
-				{
-					"name": "Request",
-					"pattern": "Request",
-					"target": [
-						"Request"
-					]
-				},
-				{
-					"name": "Sales",
-					"pattern": "Sales/{Target}",
-					"target": [
-						"Sales"
-					]
-				},
-				{
-					"name": "Detail",
-					"pattern": "Detail/{Detail}",
-					"target": [
-						"Detail"
-					]
-				},
-				{
-					"name": "RequestTable",
-					"pattern": "RequestTable",
-					"target": [
-						"RequestTable"
-					]
-				},
+			"routes": [{
+				"name": "Startpage",
+				"pattern": "Startpage",
+				"target": ["Startpage"]
+			}, {
+				"name": "Request",
+				"pattern": "Request",
+				"target": ["Request"]
+			}, {
+				"name": "Sales",
+				"pattern": "Sales/{Target}",
+				"target": ["Sales"]
+			}, {
+				"name": "Detail",
+				"pattern": "Detail/{Detail}",
+				"target": ["Detail"]
+			}, {
+				"name": "RequestTable",
+				"pattern": "RequestTable",
+				"target": ["RequestTable"]
+			}, {
+				"name": "DetailAD",
+				"pattern": "DetailAD/{Detail}",
+				"target" : ["DetailAD"]
+			},
 				{
 					"name": "employeeTable",
 					"pattern": "employeeTable",
@@ -161,9 +147,14 @@
 					"viewType": "XML",
 					"viewName": "RequestTable"
 				},
+				"DetailAD": {
+					"viewType" :"XML",
+					"viewName" : "DetailAD"
+                },
 				"employeeTable": {
 					"viewType": "XML",
 					"viewName": "employeeTable"
+
 				}
 			}
 		}
