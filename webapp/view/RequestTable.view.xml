@@ -44,7 +44,8 @@
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+									<Label
+										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
@@ -53,26 +54,23 @@
 								</cells>
 							</ColumnListItem>
 						</items>
-						
-					<headerToolbar>
-					    <Toolbar width="100%" id="toolbar4">
-					        <content>
-					            <SearchField placeholder="Search for ..." id="field2" width="30%" search="handleSearch"/>
-					            <Label text="Status:" width="100%" id="label6" textAlign="End"/>
-					            <ActionSelect id="select0" change="selectionChanged" forceSelection="false" selectedKey="1">
-					                <items>
-					                	<core:ListItem text="Abgelehnt" id="item0" key="0.1"/>
-					                    <core:ListItem text="Ausstehend" id="item1" key="1"/>
-					                    <core:ListItem text="Genehmigt" id="item2" key="2"/>
-					                    <core:ListItem text="Durchgeführt" id="item3" key="3"/>
-					                    <core:ListItem text="-" id="item4" key="4"/>
-					                </items>
-					            </ActionSelect>
-					            
-					        </content>
-					    </Toolbar>
-					</headerToolbar>
-					
+						<headerToolbar>
+							<Toolbar width="100%" id="toolbar4">
+								<content>
+									<SearchField placeholder="Search for ..." id="field2" width="30%" search="handleSearch"/>
+									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
+									<ActionSelect id="select0" change="selectionChanged" forceSelection="false" selectedKey="1">
+										<items>
+											<core:ListItem text="Abgelehnt" id="item0" key="0.1"/>
+											<core:ListItem text="Ausstehend" id="item1" key="1"/>
+											<core:ListItem text="Genehmigt" id="item2" key="2"/>
+											<core:ListItem text="Durchgeführt" id="item3" key="3"/>
+											<core:ListItem text="-" id="item4" key="4"/>
+										</items>
+									</ActionSelect>
+								</content>
+							</Toolbar>
+						</headerToolbar>
 					</Table>
 				</content>
 				<customHeader>

@@ -28,13 +28,10 @@
 									press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}"/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTableTile}"
-									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}" 
-								/>
-								
+									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}"/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Mitarbeitertabelle"
-									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToemployeeTable" visible="{= ${roleModel>/verwalter}}" 
-								/>
+									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Mitarbeitertabelle" subheader="{i18n&gt;startpageRequestTableTileSub}"
+									press="onNavToemployeeTable" visible="{= ${roleModel>/verwalter}}"/>
 							</sap.ui.layout:content>
 						</sap.ui.layout:HorizontalLayout>
 					</content>
