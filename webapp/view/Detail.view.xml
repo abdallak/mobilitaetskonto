@@ -1,6 +1,6 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Detail">
-	<App>
+	<App id="app">
 		<pages>
 			<Page title="{i18n>detailTitle}" showNavButton="true" navButtonPress="onNavBack">
 				<content>
@@ -37,8 +37,8 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%"
-												text="{parts: [{path: 'detailModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Center"/>
+											<Text xmlns="sap.m" width="50%" text="{parts: [{path: 'detailModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"
+												textAlign="Center"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
@@ -49,6 +49,11 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/BESCHREIBUNG}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/FEEDBACK}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>

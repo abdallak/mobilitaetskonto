@@ -10,7 +10,7 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
 		},
-
+		
 		_onRoutePatternMatched: function (oEvent) {
 			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();

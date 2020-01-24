@@ -12,11 +12,50 @@ sap.ui.define([
 
 		_onRoutePatternMatched: function (oEvent) {
 			// this.resetRequest();
+			this.fetchCategories();
 		},
 
 		cancelButton: function (oEvent) {
 			this.resetRequest();
 			this.onNavBack();
+		},
+
+		fetchCategories: function () {
+			var settings = {
+				"url": "/MOB_KATEGORIE",
+				"method": "GET",
+				"timeout": 0
+			};
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var dbCategoryModel = new JSONModel();
+					dbCategoryModel.setData(response);
+					that.insertCategories(dbCategoryModel.getData());
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+				});
+		},
+
+		insertCategories: function (oCategoryData) {
+			var oCategorySelect = this.getView().byId("categorySelect");
+			var previousItems = oCategorySelect.getItems();
+
+			// remove previous items from select
+			previousItems.forEach(function (oldItem) {
+				oCategorySelect.removeItem(oldItem);
+			});
+
+			// add category items from db
+			oCategoryData.forEach(function (newItemDb) {
+				var newItem = new sap.ui.core.Item({
+					key: newItemDb.KID.toString(),
+					text: newItemDb.BEZEICHNUNG
+				});
+				oCategorySelect.addItem(newItem);
+			});
 		},
 
 		resetRequest: function () {
@@ -26,7 +65,7 @@ sap.ui.define([
 				"art": "0",
 				"betrag": null,
 				"beschreibung": null,
-				"kid": "0" // TODO: wenn dynamisch, dann wieder Wert null
+				"kid": null
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
@@ -38,7 +77,7 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 
 			var oRequestData = this.getModel("oRequestModel").getData();
-			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-")) {
+			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
 			}
@@ -57,16 +96,14 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
-					that.getRouter().navTo("Sales");
+					that.getRouter().navTo("Sales", {
+						Target: "SubmittedRequests"
+					});
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
-
-			// FIXME: Auskommentiert, weil bei mir sonst View nicht geladen wird
-			// var oRequestResponseModel = new JSONModel();
-			// oRequestResponseModel.loadData("/MOB_ANTRAG_INSERT", oRequestData);
 		},
 
 		onValueChanged: function (oEvent) {
