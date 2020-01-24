@@ -75,6 +75,12 @@
 				"name": "MOB_Kategorie"
 			}
 		}, {
+			"path": "/MOB_MITARBEITER_GET",
+			"target": {
+				"type": "destination",
+				"name": "MOB_MITARBEITER_GET"
+			}
+		}, {
 			"path": "/MOB_ANTRAG_INSERT",
 			"target": {
 				"type": "destination",
