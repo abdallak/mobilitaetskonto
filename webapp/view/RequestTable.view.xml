@@ -49,7 +49,7 @@
 									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
-									<Label text="{requestTableModel>KATEGORIE}"/>
+									<Label text="{requestTableModel>BEZEICHNUNG}"/>
 									<CheckBox selected="false"/>
 								</cells>
 							</ColumnListItem>
