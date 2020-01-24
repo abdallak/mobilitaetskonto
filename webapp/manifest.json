@@ -76,9 +76,11 @@
 			
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -88,13 +90,10 @@
 				"viewPath": "Mobilitaetskonto.Mobilitaetskonto.view",
 				"controlAggregation": "pages",
 				"controlId": "app",
-				"clearControlAggregation": false
+				"clearControlAggregation": false,
+				"transition": "fade"
 			},
 			"routes": [{
-				"name": "RouteView1",
-				"pattern": "RouteView1",
-				"target": ["TargetView1"]
-			}, {
 				"name": "Startpage",
 				"pattern": "Startpage",
 				"target": ["Startpage"]
@@ -114,20 +113,20 @@
 				"name": "RequestTable",
 				"pattern": "RequestTable",
 				"target": ["RequestTable"]
-			},
-			{
+			}, {
 				"name": "DetailAD",
 				"pattern": "DetailAD/{Detail}",
 				"target" : ["DetailAD"]
-			}],
+			},
+				{
+					"name": "employeeTable",
+					"pattern": "employeeTable",
+					"target": [
+						"employeeTable"
+					]
+				}
+			],
 			"targets": {
-				"TargetView1": {
-					"viewType": "XML",
-					"transition": "slide",
-					"clearControlAggregation": false,
-					"viewId": "Startpage",
-					"viewName": "Startpage"
-				},
 				"Startpage": {
 					"viewType": "XML",
 					"viewName": "Startpage"
@@ -140,10 +139,6 @@
 					"viewType": "XML",
 					"viewName": "Sales"
 				},
-				"testview": {
-					"viewType": "XML",
-					"viewName": "testview"
-				},
 				"Detail": {
 					"viewType": "XML",
 					"viewName": "Detail"
@@ -155,6 +150,11 @@
 				"DetailAD": {
 					"viewType" :"XML",
 					"viewName" : "DetailAD"
+                },
+				"employeeTable": {
+					"viewType": "XML",
+					"viewName": "employeeTable"
+
 				}
 			}
 		}

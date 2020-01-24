@@ -1,9 +1,9 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
+	"sap/m/MessageBox",
 	"Mobilitaetskonto/Mobilitaetskonto/model/models"
-
-], function (Controller, History, models) {
+], function (Controller, History, MessageBox, models) {
 	"use strict";
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
@@ -48,7 +48,14 @@ sap.ui.define([
 
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
-			sap.m.MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ": " + sMessage);
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix"), {
+				title: "Error",
+				id: "errorMessageBox",
+				details: sMessage,
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				contentWidth: "100px"
+			});
 		}
 
 	});

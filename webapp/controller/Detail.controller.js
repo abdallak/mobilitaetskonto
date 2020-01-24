@@ -29,7 +29,7 @@ sap.ui.define([
 			//--
 
 			//USERDATEN
-			//FIXME: workaround fuer dummiedata
+			//FIXME: eigener service
 			var detailUserModel = this.getModel("detailUserModel");
 			detailUserModel.loadData("/MOB_MITARBEITER_GETCREATE", {
 				name: detail.MID,
