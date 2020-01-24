@@ -1,34 +1,34 @@
 {
-    "application": {
-        "id": "",
-        "title": "Mobilitaetskonto.Mobilitaetskonto.mobilitaetskonto",
-        "type": "SAP_UI5_Component",
-        "componentUrl": "/",
-        "appUrl": "#mobilitaetskonto-Display",
-        "navigationComponentName": "Mobilitaetskonto.Mobilitaetskonto",
-        "intentSemanticObject": "mobilitaetskonto",
-        "intentAction": "Display",
-        "html5ApplicationName": "mobilitaetskonto",
-        "HCPParentApplicationName": ""
-    },
-    "assignment": {
-        "groups": [
-            "5682734b-b128-4b31-ade8-38adaea72ae7"
-        ],
-        "contentPackages": [
-            "3c42b0ee-4c39-4fb8-9069-60356fad4dba"
-        ],
-        "categories": []
-    },
-    "tile": {
-        "type": "StaticTile",
-        "title": "Mobilitaetskonto",
-        "subtitle": "",
-        "searchKeywords": "Mobilitaetskonto,",
-        "displayIconUrl": "sap-icon://passenger-train",
-        "displayInfoText": "",
-        "size": "1x1",
-        "serviceURL": "",
-        "refreshInterval": ""
-    }
+	"application": {
+		"id": "",
+		"title": "Mobilitaetskonto.Mobilitaetskonto.mobilitaetskonto",
+		"type": "SAP_UI5_Component",
+		"componentUrl": "/",
+		"appUrl": "#mobilitaetskonto-Display",
+		"navigationComponentName": "Mobilitaetskonto.Mobilitaetskonto",
+		"intentSemanticObject": "mobilitaetskonto",
+		"intentAction": "Display",
+		"html5ApplicationName": "mobilitaetskonto",
+		"HCPParentApplicationName": ""
+	},
+	"assignment": {
+		"groups": [
+			"5682734b-b128-4b31-ade8-38adaea72ae7"
+		],
+		"contentPackages": [
+			"3c42b0ee-4c39-4fb8-9069-60356fad4dba"
+		],
+		"categories": []
+	},
+	"tile": {
+		"type": "StaticTile",
+		"title": "Mobilitaetskonto",
+		"subtitle": "",
+		"searchKeywords": "Mobilitaetskonto,",
+		"displayIconUrl": "sap-icon://passenger-train",
+		"displayInfoText": "",
+		"size": "1x1",
+		"serviceURL": "",
+		"refreshInterval": ""
+	}
 }
