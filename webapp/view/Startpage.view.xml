@@ -32,7 +32,7 @@
 								/>
 								
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="TEST"
+									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Mitarbeitertabelle"
 									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToemployeeTable" visible="{= ${roleModel>/verwalter}}" 
 								/>
 							</sap.ui.layout:content>
