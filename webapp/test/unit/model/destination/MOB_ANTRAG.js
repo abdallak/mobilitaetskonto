@@ -14,9 +14,9 @@ sap.ui.define([], function () {
 			"url": "/" + destinationName,
 			"method": "POST",
 			"timeout": 10000, // timeout 10s
-			"data": {
-				"name": destinationName
-			}
+			"data": JSON.stringify({
+				name: destinationName
+			})
 		};
 
 		$.ajax(settings)

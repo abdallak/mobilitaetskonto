@@ -14,9 +14,9 @@ sap.ui.define([], function () {
 			"url": "/" + destinationName,
 			"method": "POST",
 			"timeout": 10000, // timeout 10s
-			"data": {
-				"name": destinationName
-			}
+			"data": JSON.stringify({
+				name: destinationName
+			})
 		};
 
 		$.ajax(settings)
@@ -28,8 +28,7 @@ sap.ui.define([], function () {
 				if (jqXHR.status === 400) {
 					assert.ok(true, "Connection to " + destinationName + " established. Response returned: " + jqXHR.status);
 				} else {
-					assert.ok(false, "Connection to " + destinationName + " could not be established. Response returned: " + jqXHR.status + " " +
-						jqXHR.responseText);
+					assert.ok(false, "Connection to " + destinationName + " could not be established. Response returned: " + jqXHR.status);
 				}
 
 				done();
