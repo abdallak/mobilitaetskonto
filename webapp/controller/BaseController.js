@@ -5,6 +5,7 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/models"
 ], function (Controller, History, MessageBox, models) {
 	"use strict";
+
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
@@ -46,6 +47,15 @@ sap.ui.define([
 			models.updateUserModel(this.getOwnerComponent());
 		},
 
+		prepareAjaxRequest: function (url, method, data) {
+			return {
+				"url": url,
+				"method": method,
+				"timeout": 5 * 1000, // 5s
+				"data": data
+			};
+		},
+
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
@@ -55,6 +65,10 @@ sap.ui.define([
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"
 			});
+		},
+
+		handleNetworkError: function (jqXHR) {
+			this.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 		}
 
 	});

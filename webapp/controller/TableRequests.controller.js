@@ -1,25 +1,44 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator"
-], function (BaseController, formatter, Filter, FilterOperator) {
+	"sap/ui/model/FilterOperator",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, formatter, Filter, FilterOperator, JSONModel) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
 		formatter: formatter,
 
 		onInit: function () {
-			var requestTableModel = new sap.ui.model.json.JSONModel();
-			requestTableModel.loadData("/MOB_ANTRAG_TABELLE");
-			this.setModel(requestTableModel, "requestTableModel");
-			console.log(requestTableModel);
-
+			var requestTableModel = new JSONModel();
 			requestTableModel.setSizeLimit(500); // evt kleiner machen?
+			this.setModel(requestTableModel, "requestTableModel");
 
 			this.filterStatus(1); //Vorfiltern nach Status = ausstehend
+
+			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
 
+		_onRoutePatternMatched: function (oEvent) {
+			this.getTableData();
+		},
+
+		getTableData: function () {
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_TABELLE", "GET");
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var requestTableModel = that.getModel("requestTableModel");
+					requestTableModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
+		},
+
+		// FIXME: wird das hier noch gebraucht?
 		updateFinished: function (oEvent) {
 			//	var test = oEvent.getParameter("total");
 		},

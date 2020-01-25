@@ -3,6 +3,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel"
 ], function (BaseController, JSONModel) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Request", {
 
 		onInit: function () {
@@ -11,7 +12,6 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			// this.resetRequest();
 			this.fetchCategories();
 		},
 
@@ -21,12 +21,7 @@ sap.ui.define([
 		},
 
 		fetchCategories: function () {
-			var settings = {
-				"url": "/MOB_KATEGORIE",
-				"method": "GET",
-				"timeout": 0
-			};
-
+			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -35,7 +30,7 @@ sap.ui.define([
 					that.insertCategories(dbCategoryModel.getData());
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleNetworkError(jqXHR);
 				});
 		},
 
@@ -74,9 +69,10 @@ sap.ui.define([
 		submitRequest: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
-			var oResourceBundle = this.getResourceBundle();
 
+			var oResourceBundle = this.getResourceBundle();
 			var oRequestData = this.getModel("oRequestModel").getData();
+
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -86,13 +82,11 @@ sap.ui.define([
 				return;
 			}
 
-			var settings = {
-				"url": "/MOB_ANTRAG",
-				"method": "POST",
-				"timeout": 0,
-				"data": JSON.stringify(oRequestData)
-			};
+			this.performRequestSubmit(oRequestData);
+		},
 
+		performRequestSubmit: function (oRequestData) {
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -102,7 +96,7 @@ sap.ui.define([
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleNetworkError(jqXHR);
 				});
 		},
 

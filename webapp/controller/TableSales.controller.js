@@ -4,6 +4,7 @@ sap.ui.define([
 	"sap/m/MessageToast"
 ], function (BaseController, formatter) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableSales", {
 		formatter: formatter,
 
@@ -29,12 +30,7 @@ sap.ui.define([
 				params.status2 = 1;
 			}
 
-			var settings = {
-				"url": "/MOB_UMSATZ",
-				"method": "GET",
-				"timeout": 0,
-				"data": params
-			};
+			var settings = this.prepareAjaxRequest("/MOB_UMSATZ", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
@@ -43,7 +39,7 @@ sap.ui.define([
 					salesModel.setData(response);
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleNetworkError(jqXHR);
 				});
 		},
 
