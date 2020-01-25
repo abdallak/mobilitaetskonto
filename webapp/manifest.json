@@ -119,11 +119,9 @@
 				"target" : ["DetailAdministation"]
 			},
 				{
-					"name": "EmployeeTable",
-					"pattern": "EmployeeTable",
-					"target": [
-						"EmployeeTable"
-					]
+				"name": "TableEmployees",
+				"pattern": "TableEmployees",
+				"target": ["TableEmployees"]
 				}
 			],
 			"targets": {
@@ -151,9 +149,9 @@
 					"viewType" :"XML",
 					"viewName" : "DetailAdministation"
                 },
-				"EmployeeTable": {
+				"TableEmployees": {
 					"viewType": "XML",
-					"viewName": "EmployeeTable"
+					"viewName": "TableEmployees"
 				}
 			}
 		}

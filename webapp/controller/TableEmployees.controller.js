@@ -7,11 +7,11 @@ sap.ui.define([
 
 ], function (BaseController, formatter, JSONModel) {
 	"use strict";
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.EmployeeTable", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("EmployeeTable").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {

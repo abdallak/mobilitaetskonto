@@ -31,7 +31,7 @@
 									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}"/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
 									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}"
-									press="onNavToEmployeeTable" visible="{= ${roleModel>/verwalter}}"/>
+									press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}"/>
 							</sap.ui.layout:content>
 						</sap.ui.layout:HorizontalLayout>
 					</content>

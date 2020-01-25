@@ -32,8 +32,8 @@ sap.ui.define([
 			this.getRouter().navTo("RequestTable");
 		},
 
-		onNavToEmployeeTable: function () {
-			this.getRouter().navTo("EmployeeTable");
+		onNavToTableEmployees: function () {
+			this.getRouter().navTo("TableEmployees");
 		}
 
 	});
