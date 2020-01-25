@@ -6,11 +6,11 @@ sap.ui.define([
 ], function (JSONModel, BaseController, formatter) {
 	"use strict";
 
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Detail", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("Detail").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("DetailEmployee").attachMatched(this._onRoutePatternMatched, this);
 
 			var detailModel = new JSONModel();
 			this.setModel(detailModel, "detailModel");

@@ -106,17 +106,17 @@
 				"pattern": "Sales/{Target}",
 				"target": ["Sales"]
 			}, {
-				"name": "Detail",
-				"pattern": "Detail/{Detail}",
-				"target": ["Detail"]
+				"name": "DetailEmployee",
+				"pattern": "DetailEmDetailEmployee/{Detail}",
+				"target": ["DetailEmployee"]
 			}, {
 				"name": "RequestTable",
 				"pattern": "RequestTable",
 				"target": ["RequestTable"]
 			}, {
-				"name": "DetailAD",
-				"pattern": "DetailAD/{Detail}",
-				"target" : ["DetailAD"]
+				"name": "DetailAdministation",
+				"pattern": "DetailAdministation/{Detail}",
+				"target" : ["DetailAdministation"]
 			},
 				{
 					"name": "EmployeeTable",
@@ -139,17 +139,17 @@
 					"viewType": "XML",
 					"viewName": "Sales"
 				},
-				"Detail": {
+				"DetailEmployee": {
 					"viewType": "XML",
-					"viewName": "Detail"
+					"viewName": "DetailEmployee"
 				},
 				"RequestTable": {
 					"viewType": "XML",
 					"viewName": "RequestTable"
 				},
-				"DetailAD": {
+				"DetailAdministation": {
 					"viewType" :"XML",
-					"viewName" : "DetailAD"
+					"viewName" : "DetailAdministation"
                 },
 				"EmployeeTable": {
 					"viewType": "XML",
