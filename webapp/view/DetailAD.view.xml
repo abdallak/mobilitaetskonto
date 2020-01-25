@@ -59,7 +59,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="area0" width="50%"/>
+											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="area0" width="50%" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>

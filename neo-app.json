@@ -87,6 +87,12 @@
 			"name": "MOB_Kategorie"
 		}
 	}, {
+		"path": "/MOB_ANTRAG_HANDLE",
+		"target": {
+			"type": "destination",
+			"name": "MOB_ANTRAG_HANDLE"
+		}
+	}, {
 		"path": "/MOB_ANTRAG_INSERT",
 		"target": {
 			"type": "destination",
