@@ -69,12 +69,6 @@
 			"name": "MOB_ANTRAG_TABELLE"
 		}
 	}, {
-		"path": "/MOB_Kategorie",
-		"target": {
-			"type": "destination",
-			"name": "MOB_Kategorie"
-		}
-	}, {
 		"path": "/MOB_MITARBEITER_GET",
 		"target": {
 			"type": "destination",
@@ -84,7 +78,7 @@
 		"path": "/MOB_KATEGORIE",
 		"target": {
 			"type": "destination",
-			"name": "MOB_Kategorie"
+			"name": "MOB_KATEGORIE"
 		}
 	}, {
 		"path": "/MOB_ANTRAG_HANDLE",
