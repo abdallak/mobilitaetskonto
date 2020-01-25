@@ -46,6 +46,15 @@ sap.ui.define([
 			models.updateUserModel(this.getOwnerComponent());
 		},
 
+		prepareAjaxRequest: function (url, method, data) {
+			return {
+				"url": url,
+				"method": method,
+				"timeout": 5 * 1000, // 5s
+				"data": JSON.stringify(data)
+			};
+		},
+
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
@@ -55,6 +64,10 @@ sap.ui.define([
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"
 			});
+		},
+
+		handleNetworkError: function (jqXHR) {
+			this.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 		}
 
 	});
