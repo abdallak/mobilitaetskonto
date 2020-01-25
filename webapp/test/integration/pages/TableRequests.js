@@ -2,7 +2,7 @@ sap.ui.define([
 	"sap/ui/test/Opa5"
 ], function (Opa5) {
 	"use strict";
-	var sViewName = "RequestTable";
+	var sViewName = "TableRequests";
 	Opa5.createPageObjects({
 		onTheRequestTablePage: {
 
@@ -15,9 +15,9 @@ sap.ui.define([
 						id: "app",
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The RequestTable view is displayed");
+							Opa5.assert.ok(true, "The TableRequests view is displayed");
 						},
-						errorMessage: "Did not find the RequestTable view"
+						errorMessage: "Did not find the TableRequests view"
 					});
 				}
 			}

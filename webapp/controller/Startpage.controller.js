@@ -13,13 +13,13 @@ sap.ui.define([
 		},
 
 		onNavToSales: function () {
-			this.getRouter().navTo("Sales", {
-				Target: "Sales"
+			this.getRouter().navTo("TableSales", {
+				Target: "TableSales"
 			});
 		},
 
 		onNavToSubmittedRequests: function () {
-			this.getRouter().navTo("Sales", {
+			this.getRouter().navTo("TableSales", {
 				Target: "SubmittedRequests"
 			});
 		},
@@ -29,7 +29,7 @@ sap.ui.define([
 		},
 
 		onNavToRequestTable: function () {
-			this.getRouter().navTo("RequestTable");
+			this.getRouter().navTo("TableRequests");
 		},
 
 		onNavToTableEmployees: function () {

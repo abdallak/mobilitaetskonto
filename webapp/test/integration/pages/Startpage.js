@@ -61,9 +61,9 @@ sap.ui.define([
 						id: sSalesTileId,
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The Sales tile view is displayed");
+							Opa5.assert.ok(true, "The TableSales tile view is displayed");
 						},
-						errorMessage: "Did not find the Sales tile view"
+						errorMessage: "Did not find the TableSales tile view"
 					});
 				},
 

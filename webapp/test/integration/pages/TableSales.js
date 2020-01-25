@@ -4,7 +4,7 @@ sap.ui.define([
 ], function (Opa5, Press) {
 	"use strict";
 
-	var sViewName = "Sales";
+	var sViewName = "TableSales";
 	var sTableId = "table0";
 	var sBackButtonId = "backButton";
 	Opa5.createPageObjects({
@@ -39,9 +39,9 @@ sap.ui.define([
 						id: "app",
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The Sales view is displayed");
+							Opa5.assert.ok(true, "The TableSales view is displayed");
 						},
-						errorMessage: "Did not find the Sales view"
+						errorMessage: "Did not find the TableSales view"
 					});
 				},
 
@@ -50,9 +50,9 @@ sap.ui.define([
 						id: sTableId,
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The Sales table is displayed");
+							Opa5.assert.ok(true, "The TableSales table is displayed");
 						},
-						errorMessage: "Did not find Sales table"
+						errorMessage: "Did not find TableSales table"
 					});
 				},
 
@@ -61,9 +61,9 @@ sap.ui.define([
 						id: sId,
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The Sales table " + sId + " is displayed");
+							Opa5.assert.ok(true, "The TableSales table " + sId + " is displayed");
 						},
-						errorMessage: "Did not find Sales table" + sId
+						errorMessage: "Did not find TableSales table" + sId
 					});
 				},
 
