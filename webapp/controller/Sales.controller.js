@@ -10,7 +10,7 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
 		},
-		
+
 		_onRoutePatternMatched: function (oEvent) {
 			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
@@ -21,7 +21,7 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			if (target == "Sales"){
+			if (target === "Sales") {
 				params.status1 = 2;
 				params.status2 = 3;
 			} else {
