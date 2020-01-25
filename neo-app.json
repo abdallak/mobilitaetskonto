@@ -81,43 +81,6 @@
 			"name": "MOB_MITARBEITER_GET"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_INSERT",
-		"target": {
-			"type": "destination",
-			"name": "MOB_ANTRAG_INSERT"
-		}
-
-	}, {
-		"path": "/MOB_UMSATZ",
-		"target": {
-			"type": "destination",
-			"name": "MOB_UMSATZ"
-		}
-	}, {
-		"path": "/MOB_ANTRAG",
-		"target": {
-			"type": "destination",
-			"name": "MOB_ANTRAG"
-		}
-	}, {
-		"path": "/MOB_GUTHABEN",
-		"target": {
-			"type": "destination",
-			"name": "MOB_GUTHABEN"
-		}
-	}, {
-		"path": "/MOB_MITARBEITER_GETCREATE",
-		"target": {
-			"type": "destination",
-			"name": "MOB_MITARBEITER_GETCREATE"
-		}
-	}, {
-		"path": "/MOB_ANTRAG_TABELLE",
-		"target": {
-			"type": "destination",
-			"name": "MOB_ANTRAG_TABELLE"
-		}
-	}, {
 		"path": "/MOB_KATEGORIE",
 		"target": {
 			"type": "destination",

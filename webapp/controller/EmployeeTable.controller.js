@@ -7,11 +7,11 @@ sap.ui.define([
 
 ], function (BaseController, formatter, JSONModel) {
 	"use strict";
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.employeeTable", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.EmployeeTable", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("employeeTable").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("EmployeeTable").attachMatched(this._onRoutePatternMatched, this);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -20,10 +20,10 @@ sap.ui.define([
 		},
 
 		getTableData: function (target) {
-			
+
 			var params = {};
 			params.mid = null;
-			
+
 			var settings = {
 				"url": "/MOB_MITARBEITER_GET",
 				"method": "GET",
@@ -35,9 +35,9 @@ sap.ui.define([
 			$.ajax(settings)
 				.done(function (response) {
 					var employeeTableModel = new JSONModel();
-					that.setModel(employeeTableModel , "employeeTableModel");
+					that.setModel(employeeTableModel, "employeeTableModel");
 					employeeTableModel.setData(response);
-				console.log(employeeTableModel);
+					console.log(employeeTableModel);
 
 				})
 				.fail(function (jqXHR, exception) {

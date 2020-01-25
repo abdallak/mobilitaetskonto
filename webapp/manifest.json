@@ -119,10 +119,10 @@
 				"target" : ["DetailAD"]
 			},
 				{
-					"name": "employeeTable",
-					"pattern": "employeeTable",
+					"name": "EmployeeTable",
+					"pattern": "EmployeeTable",
 					"target": [
-						"employeeTable"
+						"EmployeeTable"
 					]
 				}
 			],
@@ -151,10 +151,9 @@
 					"viewType" :"XML",
 					"viewName" : "DetailAD"
                 },
-				"employeeTable": {
+				"EmployeeTable": {
 					"viewType": "XML",
-					"viewName": "employeeTable"
-
+					"viewName": "EmployeeTable"
 				}
 			}
 		}
