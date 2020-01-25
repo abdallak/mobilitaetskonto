@@ -1,4 +1,3 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
@@ -20,24 +19,17 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
-			//--
 
 			//USERDATEN
-			//FIXME: eigener service
 			var detailUserModel = this.getModel("detailUserModel");
-			detailUserModel.loadData("/MOB_MITARBEITER_GETCREATE", {
-				name: detail.MID,
-				lastName: "dummie-Data",
-				firstName: "dummie-Data"
+			detailUserModel.loadData("/MOB_MITARBEITER_GET", {
+				name: detail.MID
 			});
-
-			console.log("testUser==  " + JSON.stringify(detailUserModel.getData()));
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
