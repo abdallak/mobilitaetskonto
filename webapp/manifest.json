@@ -114,9 +114,9 @@
 				"pattern": "RequestTable",
 				"target": ["RequestTable"]
 			}, {
-				"name": "DetailAD",
-				"pattern": "DetailAD/{Detail}",
-				"target" : ["DetailAD"]
+				"name": "DetailAdministation",
+				"pattern": "DetailAdministation/{Detail}",
+				"target" : ["DetailAdministation"]
 			},
 				{
 					"name": "EmployeeTable",
@@ -147,9 +147,9 @@
 					"viewType": "XML",
 					"viewName": "RequestTable"
 				},
-				"DetailAD": {
+				"DetailAdministation": {
 					"viewType" :"XML",
-					"viewName" : "DetailAD"
+					"viewName" : "DetailAdministation"
                 },
 				"EmployeeTable": {
 					"viewType": "XML",
