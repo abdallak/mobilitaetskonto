@@ -5,7 +5,7 @@
 		"./pages/Startpage",
 		"./pages/Request",
 		"./pages/Sales",
-		"./pages/Detail"
+		"./pages/DetailEmployee"
 	], function (opaTest) {
 		"use strict";
 

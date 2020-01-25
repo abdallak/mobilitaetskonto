@@ -106,9 +106,9 @@
 				"pattern": "Sales/{Target}",
 				"target": ["Sales"]
 			}, {
-				"name": "Detail",
-				"pattern": "Detail/{Detail}",
-				"target": ["Detail"]
+				"name": "DetailEmployee",
+				"pattern": "DetailEmDetailEmployee/{Detail}",
+				"target": ["DetailEmployee"]
 			}, {
 				"name": "RequestTable",
 				"pattern": "RequestTable",
@@ -139,9 +139,9 @@
 					"viewType": "XML",
 					"viewName": "Sales"
 				},
-				"Detail": {
+				"DetailEmployee": {
 					"viewType": "XML",
-					"viewName": "Detail"
+					"viewName": "DetailEmployee"
 				},
 				"RequestTable": {
 					"viewType": "XML",

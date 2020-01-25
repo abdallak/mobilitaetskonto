@@ -51,8 +51,8 @@ sap.ui.define([
 
 			var detail = JSON.stringify(context.getProperty(path));
 
-			this.getRouter().navTo("Detail", {
-				Detail: detail
+			this.getRouter().navTo("DetailEmployee", {
+				DetailEmployee: detail
 			});
 		}
 	});

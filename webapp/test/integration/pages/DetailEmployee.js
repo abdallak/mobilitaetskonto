@@ -3,7 +3,7 @@ sap.ui.define([
 ], function (Opa5) {
 	"use strict";
 
-	var sViewName = "Detail";
+	var sViewName = "DetailEmployee";
 
 	Opa5.createPageObjects({
 		onTheDetailPage: {
@@ -17,9 +17,9 @@ sap.ui.define([
 						id: "app",
 						viewName: sViewName,
 						success: function () {
-							Opa5.assert.ok(true, "The Detail view is displayed");
+							Opa5.assert.ok(true, "The DetailEmployee view is displayed");
 						},
-						errorMessage: "Did not find the Detail view"
+						errorMessage: "Did not find the DetailEmployee view"
 					});
 				},
 
