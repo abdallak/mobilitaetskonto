@@ -37,7 +37,7 @@
 								</header>
 							</Column>
 							<Column width="5%" id="column6">
-								<header></header>
+								<header/>
 							</Column>
 						</columns>
 						<items>
@@ -84,7 +84,8 @@
 					</Bar>
 				</customHeader>
 				<footer>
-					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+					<!-- Erstmal versteckt, weil hier kein Feedback gegeben werden kann -->
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1" visible="false">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen"/>
