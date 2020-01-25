@@ -7,6 +7,7 @@ sap.ui.define([
 	var sViewName = "Startpage";
 	var sRequestTileId = "requestTile";
 	var sSalesTileId = "salesTile";
+	var sRequestTableTileId = "requestTableTile";
 
 	Opa5.createPageObjects({
 		onTheStartpage: {
@@ -29,7 +30,16 @@ sap.ui.define([
 						actions: [new Press()],
 						errorMessage: "salesTile cannot be pressed"
 					});
-				}
+				},
+
+				iClickOnTheRequestTableTile: function () {
+					return this.waitFor({
+						id: sRequestTableTileId,
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "requestTableTile cannot be pressed"
+					});
+				},
 			},
 
 			assertions: {
@@ -64,6 +74,17 @@ sap.ui.define([
 							Opa5.assert.ok(true, "The TableSales tile view is displayed");
 						},
 						errorMessage: "Did not find the TableSales tile view"
+					});
+				},
+
+				iShouldSeeTheRequestTableTile: function () {
+					return this.waitFor({
+						id: sRequestTableTileId,
+						viewName: sViewName,
+						success: function () {
+							Opa5.assert.ok(true, "The requestTable tile view is displayed");
+						},
+						errorMessage: "Did not find the requestTable tile view"
 					});
 				},
 

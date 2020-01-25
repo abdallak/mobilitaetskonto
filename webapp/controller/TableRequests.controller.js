@@ -41,7 +41,7 @@ sap.ui.define([
 
 		filterStatus: function (param) {
 			var statusnummer = parseFloat(param);
-			var table = this.getView().byId("table0");
+			var table = this.getView().byId("requestTableId");
 			var binding = table.getBinding("items");
 
 			//problematisch
@@ -74,7 +74,7 @@ sap.ui.define([
 			}
 
 			// update list binding
-			var list = this.getView().byId("table0");
+			var list = this.getView().byId("requestTableId");
 			var binding = list.getBinding("items");
 			binding.filter(filters);
 		}

@@ -4,7 +4,7 @@
 		<pages>
 			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'requestTableModel>/'}" updateFinished="updateFinished" growingScrollToLoad="true">
+					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" updateFinished="updateFinished" growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
@@ -57,7 +57,7 @@
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar4">
 								<content>
-									<SearchField placeholder="Search for ..." id="field2" width="30%" search="handleSearch"/>
+									<SearchField placeholder="Search for ..." id="searchField0" width="30%" search="handleSearch"/>
 									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
 									<ActionSelect id="select0" change="selectionChanged" forceSelection="false" selectedKey="1">
 										<items>
