@@ -102,28 +102,26 @@
 				"pattern": "Request",
 				"target": ["Request"]
 			}, {
-				"name": "Sales",
-				"pattern": "Sales/{Target}",
-				"target": ["Sales"]
+				"name": "TableSales",
+				"pattern": "TableSales/{Target}",
+				"target": ["TableSales"]
 			}, {
 				"name": "DetailEmployee",
 				"pattern": "DetailEmDetailEmployee/{Detail}",
 				"target": ["DetailEmployee"]
 			}, {
-				"name": "RequestTable",
-				"pattern": "RequestTable",
-				"target": ["RequestTable"]
+				"name": "TableRequests",
+				"pattern": "TableRequests",
+				"target": ["TableRequests"]
 			}, {
 				"name": "DetailAdministation",
 				"pattern": "DetailAdministation/{Detail}",
 				"target" : ["DetailAdministation"]
 			},
 				{
-					"name": "EmployeeTable",
-					"pattern": "EmployeeTable",
-					"target": [
-						"EmployeeTable"
-					]
+				"name": "TableEmployees",
+				"pattern": "TableEmployees",
+				"target": ["TableEmployees"]
 				}
 			],
 			"targets": {
@@ -135,25 +133,25 @@
 					"viewType": "XML",
 					"viewName": "Request"
 				},
-				"Sales": {
+				"TableSales": {
 					"viewType": "XML",
-					"viewName": "Sales"
+					"viewName": "TableSales"
 				},
 				"DetailEmployee": {
 					"viewType": "XML",
 					"viewName": "DetailEmployee"
 				},
-				"RequestTable": {
+				"TableRequests": {
 					"viewType": "XML",
-					"viewName": "RequestTable"
+					"viewName": "TableRequests"
 				},
 				"DetailAdministation": {
 					"viewType" :"XML",
 					"viewName" : "DetailAdministation"
                 },
-				"EmployeeTable": {
+				"TableEmployees": {
 					"viewType": "XML",
-					"viewName": "EmployeeTable"
+					"viewName": "TableEmployees"
 				}
 			}
 		}

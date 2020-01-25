@@ -4,12 +4,12 @@
 		"sap/ui/test/opaQunit",
 		"./pages/Startpage",
 		"./pages/Request",
-		"./pages/Sales",
+		"./pages/TableSales",
 		"./pages/DetailEmployee"
 	], function (opaTest) {
 		"use strict";
 
-		QUnit.module("Sales Journey");
+		QUnit.module("TableSales Journey");
 
 		opaTest("The sales view should be reachable and show the sales table", function (Given, When, Then) {
 			// Arrangements

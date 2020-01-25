@@ -96,7 +96,7 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
-					that.getRouter().navTo("Sales", {
+					that.getRouter().navTo("TableSales", {
 						Target: "SubmittedRequests"
 					});
 					that.resetRequest();

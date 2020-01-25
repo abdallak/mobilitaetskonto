@@ -1,36 +1,31 @@
+/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast"
-], function (BaseController, formatter) {
+
+], function (BaseController, formatter, JSONModel) {
 	"use strict";
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Sales", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("Sales").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			this.getTableData(target);
+			this.getTableData();
 		},
 
 		getTableData: function (target) {
-			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+
 			var params = {};
-			params.mid = dbUserData.MID;
-			if (target === "Sales") {
-				params.status1 = 2;
-				params.status2 = 3;
-			} else {
-				params.status1 = 0;
-				params.status2 = 1;
-			}
+			params.mid = null;
 
 			var settings = {
-				"url": "/MOB_UMSATZ",
+				"url": "/MOB_MITARBEITER_GET",
 				"method": "GET",
 				"timeout": 0,
 				"data": params
@@ -39,8 +34,11 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
-					var salesModel = that.getGlobalModel("salesModel");
-					salesModel.setData(response);
+					var employeeTableModel = new JSONModel();
+					that.setModel(employeeTableModel, "employeeTableModel");
+					employeeTableModel.setData(response);
+					console.log(employeeTableModel);
+
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
@@ -48,13 +46,13 @@ sap.ui.define([
 		},
 
 		onNavToDetail: function (oEvent) {
-			var context = oEvent.getSource().getBindingContext("salesModel");
+			var context = oEvent.getSource().getBindingContext("employeeTableModel");
 			var path = context.getPath();
 
 			var detail = JSON.stringify(context.getProperty(path));
 
 			this.getRouter().navTo("DetailEmployee", {
-				Detail: detail
+				DetailEmployee: detail
 			});
 		}
 	});
