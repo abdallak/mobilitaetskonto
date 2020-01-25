@@ -11,7 +11,6 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			// this.resetRequest();
 			this.fetchCategories();
 		},
 
@@ -21,12 +20,7 @@ sap.ui.define([
 		},
 
 		fetchCategories: function () {
-			var settings = {
-				"url": "/MOB_KATEGORIE",
-				"method": "GET",
-				"timeout": 0
-			};
-
+			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -35,7 +29,7 @@ sap.ui.define([
 					that.insertCategories(dbCategoryModel.getData());
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleNetworkError(jqXHR);
 				});
 		},
 
@@ -86,13 +80,7 @@ sap.ui.define([
 				return;
 			}
 
-			var settings = {
-				"url": "/MOB_ANTRAG",
-				"method": "POST",
-				"timeout": 0,
-				"data": JSON.stringify(oRequestData)
-			};
-
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", oRequestData);
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -102,7 +90,7 @@ sap.ui.define([
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					that.handleNetworkError(jqXHR);
 				});
 		},
 
