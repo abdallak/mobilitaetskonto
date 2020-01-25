@@ -1,8 +1,7 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
-	"sap/ui/model/json/JSONModel",
-	"sap/m/MessageToast"
+	"sap/ui/model/json/JSONModel"
 ], function (BaseController, formatter, JSONModel) {
 	"use strict";
 
