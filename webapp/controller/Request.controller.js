@@ -86,7 +86,7 @@ sap.ui.define([
 		},
 
 		performRequestSubmit: function (oRequestData) {
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", oRequestData);
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {

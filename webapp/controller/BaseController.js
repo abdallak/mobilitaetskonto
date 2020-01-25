@@ -52,7 +52,7 @@ sap.ui.define([
 				"url": url,
 				"method": method,
 				"timeout": 5 * 1000, // 5s
-				"data": JSON.stringify(data)
+				"data": data
 			};
 		},
 
