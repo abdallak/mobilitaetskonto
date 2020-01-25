@@ -69,9 +69,10 @@ sap.ui.define([
 		submitRequest: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
-			var oResourceBundle = this.getResourceBundle();
 
+			var oResourceBundle = this.getResourceBundle();
 			var oRequestData = this.getModel("oRequestModel").getData();
+
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -81,6 +82,10 @@ sap.ui.define([
 				return;
 			}
 
+			this.performRequestSubmit(oRequestData);
+		},
+
+		performRequestSubmit: function (oRequestData) {
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", oRequestData);
 			var that = this;
 			$.ajax(settings)

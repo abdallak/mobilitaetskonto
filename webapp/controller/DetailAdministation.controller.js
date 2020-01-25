@@ -25,10 +25,7 @@ sap.ui.define([
 			detailADModel.setData(detail);
 
 			//USERDATEN
-			var detailADUserModel = this.getModel("detailADUserModel");
-			detailADUserModel.loadData("/MOB_MITARBEITER_GET", {
-				name: detail.MID
-			});
+			this.performRequestEmployee(detail.MID);
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 			if (jQuery.isEmptyObject(detailADModel.getData())) {
@@ -36,6 +33,23 @@ sap.ui.define([
 			} else {
 				oStorage.put("requestTableLocalData", detailADModel.getData());
 			}
+		},
+
+		performRequestEmployee: function (mid) {
+			var params = {};
+			params.mid = mid;
+
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var detailADUserModel = that.getModel("detailADUserModel");
+					detailADUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
 		},
 
 		performRequestUpdate: function (state) {

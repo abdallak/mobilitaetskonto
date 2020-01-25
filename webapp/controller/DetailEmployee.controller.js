@@ -26,10 +26,8 @@ sap.ui.define([
 			detailModel.setData(detail);
 
 			//USERDATEN
-			var detailUserModel = this.getModel("detailUserModel");
-			detailUserModel.loadData("/MOB_MITARBEITER_GET", {
-				name: detail.MID
-			});
+			// FIXME: Wird das hier gebraucht? Name + Vorname müssten doch auch von dbUserModel reichen?
+			this.performRequestEmployee(detail.MID);
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
@@ -38,11 +36,24 @@ sap.ui.define([
 			} else {
 				oStorage.put("salesLocalData", detailModel.getData());
 			}
-			if (detailModel.UID === null) {
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
-		}
+		},
 
+		performRequestEmployee: function (mid) {
+			var params = {};
+			params.mid = mid;
+
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var detailUserModel = that.getModel("detailUserModel");
+					detailUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
+		}
 	});
 
 });
