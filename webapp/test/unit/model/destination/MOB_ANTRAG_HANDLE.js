@@ -3,7 +3,7 @@
 sap.ui.define([], function () {
 	"use strict";
 
-	var destinationName = "MOB_KATEGORIE";
+	var destinationName = "MOB_ANTRAG_HANDLE";
 
 	QUnit.module(destinationName + " Destination");
 
@@ -28,7 +28,8 @@ sap.ui.define([], function () {
 				if (jqXHR.status === 400) {
 					assert.ok(true, "Connection to " + destinationName + " established. Response returned: " + jqXHR.status);
 				} else {
-					assert.ok(false, "Connection to " + destinationName + " could not be established. Response returned: " + jqXHR.status);
+					assert.ok(false, "Connection to " + destinationName + " could not be established. Response returned: " + jqXHR.status + " " +
+						jqXHR.responseText);
 				}
 
 				done();
