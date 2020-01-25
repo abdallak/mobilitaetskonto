@@ -3,6 +3,7 @@ sap.ui.define([
 	"sap/ui/model/json/JSONModel"
 ], function (BaseController, JSONModel) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Request", {
 
 		onInit: function () {

@@ -6,6 +6,7 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator"
 ], function (BaseController, formatter, Filter, FilterOperator) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
 		formatter: formatter,
 

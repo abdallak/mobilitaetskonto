@@ -5,6 +5,7 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/models"
 ], function (Controller, History, MessageBox, models) {
 	"use strict";
+
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
