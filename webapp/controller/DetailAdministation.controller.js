@@ -60,7 +60,7 @@ sap.ui.define([
 				return;
 			}
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", oRequestData);
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
