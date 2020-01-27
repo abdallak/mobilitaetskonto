@@ -33,6 +33,23 @@ sap.ui.define([
 			} else {
 				oStorage.put("requestTableLocalData", detailADModel.getData());
 			}
+			
+			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
+			var acc = this.getView().byId("submitButton");
+			var cnc = this.getView().byId("cancelButton");
+			var fb = this.getView().byId("areaFeedback");
+			if(detail.STATUS !== 1){
+				fb.setBlocked(true);
+				fb.setRequired(false);
+				acc.setEnabled(false);
+				cnc.setEnabled(false);
+			}else{
+				fb.setBlocked(false);
+				fb.setRequired(true);
+				acc.setEnabled(true);
+				cnc.setEnabled(true);
+			}
+			
 		},
 
 		performRequestEmployee: function (mid) {
