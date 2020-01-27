@@ -37,7 +37,7 @@
 											<HBox width="100%" id="hbox0">
 												<items>
 													<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Left" id="text9" class="sapUiSmallMarginEnd"/>
-													<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}" id="button0"/>
+													<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}" id="button0" press="editValue"/>
 												</items>
 											</HBox>
 										</sap.ui.layout.form:fields>
@@ -45,6 +45,11 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAccountBalance}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{parts: [{path: 'detailADUserModel>/GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Resultierender Kontostand" id="resultingBalance">
+										<sap.ui.layout.form:fields>
+											<Text id="txtResultingBalance" xmlns="sap.m" width="50%" textAlign="Left" text=""/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
