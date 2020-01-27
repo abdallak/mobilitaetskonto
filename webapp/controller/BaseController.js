@@ -1,10 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
+	"sap/m/MessageBox",
 	"Mobilitaetskonto/Mobilitaetskonto/model/models"
-
-], function (Controller, History, models) {
+], function (Controller, History, MessageBox, models) {
 	"use strict";
+
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
 
 		getRouter: function () {
@@ -46,9 +47,28 @@ sap.ui.define([
 			models.updateUserModel(this.getOwnerComponent());
 		},
 
+		prepareAjaxRequest: function (url, method, data) {
+			return {
+				"url": url,
+				"method": method,
+				"timeout": 5 * 1000, // 5s
+				"data": data
+			};
+		},
+
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
-			sap.m.MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ": " + sMessage);
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ": " + sMessage, {
+				title: "Error",
+				id: "errorMessageBox",
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				contentWidth: "100px"
+			});
+		},
+
+		handleNetworkError: function (jqXHR) {
+			this.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 		}
 
 	});

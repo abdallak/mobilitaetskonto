@@ -69,12 +69,18 @@
 			"roleModel": {
 				"type": "sap.ui.model.json.JSONModel",
 				"uri": "model/data/roles.json"
+			},
+			"requestTableModel": {
+				"type": "sap.ui.model.json.JSONModel"
 			}
+			
 		},
 		"resources": {
-			"css": [{
-				"uri": "css/style.css"
-			}]
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
 		},
 		"routing": {
 			"config": {
@@ -84,13 +90,10 @@
 				"viewPath": "Mobilitaetskonto.Mobilitaetskonto.view",
 				"controlAggregation": "pages",
 				"controlId": "app",
-				"clearControlAggregation": false
+				"clearControlAggregation": false,
+				"transition": "fade"
 			},
 			"routes": [{
-				"name": "RouteView1",
-				"pattern": "RouteView1",
-				"target": ["TargetView1"]
-			}, {
 				"name": "Startpage",
 				"pattern": "Startpage",
 				"target": ["Startpage"]
@@ -99,26 +102,29 @@
 				"pattern": "Request",
 				"target": ["Request"]
 			}, {
-				"name": "Sales",
-				"pattern": "Sales/{Target}",
-				"target": ["Sales"]
+				"name": "TableSales",
+				"pattern": "TableSales/{Target}",
+				"target": ["TableSales"]
 			}, {
-				"name": "Detail",
-				"pattern": "Detail/{Detail}",
-				"target": ["Detail"]
+				"name": "DetailEmployee",
+				"pattern": "DetailEmDetailEmployee/{Detail}",
+				"target": ["DetailEmployee"]
 			}, {
-				"name": "RequestTable",
-				"pattern": "RequestTable",
-				"target": ["RequestTable"]
-			}],
+				"name": "TableRequests",
+				"pattern": "TableRequests",
+				"target": ["TableRequests"]
+			}, {
+				"name": "DetailAdministation",
+				"pattern": "DetailAdministation/{Detail}",
+				"target" : ["DetailAdministation"]
+			},
+				{
+				"name": "TableEmployees",
+				"pattern": "TableEmployees",
+				"target": ["TableEmployees"]
+				}
+			],
 			"targets": {
-				"TargetView1": {
-					"viewType": "XML",
-					"transition": "slide",
-					"clearControlAggregation": false,
-					"viewId": "Startpage",
-					"viewName": "Startpage"
-				},
 				"Startpage": {
 					"viewType": "XML",
 					"viewName": "Startpage"
@@ -127,21 +133,25 @@
 					"viewType": "XML",
 					"viewName": "Request"
 				},
-				"Sales": {
+				"TableSales": {
 					"viewType": "XML",
-					"viewName": "Sales"
+					"viewName": "TableSales"
 				},
-				"testview": {
+				"DetailEmployee": {
 					"viewType": "XML",
-					"viewName": "testview"
+					"viewName": "DetailEmployee"
 				},
-				"Detail": {
+				"TableRequests": {
 					"viewType": "XML",
-					"viewName": "Detail"
+					"viewName": "TableRequests"
 				},
-				"RequestTable": {
+				"DetailAdministation": {
+					"viewType" :"XML",
+					"viewName" : "DetailAdministation"
+                },
+				"TableEmployees": {
 					"viewType": "XML",
-					"viewName": "RequestTable"
+					"viewName": "TableEmployees"
 				}
 			}
 		}

@@ -1,0 +1,63 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees">
+	<App>
+		<pages>
+			<Page title="TITEL" floatingFooter="true">
+				<content>
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="{i18n>HeaderMid}" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="{i18n>HeaderEmployee}" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="{i18n>startpageSalesTileSub}" id="label2"/>
+									<!--//kontostand-->
+								</header>
+							</Column>
+							<Column id="column3">
+								<header>
+									<Label text="{i18n>HeaderSummary}" id="label3"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem id="item0" type="Active">
+								<cells>
+									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
+									<Label text="{path: 'employeeTableModel>NAME'}, {path: 'employeeTableModel>VORNAME'}" id="label5"/>
+									<Label text="{parts: [{path: 'employeeTableModel>GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label6"/>
+									<Label
+										text="{path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+										id="label7"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<customHeader>
+					<Bar id="bar0">
+						<contentLeft>
+							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
+								text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%" id="nameLabel_copy"/>
+						</contentMiddle>
+						<contentRight>
+							<Label text="Freigabewert:" textAlign="Right"/>
+							<Label text="{parts:[{path:'dbUserModel>/VERWALTER'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+						</contentRight>
+					</Bar>
+				</customHeader>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

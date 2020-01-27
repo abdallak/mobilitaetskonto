@@ -1,18 +1,28 @@
 {
-  "name": "Mobilitaetskonto",
-  "version": "0.0.1",
-  "description": "",
-  "private": true,
-  "devDependencies": {
-    "@ui5/cli": "1.7.0",
-    "@sap/ui5-builder-webide-extension": "1.0.9"
-  },
-  "scripts": {
-    "build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo"
-  },
-  "ui5": {
-    "dependencies": [
-      "@sap/ui5-builder-webide-extension"
-    ]
-  }
+	"name": "Mobilitaetskonto",
+	"version": "0.0.1",
+	"description": "",
+	"private": true,
+	"devDependencies": {
+		"@sap/ui5-builder-webide-extension": "1.0.9",
+		"@ui5/cli": "1.7.0",
+		"@sap/grunt-sapui5-bestpractice-build": "latest",
+		"grunt": "latest",
+		"grunt-cli": "latest",
+		"grunt-eslint": "latest",
+		"grunt-contrib-clean": "latest",
+		"grunt-contrib-copy": "latest",
+		"grunt-contrib-cssmin": "latest",
+		"grunt-contrib-uglify": "latest",
+		"grunt-mkdir": "latest",
+		"grunt-openui5": "latest"
+	},
+	"scripts": {
+		"build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo"
+	},
+	"ui5": {
+		"dependencies": [
+			"@sap/ui5-builder-webide-extension"
+		]
+	}
 }

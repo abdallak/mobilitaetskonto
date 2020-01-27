@@ -1,4 +1,3 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
@@ -6,11 +5,11 @@ sap.ui.define([
 ], function (JSONModel, BaseController, formatter) {
 	"use strict";
 
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Detail", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
 
 		onInit: function () {
-			this.getRouter().getRoute("Detail").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("DetailEmployee").attachMatched(this._onRoutePatternMatched, this);
 
 			var detailModel = new JSONModel();
 			this.setModel(detailModel, "detailModel");
@@ -20,24 +19,15 @@ sap.ui.define([
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
-			//--
 
 			//USERDATEN
-			//FIXME: workaround fuer dummiedata
-			var detailUserModel = this.getModel("detailUserModel");
-			detailUserModel.loadData("/MOB_MITARBEITER_GETCREATE", {
-				name: detail.MID,
-				lastName: "dummie-Data",
-				firstName: "dummie-Data"
-			});
-
-			console.log("testUser==  " + JSON.stringify(detailUserModel.getData()));
+			// FIXME: Wird das hier gebraucht? Name + Vorname müssten doch auch von dbUserModel reichen?
+			this.performRequestEmployee(detail.MID);
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
@@ -46,11 +36,24 @@ sap.ui.define([
 			} else {
 				oStorage.put("salesLocalData", detailModel.getData());
 			}
-			if (detailModel.UID === null) {
-				this.handleEmptyModel("Aktualisierung fehlgeschlagen.");
-			}
-		}
+		},
 
+		performRequestEmployee: function (mid) {
+			var params = {};
+			params.mid = mid;
+
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var detailUserModel = that.getModel("detailUserModel");
+					detailUserModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
+		}
 	});
 
 });

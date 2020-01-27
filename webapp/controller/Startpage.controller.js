@@ -2,6 +2,7 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
 ], function (BaseController) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 
 		onInit: function () {
@@ -13,19 +14,27 @@ sap.ui.define([
 		},
 
 		onNavToSales: function () {
-			this.getRouter().navTo("Sales",{Target: "Sales"});
+			this.getRouter().navTo("TableSales", {
+				Target: "TableSales"
+			});
 		},
-		
-		onNavToSubmittedRequests: function(){
-			this.getRouter().navTo("Sales",{Target: "SubmittedRequests"});
+
+		onNavToSubmittedRequests: function () {
+			this.getRouter().navTo("TableSales", {
+				Target: "SubmittedRequests"
+			});
 		},
 
 		onNavToRequest: function () {
 			this.getRouter().navTo("Request");
 		},
-		
+
 		onNavToRequestTable: function () {
-			this.getRouter().navTo("RequestTable");
+			this.getRouter().navTo("TableRequests");
+		},
+
+		onNavToTableEmployees: function () {
+			this.getRouter().navTo("TableEmployees");
 		}
 
 	});
