@@ -63,6 +63,18 @@
 			"name": "MOB_MITARBEITER_GETCREATE"
 		}
 	}, {
+		"path": "/MOB_ANTRAG_UPLOAD",
+		"target": {
+			"type": "destination",
+			"name": "MOB_ANTRAG_UPLOAD"
+		}
+	}, {
+		"path": "/MOB_ANTRAG_DOWNLOAD",
+		"target": {
+			"type": "destination",
+			"name": "MOB_ANTRAG_DOWNLOAD"
+		}
+	}, {
 		"path": "/MOB_ANTRAG_TABELLE",
 		"target": {
 			"type": "destination",
