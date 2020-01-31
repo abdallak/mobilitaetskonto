@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests">
 	<App id="app">
 		<pages>
-			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
+			<Page title="" floatingFooter="true">
 				<content>
 					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" growingScrollToLoad="true">
 						<columns>
@@ -78,7 +78,7 @@
 							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
 						</contentLeft>
 						<contentMiddle>
-							<Label text="Ausstehende Anträge" width="100%" id="nameLabel_copy"/>
+							<Label text="{i18n>requestTableTitle}" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
 					</Bar>
 				</customHeader>
