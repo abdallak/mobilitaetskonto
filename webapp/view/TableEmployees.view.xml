@@ -1,30 +1,29 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees">
 	<App>
 		<pages>
 			<Page title="TITEL" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}" mode="MultiSelect">
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>HeaderMid}" id="label0"/>
+									<Label text="{i18n>HeaderMid}" id="label0" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>HeaderEmployee}" id="label1"/>
+									<Label text="{i18n>HeaderEmployee}" id="label1" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>startpageSalesTileSub}" id="label2"/>
+									<Label text="{i18n>startpageSalesTileSub}" id="label2" textAlign="Center"/>
 									<!--//kontostand-->
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="{i18n>HeaderSummary}" id="label3"/>
+									<Label text="{i18n>HeaderSummary}" id="label3" textAlign="Center"/>
 								</header>
 							</Column>
 						</columns>
@@ -34,9 +33,7 @@
 									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
 									<Label text="{path: 'employeeTableModel>NAME'}, {path: 'employeeTableModel>VORNAME'}" id="label5"/>
 									<Label text="{parts: [{path: 'employeeTableModel>GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label6"/>
-									<Label
-										text="{path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
-										id="label7"/>
+									<Label text="{path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }" id="label7"/>
 								</cells>
 							</ColumnListItem>
 						</items>
@@ -48,8 +45,7 @@
 							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
 						</contentLeft>
 						<contentMiddle>
-							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
-								text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%" id="nameLabel_copy"/>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
 						<contentRight>
 							<Label text="Freigabewert:" textAlign="Right"/>
@@ -57,6 +53,14 @@
 						</contentRight>
 					</Bar>
 				</customHeader>
+				<footer>
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+						<content>
+							<ToolbarSpacer id="spacer0"/>
+							<Button xmlns="sap.m" id="GuthabenButton" type="Reject" text="{i18n>GuthabenButton}" press="GuthabenButton"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
 			</Page>
 		</pages>
 	</App>
