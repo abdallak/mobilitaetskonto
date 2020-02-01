@@ -1,5 +1,5 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
+	xmlns:l="sap.ui.layout" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
 	<App id="app">
 		<pages>
 			<Page title="{i18n>requestTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
@@ -22,7 +22,7 @@
 										<sap.ui.layout.form:fields>
 											<Select xmlns="sap.m" id="categorySelect" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect"
 												selectedKey="{oRequestModel>/kid}">
-												<items></items>
+												<items/>
 											</Select>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
@@ -39,6 +39,13 @@
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
+								<sap.ui.layout.form:FormElement label="Anhänge">
+									<sap.ui.layout.form:fields>
+										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
+											instantUpload="false" noDataDescription="Drop files or use the &quot;+&quot; button for pending upload" change="onChange"
+											fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"/>
+									</sap.ui.layout.form:fields>
+								</sap.ui.layout.form:FormElement>
 							</sap.ui.layout.form:FormContainer>
 						</sap.ui.layout.form:formContainers>
 						<sap.ui.layout.form:layout>
