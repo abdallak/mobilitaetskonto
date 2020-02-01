@@ -1,4 +1,4 @@
 {
-	"verwalter": true,
-	"mitarbeiter": true
+	"verwalter": false,
+	"mitarbeiter": false
 }
