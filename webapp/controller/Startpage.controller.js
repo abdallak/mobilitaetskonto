@@ -35,6 +35,10 @@ sap.ui.define([
 
 		onNavToTableEmployees: function () {
 			this.getRouter().navTo("TableEmployees");
+		},
+
+		onNavToSettings: function () {
+			// TODO
 		}
 
 	});
