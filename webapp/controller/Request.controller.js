@@ -122,18 +122,6 @@ sap.ui.define([
 			}
 		},
 
-		performUploadFile: function (oRequestData) {
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_UPLOAD", "POST", JSON.stringify(oRequestData.attachments));
-			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					MessageBox.information("Uploaded.");
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleNetworkError(jqXHR);
-				});
-		},
-
 		/* UPLOAD COLLECTION https://sapui5.hana.ondemand.com/#/entity/sap.m.UploadCollection/sample/sap.m.sample.UploadCollectionForPendingUpload */
 
 		onChange: function (oEvent) {
@@ -153,7 +141,6 @@ sap.ui.define([
 			var that = this;
 			reader.onload = function (e) {
 				var oRequestData = that.getModel("oRequestModel").getData();
-
 				var raw = e.target.result;
 				var fileItem = {};
 
@@ -173,12 +160,14 @@ sap.ui.define([
 			reader.readAsDataURL(file);
 			// reader.readAsArrayBuffer(file);
 			// reader.readAsText(file);
-			//reader.readAsBinaryString(file);
+			// reader.readAsBinaryString(file);
 		},
 
 		onFileDeleted: function (oEvent) {
 
 			// TODO: remove file from attachment array
+
+			console.log(oEvent);
 
 			MessageToast.show("Event fileDeleted triggered");
 		},
@@ -194,23 +183,6 @@ sap.ui.define([
 		onTypeMissmatch: function (oEvent) {
 			MessageToast.show("Event typeMissmatch triggered");
 		},
-
-		onStartUpload: function (oEvent) {
-			var oUploadCollection = this.byId("UploadCollection");
-			var cUploadCollectionItems = oUploadCollection.getItems().length;
-
-			if (cUploadCollectionItems !== 0) {
-				var oRequestData = this.getModel("oRequestModel").getData();
-
-				console.log(oRequestData);
-
-				this.performUploadFile(oRequestData);
-			}
-		},
-
-		onBeforeUploadStarts: function (oEvent) {},
-
-		onUploadComplete: function (oEvent) {},
 
 		onSelectChange: function (oEvent) {
 			var oUploadCollection = this.byId("UploadCollection");
