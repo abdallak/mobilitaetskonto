@@ -49,7 +49,7 @@
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
 									<Label text="{requestTableModel>BEZEICHNUNG}"/>
-									<CheckBox id="checkBox0" select="onSelect" selected="false" visible="{= ${requestTableModel>STATUS} === 2}"/>
+									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2}"/>
 								</cells>
 							</ColumnListItem>
 						</items>
@@ -89,7 +89,7 @@
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen" visible="false"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen" visible="false"/>
-							<Button xmlns="sap.m" press="onMarkAsTransacted" id="transactedButton" type="Accept" text ="Als durchgeführt markieren"/>
+							<Button xmlns="sap.m" press="onMarkAsTransacted" id="transactedButton" type="Accept" text ="{i18n>markAsTransacted}"/>
 						</content>
 					</OverflowToolbar>
 				</footer>
