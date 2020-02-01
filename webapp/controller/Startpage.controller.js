@@ -39,6 +39,7 @@ sap.ui.define([
 
 		onNavToSettings: function () {
 			// TODO
+			sap.m.MessageToast.show("TODO");
 		}
 
 	});
