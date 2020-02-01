@@ -108,7 +108,7 @@ sap.ui.define([
 			
 			var oSelected = {selection: selected};
 			
-			sap.m.MessageBox.show("Ausgewählte Anträge als 'durchgeführt' markieren?", {
+			sap.m.MessageBox.show(this.getView().getModel("i18n").getResourceBundle().getText("markAsTransactedMessageBox"), {
         		actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
         		onClose: function (oAction) {
         			if (oAction === "YES"){
