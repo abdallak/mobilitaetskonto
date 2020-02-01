@@ -15,8 +15,6 @@ sap.ui.define([
 		setupGlobalModels: function (component) {
 			// getOrCreateUser and set Model dbUserModel
 			this.getOrCreateUser(component);
-
-			this.createRole(component);
 		},
 
 		getOrCreateUser: function (component) {
@@ -53,15 +51,19 @@ sap.ui.define([
 				.done(function (response) {
 					var dbUserModel = component.getModel("dbUserModel");
 					dbUserModel.setData(response);
+
+					var roleModel = component.getModel("roleModel");
+					var roleData = roleModel.getData();
+					roleData.verwalter = response.VERWALTER !== 0;
+					// FIXME: Keine Ahnung warum hier der Boolean der String "TRUE" ist statt 1 oder true..
+					// In XSJS Service gibt es scheinbar kein BOOLEAN Typ und wird auch nicht als Integer erkannt.
+					roleData.mitarbeiter = response.AKTIV === "TRUE";
+
+					roleModel.refresh(true);
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
-		},
-
-		createRole: function (component) {
-			var oUserModel = component.getModel("userModel");
-			oUserModel.loadData();
 		}
 
 	};
