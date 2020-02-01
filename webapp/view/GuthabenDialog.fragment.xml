@@ -1,0 +1,25 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core" >
+	<Dialog
+    	id="GuthabenDialog"
+    	title="Guthabeneinbuchung">
+		
+		<Label text="Betrag" id="betragtext" />
+		<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" />
+	
+		<Label text="Beschreibung" id="beschreibtext" />
+		<Input width="100%" id="describe"  placeholder="individuelle Gutschrift" required="true" type="Text"/>
+
+		<beginButton>
+        	<Button
+            	text="Guthaben Einbuchen"
+            	press=".onExecuteAndCloseDialog"/>
+    	</beginButton>
+    	<endButton>
+        	<Button
+            	text="{i18n>cancelButton}"
+            	press=".onAbortAndCloseDialog"/>
+    	</endButton>
+    </Dialog>
+</core:FragmentDefinition>

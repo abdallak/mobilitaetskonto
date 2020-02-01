@@ -59,6 +59,7 @@ sap.ui.define([
 				"MID": dbUserData.MID,
 				"art": "0",
 				"betrag": null,
+				"state": 1,
 				"beschreibung": null,
 				"kid": null
 			};

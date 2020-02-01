@@ -1,5 +1,4 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Startpage"
-	displayBlock="true">
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Startpage" displayBlock="true">
 	<Shell id="shell">
 		<App id="app">
 			<pages>
@@ -7,31 +6,23 @@
 					<content>
 						<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
 							<sap.ui.layout:content>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTile}" subheader="{i18n>startpageRequestTileSub}"
-									press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}"/>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-									header="{i18n>startpageSalesTile}" subheader="{i18n>startpageSalesTileSub}" id="salesTile" press="onNavToSales"
-									visible="{= ${roleModel>/mitarbeiter}}">
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTile}" subheader="{i18n>startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}"/>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageSalesTile}" subheader="{i18n>startpageSalesTileSub}" id="salesTile" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter}}">
 									<tileContent>
 										<TileContent>
 											<content>
-												<NumericContent
-													value="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency',formatOptions: {showMeasure:true}}"
-													truncateValueTo="12" id="NumCont1" valueColor="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Good' : 'Critical' }"/>
+												<NumericContent value="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency',formatOptions: {showMeasure:true}}" truncateValueTo="12" id="NumCont1" valueColor="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Good' : 'Critical' }"/>
 											</content>
 										</TileContent>
 									</tileContent>
 								</GenericTile>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-									id="employeeRequestTableTile" header="{i18n>startpageEmployeeRequestTableTile}" subheader="{i18n>startpageEmployeeRequestTableTileSub}"
-									press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}"/>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n&gt;startpageRequestTableTile}"
-									subheader="{i18n&gt;startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}"/>
-								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
-									class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}"
-									press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}"/>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" id="employeeRequestTableTile" header="{i18n>startpageEmployeeRequestTableTile}" subheader="{i18n>startpageEmployeeRequestTableTileSub}" press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}"/>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTableTile}" subheader="{i18n>startpageRequestTableTileSub}" press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}">
+								    <icon>
+								        <sap.ui.core:Icon xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" src="sap-icon://monitor-payments" size="2em" xmlns:sap.ui.core="sap.ui.core" id="icon0"/>
+								    </icon>
+								</GenericTile>
+								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}" press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}"/>
 							</sap.ui.layout:content>
 						</sap.ui.layout:HorizontalLayout>
 					</content>

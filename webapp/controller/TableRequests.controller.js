@@ -1,3 +1,4 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -57,14 +58,13 @@ sap.ui.define([
 			var table = this.getView().byId("requestTableId");
 			var binding = table.getBinding("items");
 
-			//problematisch
 			var filters = [];
 			var FO = FilterOperator.EQ;
 			
-			if (statusnummer === 4) {
-				FO = FilterOperator.LE;
-			}
+			if (statusnummer === "4"){ FO = FilterOperator.LE;}
 
+			
+			
 			filters.push(new Filter("STATUS", FO, statusnummer));
 			binding.filter(filters);
 		},
