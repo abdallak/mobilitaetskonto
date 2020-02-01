@@ -4,7 +4,7 @@
 			<pages>
 				<Page id="page" title="{i18n>title}">
 					<content>
-						<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0">
+						<sap.ui.layout:HorizontalLayout xmlns:sap.ui.layout="sap.ui.layout" id="layout0" allowWrapping="true">
 							<sap.ui.layout:content>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTile" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTile}" subheader="{i18n>startpageRequestTileSub}" press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}"/>
 								<GenericTile xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageSalesTile}" subheader="{i18n>startpageSalesTileSub}" id="salesTile" press="onNavToSales" visible="{= ${roleModel>/mitarbeiter}}">
