@@ -14,7 +14,6 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Request").attachMatched(this._onRoutePatternMatched, this);
 			this.resetRequest();
-			MessageToast.show("Event change   ");
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -67,10 +66,16 @@ sap.ui.define([
 				"betrag": null,
 				"beschreibung": null,
 				"kid": null,
+				"state": 1,
 				"attachments": []
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
+
+			var oUploadCollection = this.byId("UploadCollection");
+			for (var i = 0; i < oUploadCollection.getItems().length; i++) {
+				oUploadCollection.removeItem(oUploadCollection.getItems()[i]);
+			}
 		},
 
 		submitRequest: function (oEvent) {
@@ -126,11 +131,9 @@ sap.ui.define([
 
 		onChange: function (oEvent) {
 			var files = oEvent.getParameter("files");
-
 			for (var i = 0; i < files.length; i++) {
 				this.addAttachment(files[i]);
 			}
-
 			MessageToast.show("Event change triggered");
 		},
 
@@ -164,9 +167,7 @@ sap.ui.define([
 		},
 
 		onFileDeleted: function (oEvent) {
-
-			// TODO: remove file from attachment array
-
+			// FIXME: remove file from attachment array - wird irgendwie noch nicht aufgerufen
 			console.log(oEvent);
 
 			MessageToast.show("Event fileDeleted triggered");
