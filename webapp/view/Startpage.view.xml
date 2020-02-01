@@ -51,6 +51,10 @@
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}"
 											press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}"/>
+										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
+											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="settingsTile"
+											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageSettingsTile}" subheader="{i18n>startpageSettingsTileSub}"
+											press="onNavToSettings" visible="{= ${roleModel>/verwalter}}"/>
 									</sap.ui.layout:content>
 								</sap.ui.layout:HorizontalLayout>
 							</sap.ui.layout:content>
