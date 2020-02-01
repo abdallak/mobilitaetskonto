@@ -114,9 +114,9 @@
 				"pattern": "TableRequests",
 				"target": ["TableRequests"]
 			}, {
-				"name": "DetailAdministation",
-				"pattern": "DetailAdministation/{Detail}",
-				"target" : ["DetailAdministation"]
+				"name": "DetailAdministration",
+				"pattern": "DetailAdministration/{Detail}",
+				"target" : ["DetailAdministration"]
 			},
 				{
 				"name": "TableEmployees",
@@ -145,9 +145,9 @@
 					"viewType": "XML",
 					"viewName": "TableRequests"
 				},
-				"DetailAdministation": {
+				"DetailAdministration": {
 					"viewType" :"XML",
-					"viewName" : "DetailAdministation"
+					"viewName" : "DetailAdministration"
                 },
 				"TableEmployees": {
 					"viewType": "XML",

@@ -67,7 +67,6 @@ sap.ui.define([
 				"state": 1,
 				"beschreibung": null,
 				"kid": null,
-				"state": 1,
 				"attachments": []
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
