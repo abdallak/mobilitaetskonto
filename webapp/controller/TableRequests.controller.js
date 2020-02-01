@@ -44,7 +44,7 @@ sap.ui.define([
 			var path = context.getPath();
 			var detail = JSON.stringify(context.getProperty(path));
 
-			this.getRouter().navTo("DetailAdministation", {
+			this.getRouter().navTo("DetailAdministration", {
 				Detail: detail
 			});
 		},
