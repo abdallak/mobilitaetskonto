@@ -44,8 +44,7 @@
 										<l:VerticalLayout>
 											<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="true"
 												instantUpload="false" noDataDescription="Drop files or use the &quot;+&quot; button for pending upload" change="onChange"
-												fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"
-												uploadComplete="onUploadComplete" beforeUploadStarts="onBeforeUploadStarts"/>
+												fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"/>
 											<Button id="Button" text="Upload Now" press="onStartUpload"/>
 										</l:VerticalLayout>
 									</sap.ui.layout.form:fields>

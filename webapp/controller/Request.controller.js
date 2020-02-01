@@ -1,3 +1,4 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -13,6 +14,7 @@ sap.ui.define([
 		onInit: function () {
 			this.getRouter().getRoute("Request").attachMatched(this._onRoutePatternMatched, this);
 			this.resetRequest();
+			MessageToast.show("Event change   ");
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -64,7 +66,8 @@ sap.ui.define([
 				"art": "0",
 				"betrag": null,
 				"beschreibung": null,
-				"kid": null
+				"kid": null,
+				"attachments": []
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
@@ -119,20 +122,64 @@ sap.ui.define([
 			}
 		},
 
+		performUploadFile: function (oRequestData) {
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_UPLOAD", "POST", JSON.stringify(oRequestData.attachments));
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					MessageBox.information("Uploaded.");
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
+		},
+
 		/* UPLOAD COLLECTION https://sapui5.hana.ondemand.com/#/entity/sap.m.UploadCollection/sample/sap.m.sample.UploadCollectionForPendingUpload */
 
 		onChange: function (oEvent) {
-			/*var oUploadCollection = oEvent.getSource();
-			// Header Token
-			var oCustomerHeaderToken = new UploadCollectionParameter({
-				name: "x-csrf-token",
-				value: "securityTokenFromModel"
-			});
-			oUploadCollection.addHeaderParameter(oCustomerHeaderToken);*/
+			var files = oEvent.getParameter("files");
+
+			for (var i = 0; i < files.length; i++) {
+				this.addAttachment(files[i]);
+			}
+
 			MessageToast.show("Event change triggered");
 		},
 
+		addAttachment: function (file) {
+			var name = file.name;
+			var reader = new FileReader();
+
+			var that = this;
+			reader.onload = function (e) {
+				var oRequestData = that.getModel("oRequestModel").getData();
+
+				var raw = e.target.result;
+				var fileItem = {};
+
+				fileItem.uid = 2;
+				fileItem.name = name;
+				fileItem.data = raw;
+
+				oRequestData.attachments.push(fileItem);
+
+				console.log(name + " binary string: " + raw);
+			};
+
+			reader.onerror = function (e) {
+				sap.m.MessageToast.show("error");
+			};
+
+			reader.readAsDataURL(file);
+			// reader.readAsArrayBuffer(file);
+			// reader.readAsText(file);
+			//reader.readAsBinaryString(file);
+		},
+
 		onFileDeleted: function (oEvent) {
+
+			// TODO: remove file from attachment array
+
 			MessageToast.show("Event fileDeleted triggered");
 		},
 
@@ -150,57 +197,25 @@ sap.ui.define([
 
 		onStartUpload: function (oEvent) {
 			var oUploadCollection = this.byId("UploadCollection");
-			var oTextArea = this.byId("TextArea");
-			var cFiles = oUploadCollection.getItems().length;
-			var uploadInfo = cFiles + " file(s)";
+			var cUploadCollectionItems = oUploadCollection.getItems().length;
 
-			if (cFiles > 0) {
-				oUploadCollection.upload();
+			if (cUploadCollectionItems !== 0) {
+				var oRequestData = this.getModel("oRequestModel").getData();
 
-				if (oTextArea.getValue().length === 0) {
-					uploadInfo = uploadInfo + " without notes";
-				} else {
-					uploadInfo = uploadInfo + " with notes";
-				}
+				console.log(oRequestData);
 
-				MessageToast.show("Method Upload is called (" + uploadInfo + ")");
-				MessageBox.information("Uploaded " + uploadInfo);
-				oTextArea.setValue("");
+				this.performUploadFile(oRequestData);
 			}
 		},
 
-		onBeforeUploadStarts: function (oEvent) {
-			// Header Slug
-			/*var oCustomerHeaderSlug = new UploadCollectionParameter({
-				name: "slug",
-				value: oEvent.getParameter("fileName")
-			});
-			oEvent.getParameters().addHeaderParameter(oCustomerHeaderSlug);*/
-			setTimeout(function () {
-				MessageToast.show("Event beforeUploadStarts triggered");
-			}, 4000);
-		},
+		onBeforeUploadStarts: function (oEvent) {},
 
-		onUploadComplete: function (oEvent) {
-			var sUploadedFileName = oEvent.getParameter("files")[0].fileName;
-			setTimeout(function () {
-				var oUploadCollection = this.byId("UploadCollection");
-
-				for (var i = 0; i < oUploadCollection.getItems().length; i++) {
-					if (oUploadCollection.getItems()[i].getFileName() === sUploadedFileName) {
-						oUploadCollection.removeItem(oUploadCollection.getItems()[i]);
-						break;
-					}
-				}
-
-				// delay the success message in order to see other messages before
-				MessageToast.show("Event uploadComplete triggered");
-			}.bind(this), 8000);
-		},
+		onUploadComplete: function (oEvent) {},
 
 		onSelectChange: function (oEvent) {
 			var oUploadCollection = this.byId("UploadCollection");
 			oUploadCollection.setShowSeparators(oEvent.getParameters().selectedItem.getProperty("key"));
 		}
 	});
+
 });
