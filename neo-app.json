@@ -92,6 +92,12 @@
 			"type": "destination",
 			"name": "MOB_ANTRAG_INSERT"
 		}
+	}, {
+		"path": "/MOB_ANTRAG_DURCHGEFUEHRT",
+		"target": {
+			"type": "destination",
+			"name": "MOB_ANTRAG_DURCHGEFUEHRT"
+		}
 	}],
 	"sendWelcomeFileRedirect": true
 }

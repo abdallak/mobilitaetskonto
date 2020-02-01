@@ -16,7 +16,7 @@ sap.ui.define([
 			this.setModel(requestTableModel, "requestTableModel");
 
 			this.filterStatus(1); //Vorfiltern nach Status = ausstehend
-
+			
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
 
@@ -89,6 +89,54 @@ sap.ui.define([
 			var list = this.getView().byId("requestTableId");
 			var binding = list.getBinding("items");
 			binding.filter(filters);
+		},
+		
+		onMarkAsTransacted: function (oEvent){
+			var oTab = this.byId("requestTableId");
+			var selected = [];
+			
+			oTab.getItems().forEach(function(item){ // loop over all the items in the table
+            	var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
+            	if (oCheckBoxCell.getSelected()){
+            		var sUID = oCheckBoxCell.getBindingContext("requestTableModel").getProperty("UID");
+            		selected.push(sUID);
+            	}
+        	});
+        	if (selected.length === 0) {
+        		return;
+        	}
+			
+			var oSelected = {selection: selected};
+			
+			sap.m.MessageBox.show("Ausgewählte Anträge als 'durchgeführt' markieren?", {
+        		actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
+        		onClose: function (oAction) {
+        			if (oAction === "YES"){
+        				var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DURCHGEFUEHRT", "POST", JSON.stringify(oSelected));
+        				
+						var that = this;
+						$.ajax(settings)
+							.done(function (response) {
+								that._onRoutePatternMatched(null);
+							})
+							.fail(function (jqXHR, exception) {
+								that.handleNetworkError(jqXHR);
+							});
+				
+        			} else {
+        				this.resetSelection();
+        			}	
+        		}.bind(this)
+        	});
+    	},
+    	
+		resetSelection: function(){
+			var oTab = this.byId("requestTableId");
+			
+			oTab.getItems().forEach(function(item){ // loop over all the items in the table
+            	var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
+            	oCheckBoxCell.setSelected(false);
+            	});
 		}
 	});
 });
