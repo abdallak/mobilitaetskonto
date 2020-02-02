@@ -13,10 +13,13 @@ sap.ui.define([
 
 		onInit: function () {
 			var requestTableModel = new JSONModel();
-			requestTableModel.setSizeLimit(500); //evt kleiner machen?
 			this.setModel(requestTableModel, "requestTableModel");
-
-			this.filterStatus(1); //Vorfiltern nach Status = ausstehend
+			this.filterStatus("1"); //Vorfiltern nach Status = ausstehend
+			
+			var picker = this.getView().byId("rangepicker0");
+			picker.setMaxDate(new Date()); //Setzt MaxDatum zum aktuellen Zeitpunkt
+			
+			
 			
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -49,47 +52,19 @@ sap.ui.define([
 			});
 		},
 
-		selectionChanged: function (oEvent) {
-			var actionSelectValue = oEvent.getSource().getSelectedItem().getKey();
-			this.filterStatus(actionSelectValue);
-		},
-
+		
 		filterStatus: function (statusnummer) {
-			var table = this.getView().byId("requestTableId");
-			var binding = table.getBinding("items");
-
-			var filters = [];
-			var FO = FilterOperator.EQ;
-			
+		
+			var FO = FilterOperator.EQ; 
 			if (statusnummer === "4"){ FO = FilterOperator.LE;}
 
 			
-			
-			filters.push(new Filter("STATUS", FO, statusnummer));
-			binding.filter(filters);
-		},
-
-		handleSearch: function (oEvent) {
-			var query = oEvent.getParameter("query");
 			var filters = [];
-
-			if (query && query.length > 0) {
-				var filter = new Filter([
-					new Filter("NAME", FilterOperator.Contains, query),
-					new Filter("VORNAME", FilterOperator.Contains, query),
-					//new Filter("ART", FilterOperator.Contains, query),
-					new Filter("DATUM", FilterOperator.Contains, query),
-					new Filter("BETRAG", FilterOperator.EQ, parseFloat(query)), //evt. noch Checken ob Number vorm parsen??
-					new Filter("KATEGORIE", FilterOperator.Contains, query)
-				], false);
-				filters.push(filter);
-			}
-
-			// update list binding
-			var list = this.getView().byId("requestTableId");
-			var binding = list.getBinding("items");
-			binding.filter(filters);
+			filters.push(new Filter("STATUS", FO, statusnummer));
+			
+			this.bindFilters(filters);
 		},
+
 		
 		onMarkAsTransacted: function (oEvent){
 			var oTab = this.byId("requestTableId");
@@ -137,6 +112,58 @@ sap.ui.define([
             	var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
             	oCheckBoxCell.setSelected(false);
             	});
+		},
+		
+		filterTable: function(){
+		
+			var dateRangePicker = this.getView().byId("rangepicker0");
+			var minDate = dateRangePicker.getDateValue();
+			var maxDate = dateRangePicker.getSecondDateValue();
+			var sSearchQuery = this.getView().byId("searchField0").getProperty("value");
+			var sStateKey = this.getView().byId("select0").getProperty("selectedKey");
+			
+			var filters = [];
+			var singleFilters = [];
+			var oFoState = FilterOperator.EQ;
+			
+			
+			//STATUS FILTER
+			if (sStateKey === "4"){
+				oFoState = FilterOperator.LE; //alle Status(plural)
+			} 
+			var oStateFilter = new Filter("STATUS", oFoState, sStateKey);
+			singleFilters.push(oStateFilter);
+			
+			
+			//SEARCHBAR FILTER
+			if(sSearchQuery !== ""){
+				
+				var oSearchFilter = new Filter([
+					new Filter("NAME", FilterOperator.Contains, sSearchQuery),
+					new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
+					new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery))],
+					false);
+						 
+				singleFilters.push(oSearchFilter);			 
+			}
+			
+			//DATE FILTER
+			if(minDate !== null && maxDate !== null){
+				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
+				singleFilters.push(oDateFilter);
+			}
+			
+			
+			var oFinalFilter = new Filter(singleFilters, true);
+			filters.push(oFinalFilter);
+			
+			this.bindFilters(filters);	
+		},
+		
+		bindFilters : function(filterArr){
+			var list = this.getView().byId("requestTableId");
+			var binding = list.getBinding("items");
+			binding.filter(filterArr);
 		}
 	});
 });
