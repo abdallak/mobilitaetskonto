@@ -35,6 +35,11 @@ sap.ui.define([
 
 		onNavToTableEmployees: function () {
 			this.getRouter().navTo("TableEmployees");
+		},
+
+		onNavToSettings: function () {
+			// TODO
+			sap.m.MessageToast.show("TODO");
 		}
 
 	});
