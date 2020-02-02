@@ -1,14 +1,13 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests">
 	<App id="app">
 		<pages>
-			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
+			<Page title="" floatingFooter="true">
 				<content>
 					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>HeaderType}" id="label0"/>
+									<Label text="{i18n>HeaderEmployee}" id="label0"/>
 								</header>
 							</Column>
 							<Column id="column1">
@@ -18,7 +17,7 @@
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>HeaderEmployee}" id="label2"/>
+									<Label text="{i18n>HeaderType}" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column3">
@@ -28,12 +27,12 @@
 							</Column>
 							<Column id="column4">
 								<header>
-									<Label text="{i18n>HeaderStatus}" id="label4"/>
+									<Text text="{i18n>HeaderCategorie}"/>
 								</header>
 							</Column>
 							<Column id="column5">
 								<header>
-									<Text text="{i18n>HeaderCategorie}"/>
+									<Label text="{i18n>HeaderStatus}" id="label4"/>
 								</header>
 							</Column>
 							<Column width="5%" id="column6">
@@ -43,12 +42,12 @@
 						<items>
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
-									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
+									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
-									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
 									<Label text="{requestTableModel>BEZEICHNUNG}"/>
+									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
 									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2}"/>
 								</cells>
 							</ColumnListItem>
@@ -56,9 +55,10 @@
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar4">
 								<content>
-									<SearchField placeholder="Search for ..." id="searchField0" width="30%" search="handleSearch"/>
+									<SearchField placeholder="Betrag oder Name..." id="searchField0" width="40%" search="filterTable"/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable"/>
 									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
-									<ActionSelect id="select0" change="selectionChanged" forceSelection="false" selectedKey="1">
+									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
 											<core:ListItem text="Abgelehnt" id="item0" key="0"/>
 											<core:ListItem text="Ausstehend" id="item1" key="1"/>
@@ -78,7 +78,7 @@
 							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
 						</contentLeft>
 						<contentMiddle>
-							<Label text="Ausstehende Anträge" width="100%" id="nameLabel_copy"/>
+							<Label text="{i18n>requestTableTitle}" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
 					</Bar>
 				</customHeader>
@@ -89,7 +89,7 @@
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen" visible="false"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen" visible="false"/>
-							<Button xmlns="sap.m" press="onMarkAsTransacted" id="transactedButton" type="Accept" text ="{i18n>markAsTransacted}"/>
+							<Button xmlns="sap.m" press="onMarkAsTransacted" id="transactedButton" type="Accept" text="{i18n>markAsTransacted}"/>
 						</content>
 					</OverflowToolbar>
 				</footer>
