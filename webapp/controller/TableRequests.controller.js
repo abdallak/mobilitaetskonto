@@ -68,20 +68,20 @@ sap.ui.define([
 		
 		onMarkAsTransacted: function (oEvent){
 			var oTab = this.byId("requestTableId");
-			var selected = [];
+			var aSelected = [];
 			
 			oTab.getItems().forEach(function(item){ // loop over all the items in the table
             	var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
             	if (oCheckBoxCell.getSelected()){
-            		var sUID = oCheckBoxCell.getBindingContext("requestTableModel").getProperty("UID");
-            		selected.push(sUID);
+            		var iUID = oCheckBoxCell.getBindingContext("requestTableModel").getProperty("UID");
+            		aSelected.push(iUID);
             	}
         	});
-        	if (selected.length === 0) {
+        	if (aSelected.length === 0) {
         		return;
         	}
 			
-			var oSelected = {selection: selected};
+			var oSelected = {selection: aSelected};
 			
 			sap.m.MessageBox.show(this.getView().getModel("i18n").getResourceBundle().getText("markAsTransactedMessageBox"), {
         		actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
