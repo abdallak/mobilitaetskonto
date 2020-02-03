@@ -62,10 +62,10 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailModel>/ATTACHMENTS} !== undefined}">
 										<sap.ui.layout.form:fields>
 											<UploadCollection id="UploadCollection" multiple="false" change="onChange" selectionChange="onSelectionChange" uploadButtonInvisible="true"
-												uploadEnabled="false" items="{ path: 'detailModel>/ATTACHMENTS'}">
+												uploadEnabled="false" items="{ path: 'detailModel>/ATTACHMENTS/'}">
 												<items>
-													<UploadCollectionItem documentId="TODO" fileName="{detailModel>ATTACHMENTS/FILENAME}" mimeType="text/plain" enableEdit="false"
-														enableDelete="false" visibleDelete="false" visibleEdit="false" selected="false"/>
+													<UploadCollectionItem documentId="TODO" fileName="{detailModel>FILENAME}" mimeType="text/plain" enableEdit="false" enableDelete="false"
+														visibleDelete="false" visibleEdit="false" selected="false"/>
 												</items>
 											</UploadCollection>
 										</sap.ui.layout.form:fields>
