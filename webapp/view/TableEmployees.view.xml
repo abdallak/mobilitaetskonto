@@ -57,7 +57,8 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="GuthabenButton" type="Reject" text="{i18n>GuthabenButton}" press="GuthabenButton"/>
+							<Button xmlns="sap.m" id="GuthabenButton" type="Reject" text="{i18n>GuthabenButton}" press="dialogButton($event, 'GuthabenDialog')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" type="Reject" text="{i18n>AbschlussButton}" press="dialogButton($event, 'AbschlussDialog')"/>
 						</content>
 					</OverflowToolbar>
 				</footer>

@@ -13,12 +13,14 @@ sap.ui.define([
 		formatter: formatter,
 		onInit: function () {
 			employeeTableModel = new JSONModel();
-			insertModel = new JSONModel();
-
 			this.setModel(employeeTableModel, "employeeTableModel");
+			
+			var staticModel = new JSONModel();
+			this.setModel(staticModel, "staticModel");
+			
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
-		
+		//////MODELL INITIALISIEREN ODER SO??????
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 			this.getTableData();
@@ -37,26 +39,41 @@ sap.ui.define([
 			});
 		},
 		
-		setRequest: function (mid, betrag, beschreibung) {
+		setRequest: function (mid) {
 			//var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var staticModel = this.getModel("staticModel").getData();
+			var betr = staticModel.betrag;
+			var besch = staticModel.beschreibung;
+			
+			console.log(staticModel);
+			console.log(staticModel.betrag);
+			//var betr = 1;
+			//var besch = "test";
+			
 			var defaultRequest = {
 				"MID": mid,
 				"art": 2,
-				"betrag": betrag,
-				"beschreibung": beschreibung,
+				"betrag": betr,
+				"beschreibung": besch,
 				"kid": "0",    //nicht schön
 				"state": 2
+				
 			};
 			insertModel = new JSONModel(defaultRequest);
 			this.setModel(insertModel, "insertModel");
+			console.log(insertModel);
 		},
 		
 		makeRequest: function (oEvent) {
 			var insertData = this.getModel("insertModel").getData();
-
+			console.log(insertData);
+			
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(insertData));
 			var that = this;
 			$.ajax(settings)
+				.done(function (response){
+					that.getTableData();
+				})
 				.fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
 				});
@@ -71,14 +88,15 @@ sap.ui.define([
 			});
 		},
 		
-		GuthabenButton: function (oEvent) {
+		dialogButton: function (oEvent, dialogId) {
+			//var dialogId = "AbschlussDialog";
 			var thisView = this.getView();
 			// create dialog lazily
-			if (!this.byId("GuthabenDialog")) {
+			if (!this.byId(dialogId)) {
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: thisView.getId(),
-					name: "Mobilitaetskonto.Mobilitaetskonto.view.GuthabenDialog",
+					name: "Mobilitaetskonto.Mobilitaetskonto.view.".concat(dialogId),
 					controller: this
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
@@ -86,13 +104,13 @@ sap.ui.define([
 					oDialog.open();
 				});
 			} else {
-				this.byId("GuthabenDialog").open();
+				this.byId(dialogId).open();
+				
 			}
-			
 		},
 		
-		onAbortAndCloseDialog : function () {
-			this.byId("GuthabenDialog").close();
+		onAbortCloseDialog : function (oEvent, dialogId) {
+			this.byId(dialogId).close();
 		},
 		
 		onExecuteAndCloseDialog : function () {
@@ -108,17 +126,14 @@ sap.ui.define([
 				SelectedMID.push(context.getProperty(path).MID);
 				
 			}
-			
-			var content = this.byId("GuthabenDialog").getContent();
-			var betrag = content[1].getValue();
-			var beschreibung = content[3].getValue();
-			
+
 			for(var j = 0; j < SelectedMID.length; j++){
-				this.setRequest(SelectedMID[j] , betrag, beschreibung);
+				this.setRequest(SelectedMID[j]);
 				this.makeRequest();
 			}
 			//closing the dialog box
 			this.byId("GuthabenDialog").close();
+	
 		}
 	});
 });
