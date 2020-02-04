@@ -42,8 +42,8 @@
 								<sap.ui.layout.form:FormElement label="Anhänge">
 									<sap.ui.layout.form:fields>
 										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
-											instantUpload="false" noDataDescription="Drop files or use the &quot;+&quot; button for pending upload" change="onChange"
-											fileDeleted="onFileDeleted" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" typeMissmatch="onTypeMissmatch"/>
+											noDataDescription="Drop files or use the &quot;+&quot; button for pending upload" change="onChange"
+											filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false"/>
 									</sap.ui.layout.form:fields>
 								</sap.ui.layout.form:FormElement>
 							</sap.ui.layout.form:FormContainer>

@@ -85,6 +85,8 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 			var oRequestData = this.getModel("oRequestModel").getData();
 
+			this.checkAttachments(oRequestData);
+
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -137,6 +139,26 @@ sap.ui.define([
 			MessageToast.show("Event change triggered");
 		},
 
+		// onDelete ist komisch, deswegen muss der workaround genommen werden..
+		checkAttachments: function (oRequestData) {
+			var oUploadCollection = this.byId("UploadCollection");
+
+			// Art dict mit key -> Filename value -> object
+			var previouslySavedAttachments = {};
+			oRequestData.attachments.forEach(function (attachmentObject) {
+				previouslySavedAttachments[attachmentObject.name] = attachmentObject;
+			});
+
+			var remainingAttachments = [];
+			var items = oUploadCollection.getItems();
+			items.forEach(function (itemObject) {
+				var attachment = previouslySavedAttachments[itemObject.getFileName()];
+				remainingAttachments.push(attachment);
+			});
+
+			oRequestData.attachments = remainingAttachments;
+		},
+
 		addAttachment: function (file) {
 			var name = file.name;
 			var reader = new FileReader();
@@ -157,37 +179,15 @@ sap.ui.define([
 			};
 
 			reader.onerror = function (e) {
+				// FIXME: ordentliche Fehlermeldung
 				sap.m.MessageToast.show("error");
 			};
 
 			reader.readAsDataURL(file);
-			// reader.readAsArrayBuffer(file);
-			// reader.readAsText(file);
-			// reader.readAsBinaryString(file);
-		},
-
-		onFileDeleted: function (oEvent) {
-			// FIXME: remove file from attachment array - wird irgendwie noch nicht aufgerufen
-			console.log(oEvent);
-
-			MessageToast.show("Event fileDeleted triggered");
 		},
 
 		onFilenameLengthExceed: function (oEvent) {
 			MessageToast.show("Event filenameLengthExceed triggered");
-		},
-
-		onFileSizeExceed: function (oEvent) {
-			MessageToast.show("Event fileSizeExceed triggered");
-		},
-
-		onTypeMissmatch: function (oEvent) {
-			MessageToast.show("Event typeMissmatch triggered");
-		},
-
-		onSelectChange: function (oEvent) {
-			var oUploadCollection = this.byId("UploadCollection");
-			oUploadCollection.setShowSeparators(oEvent.getParameters().selectedItem.getProperty("key"));
 		}
 	});
 
