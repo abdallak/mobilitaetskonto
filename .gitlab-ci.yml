@@ -23,7 +23,7 @@ before_script:
 init-ci:
   stage: init
   script:
-    - npm update -g
+    - npm update
     - npm install
     - node_modules/grunt-cli/bin/grunt --verbose clean
   artifacts:

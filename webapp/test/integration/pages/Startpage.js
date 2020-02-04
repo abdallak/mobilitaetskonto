@@ -39,7 +39,7 @@ sap.ui.define([
 						actions: [new Press()],
 						errorMessage: "requestTableTile cannot be pressed"
 					});
-				},
+				}
 			},
 
 			assertions: {

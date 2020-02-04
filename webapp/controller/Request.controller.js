@@ -1,7 +1,12 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/format/FileSizeFormat",
+	"sap/m/upload/Uploader",
+	"sap/m/MessageToast",
+	"sap/m/MessageBox"
+], function (BaseController, JSONModel, FileSizeFormat, Uploader, MessageToast, MessageBox) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Request", {
@@ -61,10 +66,16 @@ sap.ui.define([
 				"betrag": null,
 				"state": 1,
 				"beschreibung": null,
-				"kid": null
+				"kid": null,
+				"attachments": []
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
+
+			var oUploadCollection = this.byId("UploadCollection");
+			for (var i = 0; i < oUploadCollection.getItems().length; i++) {
+				oUploadCollection.removeItem(oUploadCollection.getItems()[i]);
+			}
 		},
 
 		submitRequest: function (oEvent) {
@@ -114,6 +125,70 @@ sap.ui.define([
 				oSource.setValueState("Error");
 				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
 			}
+		},
+
+		/* UPLOAD COLLECTION https://sapui5.hana.ondemand.com/#/entity/sap.m.UploadCollection/sample/sap.m.sample.UploadCollectionForPendingUpload */
+
+		onChange: function (oEvent) {
+			var files = oEvent.getParameter("files");
+			for (var i = 0; i < files.length; i++) {
+				this.addAttachment(files[i]);
+			}
+			MessageToast.show("Event change triggered");
+		},
+
+		addAttachment: function (file) {
+			var name = file.name;
+			var reader = new FileReader();
+
+			var that = this;
+			reader.onload = function (e) {
+				var oRequestData = that.getModel("oRequestModel").getData();
+				var raw = e.target.result;
+				var fileItem = {};
+
+				fileItem.uid = 2;
+				fileItem.name = name;
+				fileItem.data = raw;
+
+				oRequestData.attachments.push(fileItem);
+
+				console.log(name + " binary string: " + raw);
+			};
+
+			reader.onerror = function (e) {
+				sap.m.MessageToast.show("error");
+			};
+
+			reader.readAsDataURL(file);
+			// reader.readAsArrayBuffer(file);
+			// reader.readAsText(file);
+			// reader.readAsBinaryString(file);
+		},
+
+		onFileDeleted: function (oEvent) {
+			// FIXME: remove file from attachment array - wird irgendwie noch nicht aufgerufen
+			console.log(oEvent);
+
+			MessageToast.show("Event fileDeleted triggered");
+		},
+
+		onFilenameLengthExceed: function (oEvent) {
+			MessageToast.show("Event filenameLengthExceed triggered");
+		},
+
+		onFileSizeExceed: function (oEvent) {
+			MessageToast.show("Event fileSizeExceed triggered");
+		},
+
+		onTypeMissmatch: function (oEvent) {
+			MessageToast.show("Event typeMissmatch triggered");
+		},
+
+		onSelectChange: function (oEvent) {
+			var oUploadCollection = this.byId("UploadCollection");
+			oUploadCollection.setShowSeparators(oEvent.getParameters().selectedItem.getProperty("key"));
 		}
 	});
+
 });
