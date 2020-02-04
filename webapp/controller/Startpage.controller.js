@@ -38,10 +38,7 @@ sap.ui.define([
 		},
 
 		onNavToSettings: function () {
-			// TODO vielleicht so?
-			// https://sapui5.hana.ondemand.com/#/entity/sap.tnt.SideNavigation/sample/sap.tnt.sample.SideNavigation
-
-			sap.m.MessageToast.show("TODO");
+			this.getRouter().navTo("Settings");
 		}
 
 	});
