@@ -1,4 +1,5 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration">
 	<App>
 		<pages>
 			<Page title="DetailAdministration" showNavButton="true" navButtonPress="onNavBack">
@@ -19,7 +20,9 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }" textAlign="Left"/>
+											<Text width="50%"
+												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+												textAlign="Left"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
@@ -36,15 +39,21 @@
 										<sap.ui.layout.form:fields>
 											<HBox width="100%" id="hbox0">
 												<items>
-													<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%" text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Left" id="text9" class="sapUiSmallMarginEnd"/>
-													<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}" id="button0" press="editValue"/>
+													<Text xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+														xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="100%"
+														text="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" textAlign="Left" id="text9"
+														class="sapUiSmallMarginEnd"/>
+													<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+														xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}"
+														id="button0" press="editValue"/>
 												</items>
 											</HBox>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAccountBalance}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{parts: [{path: 'detailADUserModel>/GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left"
+												text="{parts: [{path: 'detailADUserModel>/GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="Resultierender Kontostand" id="resultingBalance">
@@ -65,6 +74,17 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
 										<sap.ui.layout.form:fields>
 											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="areaFeedback" width="50%" required="true"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailADModel>/ATTACHMENTS} !== undefined}">
+										<sap.ui.layout.form:fields>
+											<UploadCollection id="UploadCollection" multiple="false" change="onChange" selectionChange="onSelectChange" uploadButtonInvisible="true"
+												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailADModel>/ATTACHMENTS/'}" instantUpload="false">
+												<items>
+													<UploadCollectionItem documentId="{detailADModel>AID}" fileName="{detailADModel>FILENAME}" mimeType="text/plain" enableEdit="false"
+														enableDelete="false" visibleDelete="false" visibleEdit="false" selected="false"/>
+												</items>
+											</UploadCollection>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
