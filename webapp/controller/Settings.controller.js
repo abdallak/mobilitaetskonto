@@ -1,11 +1,16 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
+], function (BaseController) {
 	"use strict";
 
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Settings", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Settings", {
 
 		onInit: function () {
+			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
+
+		},
+
+		_onRoutePatternMatched: function (oEvent) {
 
 		}
 
