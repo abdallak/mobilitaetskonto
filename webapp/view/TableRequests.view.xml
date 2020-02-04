@@ -4,7 +4,7 @@
 		<pages>
 			<Page title="{i18n>requestTableTitle}" floatingFooter="true">
 				<content>
-					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" updateFinished="updateFinished" growingScrollToLoad="true">
+					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
@@ -44,8 +44,7 @@
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<Label
-										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+									<Label text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
 									<Label text="{parts: [{path: 'requestTableModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
@@ -61,7 +60,7 @@
 									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
 									<ActionSelect id="select0" change="selectionChanged" forceSelection="false" selectedKey="1">
 										<items>
-											<core:ListItem text="Abgelehnt" id="item0" key="0.1"/>
+											<core:ListItem text="Abgelehnt" id="item0" key="0"/>
 											<core:ListItem text="Ausstehend" id="item1" key="1"/>
 											<core:ListItem text="Genehmigt" id="item2" key="2"/>
 											<core:ListItem text="Durchgeführt" id="item3" key="3"/>

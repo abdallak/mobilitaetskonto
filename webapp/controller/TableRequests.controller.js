@@ -1,3 +1,4 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -12,7 +13,7 @@ sap.ui.define([
 
 		onInit: function () {
 			var requestTableModel = new JSONModel();
-			requestTableModel.setSizeLimit(500); // evt kleiner machen?
+			requestTableModel.setSizeLimit(500); //evt kleiner machen?
 			this.setModel(requestTableModel, "requestTableModel");
 
 			this.filterStatus(1); //Vorfiltern nach Status = ausstehend
@@ -38,11 +39,6 @@ sap.ui.define([
 				});
 		},
 
-		// FIXME: wird das hier noch gebraucht?
-		updateFinished: function (oEvent) {
-			//	var test = oEvent.getParameter("total");
-		},
-
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
 			var path = context.getPath();
@@ -58,20 +54,17 @@ sap.ui.define([
 			this.filterStatus(actionSelectValue);
 		},
 
-		filterStatus: function (param) {
-			var statusnummer = parseFloat(param);
+		filterStatus: function (statusnummer) {
 			var table = this.getView().byId("requestTableId");
 			var binding = table.getBinding("items");
 
-			//problematisch
 			var filters = [];
 			var FO = FilterOperator.EQ;
+			
+			if (statusnummer === "4"){ FO = FilterOperator.LE;}
 
-			//FIXME: bessere lösung finden? 
-			if (statusnummer === 0.1 || statusnummer === 4) {
-				FO = FilterOperator.LE;
-			}
-
+			
+			
 			filters.push(new Filter("STATUS", FO, statusnummer));
 			binding.filter(filters);
 		},
