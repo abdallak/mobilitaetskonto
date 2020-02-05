@@ -17,7 +17,7 @@
 			</tnt:ToolHeader>
 		</tnt:header>
 		<tnt:sideContent>
-			<tnt:SideNavigation id="sideNavigation" selectedKey="showLog" itemSelect=".onItemSelect">
+			<tnt:SideNavigation id="sideNavigation" selectedKey="manageEmployeeStatus" itemSelect=".onItemSelect">
 				<tnt:NavigationList>
 					<tnt:NavigationListItem text="Mitarbeiter verwalten" icon="sap-icon://employee">
 						<tnt:NavigationListItem text="Mitarbeiterstatus anpassen" key="manageEmployeeStatus"/>

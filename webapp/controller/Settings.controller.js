@@ -18,7 +18,7 @@ sap.ui.define([
 			var oItem = oEvent.getParameter("item");
 			var navContainer = this.byId("navContainer");
 			var viewId = this.byId(oItem.getKey());
-			navContainer.to(this.byId(viewId));
+			navContainer.to(viewId);
 		}
 
 	});
