@@ -128,7 +128,7 @@
 						"TableRequests"
 					]
 				},
-								{
+				{
 					"name": "Settings",
 					"pattern": "Settings",
 					"target": [
@@ -182,6 +182,10 @@
 				"Settings": {
 					"viewType": "XML",
 					"viewName": "Settings"
+				},
+				"SettingsLog": {
+					"viewType": "XML",
+					"viewName": "SettingsLog"
 				}
 			}
 		}
