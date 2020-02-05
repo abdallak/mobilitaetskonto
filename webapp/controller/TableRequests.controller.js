@@ -80,8 +80,9 @@ sap.ui.define([
         	if (aSelected.length === 0) {
         		return;
         	}
-			
-			var oSelected = {selection: aSelected};
+        	
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var oSelected = {selection: aSelected, midA: dbUserData.MID};
 			
 			sap.m.MessageBox.show(this.getView().getModel("i18n").getResourceBundle().getText("markAsTransactedMessageBox"), {
         		actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
