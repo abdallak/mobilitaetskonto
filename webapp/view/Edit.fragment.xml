@@ -16,8 +16,10 @@ id="inputdialog">
          columnsM="1"
          singleContainerFullSize="false">
     <f:content>
-    <Label text="Betrag"/>
-    <Input id="field1" value="{parts: [{path: 'detailADModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" />
+    <Label text="Bisheriger Betrag"/>
+    <Input id="field" value="{detailADModel>/BETRAG}" enabled="false" />
+    <Label text="Neuer Betrag"/>
+    <Input id="field1" value="{detailADModel>/NEUBETRAG}" />
     </f:content>
     </f:SimpleForm>
     </VBox>

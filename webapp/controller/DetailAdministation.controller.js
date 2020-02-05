@@ -15,15 +15,23 @@ sap.ui.define([
 			this.setModel(detailADModel, "detailADModel");
 			var detailADUserModel = new JSONModel();
 			this.setModel(detailADUserModel, "detailADUserModel");
+			var editADModel = new JSONModel();
+			this.setModel(editADModel, "editADModel");
+			
+
 		},
 		
 		_onRoutePatternMatched: function (oEvent) {
+			//Alter Betrag reset
+			this.byId("FormElementAlt").setVisible(false);
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
 			//USERDATEN
 			this.performRequestEmployee(detail.MID);
+			detailADModel.setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
+
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 			if (jQuery.isEmptyObject(detailADModel.getData())) {
 				detailADModel.setData(oStorage.get("requestTableLocalData"));
@@ -131,8 +139,19 @@ sap.ui.define([
    
 		
 		closeDialog : function (oEvent) {
-			console.log("Ich war hier");
 			this.byId("openDialog").destroy();
+		},
+		
+		updateDialog : function (oEvent) {
+			this.byId("openDialog").destroy();
+		
+
+			this.byId("FormElementAlt").setVisible(true);
+		
+			this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
+			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
+			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
+
 		},
 		
 		calcNewBalance : function(){
