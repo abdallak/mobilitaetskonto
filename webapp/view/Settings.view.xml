@@ -1,14 +1,27 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Settings" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt"
-	height="100%" class="side-navigation-demo">
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Settings" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
 	<tnt:ToolPage id="toolPage">
-		<tnt:header></tnt:header>
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button id="sideNavigationToggleButton" icon="sap-icon://menu2" type="Transparent" press=".onSideNavButtonPress">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<ToolbarSpacer width="20px"/>
+				<Button id="backButton" icon="sap-icon://nav-back" press="onNavBack" type="Transparent">
+					<layoutData>
+						<FlexItemData growFactor="1"/>
+					</layoutData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
 		<tnt:sideContent>
 			<tnt:SideNavigation id="sideNavigation" selectedKey="showLog" itemSelect=".onItemSelect">
 				<tnt:NavigationList>
 					<tnt:NavigationListItem text="Mitarbeiter verwalten" icon="sap-icon://employee">
 						<tnt:NavigationListItem text="Mitarbeiterstatus anpassen" key="manageEmployeeStatus"/>
-						<tnt:NavigationListItem text="Verwalterguthaben anpassen" key="manageAdministrationX"/>
+						<tnt:NavigationListItem text="Verwalterguthaben anpassen" key="manageVerwalterguthaben"/>
 						<tnt:NavigationListItem text="Verwalter zuordnen" key="assignAdministrators"/>
 					</tnt:NavigationListItem>
 					<tnt:NavigationListItem text="Kategorien verwalten" icon="sap-icon://building" key="manageCategories"/>
@@ -24,24 +37,24 @@
 		<tnt:mainContents>
 			<NavContainer id="navContainer" initialPage="manageEmployeeStatus">
 				<pages>
-					<Page id="showLog" title="Page 2">
+					<Page id="manageEmployeeStatus" title="Mitarbeiterstatus anpassen">
+						<Text text="TODO Mitarbeiterstatus anpassen"/>
+					</Page>
+					<Page id="manageVerwalterguthaben" title="Verwalterguthaben anpassen">
+						<Text text="TODO Verwalterguthaben anpassen"/>
+					</Page>
+					<Page id="assignAdministrators" title="Verwalter zuordnen">
+						<Text text="TODO Verwalter zuordnen"/>
+					</Page>
+					<Page id="manageCategories" title="Kategorien verwalten">
+						<Text text="TODO Kategorien verwalten"/>
+					</Page>
+					<Page id="showLog" title="Log einsehen">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog"/>
 					</Page>
-					<ScrollContainer id="manageEmployeeStatus" horizontal="false" vertical="true" height="100%">
-						<Text text="Mitarbeiterstatus anpassen"/>
-					</ScrollContainer>
-					<ScrollContainer id="manageAdministrationX" horizontal="false" vertical="true" height="100%">
-						<Text text="Verwalterguthaben anpassen"/>
-					</ScrollContainer>
-					<ScrollContainer id="assignAdministrators" horizontal="false" vertical="true" height="100%">
-						<Text text="Verwalter zuordnen"/>
-					</ScrollContainer>
-					<ScrollContainer id="manageCategories" horizontal="false" vertical="true" height="100%">
-						<Text text="Kategorien verwalten"/>
-					</ScrollContainer>
-					<ScrollContainer id="privacy" horizontal="false" vertical="true" height="100%">
+					<Page id="privacy" title="Datenschutz">
 						<Text text="Datenschutz"/>
-					</ScrollContainer>
+					</Page>
 				</pages>
 			</NavContainer>
 		</tnt:mainContents>

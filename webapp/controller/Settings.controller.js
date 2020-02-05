@@ -14,17 +14,11 @@ sap.ui.define([
 
 		},
 
-		// https://sapui5.hana.ondemand.com/#/entity/sap.tnt.ToolPage/sample/sap.tnt.sample.ToolPage/code/ToolPage.view.xml
 		onItemSelect: function (oEvent) {
 			var oItem = oEvent.getParameter("item");
-			// this.byId("pageContainer").to(this.getView().createId(oItem.getKey()));
-
 			var navContainer = this.byId("navContainer");
-			var viewId = this.getView().createId(oItem.getKey());
-
-			// console.log(oItem.getKey(), viewId);
-			// navContainer.to(this.byId(oItem.getKey()).getId());
-			navContainer.to(this.byId(oItem.getKey()));
+			var viewId = this.byId(oItem.getKey());
+			navContainer.to(this.byId(viewId));
 		}
 
 	});
