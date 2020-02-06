@@ -1,9 +1,17 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory" xmlns:html="http://www.w3.org/1999/xhtml">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Title">
-				<content></content>
+			<Page title="Kategorien verwalten">
+				<content>
+					<List noDataText="Drop list items here" id="list0" mode="Delete" delete="onDeletePressed" items="{ path : 'dbCategoryModel>/'}">
+						<items>
+							<StandardListItem title="{dbCategoryModel>BEZEICHNUNG}" id="item0" type="Detail" detailPress="onEditPressed"/>
+						</items>
+					</List>
+				</content>
+			<headerContent>
+			    <Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" id="button1_copy" icon="sap-icon://add" text="Kategorie hinzufügen"/>
+			</headerContent>
 			</Page>
 		</pages>
 	</App>
