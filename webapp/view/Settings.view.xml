@@ -37,8 +37,8 @@
 		<tnt:mainContents>
 			<NavContainer id="navContainer" initialPage="manageEmployeeStatus">
 				<pages>
-					<Page id="manageEmployeeStatus" title="Mitarbeiterstatus anpassen">
-						<Text text="TODO Mitarbeiterstatus anpassen"/>
+					<Page id="manageEmployeeStatus" showHeader="false">
+						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsEmployeeStatus"/>
 					</Page>
 					<Page id="manageVerwalterguthaben" title="Verwalterguthaben anpassen">
 						<Text text="TODO Verwalterguthaben anpassen"/>
