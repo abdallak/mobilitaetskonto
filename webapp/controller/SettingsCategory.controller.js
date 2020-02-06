@@ -25,20 +25,40 @@ sap.ui.define([
 
 		_onRoutePatternMatched: function (oEvent) {},
 
-		changeCategory: function (type, kid) {
-			// TODO network request
+		changeCategory: function (type, name, kid) {
+			var settings;
+			var data = {
+				type: type,
+				name: name,
+				kid: kid
+			};
 
 			switch (type) {
 			case "add":
+				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 				break;
 			case "delete":
+				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 				break;
 			case "edit":
+				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 				break;
 			default:
 				break;
 			}
 
+			if (settings === undefined) {
+				this.handleEmptyModel("Error: changeCategory settings === undefined");
+				return;
+			}
+
+			var that = this;
+			$.ajax(settings).done(function (response) {
+				var dbCategoryModel = that.getModel("dbCategoryModel");
+				dbCategoryModel.setData(response);
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
 		},
 
 		fetchCategories: function () {
@@ -53,8 +73,9 @@ sap.ui.define([
 		},
 
 		onDeletePressed: function (oEvent) {
-			var kid = oEvent.getSource().data("KID");
+			var kid = oEvent.getParameter("listItem").data("KID");
 
+			var that = this;
 			var oDialog = new Dialog({
 				title: "Bestätigen",
 				type: "Message",
@@ -65,7 +86,7 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: "Löschen",
 					press: function () {
-						this.changeCategory("delete", null, kid);
+						that.changeCategory("delete", undefined, kid);
 						oDialog.close();
 					}
 				}),
@@ -86,6 +107,7 @@ sap.ui.define([
 		onEditPressed: function (oEvent) {
 			var kid = oEvent.getSource().data("KID");
 
+			var that = this;
 			var oDialog = new Dialog({
 				title: "Kategorie Namen ändern",
 				type: "Message",
@@ -100,7 +122,7 @@ sap.ui.define([
 					text: "Ändern",
 					press: function () {
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
-						this.changeCategory("edit", sText, kid);
+						that.changeCategory("edit", sText, kid);
 						oDialog.close();
 					}
 				}),
@@ -119,6 +141,7 @@ sap.ui.define([
 		},
 
 		onAddPressed: function (oEvent) {
+			var that = this;
 			var oDialog = new Dialog({
 				title: "Kategorie hinzufügen",
 				type: "Message",
@@ -133,7 +156,7 @@ sap.ui.define([
 					text: "Hinzufügen",
 					press: function () {
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
-						this.changeCategory("add", sText);
+						that.changeCategory("add", sText);
 						oDialog.close();
 					}
 				}),
