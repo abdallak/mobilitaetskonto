@@ -19,17 +19,17 @@
 		<tnt:sideContent>
 			<tnt:SideNavigation id="sideNavigation" selectedKey="manageEmployeeStatus" itemSelect=".onItemSelect">
 				<tnt:NavigationList>
-					<tnt:NavigationListItem text="Mitarbeiter verwalten" icon="sap-icon://employee">
+					<tnt:NavigationListItem text="Mitarbeiter verwalten" icon="sap-icon://user-edit">
 						<tnt:NavigationListItem text="Mitarbeiterstatus anpassen" key="manageEmployeeStatus"/>
 						<tnt:NavigationListItem text="Verwalterguthaben anpassen" key="manageVerwalterguthaben"/>
 						<tnt:NavigationListItem text="Verwalter zuordnen" key="assignAdministrators"/>
 					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Kategorien verwalten" icon="sap-icon://building" key="manageCategories"/>
-					<tnt:NavigationListItem text="Log einsehen" icon="sap-icon://building" key="showLog"/>
+					<tnt:NavigationListItem text="Kategorien verwalten" icon="sap-icon://shelf" key="manageCategories"/>
+					<tnt:NavigationListItem text="Log einsehen" icon="sap-icon://customer-history" key="showLog"/>
 				</tnt:NavigationList>
 				<tnt:fixedItem>
 					<tnt:NavigationList>
-						<tnt:NavigationListItem text="Datenschutz" icon="sap-icon://card" key="privacy"/>
+						<tnt:NavigationListItem text="Datenschutz" icon="sap-icon://private" key="privacy"/>
 					</tnt:NavigationList>
 				</tnt:fixedItem>
 			</tnt:SideNavigation>
@@ -37,8 +37,8 @@
 		<tnt:mainContents>
 			<NavContainer id="navContainer" initialPage="manageEmployeeStatus">
 				<pages>
-					<Page id="manageEmployeeStatus" title="Mitarbeiterstatus anpassen">
-						<Text text="TODO Mitarbeiterstatus anpassen"/>
+					<Page id="manageEmployeeStatus" showHeader="false">
+						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsEmployeeStatus"/>
 					</Page>
 					<Page id="manageVerwalterguthaben" title="Verwalterguthaben anpassen">
 						<Text text="TODO Verwalterguthaben anpassen"/>
@@ -49,7 +49,7 @@
 					<Page id="manageCategories" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory"/>
 					</Page>
-					<Page id="showLog" title="Log einsehen">
+					<Page id="showLog" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog"/>
 					</Page>
 					<Page id="privacy" title="Datenschutz">

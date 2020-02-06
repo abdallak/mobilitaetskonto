@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="SettingsLog">
+			<Page title="Log einsehen">
 				<content>
 					<Table id="table0" growing="true" items="{ path : 'logModel>/'}">
 						<columns>
@@ -20,8 +20,9 @@
 						<items>
 							<ColumnListItem id="item0" type="Active">
 								<cells>
-									<ObjectIdentifier title="{logModel>MID}" text ="{path: 'logModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } }}"
-									id="objectidentifier0"/>
+									<ObjectIdentifier title="{logModel>MID}"
+										text="{path: 'logModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } }}"
+										id="objectidentifier0"/>
 									<Text text="{logModel>AKTION}" id="text2"/>
 								</cells>
 							</ColumnListItem>

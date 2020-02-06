@@ -191,6 +191,10 @@
 				"SettingsCategory": {
 					"viewType": "XML",
 					"viewName": "SettingsCategory"
+				},
+				"SettingsEmployeeStatus": {
+					"viewType": "XML",
+					"viewName": "SettingsEmployeeStatus"
 				}
 			}
 		}
