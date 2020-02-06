@@ -3,7 +3,31 @@
 	<App>
 		<pages>
 			<Page title="Mitarbeiterstatus anpassen">
-				<content></content>
+				<content>
+					<List id="list0" mode="MultiSelect" delete="onDeletePressed" items="{ path : 'employeeTableModel>/'}">
+						<items>
+							<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel&gt;NAME'}" id="item0" detailPress="onEditPressed"
+								description="MID: {path: 'employeeTableModel>MID'} Guthaben: {path: 'employeeTableModel>GUTHABEN'} Aktiv: {path: 'employeeTableModel>AKTIV'} Verwalter: {path: 'employeeTableModel>VERWALTER'}">
+								<customData>
+									<core:CustomData key="MID" value="{MID}"/>
+								</customData>
+							</StandardListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Toolbar width="100%" id="toolbar1">
+						<content>
+							<Label text="Ausgewählte Mitarbeiter:" width="100%" id="label0" textAlign="End"/>
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Freischalten"
+								id="button0" icon="sap-icon://employee-approvals" press="onAktivPressed"/>
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Inaktiv stellen"
+								id="button0_copy" icon="sap-icon://employee-rejections" press="onInaktivPressed"/>
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Löschen"
+								id="button0_copy2" icon="sap-icon://delete" press="onDeletePressed"/>
+						</content>
+					</Toolbar>
+				</footer>
 			</Page>
 		</pages>
 	</App>
