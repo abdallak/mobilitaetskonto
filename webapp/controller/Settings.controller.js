@@ -6,7 +6,7 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Settings", {
 
 		onInit: function () {
-			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
+			this.getRouter().getRoute("Settings").attachMatched(this._onRoutePatternMatched, this);
 
 		},
 
