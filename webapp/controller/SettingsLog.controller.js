@@ -11,7 +11,7 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog
 		 */
 		onInit: function () {
-
+			
 		},
 
 		/**
