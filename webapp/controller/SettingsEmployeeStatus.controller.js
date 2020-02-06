@@ -54,17 +54,37 @@ sap.ui.define([
 		onAktivPressed: function (oEvent) {
 			var oList = this.byId("list0");
 			var oSelectedItems = oList.getSelectedItems();
+
+			if (oSelectedItems.length === 0) {
+				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				return;
+			}
+
 			this.setEmployeeStatus(oSelectedItems, true);
 		},
 
 		onInaktivPressed: function (oEvent) {
 			var oList = this.byId("list0");
 			var oSelectedItems = oList.getSelectedItems();
+
+			if (oSelectedItems.length === 0) {
+				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				return;
+			}
+
 			this.setEmployeeStatus(oSelectedItems, false);
 		},
 
 		onDeletePressed: function (oEvent) {
-			sap.m.MessageToast.show("Leider noch nicht implementiert.");
+			var oList = this.byId("list0");
+			var oSelectedItems = oList.getSelectedItems();
+
+			if (oSelectedItems.length === 0) {
+				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				return;
+			}
+
+			sap.m.MessageToast.show("Noch nicht implementiert.");
 		}
 	});
 });
