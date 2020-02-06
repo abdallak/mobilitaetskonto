@@ -47,7 +47,7 @@
 						<Text text="TODO Verwalter zuordnen"/>
 					</Page>
 					<Page id="manageCategories" title="Kategorien verwalten">
-						<Text text="TODO Kategorien verwalten"/>
+						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory"/>
 					</Page>
 					<Page id="showLog" title="Log einsehen">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog"/>

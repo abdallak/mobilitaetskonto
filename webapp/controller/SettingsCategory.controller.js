@@ -1,44 +1,40 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, JSONModel) {
 	"use strict";
 
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory", {
 
-		/**
-		 * Called when a controller is instantiated and its View controls (if available) are already created.
-		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory
-		 */
 		onInit: function () {
-
+			this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
 		},
 
-		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory
-		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
+		_onRoutePatternMatched: function (oEvent) {
+			this.fetchCategories();
+		},
 
-		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory
-		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
+		addCategory: function () {
+			// TODO network request
+		},
 
-		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory
-		 */
-		//	onExit: function() {
-		//
-		//	}
+		deleteCategory: function () {
+			// TODO network request
+		},
+
+		fetchCategories: function () {
+			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var dbCategoryModel = new JSONModel();
+					dbCategoryModel.setData(response);
+					that.insertCategories(dbCategoryModel.getData());
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
+		}
 
 	});
 
