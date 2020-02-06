@@ -104,6 +104,12 @@
 			"type": "destination",
 			"name": "MOB_ANTRAG_DURCHGEFUEHRT"
 		}
+	}, {
+		"path": "/MOB_LOG_GET",
+		"target": {
+			"type": "destination",
+			"name": "MOB_LOG_GET"
+		}
 	}],
 	"sendWelcomeFileRedirect": true
 }

@@ -3,7 +3,31 @@
 	<App>
 		<pages>
 			<Page title="SettingsLog">
-				<content></content>
+				<content>
+					<Table id="table0" growing="true" items="{ path : 'logModel>/'}">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="{i18n>HeaderDetails}" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column3" width="70%">
+								<header>
+									<Label text="{i18n>HeaderAction}" id="label3"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem id="item0" type="Active">
+								<cells>
+									<ObjectIdentifier title="{logModel>MID}" text ="{path: 'logModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } }}"
+									id="objectidentifier0"/>
+									<Text text="{logModel>AKTION}" id="text2"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
 			</Page>
 		</pages>
 	</App>
