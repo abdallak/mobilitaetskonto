@@ -187,6 +187,10 @@
 				"SettingsLog": {
 					"viewType": "XML",
 					"viewName": "SettingsLog"
+				},
+				"SettingsCategory": {
+					"viewType": "XML",
+					"viewName": "SettingsCategory"
 				}
 			}
 		}
