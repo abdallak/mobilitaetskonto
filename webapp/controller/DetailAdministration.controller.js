@@ -153,6 +153,7 @@ sap.ui.define([
 			this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
 			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
+			this.calcNewBalance();
 
 		},
 		
