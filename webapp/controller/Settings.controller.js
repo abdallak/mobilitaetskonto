@@ -8,7 +8,7 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("Settings").attachMatched(this._onRoutePatternMatched, this);
-			
+
 			var logModel = new JSONModel();
 			this.setGlobalModel(logModel, "logModel");
 		},
@@ -28,8 +28,8 @@ sap.ui.define([
 			var viewId = this.byId(oItem.getKey());
 			navContainer.to(viewId);
 		},
-		
-		getLogData: function() {
+
+		getLogData: function () {
 			var settings = this.prepareAjaxRequest("/MOB_LOG_GET", "GET", null);
 
 			var that = this;

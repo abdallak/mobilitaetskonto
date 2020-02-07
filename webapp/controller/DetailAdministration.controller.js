@@ -9,6 +9,7 @@ sap.ui.define([
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
+
 		onInit: function () {
 			this.getRouter().getRoute("DetailAdministration").attachMatched(this._onRoutePatternMatched, this);
 			var detailADModel = new JSONModel();
@@ -17,8 +18,6 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
-			
-
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -63,6 +62,7 @@ sap.ui.define([
 				cnc.setEnabled(true);
 			}
 		},
+
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
@@ -75,6 +75,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
 			if (!oRequestData.feedback || oRequestData.feedback.trim().length === 0) {
@@ -89,6 +90,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var detailADData = this.getModel("detailADModel").getData();
@@ -101,63 +103,63 @@ sap.ui.define([
 			oRequestData.state = state.toString();
 			return oRequestData;
 		},
+
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
+
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 			this.performRequestUpdate(0);
 		},
+
 		/**
 		 *@memberOf Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration
 		 */
-		_getDialog : function () {
-         if (!this._oDialog) {
-            this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
-            this.getView().addDependent(this._oDialog);
-            console.log("Hallo");
-         }
-         return this._oDialog;
-      },
-      onbuttonpress : function () {
-         var thisView = this.getView();
-          if (!this._oDialog) {
-          	Fragment.load({	
-          		id: thisView.getId(),
-          		name: "Mobilitaetskonto.Mobilitaetskonto.view.Edit",
-          		controller: this
-      }).then(function (oDialog){
-      	thisView.addDependent(oDialog);
-      	oDialog.open();
-      });}
-      else {
-      	this.byId("openDialog").open();
-      }
-      },
+		_getDialog: function () {
+			if (!this._oDialog) {
+				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
+				this.getView().addDependent(this._oDialog);
+				console.log("Hallo");
+			}
+			return this._oDialog;
+		},
 
-   
-		
-		closeDialog : function (oEvent) {
+		onbuttonpress: function () {
+			var thisView = this.getView();
+			if (!this._oDialog) {
+				Fragment.load({
+					id: thisView.getId(),
+					name: "Mobilitaetskonto.Mobilitaetskonto.view.Edit",
+					controller: this
+				}).then(function (oDialog) {
+					thisView.addDependent(oDialog);
+					oDialog.open();
+				});
+			} else {
+				this.byId("openDialog").open();
+			}
+		},
+
+		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
 		},
-		
-		updateDialog : function (oEvent) {
+
+		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
-		
 
 			this.byId("FormElementAlt").setVisible(true);
-		
+
 			this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
 			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
-
 		},
-		
-		calcNewBalance : function(){
+
+		calcNewBalance: function () {
 			var resLabel = this.getView().byId("txtResultingBalance");
 
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
@@ -174,7 +176,6 @@ sap.ui.define([
 			console.log(oCurrency);
 
 			resLabel.setText("€" + (a + b));
-
 		},
 
 		performDownloadAttachment: function (aid) {
@@ -207,4 +208,3 @@ sap.ui.define([
 		}
 	});
 });
- 
