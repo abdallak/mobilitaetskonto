@@ -56,7 +56,7 @@
 							<Toolbar width="100%" id="toolbar4">
 								<content>
 									<SearchField placeholder="Betrag oder Name..." id="searchField0" width="40%" search="filterTable"/>
-									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable"/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="Datum Range eingeben"/>
 									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
 									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
