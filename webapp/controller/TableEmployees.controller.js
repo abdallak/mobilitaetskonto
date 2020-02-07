@@ -8,6 +8,7 @@ sap.ui.define([
 	"use strict";
 	var employeeTableModel;
 	var insertModel;
+	var dbUserModel;
 	
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
@@ -40,7 +41,7 @@ sap.ui.define([
 		},
 		
 		setRequest: function (mid) {
-			//var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var staticModel = this.getModel("staticModel").getData();
 			var betr = staticModel.betrag;
 			var besch = staticModel.beschreibung;
@@ -55,8 +56,9 @@ sap.ui.define([
 				"art": 2,
 				"betrag": betr,
 				"beschreibung": besch,
-				"kid": "0",    //nicht schön
-				"state": 2
+				"kid": 1,    //nicht schön
+				"state": 2,
+				"MIDV" : dbUserData.MID
 				
 			};
 			insertModel = new JSONModel(defaultRequest);
