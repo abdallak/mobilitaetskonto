@@ -43,15 +43,18 @@ sap.ui.define([
 			var acc = this.getView().byId("submitButton");
 			var cnc = this.getView().byId("cancelButton");
 			var fb = this.getView().byId("areaFeedback");
+			var edit = this.getView().byId("button0");
 			var resBalance = this.getView().byId("resultingBalance");
 
 			if (detail.STATUS !== 1) {
+				edit.setEnabled(false);
 				resBalance.setVisible(false);
 				fb.setBlocked(true);
 				fb.setRequired(false);
 				acc.setEnabled(false);
 				cnc.setEnabled(false);
 			} else {
+				edit.setEnabled(true);
 				resBalance.setVisible(true);
 				this.calcNewBalance();
 				fb.setBlocked(false);
