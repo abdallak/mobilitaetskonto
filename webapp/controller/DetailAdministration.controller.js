@@ -158,23 +158,15 @@ sap.ui.define([
 		},
 		
 		calcNewBalance : function(){
-			var resLabel = this.getView().byId("txtResultingBalance");
 
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
-			var val = this.getView().byId("text9").getText().substr(1);
-
+			var val = this.getModel("detailADModel").getData().BETRAG;
+			console.log(val, accBalance);
 			var a = parseFloat(accBalance);
 			var b = parseFloat(val);
-
-			//CURRENCY CONVERTER GEHT NOCH NICHT ??
-			var oCurrency = new sap.ui.model.type.Currency({
-				showMeasure: false
-			});
-			oCurrency.formatValue([(a + b), "€"], "string");
-			console.log(oCurrency);
-
-			resLabel.setText("€" + (a + b));
-
+			
+			this.getModel("detailADModel").setProperty("/RESULTBALANCE", a + b);
+			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
 
 		performDownloadAttachment: function (aid) {

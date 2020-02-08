@@ -66,7 +66,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="Resultierender Kontostand" id="resultingBalance">
 										<sap.ui.layout.form:fields>
-											<Text id="txtResultingBalance" xmlns="sap.m" width="50%" textAlign="Left" text=""/>
+											<Text id="txtResultingBalance" xmlns="sap.m" width="50%" textAlign="Left" text="{parts: [{path: 'detailADModel>/RESULTBALANCE'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
