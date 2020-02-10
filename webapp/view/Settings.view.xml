@@ -14,6 +14,8 @@
 						<FlexItemData growFactor="1"/>
 					</layoutData>
 				</Button>
+				<ToolbarSpacer width="20px"/>
+				<Text text="{i18n>startpageSettingsTile}" wrapping="false"/>
 			</tnt:ToolHeader>
 		</tnt:header>
 		<tnt:sideContent>
