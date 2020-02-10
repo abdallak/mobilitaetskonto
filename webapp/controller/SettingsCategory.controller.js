@@ -33,7 +33,7 @@ sap.ui.define([
 				type: type,
 				name: name,
 				kid: kid,
-				amid: dbUserData.mid
+				amid: dbUserData.MID
 			};
 
 			switch (type) {
@@ -78,6 +78,11 @@ sap.ui.define([
 		onDeletePressed: function (oEvent) {
 			var kid = oEvent.getParameter("listItem").data("KID");
 
+			if (kid === "0") {
+				this.handleEmptyModel("Kategorie \"Sonstiges\" kann nicht gelöscht werden.");
+				return;
+			}
+
 			var that = this;
 			var oDialog = new Dialog({
 				title: "Bestätigen",
@@ -109,6 +114,11 @@ sap.ui.define([
 
 		onEditPressed: function (oEvent) {
 			var kid = oEvent.getSource().data("KID");
+
+			if (kid === "0") {
+				this.handleEmptyModel("Kategorie \"Sonstiges\" kann nicht geändert werden.");
+				return;
+			}
 
 			var that = this;
 			var oDialog = new Dialog({
