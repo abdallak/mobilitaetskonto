@@ -16,6 +16,17 @@ sap.ui.define([
 			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
 			this.getTableData(target);
+
+			// set title
+			var oResourceBundle = this.getResourceBundle();
+			var oTitleLabel = this.byId("titleLabel");
+			var sTitle;
+			if (target === "TableSales") {
+				sTitle = oResourceBundle.getText("salesTitle");
+			} else {
+				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
+			}
+			oTitleLabel.setText(sTitle);
 		},
 
 		getTableData: function (target) {
