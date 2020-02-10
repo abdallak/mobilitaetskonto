@@ -33,7 +33,7 @@ sap.ui.define([
 				type: type,
 				name: name,
 				kid: kid,
-				amid: dbUserData.mid
+				amid: dbUserData.MID
 			};
 
 			switch (type) {
