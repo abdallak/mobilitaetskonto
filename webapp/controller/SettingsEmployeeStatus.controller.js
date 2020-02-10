@@ -28,6 +28,7 @@ sap.ui.define([
 		},
 
 		setEmployeeStatus: function (oSelectedItems, status) {
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var paramData = [];
 
 			for (var i = 0; i < oSelectedItems.length; i++) {
@@ -37,6 +38,7 @@ sap.ui.define([
 				var employeeStatus = {};
 				employeeStatus.status = status;
 				employeeStatus.mid = context.getProperty(path).MID;
+				employeeStatus.amid = dbUserData.mid;
 				paramData.push(employeeStatus);
 			}
 

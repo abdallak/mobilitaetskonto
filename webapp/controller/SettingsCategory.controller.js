@@ -26,11 +26,14 @@ sap.ui.define([
 		_onRoutePatternMatched: function (oEvent) {},
 
 		changeCategory: function (type, name, kid) {
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+
 			var settings;
 			var data = {
 				type: type,
 				name: name,
-				kid: kid
+				kid: kid,
+				amid: dbUserData.mid
 			};
 
 			switch (type) {
