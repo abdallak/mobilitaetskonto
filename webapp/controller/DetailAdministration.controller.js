@@ -158,15 +158,15 @@ sap.ui.define([
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
 		},
-		
-		calcNewBalance : function(){
+
+		calcNewBalance: function () {
 
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var val = this.getModel("detailADModel").getData().BETRAG;
 			console.log(val, accBalance);
 			var a = parseFloat(accBalance);
 			var b = parseFloat(val);
-			
+
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", a + b);
 			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
