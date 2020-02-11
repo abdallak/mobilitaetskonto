@@ -10,53 +10,50 @@
 								<sap.ui.layout.form:formElements>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderMid}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{detailModel>/MID}" textAlign="Center"/>
+											<Text width="50%" text="{detailModel>/MID}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderEmployee}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{detailUserModel>/NAME}, {detailUserModel>/VORNAME}" textAlign="Center"/>
+											<Text width="50%" text="{detailUserModel>/NAME}, {detailUserModel>/VORNAME}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%"
-												text="{ path: 'detailModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
-												textAlign="Center"/>
+												text="{ path: 'detailModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailModel>/ART', formatter: '.formatter.antragArtText'}"/>
+											<Text xmlns="sap.m" width="50%" text="{path: 'detailModel>/ART', formatter: '.formatter.antragArtText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/KATEGORIE}"/>
+											<Text xmlns="sap.m" width="50%" text="{detailModel>/KATEGORIE}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
 										<sap.ui.layout.form:fields>
-											<!--	<ObjectNumber
+											<ObjectNumber
 												number="{ parts:[{path:'detailModel>/BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-												unit="{i18n>currency}"/>-->
-											<Text xmlns="sap.m" width="50%" text="{parts: [{path: 'detailModel>/BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"
-												textAlign="Center"/>
+												unit="{i18n>currency}" state="{= ${detailModel>/BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{path: 'detailModel>/STATUS', formatter: '.formatter.statusText'}"/>
+											<Text xmlns="sap.m" width="50%" text="{path: 'detailModel>/STATUS', formatter: '.formatter.statusText'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/BESCHREIBUNG}"/>
+											<Text xmlns="sap.m" width="50%" text="{detailModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Center" text="{detailModel>/FEEDBACK}"/>
+											<Text xmlns="sap.m" width="50%" text="{detailModel>/FEEDBACK}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailModel>/ATTACHMENTS} !== undefined}">

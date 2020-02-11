@@ -39,7 +39,9 @@
 									<Label
 										text="{path: 'salesModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 										id="label6"/>
-									<Label text="{parts: [{path: 'salesModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label7"/>
+									<ObjectNumber
+										number="{ parts:[{path:'salesModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}" state="{= ${salesModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label text="{salesModel>KATEGORIE}" id="label8"/>
 									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}" id="label9"/>
 								</cells>
@@ -61,7 +63,9 @@
 								id="titleLabel"/>
 						</contentMiddle>
 						<contentRight>
-							<Label text="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+							<ObjectNumber
+								number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{i18n>currency}" state="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 						</contentRight>
 					</Bar>
 				</customHeader>

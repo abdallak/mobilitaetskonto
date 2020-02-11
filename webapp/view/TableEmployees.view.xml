@@ -33,7 +33,9 @@
 								<cells>
 									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
 									<Label text="{path: 'employeeTableModel>NAME'}, {path: 'employeeTableModel>VORNAME'}" id="label5"/>
-									<Label text="{parts: [{path: 'employeeTableModel>GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label6"/>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label
 										text="{path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 										id="label7"/>
@@ -57,7 +59,9 @@
 						</contentMiddle>
 						<contentRight>
 							<Label text="Freigabewert:" textAlign="Right"/>
-							<Label text="{parts:[{path:'dbUserModel>/VERWALTER'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+							<ObjectNumber
+								number="{ parts:[{path:'dbUserModel>/VERWALTER'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{i18n>currency}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
