@@ -28,8 +28,11 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
-												liveChange="onValueChanged"/>
+											<HBox width="100%" id="hbox0">
+												<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
+													liveChange="onValueChanged"/>
+												<core:Icon src="sap-icon://message-information" size="1.9em" id="icon0" tooltip="{i18n>requestInfoIcon}" class="sapUiSmallMarginBegin"/>
+											</HBox>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
