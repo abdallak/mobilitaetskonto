@@ -39,8 +39,12 @@ sap.ui.define([
 			if (sPreviousHash !== undefined) {
 				window.history.go(-1);
 			} else {
-				this.getRouter().navTo("Startpage", {}, true);
+				this.onNavStartpage();
 			}
+		},
+
+		onNavStartpage: function (oEvent) {
+			this.getRouter().navTo("Startpage", {}, true);
 		},
 
 		updateUserModel: function () {

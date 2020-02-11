@@ -50,7 +50,11 @@
 				<customHeader>
 					<Bar id="bar0">
 						<contentLeft>
-							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
+							<HBox>
+								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+							</HBox>
 						</contentLeft>
 						<contentMiddle>
 							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="-" width="100%"
