@@ -195,6 +195,10 @@
 				"SettingsEmployeeStatus": {
 					"viewType": "XML",
 					"viewName": "SettingsEmployeeStatus"
+				},
+				"MessagePage": {
+					"viewType": "XML",
+					"viewName": "MessagePage"
 				}
 			}
 		}
