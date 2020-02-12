@@ -25,10 +25,17 @@ sap.ui.define([
 				"timeout": 0
 			};
 
+			var that = this;
+			var oUserModel = component.getModel("userModel");
+			oUserModel.attachEventOnce("modelUpdated", function (oEvent) {
+				// FIXME: kein controller, weil in component.js noch kein controller existiert
+				that.updateUserModel(undefined, component);
+			}, this);
+
 			$.ajax(settings)
 				.done(function (response) {
-					var oUserModel = component.getModel("userModel");
 					oUserModel.setData(response);
+					oUserModel.fireEvent("modelUpdated");
 				})
 				.fail(function (jqXHR, exception) {
 					var sErrorMessage = "Ein Fehler beim Laden des SAP Benutzerprofils ist aufgetreten";
@@ -45,7 +52,7 @@ sap.ui.define([
 		updateUserModel: function (controller, component) {
 			var oUserModel = component.getModel("userModel");
 
-			// wenn keine Datein in userModel, dann error anzeigen
+			// wenn keine Daten in userModel, dann error anzeigen
 			if (oUserModel.getData().name === undefined) {
 				controller.onNavMessagePage("", "SAP Benutzerdaten wurden nicht gefunden.");
 				return;
