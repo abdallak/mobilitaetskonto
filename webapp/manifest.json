@@ -149,6 +149,13 @@
 					"target": [
 						"TableEmployees"
 					]
+				},
+				{
+					"name": "MessagePage",
+					"pattern": "MessagePage",
+					"target": [
+						"MessagePage"
+					]
 				}
 			],
 			"targets": {
