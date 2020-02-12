@@ -26,17 +26,25 @@ sap.ui.define([
 		},
 
 		fetchCategories: function () {
-			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
+			var data = {
+				type: "get"
+			};
+
+			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+
+			if (settings === undefined) {
+				this.handleEmptyModel("Error: changeCategory settings === undefined");
+				return;
+			}
+
 			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					var dbCategoryModel = new JSONModel();
-					dbCategoryModel.setData(response);
-					that.insertCategories(dbCategoryModel.getData());
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleNetworkError(jqXHR);
-				});
+			$.ajax(settings).done(function (response) {
+				var dbCategoryModel = new JSONModel();
+				dbCategoryModel.setData(response);
+				that.insertCategories(dbCategoryModel.getData());
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
 		},
 
 		insertCategories: function (oCategoryData) {
