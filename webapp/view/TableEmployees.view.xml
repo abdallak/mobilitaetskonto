@@ -32,7 +32,7 @@
 							<ColumnListItem id="item0" type="Active">
 								<cells>
 									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
-									<Label text="{path: 'employeeTableModel>NAME'}, {path: 'employeeTableModel>VORNAME'}" id="label5"/>
+									<Label text="{path: 'employeeTableModel>VORNAME'}, {path: 'employeeTableModel>NAME'}" id="label5"/>
 									<ObjectNumber
 										number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>

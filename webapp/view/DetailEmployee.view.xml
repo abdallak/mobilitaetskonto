@@ -15,7 +15,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderEmployee}">
 										<sap.ui.layout.form:fields>
-											<Text width="50%" text="{detailUserModel>/NAME}, {detailUserModel>/VORNAME}"/>
+											<Text width="50%" text="{detailUserModel>/VORNAME}, {detailUserModel>/NAME}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">

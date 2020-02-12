@@ -43,7 +43,7 @@
 						<items>
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
-									<Label text="{requestTableModel>NAME}, {requestTableModel>VORNAME}"/>
+									<Label text="{requestTableModel>VORNAME}, {requestTableModel>NAME}"/>
 									<Label
 										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
@@ -61,7 +61,7 @@
 							<Toolbar width="100%" id="toolbar4">
 								<content>
 									<SearchField placeholder="Betrag oder Name..." id="searchField0" width="40%" search="filterTable"/>
-									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="Datum Range eingeben"/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="Zeitfenster wählen..."/>
 									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
 									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
