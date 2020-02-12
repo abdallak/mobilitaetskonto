@@ -7,9 +7,7 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.MessagePage", {
 
 		onInit: function () {
-			var errorPageModel = new JSONModel();
-			this.setModel(errorPageModel, "errorPageModel");
-
+			this.setModel(new JSONModel(), "errorPageModel");
 			this.getRouter().getRoute("MessagePage").attachMatched(this._onRoutePatternMatched, this);
 		},
 
@@ -17,7 +15,6 @@ sap.ui.define([
 			var errorPageModel = this.getModel("errorPageModel");
 			var oErrorData = JSON.parse(oEvent.getParameter("arguments").error);
 			errorPageModel.setData(oErrorData);
-			console.log(oErrorData);
 		}
 
 	});
