@@ -1,4 +1,3 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -33,7 +32,7 @@ sap.ui.define([
 			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 
 			if (settings === undefined) {
-				this.handleEmptyModel("Error: changeCategory settings === undefined");
+				this.handleEmptyModel("Error: fetchCategory settings === undefined");
 				return;
 			}
 
@@ -182,8 +181,6 @@ sap.ui.define([
 				fileItem.data = raw;
 
 				oRequestData.attachments.push(fileItem);
-
-				console.log(name + " binary string: " + raw);
 			};
 
 			reader.onerror = function (e) {
