@@ -1,10 +1,11 @@
 sap.ui.define([], function () {
 	"use strict";
 	return {
-		statusText: function (sStatus) {
+
+		statusText: function (iStatus) {
 			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
-			switch (sStatus) {
+			switch (iStatus) {
 			case 0:
 				return resourceBundle.getText("antragStatusAbgelehnt");
 			case 1:
@@ -14,14 +15,34 @@ sap.ui.define([], function () {
 			case 3:
 				return resourceBundle.getText("antragStatusDurchgefuehrt");
 			default:
-				return sStatus;
+				return iStatus;
 			}
 		},
 
-		antragArtText: function (sAntragArt) {
+		statusIndicator: function (iStatus) {
+			switch (iStatus) {
+			case 0:
+				// color: dark red
+				return "Indication01";
+			case 1:
+				// color: orange
+				return "Indication03";
+			case 2:
+				// color: green
+				return "Indication04";
+			case 3:
+				// color: blue
+				return "Indication05";
+			default:
+				// color: grey?
+				return "None";
+			}
+		},
+
+		antragArtText: function (iAntragArt) {
 			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
-			switch (sAntragArt) {
+			switch (iAntragArt) {
 			case 0:
 				return resourceBundle.getText("antragArtAuszahlung");
 			case 1:
@@ -29,8 +50,9 @@ sap.ui.define([], function () {
 			case 2:
 				return resourceBundle.getText("antragArtGuthaben");
 			default:
-				return sAntragArt;
+				return iAntragArt;
 			}
 		}
+
 	};
 });
