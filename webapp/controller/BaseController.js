@@ -47,6 +47,13 @@ sap.ui.define([
 			this.getRouter().navTo("Startpage", {}, true);
 		},
 
+		onNavMessagePage: function (sIconPath, sErrorMessage) {
+			this.getRouter().navTo("MessagePage", {
+				sIconPath: sIconPath,
+				sErrorMessage: sErrorMessage
+			}, true);
+		},
+
 		updateUserModel: function () {
 			models.updateUserModel(this, this.getOwnerComponent());
 		},
