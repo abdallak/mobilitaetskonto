@@ -78,6 +78,11 @@ sap.ui.define([
 					roleData.mitarbeiter = response.AKTIV === "TRUE";
 
 					roleModel.refresh(true);
+
+					if (response.AKTIV !== "TRUE") {
+						this.onNavMessagePage("message-warning", "Keine Berechtigung",
+							"Bitte wenden Sie sich an den jeweiligen Ansprechpartner / Verwalter", false);
+					}
 				})
 				.fail(function (jqXHR, exception) {
 					controller.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
