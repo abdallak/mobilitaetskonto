@@ -1,4 +1,3 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -26,17 +25,25 @@ sap.ui.define([
 		},
 
 		fetchCategories: function () {
-			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
+			var data = {
+				type: "get"
+			};
+
+			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+
+			if (settings === undefined) {
+				this.handleEmptyModel("Error: fetchCategory settings === undefined");
+				return;
+			}
+
 			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					var dbCategoryModel = new JSONModel();
-					dbCategoryModel.setData(response);
-					that.insertCategories(dbCategoryModel.getData());
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleNetworkError(jqXHR);
-				});
+			$.ajax(settings).done(function (response) {
+				var dbCategoryModel = new JSONModel();
+				dbCategoryModel.setData(response);
+				that.insertCategories(dbCategoryModel.getData());
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
 		},
 
 		insertCategories: function (oCategoryData) {
@@ -174,8 +181,6 @@ sap.ui.define([
 				fileItem.data = raw;
 
 				oRequestData.attachments.push(fileItem);
-
-				console.log(name + " binary string: " + raw);
 			};
 
 			reader.onerror = function (e) {

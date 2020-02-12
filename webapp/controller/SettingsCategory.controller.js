@@ -18,9 +18,8 @@ sap.ui.define([
 		onInit: function () {
 			// FIXME: Funktioniert für den NavContainer nicht
 			// this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
-			var dbCategoryModel = new JSONModel();
-			this.setModel(dbCategoryModel, "dbCategoryModel");
-			this.fetchCategories();
+			this.setModel(new JSONModel(), "dbCategoryModel");
+			this.changeCategory("get");
 		},
 
 		_onRoutePatternMatched: function (oEvent) {},
@@ -46,6 +45,9 @@ sap.ui.define([
 			case "edit":
 				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 				break;
+			case "get":
+				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				break;
 			default:
 				break;
 			}
@@ -55,17 +57,6 @@ sap.ui.define([
 				return;
 			}
 
-			var that = this;
-			$.ajax(settings).done(function (response) {
-				var dbCategoryModel = that.getModel("dbCategoryModel");
-				dbCategoryModel.setData(response);
-			}).fail(function (jqXHR, exception) {
-				that.handleNetworkError(jqXHR);
-			});
-		},
-
-		fetchCategories: function () {
-			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE", "GET");
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var dbCategoryModel = that.getModel("dbCategoryModel");
