@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/Device"
-], function (JSONModel, Device) {
+	"sap/ui/Device",
+	"sap/m/MessageBox"
+], function (JSONModel, Device, MessageBox) {
 	"use strict";
 
 	return {
@@ -25,19 +26,37 @@ sap.ui.define([
 			};
 
 			var that = this;
+			var oUserModel = component.getModel("userModel");
+			oUserModel.attachEventOnce("modelUpdated", function (oEvent) {
+				// FIXME: kein controller, weil in component.js noch kein controller existiert
+				that.updateUserModel(undefined, component);
+			}, this);
+
 			$.ajax(settings)
 				.done(function (response) {
-					var oUserModel = component.getModel("userModel");
 					oUserModel.setData(response);
-					that.updateUserModel(component);
+					oUserModel.fireEvent("modelUpdated");
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					var sErrorMessage = "Ein Fehler beim Laden des SAP Benutzerprofils ist aufgetreten";
+					var sDetailMessage = jqXHR.responseText + " (" + jqXHR.status + ")";
+
+					MessageBox.error(sErrorMessage, {
+						title: "Error",
+						id: "componentError",
+						details: sDetailMessage
+					});
 				});
 		},
 
-		updateUserModel: function (component) {
+		updateUserModel: function (controller, component) {
 			var oUserModel = component.getModel("userModel");
+
+			// wenn keine Daten in userModel, dann error anzeigen
+			if (oUserModel.getData().name === undefined) {
+				controller.onNavMessagePage("", "SAP Benutzerdaten wurden nicht gefunden.");
+				return;
+			}
 
 			var settings = {
 				"url": "/MOB_MITARBEITER_GETCREATE",
@@ -46,7 +65,6 @@ sap.ui.define([
 				"data": oUserModel.getData()
 			};
 
-			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
 					var dbUserModel = component.getModel("dbUserModel");
@@ -60,9 +78,14 @@ sap.ui.define([
 					roleData.mitarbeiter = response.AKTIV === "TRUE";
 
 					roleModel.refresh(true);
+
+					if (response.AKTIV !== "TRUE") {
+						this.onNavMessagePage("message-warning", "Keine Berechtigung",
+							"Bitte wenden Sie sich an den jeweiligen Ansprechpartner / Verwalter", false);
+					}
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					controller.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 		}
 

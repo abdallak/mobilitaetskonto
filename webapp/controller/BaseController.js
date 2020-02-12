@@ -47,8 +47,21 @@ sap.ui.define([
 			this.getRouter().navTo("Startpage", {}, true);
 		},
 
+		onNavMessagePage: function (sIconPath, sErrorMessage, sErrorDescription, bStartpageButton) {
+			var oError = {};
+			oError.sIconPath = sIconPath;
+			oError.sErrorDescription = sErrorDescription;
+			oError.sErrorMessage = sErrorMessage;
+			oError.bStartpageButton = bStartpageButton;
+			var sError = JSON.stringify(oError);
+
+			this.getRouter().navTo("MessagePage", {
+				error: sError
+			}, true);
+		},
+
 		updateUserModel: function () {
-			models.updateUserModel(this.getOwnerComponent());
+			models.updateUserModel(this, this.getOwnerComponent());
 		},
 
 		prepareAjaxRequest: function (url, method, data) {

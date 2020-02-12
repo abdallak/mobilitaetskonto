@@ -149,6 +149,13 @@
 					"target": [
 						"TableEmployees"
 					]
+				},
+				{
+					"name": "MessagePage",
+					"pattern": "MessagePage/{error}",
+					"target": [
+						"MessagePage"
+					]
 				}
 			],
 			"targets": {
@@ -195,6 +202,10 @@
 				"SettingsEmployeeStatus": {
 					"viewType": "XML",
 					"viewName": "SettingsEmployeeStatus"
+				},
+				"MessagePage": {
+					"viewType": "XML",
+					"viewName": "MessagePage"
 				}
 			}
 		}
