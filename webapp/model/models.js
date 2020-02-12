@@ -1,7 +1,8 @@
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/Device"
-], function (JSONModel, Device) {
+	"sap/ui/Device",
+	"sap/m/MessageBox"
+], function (JSONModel, Device, MessageBox) {
 	"use strict";
 
 	return {
@@ -32,11 +33,18 @@ sap.ui.define([
 					that.updateUserModel(component);
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					var sErrorMessage = "Ein Fehler beim Laden des Benutzerprofils ist aufgetreten";
+					var sDetailMessage = jqXHR.responseText + " (" + jqXHR.status + ")";
+
+					MessageBox.error(sErrorMessage, {
+						title: "Error",
+						id: "componentError",
+						details: sDetailMessage
+					});
 				});
 		},
 
-		updateUserModel: function (component) {
+		updateUserModel: function (baseContoller, component) {
 			var oUserModel = component.getModel("userModel");
 
 			var settings = {
@@ -46,7 +54,6 @@ sap.ui.define([
 				"data": oUserModel.getData()
 			};
 
-			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
 					var dbUserModel = component.getModel("dbUserModel");
@@ -62,7 +69,7 @@ sap.ui.define([
 					roleModel.refresh(true);
 				})
 				.fail(function (jqXHR, exception) {
-					that.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					baseContoller.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 		}
 

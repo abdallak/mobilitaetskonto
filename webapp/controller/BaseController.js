@@ -48,7 +48,7 @@ sap.ui.define([
 		},
 
 		updateUserModel: function () {
-			models.updateUserModel(this.getOwnerComponent());
+			models.updateUserModel(this, this.getOwnerComponent());
 		},
 
 		prepareAjaxRequest: function (url, method, data) {
