@@ -25,15 +25,13 @@ sap.ui.define([
 				"timeout": 0
 			};
 
-			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
 					var oUserModel = component.getModel("userModel");
 					oUserModel.setData(response);
-					that.updateUserModel(component);
 				})
 				.fail(function (jqXHR, exception) {
-					var sErrorMessage = "Ein Fehler beim Laden des Benutzerprofils ist aufgetreten";
+					var sErrorMessage = "Ein Fehler beim Laden des SAP Benutzerprofils ist aufgetreten";
 					var sDetailMessage = jqXHR.responseText + " (" + jqXHR.status + ")";
 
 					MessageBox.error(sErrorMessage, {
@@ -44,8 +42,14 @@ sap.ui.define([
 				});
 		},
 
-		updateUserModel: function (baseContoller, component) {
+		updateUserModel: function (controller, component) {
 			var oUserModel = component.getModel("userModel");
+
+			// wenn keine Datein in userModel, dann error anzeigen
+			if (oUserModel.getData().name === undefined) {
+				controller.onNavMessagePage("", "SAP Benutzerdaten wurden nicht gefunden.");
+				return;
+			}
 
 			var settings = {
 				"url": "/MOB_MITARBEITER_GETCREATE",
@@ -69,7 +73,7 @@ sap.ui.define([
 					roleModel.refresh(true);
 				})
 				.fail(function (jqXHR, exception) {
-					baseContoller.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+					controller.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
 				});
 		}
 
