@@ -152,7 +152,7 @@
 				},
 				{
 					"name": "MessagePage",
-					"pattern": "MessagePage",
+					"pattern": "MessagePage/{error}",
 					"target": [
 						"MessagePage"
 					]

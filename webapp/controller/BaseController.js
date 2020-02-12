@@ -47,10 +47,16 @@ sap.ui.define([
 			this.getRouter().navTo("Startpage", {}, true);
 		},
 
-		onNavMessagePage: function (sIconPath, sErrorMessage) {
+		onNavMessagePage: function (sIconPath, sErrorMessage, sErrorDescription, bStartpageButton) {
+			var oError = {};
+			oError.sIconPath = sIconPath;
+			oError.sErrorDescription = sErrorDescription;
+			oError.sErrorMessage = sErrorMessage;
+			oError.bStartpageButton = bStartpageButton;
+			var sError = JSON.stringify(oError);
+
 			this.getRouter().navTo("MessagePage", {
-				sIconPath: sIconPath,
-				sErrorMessage: sErrorMessage
+				error: sError
 			}, true);
 		},
 
