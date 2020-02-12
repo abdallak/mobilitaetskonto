@@ -43,6 +43,8 @@
 										number="{ parts:[{path:'salesModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${salesModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label text="{salesModel>KATEGORIE}" id="label8"/>
+									<ObjectStatus text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}"
+										state="{path: 'salesModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
 									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}" id="label9"/>
 								</cells>
 							</ColumnListItem>

@@ -51,7 +51,8 @@
 										number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label text="{requestTableModel>BEZEICHNUNG}"/>
-									<Label text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"/>
+									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"
+										state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
 									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2}"/>
 								</cells>
 							</ColumnListItem>

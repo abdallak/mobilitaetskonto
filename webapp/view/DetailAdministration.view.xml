@@ -72,7 +72,8 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusText'}"/>
+											<ObjectStatus text="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusText'}"
+												state="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusIndicator'}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
