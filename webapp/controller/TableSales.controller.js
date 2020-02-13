@@ -21,32 +21,31 @@ sap.ui.define([
 		_onRoutePatternMatched: function (oEvent) {
 			var target = oEvent.getParameter("arguments").Target;
 			this.updateUserModel();
-			this.getTableData(target);
-
+			this.getTableData();
+			
+			
 			// set title
 			var oResourceBundle = this.getResourceBundle();
 			var oTitleLabel = this.byId("titleLabel");
 			var sTitle;
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
+				this.salesTable = true;
 			} else {
 				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
+				this.salesTable = false;
 			}
 			oTitleLabel.setText(sTitle);
+			
+			this.getView().byId("rangepicker0").setValue(); //Datumwahl zuruecksetzen wenn View erneut aufgerufen
+			this.filterTable();
 		},
 
-		getTableData: function (target) {
+		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			if (target === "TableSales") {
-				params.status1 = 2;
-				params.status2 = 3;
-			} else {
-				params.status1 = 0;
-				params.status2 = 1;
-			}
-
+			
 			var settings = this.prepareAjaxRequest("/MOB_UMSATZ", "GET", params);
 
 			var that = this;
@@ -64,22 +63,31 @@ sap.ui.define([
 			//BindingContext
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");
+			var filters = [];
 			
 			//Filterparameter
 			var dateRangePicker = this.getView().byId("rangepicker0");
 			var minDate = dateRangePicker.getDateValue();
 			var maxDate = dateRangePicker.getSecondDateValue();
 			
-			var filters = [];
-			
+			//DATE FILTER
 			if (minDate !== null && maxDate !== null) {
 				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
 				filters.push(oDateFilter);
 			}
 			
+			//STATE FILTER
+			var oFO = FilterOperator.LT; //echt kleiner als
+			if(this.salesTable === true) oFO = FilterOperator.GE; //groesser gleich
+			
+			var oStateFilter = new Filter("STATUS", oFO, "2"); // Wert 2 damit entsprechnder Filteroperator die gewünschten Status zeigt
+			filters.push(oStateFilter);
+			
 			
 			binding.filter(filters);
 		},
+		
+		
 
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");
