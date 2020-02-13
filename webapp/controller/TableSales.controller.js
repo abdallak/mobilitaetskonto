@@ -1,8 +1,11 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/m/MessageToast"
-], function (BaseController, formatter) {
+], function (BaseController, formatter, Filter, FilterOperator) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableSales", {
@@ -10,6 +13,9 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
+			
+			var picker = this.getView().byId("rangepicker0");
+			picker.setMaxDate(new Date()); //Setzt MaxDatum zum aktuellen Zeitpunkt
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -52,6 +58,27 @@ sap.ui.define([
 				.fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
 				});
+		},
+		
+		filterTable: function(){
+			//BindingContext
+			var list = this.getView().byId("table0");
+			var binding = list.getBinding("items");
+			
+			//Filterparameter
+			var dateRangePicker = this.getView().byId("rangepicker0");
+			var minDate = dateRangePicker.getDateValue();
+			var maxDate = dateRangePicker.getSecondDateValue();
+			
+			var filters = [];
+			
+			if (minDate !== null && maxDate !== null) {
+				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
+				filters.push(oDateFilter);
+			}
+			
+			
+			binding.filter(filters);
 		},
 
 		onNavToDetail: function (oEvent) {
