@@ -9,7 +9,6 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_ANTRAG_INSERT",
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_ANTRAG_TABELLE",
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_GUTHABEN",
-	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_KATEGORIE",
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_MITARBEITER_GET",
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_MITARBEITER_GETCREATE",
 	"Mobilitaetskonto/Mobilitaetskonto/test/unit/model/destination/MOB_UMSATZ"
