@@ -88,13 +88,6 @@
 			"entryPath": "/mitarbeiter/getMitarbeiter.xsjs"
 		}
 	}, {
-		"path": "/MOB_KATEGORIE",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/kategorie.xsjs"
-		}
-	}, {
 		"path": "/MOB_KATEGORIE_CHANGE",
 		"target": {
 			"type": "destination",
