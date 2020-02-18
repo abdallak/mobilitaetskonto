@@ -4,18 +4,19 @@
 	"description": "",
 	"private": true,
 	"devDependencies": {
+		"@sap/grunt-sapui5-bestpractice-build": "latest",
 		"@sap/ui5-builder-webide-extension": "1.0.9",
 		"@ui5/cli": "1.7.0",
-		"@sap/grunt-sapui5-bestpractice-build": "latest",
 		"grunt": "latest",
 		"grunt-cli": "latest",
-		"grunt-eslint": "latest",
 		"grunt-contrib-clean": "latest",
 		"grunt-contrib-copy": "latest",
 		"grunt-contrib-cssmin": "latest",
 		"grunt-contrib-uglify": "latest",
+		"grunt-eslint": "latest",
 		"grunt-mkdir": "latest",
-		"grunt-openui5": "latest"
+		"grunt-openui5": "latest",
+		"jsdoc-to-markdown": "^5.0.3"
 	},
 	"scripts": {
 		"build": "ui5 build --include-task=generateManifestBundle generateCachebusterInfo"
