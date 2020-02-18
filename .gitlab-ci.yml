@@ -62,7 +62,7 @@ autogen-doc:
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git add -A
     - git commit -m "update jsDoc ${GITLAB_USER_EMAIL} ${CI_COMMIT_SHORT_SHA}"
-    - git push origin master
+    - git push https://${GITLAB_USER_CINAME}:${CI_GIT_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git HEAD:master
     dependencies:
     - build-app
 
