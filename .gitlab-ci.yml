@@ -19,6 +19,8 @@ before_script:
   - pwd
   - node -v
   - npm -v
+  - python3 --version
+  - python --version
 
 init-ci:
   stage: init
@@ -56,8 +58,6 @@ autogen-doc:
     - mkdir doc
     - cd doc
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git
-    - cd mobilitaetskonto.wiki
-    - ls -las
     dependencies:
     - build-app
 
