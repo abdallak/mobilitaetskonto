@@ -57,6 +57,10 @@ autogen-doc:
     - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git
     - rm -rf mobilitaetskonto.wiki/doc/*
     - node gen-doc.js mobilitaetskonto.wiki/ webapp/
+    - cd mobilitaetskonto.wiki
+    - git add -A
+    - git commit -m "update jsDoc $GITLAB_USER_EMAIL $CI_COMMIT_SHORT_SHA"
+    - git push origin master
     dependencies:
     - build-app
 
