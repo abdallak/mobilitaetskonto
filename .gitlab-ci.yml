@@ -55,7 +55,7 @@ autogen-doc:
     script:
     - mkdir doc
     - cd doc
-    - git clone git@gitlab.informatik.hu-berlin.de:sp_fs_2019_mob/mobilitaetskonto.wiki.git
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.com/sp_fs_2019_mob/mobilitaetskonto.wiki.git
     - cd mobilitaetskonto.wiki
     - ls -las
     dependencies:
