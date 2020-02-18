@@ -65,6 +65,8 @@ autogen-doc:
     - git push "https://${GITLAB_USER}:${CI_GIT_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git" HEAD:master
     dependencies:
     - build-app
+    only:
+    - master
 
 deploy-scp: 
     stage: deploy 
