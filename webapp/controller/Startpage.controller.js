@@ -13,7 +13,7 @@ sap.ui.define([
 		 * Globales JSON Model mit den aktuellen Mitarbeiter Daten aus der Datenbank
 		 * @typedef dbUserModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {any} GUTHABEN - Guthaben des aktuellen Nutzers
+		 * @property {number} GUTHABEN - Guthaben des aktuellen Nutzers
 		 */
 
 		/**
