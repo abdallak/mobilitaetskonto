@@ -4,17 +4,27 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * @class Startpage
-	 * 
 	 * Die Startpage ist der erste View der von dieser App geladen wird.
 	 * Er zeigt je nach Rolle nur die Mitarbeiter Kacheln an oder auch die der Verwaltung.
-	 * 
-	 */
+ 	 * @class Startpage
+ 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
+		/**
+		 * Globales JSON Model mit den aktuellen Mitarbeiter Daten aus der Datenbank
+		 * @typedef dbUserModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {any} GUTHABEN - Guthaben des aktuellen Nutzers
+		 */
 
 		/**
-		 * @function onInit
-		 * 
+		 * Globales JSON Model mit den Rollen des aktuellen Nutzers
+		 * @typedef roleModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {boolean} mitarbeiter Ist aktueller Nutzer ein Mitarbeiter
+		 * @property {boolean} verwalter Ist aktueller Nutzer ein Verwalter
+		 */
+
+		/**
 		 * Diese Funktion wird gerufen, nachdem der View erstellt wurde.
 		 */
 		onInit: function () {
@@ -24,6 +34,7 @@ sap.ui.define([
 		/**
 		 * oEvent Objekt des Routers
 		 * @typedef oEvent
+		 * @type {sap.ui.base.Event}
 		 */
 		/**
 		 * Wenn die Seite erneut aufgerufen wird, dann wird diese Funktion ausgeführt.
