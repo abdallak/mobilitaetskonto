@@ -49,7 +49,20 @@ build-app:
    artifacts:
     paths:
     - build/
-    
+
+autogen-doc:
+    stage: deploy
+    script:
+    - mkdir doc
+    - cd doc
+    - git clone git@gitlab.informatik.hu-berlin.de:sp_fs_2019_mob/mobilitaetskonto.wiki.git
+    - cd mobilitaetskonto.wiki
+    - ls -las
+    dependencies:
+    - build-app
+    only:
+    - master
+
 deploy-scp: 
     stage: deploy 
     script:
