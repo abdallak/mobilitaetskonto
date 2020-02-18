@@ -66,7 +66,7 @@ walkSync(jsFilesPath, function (filePath, stat) {
     var completePath = wikiPath + `${docName}.md`;
     writeFileSyncRecursive(completePath, output);
 
-    filePaths.push(docName);
+    fileNames.push(docName);
 
     console.log("wrote md file", completePath);
 });
