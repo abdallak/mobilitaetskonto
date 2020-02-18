@@ -1,12 +1,12 @@
 /* eslint-disable */
 
-const jsdoc2md = require('jsdoc-to-markdown')
+const jsdoc2md = require('jsdoc-to-markdown');
 const fs = require('fs');
 const path = require('path');
 
 var myArgs = process.argv.slice(2);
 
-if (myArgs.length != 2) {
+if (myArgs.length !== 2) {
     console.log("wrong number of arguments");
     return;
 }
@@ -31,18 +31,18 @@ function walkSync(currentDirPath, callback) {
 
 // https://gist.github.com/drodsou/de2ba6291aea67ffc5bc4b52d8c32abd
 function writeFileSyncRecursive(filename, content, charset) {
-    const folders = filename.split(path.sep).slice(0, -1)
+    const folders = filename.split(path.sep).slice(0, -1);
     if (folders.length) {
         // create folder path if it doesn't exist
         folders.reduce((last, folder) => {
-            const folderPath = last ? last + path.sep + folder : folder
+            const folderPath = last ? last + path.sep + folder : folder;
             if (!fs.existsSync(folderPath)) {
-                fs.mkdirSync(folderPath)
+                fs.mkdirSync(folderPath);
             }
-            return folderPath
-        })
+            return folderPath;
+        });
     }
-    fs.writeFileSync(filename, content, charset)
+    fs.writeFileSync(filename, content, charset);
 }
 
 var fileNames = [];
@@ -62,17 +62,17 @@ walkSync(jsFilesPath, function (filePath, stat) {
         return;
     }
 
-    var docName = `doc/${filePath}`
-    var completePath = wikiPath + `${docName}.md`
-    writeFileSyncRecursive(completePath, output)
+    var docName = `doc/${filePath}`;
+    var completePath = wikiPath + `${docName}.md`;
+    writeFileSyncRecursive(completePath, output);
 
     filePaths.push(docName);
 
-    console.log("wrote md file", completePath)
+    console.log("wrote md file", completePath);
 });
 
-var homeFilePath = wikiPath + "home.md"
-var newlines = "\n\n"
+var homeFilePath = wikiPath + "home.md";
+var newlines = "\n\n";
 var homeContent = "# Dokumentation der Mobilitätskonto SAP UI5 App" + newlines;
 
 for (var i = 0; i < fileNames.length; i++) {
@@ -80,6 +80,6 @@ for (var i = 0; i < fileNames.length; i++) {
     homeContent = homeContent + `[${fileName}](/${fileName})` + newlines;
 }
 
-writeFileSyncRecursive(homeFilePath, homeContent)
+writeFileSyncRecursive(homeFilePath, homeContent);
 
-console.log("wrote home.md file", homeFilePath)
+console.log("wrote home.md file", homeFilePath);
