@@ -61,8 +61,8 @@ autogen-doc:
     - git config --global user.name "${GITLAB_USER_NAME}"
     - git config --global user.email "${GITLAB_USER_EMAIL}"
     - git add -A
-    - git commit -m "update jsDoc ${GITLAB_USER_EMAIL} ${CI_COMMIT_SHORT_SHA}"
-    - git push https://${GITLAB_USER_CINAME}:${CI_GIT_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git HEAD:master
+    - git commit -m "update jsDoc ${GITLAB_USER_LOGIN} ${GITLAB_USER_NAME} ${CI_COMMIT_SHORT_SHA}"
+    - git push https://${GITLAB_USER}:${CI_GIT_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git HEAD:master
     dependencies:
     - build-app
 
