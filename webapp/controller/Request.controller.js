@@ -9,7 +9,7 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * This controller shows a form to perform a request.
+	 * This controller provides a form to perform a request.
 	 * @class Request
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Request", {
