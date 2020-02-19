@@ -19,7 +19,7 @@ sap.ui.define([
 		 */
 
 		/**
-		 * This is a convenience function which returns the router object initialized in the Component.js
+		 * This is a convenience function which returns the router object initialized in Component.js
 		 * 
 		 * @return {sap.ui.core.routing.Router} A sap router object
 		 */
