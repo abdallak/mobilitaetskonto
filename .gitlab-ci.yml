@@ -49,7 +49,25 @@ build-app:
    artifacts:
     paths:
     - build/
-    
+
+autogen-doc:
+    stage: deploy
+    script:
+    - npm install
+    - git clone https://gitlab-ci-token:${CI_JOB_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git
+    - rm -rf mobilitaetskonto.wiki/doc/*
+    - node gen-doc.js mobilitaetskonto.wiki/ webapp/
+    - cd mobilitaetskonto.wiki
+    - git config --global user.name "${GITLAB_USER_NAME}"
+    - git config --global user.email "${GITLAB_USER_EMAIL}"
+    - git add -A
+    - git diff --quiet && git diff --staged --quiet || git commit -m "update jsDoc ${GITLAB_USER_LOGIN} ${GITLAB_USER_NAME} ${CI_COMMIT_SHORT_SHA}"
+    - git push "https://${GITLAB_USER}:${CI_GIT_TOKEN}@gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto.wiki.git" HEAD:master
+    dependencies:
+    - build-app
+    only:
+    - master
+
 deploy-scp: 
     stage: deploy 
     script:
