@@ -25,12 +25,6 @@ sap.ui.define([
 		 */
 
 		/**
-		 * oEvent Objekt des Routers
-		 * @typedef oEvent
-		 * @type {sap.ui.base.Event}
-		 */
-
-		/**
 		 * Diese Funktion wird gerufen, nachdem der View erstellt wurde.
 		 */
 		onInit: function () {
@@ -41,7 +35,7 @@ sap.ui.define([
 		 * Wenn die Seite erneut aufgerufen wird, dann wird diese Funktion ausgeführt.
 		 * Sie aktualsiert das dbUserModel, damit der angezeigte Kontostand aktuell ist.
 		 * 
-		 * @param {oEvent} oEvent - Das oEvent des Routers
+		 * @param {sap.ui.base.Event} [oEvent] The SAPUI5 event object
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
