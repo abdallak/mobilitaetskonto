@@ -13,8 +13,27 @@ sap.ui.define([
 ], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel) {
 	"use strict";
 
+	/**
+	 * This controller manages deleting, renaming and adding categories.
+	 * @class SettingsCategory
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory", {
 
+		/**
+		 * A local JSON model which contains all active categories.
+		 * 
+		 * @typedef dbCategoryModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {integer} KID - Category id
+		 * @property {string} BEZEICHNUNG - Category name
+		 */
+
+		/**
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 * 
+		 * It will set an empty dbCategoryModel and triggers a model update.
+		 */
 		onInit: function () {
 			// FIXME: Funktioniert für den NavContainer nicht
 			// this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
@@ -22,20 +41,30 @@ sap.ui.define([
 			this.changeCategory("get");
 		},
 
+		/**
+		 * @param{sap.ui.base.Event} [oEvent] - oEvent
+		 */
 		_onRoutePatternMatched: function (oEvent) {},
 
-		changeCategory: function (type, name, kid) {
+		/**
+		 * This is a helper function which will prepare and perform the network requests.
+		 * 
+		 * @param{string} sType - Operation type: add, delete, edit, get
+		 * @param{string} name - New category name
+		 * @param{(integer|string)} kid - Category id
+		 */
+		changeCategory: function (sType, name, kid) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 
 			var settings;
 			var data = {
-				type: type,
+				type: sType,
 				name: name,
 				kid: kid,
 				amid: dbUserData.MID
 			};
 
-			switch (type) {
+			switch (sType) {
 			case "add":
 				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 				break;
@@ -66,6 +95,11 @@ sap.ui.define([
 			});
 		},
 
+		/**
+		 * This function will show a confirmation Dialog and call changeCategory afterwards.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
 		onDeletePressed: function (oEvent) {
 			var kid = oEvent.getParameter("listItem").data("KID");
 
@@ -103,6 +137,11 @@ sap.ui.define([
 			oDialog.open();
 		},
 
+		/**
+		 * This function will show a Dialog with an Input to change the categories name and call changeCategory afterwards.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
 		onEditPressed: function (oEvent) {
 			var kid = oEvent.getSource().data("KID");
 
@@ -144,6 +183,11 @@ sap.ui.define([
 			oDialog.open();
 		},
 
+		/**
+		 * This function will show a Dialog with an Input item to set the new name and call changeCategory afterwards.
+		 * 
+		 * @param{sap.ui.base.Event} [oEvent] - oEvent
+		 */
 		onAddPressed: function (oEvent) {
 			var that = this;
 			var oDialog = new Dialog({
