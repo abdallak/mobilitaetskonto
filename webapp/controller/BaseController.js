@@ -19,7 +19,7 @@ sap.ui.define([
 		 */
 
 		/**
-		 * This is a convenience function which returns the router object initialized in the Component.js
+		 * This is a convenience function which returns the router object initialized in Component.js
 		 * 
 		 * @return {sap.ui.core.routing.Router} A sap router object
 		 */
@@ -71,8 +71,8 @@ sap.ui.define([
 
 		/**
 		 * This is a convenience function to get the resource bundle.
-		 * 
-		 * @return {object} The i18n resource bundle TODO
+		 * @public
+		 * @returns {sap.ui.model.resource.ResourceModel} the resourceModel of the component
 		 */
 		getResourceBundle: function () {
 			return this.getGlobalModel("i18n").getResourceBundle();
@@ -83,7 +83,7 @@ sap.ui.define([
 		 * 
 		 * If there is no previous page in history, it will default to the startpage.
 		 * 
-		 * @param {object} [oEvent] - oEvent
+		 * @param {sap.ui.base.Event} [oEvent] The SAPUI5 event object
 		 */
 		onNavBack: function (oEvent) {
 			var oHistory, sPreviousHash;
@@ -101,7 +101,7 @@ sap.ui.define([
 		 * 
 		 * There will be no entry in the browser history.
 		 * 
-		 * @param {object} [oEvent] - oEvent
+		 * @param {sap.ui.base.Event} [oEvent] The SAPUI5 event object
 		 */
 		onNavStartpage: function (oEvent) {
 			this.getRouter().navTo("Startpage", {}, true);

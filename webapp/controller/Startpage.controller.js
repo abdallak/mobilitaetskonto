@@ -6,8 +6,8 @@ sap.ui.define([
 	/**
 	 * Die Startpage ist der erste View der von dieser App geladen wird.
 	 * Er zeigt je nach Rolle nur die Mitarbeiter Kacheln an oder auch die der Verwaltung.
- 	 * @class Startpage
- 	 */
+	 * @class Startpage
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		/**
 		 * Globales JSON Model mit den aktuellen Mitarbeiter Daten aus der Datenbank
@@ -32,15 +32,10 @@ sap.ui.define([
 		},
 
 		/**
-		 * oEvent Objekt des Routers
-		 * @typedef oEvent
-		 * @type {sap.ui.base.Event}
-		 */
-		/**
 		 * Wenn die Seite erneut aufgerufen wird, dann wird diese Funktion ausgeführt.
 		 * Sie aktualsiert das dbUserModel, damit der angezeigte Kontostand aktuell ist.
 		 * 
-		 * @param {oEvent} oEvent - Das oEvent des Routers
+		 * @param {sap.ui.base.Event} [oEvent] The SAPUI5 event object
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
