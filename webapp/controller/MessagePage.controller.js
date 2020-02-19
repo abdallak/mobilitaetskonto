@@ -26,8 +26,6 @@ sap.ui.define([
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * 
 		 * It will set the an empty "errorPageModel" and attach the route pattern matcher to reload the details on this page.
-		 * 
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.MessagePage
 		 */
 		onInit: function () {
 			this.setModel(new JSONModel(), "errorPageModel");
