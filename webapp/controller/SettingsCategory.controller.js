@@ -138,7 +138,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This function will show a Dialog with an Input item to change the categories name and call changeCategory afterwards.
+		 * This function will show a Dialog with an Input to change the categories name and call changeCategory afterwards.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
@@ -184,7 +184,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This function will show a Dialog with an Input item to insert the new name and call changeCategory afterwards.
+		 * This function will show a Dialog with an Input item to set the new name and call changeCategory afterwards.
 		 * 
 		 * @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */

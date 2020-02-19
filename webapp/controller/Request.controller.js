@@ -67,7 +67,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * If the user selects the cancel button, the resetRequest function will be called and onNavBack.
+		 * If the user selects the cancel button, the resetRequest and onNavBack function will be called.
 		 * 
 		 * @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
@@ -196,7 +196,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This function gets called if there is an change inside the amount input.
+		 * This function gets called if the amount input changes.
 		 * It will check if the given value is valid or not.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
@@ -233,7 +233,7 @@ sap.ui.define([
 		/**
 		 * This is a helper function which will check if the already saved files inside the oRequestModel.attachments array are still inside the uploadcollection.
 		 * 
-		 * Since we do not upload the attachments as soon as they are selected and the onDelete function is very strange, we need this strange workaround.
+		 * Since we do not upload the attachments as soon as they are selected and the onDelete function is very strange, we need this workaround.
 		 * 
 		 * @param{object} oRequestData - Data of oRequestModel
 		 */
@@ -257,7 +257,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This is a helper function which will save the file as base64 String into oRequestModel.attachments.
+		 * This is a helper function which will save the filename and content as base64 String into oRequestModel.attachments.
 		 * 
 		 * @param{object} file - according to the sap documentation a simple object
 		 */

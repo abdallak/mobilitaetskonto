@@ -7,16 +7,11 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * This controller contains functions, which will be used by all other controllers for recurring jobs like showing error messages.
+	 * This controller serves as a BaseController.
+	 * Its functions will be used by all other controllers for recurring jobs like showing error messages.
 	 * @class BaseController
 	 */
 	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.BaseController", {
-
-		/**
-		 * TODO
-		 * @typedef jqXHR
-		 * @type {object}
-		 */
 
 		/**
 		 * This is a convenience function which returns the router object initialized in Component.js
@@ -180,7 +175,7 @@ sap.ui.define([
 		/**
 		 * This function will display a messagebox with a network error message.
 		 * 
-		 * @param {jqXHR} jqXHR - jQuery xhr response object
+		 * @param {object} jqXHR - jQuery xhr response object
 		 */
 		handleNetworkError: function (jqXHR) {
 			this.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
