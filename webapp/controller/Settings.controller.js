@@ -41,7 +41,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This function navigates between different NavContainer.
+		 * This function navigates between different setting pages.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
@@ -52,6 +52,8 @@ sap.ui.define([
 			navContainer.to(viewId);
 		},
 
+		/**
+		 */
 		getLogData: function () {
 			var settings = this.prepareAjaxRequest("/MOB_LOG_GET", "GET", null);
 
