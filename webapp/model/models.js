@@ -49,12 +49,25 @@ sap.ui.define([
 				});
 		},
 
+		onNavMessagePageWorkaround: function (component, sIconPath, sErrorMessage, sErrorDescription, bStartpageButton) {
+			var oError = {};
+			oError.sIconPath = sIconPath;
+			oError.sErrorDescription = sErrorDescription;
+			oError.sErrorMessage = sErrorMessage;
+			oError.bStartpageButton = bStartpageButton;
+			var sError = JSON.stringify(oError);
+
+			component.getRouter().navTo("MessagePage", {
+				error: sError
+			}, true);
+		},
+
 		updateUserModel: function (controller, component) {
 			var oUserModel = component.getModel("userModel");
 
 			// wenn keine Daten in userModel, dann error anzeigen
 			if (oUserModel.getData().name === undefined) {
-				// onNavMessagePageWorkaround("", "SAP Benutzerdaten wurden nicht gefunden.");
+				this.onNavMessagePageWorkaround(component, "", "SAP Benutzerdaten wurden nicht gefunden.");
 				return;
 			}
 
@@ -65,6 +78,7 @@ sap.ui.define([
 				"data": oUserModel.getData()
 			};
 
+			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
 					var dbUserModel = component.getModel("dbUserModel");
@@ -80,8 +94,9 @@ sap.ui.define([
 					roleModel.refresh(true);
 
 					if (response.AKTIV !== "TRUE") {
-						controller.onNavMessagePage("message-warning", "Keine Berechtigung",
-							"Bitte wenden Sie sich an den jeweiligen Ansprechpartner bzw. Verwalter", false);
+						that.onNavMessagePageWorkaround(component, "message-warning", "Keine Berechtigung",
+							"Evtl. sind Sie noch nicht für dieses Programm freigeschaltet worden.\n\nBitte wenden Sie sich an den jeweiligen Ansprechpartner bzw. Verwalter.",
+							false);
 					}
 				})
 				.fail(function (jqXHR, exception) {
