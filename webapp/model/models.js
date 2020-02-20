@@ -1,8 +1,9 @@
 sap.ui.define([
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/Device",
 	"sap/m/MessageBox"
-], function (JSONModel, Device, MessageBox) {
+], function (BaseController, JSONModel, Device, MessageBox) {
 	"use strict";
 
 	return {
