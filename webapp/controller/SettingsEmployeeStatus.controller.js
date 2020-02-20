@@ -68,7 +68,7 @@ sap.ui.define([
 				var path = context.getPath();
 
 				var employeeStatus = {};
-				employeeStatus.status = bStatus;
+				employeeStatus.aktiv = bStatus;
 				employeeStatus.mid = context.getProperty(path).MID;
 				employeeStatus.amid = dbUserData.MID;
 				paramData.push(employeeStatus);
