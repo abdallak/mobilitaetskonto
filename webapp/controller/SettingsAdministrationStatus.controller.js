@@ -70,7 +70,7 @@ sap.ui.define([
 			employeeStatus.amid = dbUserData.MID;
 			employeeStatus.administrationValue = iValue;
 
-			var settings = this.prepareAjaxRequest("/MOB_STATUS_AENDERN", "POST", JSON.stringify(employeeStatus));
+			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
@@ -88,9 +88,7 @@ sap.ui.define([
 		 */
 		onEditPressed: function (oEvent) {
 			var mid = oEvent.getSource().data("MID");
-			
-			
-			console.log(mid);
+
 			var that = this;
 			var oDialog = new Dialog({
 				title: "Freigabebetrag des Verwalters ändern",
@@ -106,8 +104,7 @@ sap.ui.define([
 					text: "Ändern",
 					press: function () {
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
-						console.log(sText, mid);
-						// that.setEmployeeStatus(mid, sText);
+						that.setEmployeeStatus(mid, sText);
 						oDialog.close();
 					}
 				}),

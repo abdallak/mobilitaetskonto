@@ -20,7 +20,7 @@
 					<Toolbar width="100%" id="toolbar1">
 						<content>
 							<Label
-								text="Hinweis: Erstmal nur testweise so unübersichtlich. Freigabewert 0 entspricht einem normalen Mitarbeiter. Werte größer 0 sind Verwalter."
+								text="Hinweis: Erstmal nur testweise so unübersichtlich. Freigabewert 0 entspricht einem normalen Mitarbeiter. Werte größer 0 sind Verwalter. Eingegebene Werte dürfen nur ganze Zahlen sein."
 								width="100%" id="label0"/>
 						</content>
 					</Toolbar>
