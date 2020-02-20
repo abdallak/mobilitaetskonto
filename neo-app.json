@@ -123,6 +123,13 @@
 			"entryPath": "/mitarbeiter/statusAendern.xsjs"
 		}
 	}, {
+		"path": "/MOB_STATUS_ADMINISTRATION",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/mitarbeiter/administration.xsjs"
+		}
+	}, {
 		"path": "/MOB_LOG_GET",
 		"target": {
 			"type": "destination",
