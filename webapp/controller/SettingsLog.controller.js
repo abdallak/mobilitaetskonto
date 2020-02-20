@@ -1,9 +1,10 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController,JSONModel) {
 	"use strict";
 
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog", {
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -11,8 +12,24 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog
 		 */
 		onInit: function () {
+			
+		},
+		
+		onRefreshPressed: function () {
+			var settings = this.prepareAjaxRequest("/MOB_LOG_GET", "GET", null);
 
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var logModel = that.getGlobalModel("logModel");
+					logModel.setData(response);
+				})
+				.fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
 		}
+		
+
 
 		/**
 		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
