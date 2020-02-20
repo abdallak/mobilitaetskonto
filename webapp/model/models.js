@@ -54,7 +54,7 @@ sap.ui.define([
 
 			// wenn keine Daten in userModel, dann error anzeigen
 			if (oUserModel.getData().name === undefined) {
-				controller.onNavMessagePage("", "SAP Benutzerdaten wurden nicht gefunden.");
+				// onNavMessagePageWorkaround("", "SAP Benutzerdaten wurden nicht gefunden.");
 				return;
 			}
 
@@ -80,8 +80,8 @@ sap.ui.define([
 					roleModel.refresh(true);
 
 					if (response.AKTIV !== "TRUE") {
-						this.onNavMessagePage("message-warning", "Keine Berechtigung",
-							"Bitte wenden Sie sich an den jeweiligen Ansprechpartner / Verwalter", false);
+						controller.onNavMessagePage("message-warning", "Keine Berechtigung",
+							"Bitte wenden Sie sich an den jeweiligen Ansprechpartner bzw. Verwalter", false);
 					}
 				})
 				.fail(function (jqXHR, exception) {
