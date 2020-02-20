@@ -137,7 +137,8 @@ sap.ui.define([
 				"state": 1,
 				"beschreibung": null,
 				"kid": null,
-				"attachments": []
+				"attachments": [],
+				"freigeber" : dbUserData.FREIGEBER
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
