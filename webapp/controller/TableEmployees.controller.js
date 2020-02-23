@@ -80,6 +80,20 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
+		
+		calcExpired: function (mid, date){
+			var params = {};
+			params.mid = "P2001828430";
+			params.date = '31.12.2017';
+			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
+			console.log(settings);
+			var that = this;
+			$.ajax(settings).done(function (response) {
+				console.log(settings);
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
+		},
 
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("employeeTableModel");
@@ -115,7 +129,7 @@ sap.ui.define([
 			this.byId(dialogId).close();
 		},
 
-		onExecuteAndCloseDialog: function () {
+		onExecuteAndCloseDialogG: function () {
 			//TODO FEHLERMELDUNG bei keinen angewählten?
 			var thisView = this.getView();
 			var SelectedItems = thisView.byId("table0").getSelectedItems();
