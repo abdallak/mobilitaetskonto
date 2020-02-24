@@ -58,10 +58,6 @@
 								text="{i18n>tableEmployeesTitle}" width="100%"/>
 						</contentMiddle>
 						<contentRight>
-							<Label text="Freigabewert:" textAlign="Right"/>
-							<ObjectNumber
-								number="{ parts:[{path:'dbUserModel>/VERWALTER'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-								unit="{i18n>currency}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -69,8 +65,8 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="GuthabenButton" type="Default" text="{i18n>guthabenButton}" press="dialogButton($event, 'GuthabenDialog')"/>
-							<Button xmlns="sap.m" id="AbschlussButton" type="Default" text="{i18n>abschlussButton}" press="dialogButton($event, 'AbschlussDialog')"/>
+							<Button xmlns="sap.m" id="GuthabenButton" type = "Default" text="{i18n>guthabenButton}" press="dialogButton($event, 'GuthabenDialog')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" type = "Default" text="{i18n>abschlussButton}" press="dialogButton($event, 'AbschlussDialog')"/>
 							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
 						</content>
 					</OverflowToolbar>
