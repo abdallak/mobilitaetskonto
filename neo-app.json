@@ -130,6 +130,13 @@
 			"entryPath": "/mitarbeiter/administration.xsjs"
 		}
 	}, {
+		"path": "/MOB_ABSCHLUSS",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/mitarbeiter/getExpired.xsjs"
+		}	
+	}, {
 		"path": "/MOB_LOG_GET",
 		"target": {
 			"type": "destination",
