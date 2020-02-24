@@ -4,7 +4,7 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="Betrag" id="betragtext"/>
-					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betrag}"/>
+					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}"/>
 					<Label text="Beschreibung" id="beschreibtext"/>
 					<Input width="100%" id="describe" placeholder="individuelle Gutschrift" required="true" type="Text" value="{staticModel>/beschreibung}"/>
 				</f:content>

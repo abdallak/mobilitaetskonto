@@ -4,9 +4,9 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="welches Jahr soll abgeschlossen werden??" id="jahrText"/>
-					<Input width="100%" id="jahr" placeholder="2018" required="true" type="Number" value="{staticModel>/jahr1}" />
+					<Input width="100%" id="jahr" placeholder="2018" required="true" type="Number" value="{staticModel>/jahr1}"/>
 					<Label text="Wie viele Jahre altes Guthaben soll ablaufen?" id="alterText"/>
-					<Input width="100%" id="alter" placeholder="3" required="true" type="Number" value="{staticModel>/jahr2}" />
+					<Input width="100%" id="alter" placeholder="3" required="true" type="Number" value="{staticModel>/jahr2}"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

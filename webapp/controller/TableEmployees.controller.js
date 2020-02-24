@@ -40,27 +40,43 @@ sap.ui.define([
 			});
 		},
 
-		setRequest: function (mid) {
+		setRequest: function (mid, GJ) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var staticModel = this.getModel("staticModel").getData();
-			var betr = staticModel.betrag;
-			var besch = staticModel.beschreibung;
+			
 
 			console.log(staticModel);
 			console.log(staticModel.betrag);
 			//var betr = 1;
 			//var besch = "test";
-
-			var defaultRequest = {
-				"MID": mid,
-				"art": 2,
-				"betrag": betr,
-				"beschreibung": besch,
-				"kid": 1, //nicht schön
-				"state": 2,
-				"MIDV": dbUserData.MID
-
+			var defaultRequest;
+			if(GJ === 0){
+				var betr = staticModel.betragG;
+				var besch = staticModel.beschreibung;
+				
+				defaultRequest = {
+					"MID": mid,
+					"art": 2,
+					"betrag": betr,
+					"beschreibung": besch,
+					"kid": 1,
+					"state": 2,
+					"MIDV": dbUserData.MID
+			};}
+			else{
+				
+				defaultRequest = {
+					"MID": mid,
+					"art": 2,
+					"betrag": -1,
+					"beschreibung": "abgelaufenes Guthaben",
+					"kid": 1, //nicht schön
+					"state": 2,
+					"MIDV": dbUserData.MID
 			};
+				
+			}
+			
 			insertModel = new JSONModel(defaultRequest);
 			this.setModel(insertModel, "insertModel");
 			console.log(insertModel);
@@ -84,7 +100,11 @@ sap.ui.define([
 		calcExpired: function (mid, date){
 			var params = {};
 			params.mid = "P2001828430";
-			params.date = '31.12.2017';
+			params.date = "31.12.2017";
+			
+			// console.log(staticModel);
+			// console.log(staticModel.betrag);
+			
 			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
 			console.log(settings);
 			var that = this;
@@ -93,6 +113,12 @@ sap.ui.define([
 			}).fail(function (jqXHR, exception) {
 				that.handleNetworkError(jqXHR);
 			});
+			
+			this.onAbortCloseDialog(1, "GuthabenDialog");
+			
+			var ergebniss = 1;
+			this.getModel("staticModel").Betrag = (ergebniss > 0 ? ergebniss*(-1) : 0);
+			
 		},
 
 		onNavToDetail: function (oEvent) {
@@ -104,10 +130,10 @@ sap.ui.define([
 			});
 		},
 
-		dialogButton: function (oEvent, dialogId) {
-			//var dialogId = "AbschlussDialog";
+		dialogOpen: function (oEvent, dialogId) {
+
 			var thisView = this.getView();
-			// create dialog lazily
+
 			if (!this.byId(dialogId)) {
 				// load asynchronous XML fragment
 				Fragment.load({
@@ -127,6 +153,7 @@ sap.ui.define([
 
 		onAbortCloseDialog: function (oEvent, dialogId) {
 			this.byId(dialogId).close();
+			this.byId(dialogId).destroy();
 		},
 
 		onExecuteAndCloseDialogG: function () {
@@ -144,12 +171,11 @@ sap.ui.define([
 			}
 
 			for (var j = 0; j < SelectedMID.length; j++) {
-				this.setRequest(SelectedMID[j]);
+				this.setRequest(SelectedMID[j], 0);
 				this.makeRequest();
 			}
 			//closing the dialog box
-			this.byId("GuthabenDialog").close();
-
+			this.onAbortCloseDialog(1, "GuthabenDialog");
 		}
 	});
 });
