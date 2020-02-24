@@ -1,11 +1,17 @@
-<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+<core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
 	<Dialog id="AbschlussDialog" title="Jahresabschluss">
-		<Label text="welches Jahr soll abgeschlossen werden??" id="jahrText"/>
-		<Input width="100%" id="jahr" placeholder="2018" required="true" type="Number"/>
-		<Label text="Wie viele Jahre altes Guthaben soll ablaufen?" id="alterText"/>
-		<Input width="100%" id="alter" placeholder="3" required="true" type="Number"/>
+		<VBox class="sapUiSmallMargin">
+			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
+				<f:content>
+					<Label text="welches Jahr soll abgeschlossen werden??" id="jahrText"/>
+					<Input width="100%" id="jahr" placeholder="2018" required="true" type="Number" value="{staticModel>/jahr1}" />
+					<Label text="Wie viele Jahre altes Guthaben soll ablaufen?" id="alterText"/>
+					<Input width="100%" id="alter" placeholder="3" required="true" type="Number" value="{staticModel>/jahr2}" />
+				</f:content>
+			</f:SimpleForm>
+		</VBox>
 		<beginButton>
-			<Button text="Abschluss durchführen" press=".onExecuteAndCloseDialog"/>
+			<Button text="Abschluss durchführen" press=".calcExpired"/>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'AbschlussDialog')"/>

@@ -48,8 +48,8 @@
 					<Page id="manageEmployeeStatus" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsEmployeeStatus"/>
 					</Page>
-					<Page id="manageVerwalterguthaben" title="Verwalterguthaben anpassen">
-						<Text text="TODO Verwalterguthaben anpassen"/>
+					<Page id="manageVerwalterguthaben" showHeader="false">
+						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationStatus"/>
 					</Page>
 					<Page id="assignAdministrators" title="Verwalter zuordnen">
 						<Text text="TODO Verwalter zuordnen"/>
