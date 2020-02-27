@@ -51,8 +51,8 @@
 					<Page id="manageVerwalterguthaben" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationStatus"/>
 					</Page>
-					<Page id="assignAdministrators" title="Verwalter zuordnen">
-						<Text text="TODO Verwalter zuordnen"/>
+					<Page id="assignAdministrators" showHeader="false">
+						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign"/>
 					</Page>
 					<Page id="manageCategories" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsCategory"/>

@@ -68,6 +68,7 @@ sap.ui.define([
 			var employeeStatus = {};
 			employeeStatus.mid = mid;
 			employeeStatus.amid = dbUserData.MID;
+			employeeStatus.type = "value";
 			employeeStatus.administrationValue = iValue;
 
 			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));

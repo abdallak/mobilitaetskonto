@@ -1,9 +1,32 @@
 sap.ui.define([
-	"sap/ui/core/mvc/Controller"
-], function (Controller) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/m/Dialog",
+	"sap/m/ButtonType",
+	"sap/m/Input",
+	"sap/m/Button",
+	"sap/ui/model/json/JSONModel"
+], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel) {
 	"use strict";
 
-	return Controller.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign", {
+	/**
+	 * This controller provides a list of employees to change their assigned freigeber.
+	 * @class SettingsAdministrationAssign
+	 */
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign", {
+
+		/**
+		 * A local JSON model which contains all active categories.
+		 * 
+		 * @typedef employeeTableModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {string} VORNAME - firstname
+		 * @property {string} NAME - lastname
+		 * @property {string} MID - employee id
+		 * @property {number} GUTHABEN - current balance
+		 * @property {boolean} AKTIV - isActive
+		 * @property {integer} VERWALTER - administration value
+		 * @property {string} FREIGEBER - assigned freigeber id
+		 */
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -11,35 +34,96 @@ sap.ui.define([
 		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign
 		 */
 		onInit: function () {
-
+			var employeeTableModel = new JSONModel();
+			this.setModel(employeeTableModel, "employeeTableModel");
+			this.getEmployeeData();
 		},
 
 		/**
-		 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
-		 * (NOT before the first rendering! onInit() is used for that one!).
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign
+		 * This function will update the employeeTableModel.
 		 */
-		//	onBeforeRendering: function() {
-		//
-		//	},
+		getEmployeeData: function () {
+			var params = {};
+			params.mid = null;
+
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+
+			var that = this;
+			$.ajax(settings).done(function (response) {
+				var employeeTableModel = that.getModel("employeeTableModel");
+				employeeTableModel.setData(response);
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
+		},
 
 		/**
-		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
-		 * This hook is the same one that SAPUI5 controls get after being rendered.
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign
+		 * This is a helper function which will prepare and perform the network requests.
+		 * 
+		 * @param{string} mid - Selected employee id
+		 * @param{integer} iValue - New administration value
+		 * @param{string} sFreigeberId - New freigeber id
 		 */
-		//	onAfterRendering: function() {
-		//
-		//	},
+		setEmployeeStatus: function (mid, sFreigeberId) {
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+
+			var employeeStatus = {};
+			employeeStatus.mid = mid;
+			employeeStatus.amid = dbUserData.MID;
+			employeeStatus.type = "freigeber";
+			employeeStatus.freigeberId = sFreigeberId;
+
+			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
+
+			var that = this;
+			$.ajax(settings).done(function (response) {
+				var employeeTableModel = that.getModel("employeeTableModel");
+				employeeTableModel.setData(response);
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
+		},
 
 		/**
-		 * Called when the Controller is destroyed. Use this one to free resources and finalize activities.
-		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign
+		 * This function will show a Dialog with an Input to assign the freigeber.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
-		//	onExit: function() {
-		//
-		//	}
+		onEditPressed: function (oEvent) {
+			var mid = oEvent.getSource().data("MID");
+
+			var that = this;
+			var oDialog = new Dialog({
+				title: "Freigeber des Mitarbeiters ändern",
+				type: "Message",
+				content: [
+					new Input("newValueInput", {
+						width: "100%",
+						placeholder: "ID des Freigebers"
+					})
+				],
+				beginButton: new Button({
+					type: ButtonType.Emphasized,
+					text: "Ändern",
+					press: function () {
+						var sText = sap.ui.getCore().byId("newValueInput").getValue();
+						that.setEmployeeStatus(mid, sText);
+						oDialog.close();
+					}
+				}),
+				endButton: new Button({
+					text: "Abbrechen",
+					press: function () {
+						oDialog.close();
+					}
+				}),
+				afterClose: function () {
+					oDialog.destroy();
+				}
+			});
+
+			oDialog.open();
+		}
 
 	});
-
 });
