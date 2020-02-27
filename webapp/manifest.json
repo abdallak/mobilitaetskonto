@@ -210,6 +210,10 @@
 				"SettingsAdministrationStatus": {
 					"viewType": "XML",
 					"viewName": "SettingsAdministrationStatus"
+				},
+				"SettingsAdministrationAssign": {
+					"viewType": "XML",
+					"viewName": "SettingsAdministrationAssign"
 				}
 			}
 		}
