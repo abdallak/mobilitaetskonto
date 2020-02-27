@@ -9,10 +9,10 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * This controller provides a list of employees to change their administration values.
-	 * @class SettingsAdministrationStatus
+	 * This controller provides a list of employees to change their assigned freigeber.
+	 * @class SettingsAdministrationAssign
 	 */
-	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationStatus", {
+	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign", {
 
 		/**
 		 * A local JSON model which contains all active categories.
@@ -25,12 +25,13 @@ sap.ui.define([
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
 		 * @property {integer} VERWALTER - administration value
+		 * @property {string} FREIGEBER - assigned freigeber id
 		 */
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
-		 * 
+		 * @memberOf Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssign
 		 */
 		onInit: function () {
 			var employeeTableModel = new JSONModel();
@@ -61,15 +62,16 @@ sap.ui.define([
 		 * 
 		 * @param{string} mid - Selected employee id
 		 * @param{integer} iValue - New administration value
+		 * @param{string} sFreigeberId - New freigeber id
 		 */
-		setEmployeeStatus: function (mid, iValue) {
+		setEmployeeStatus: function (mid, sFreigeberId) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 
 			var employeeStatus = {};
 			employeeStatus.mid = mid;
 			employeeStatus.amid = dbUserData.MID;
-			employeeStatus.type = "value";
-			employeeStatus.administrationValue = iValue;
+			employeeStatus.type = "freigeber";
+			employeeStatus.freigeberId = sFreigeberId;
 
 			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
 
@@ -83,7 +85,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * This function will show a Dialog with an Input to change the adminsitration value.
+		 * This function will show a Dialog with an Input to assign the freigeber.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
@@ -92,12 +94,12 @@ sap.ui.define([
 
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Freigabebetrag des Verwalters ändern",
+				title: "Freigeber des Mitarbeiters ändern",
 				type: "Message",
 				content: [
 					new Input("newValueInput", {
 						width: "100%",
-						placeholder: "Neuer Freigabewert des Verwalters"
+						placeholder: "ID des Freigebers"
 					})
 				],
 				beginButton: new Button({
@@ -124,5 +126,4 @@ sap.ui.define([
 		}
 
 	});
-
 });
