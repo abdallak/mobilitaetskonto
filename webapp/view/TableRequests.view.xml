@@ -6,6 +6,11 @@
 				<content>
 					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" growingScrollToLoad="true">
 						<columns>
+							<Column id="columnU" width="5em">
+								<header>
+									<Label text="Nr." id="labelU"/>
+								</header>
+							</Column>
 							<Column id="column0">
 								<header>
 									<Label text="{i18n>HeaderEmployee}" id="label0"/>
@@ -18,17 +23,12 @@
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>HeaderType}" id="label2"/>
+									<Label text="{i18n>HeaderValue}" id="label3"/>
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="{i18n>HeaderValue}" id="label3"/>
-								</header>
-							</Column>
-							<Column id="column4">
-								<header>
-									<Text text="{i18n>HeaderCategorie}"/>
+									<Label text="{i18n>HeaderType}" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column5">
@@ -43,14 +43,14 @@
 						<items>
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
+									<Label text="{requestTableModel>UID}"/>
 									<Label text="{requestTableModel>VORNAME} {requestTableModel>NAME}"/>
 									<Label
 										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
-									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<ObjectNumber
 										number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
-									<Label text="{requestTableModel>BEZEICHNUNG}"/>
+									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"
 										state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
 									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2 &amp;&amp; ${requestTableModel>ART} === 0}"/>
