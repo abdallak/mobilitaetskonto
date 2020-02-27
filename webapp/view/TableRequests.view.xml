@@ -53,7 +53,7 @@
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"
 										state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
-									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2}"/>
+									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2 &amp;&amp; ${requestTableModel>ART} === 0}"/>
 								</cells>
 							</ColumnListItem>
 						</items>

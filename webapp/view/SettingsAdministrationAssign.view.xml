@@ -1,0 +1,31 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Verwalter zuordnen">
+				<content>
+					<List id="list0" items="{ path : 'employeeTableModel>/'}">
+						<items>
+							<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" id="item0" detailPress="onEditPressed"
+								type="Detail"
+								description="MID: {path: 'employeeTableModel>MID'} Aktiv: {path: 'employeeTableModel>AKTIV'} Freigeber: {path: 'employeeTableModel>FREIGEBER'}">
+								<customData>
+									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
+								</customData>
+							</StandardListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Toolbar width="100%" id="toolbar1">
+						<content>
+							<Text
+								text="Hinweis: Erstmal nur testweise so unübersichtlich. Id wird aktuell noch nicht geprüft und Input in Dialog wird noch durch ein Textfeld mit Namen (und Vorschlägen) ersetzt."
+								width="100%" id="label0"/>
+						</content>
+					</Toolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
