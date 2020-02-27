@@ -89,6 +89,12 @@
 						<contentMiddle>
 							<Label text="{i18n>requestTableTitle}" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
+						<contentRight>
+							<Label text="Freigabewert:" textAlign="Right"/>
+							<ObjectNumber
+								number="{ parts:[{path:'dbUserModel>/VERWALTER'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{i18n>currency}"/>
+						</contentRight>
 					</Bar>
 				</customHeader>
 				<footer>
