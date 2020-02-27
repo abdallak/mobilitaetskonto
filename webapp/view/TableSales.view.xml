@@ -2,15 +2,10 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableSales">
 	<App id="app">
 		<pages>
-			<Page title="{i18n>salesTitle}" floatingFooter="true">
+			<Page floatingFooter="true">
 				<content>
 					<Table id="table0" growing="true" items="{ path : 'salesModel>/'}">
 						<columns>
-							<Column id="column0">
-								<header>
-									<Label text="{i18n>HeaderType}" id="label0"/>
-								</header>
-							</Column>
 							<Column id="column1">
 								<header>
 									<Label text="{i18n>HeaderDate}" id="label1"/>
@@ -19,6 +14,11 @@
 							<Column id="column2">
 								<header>
 									<Label text="{i18n>HeaderValue}" id="label2"/>
+								</header>
+							</Column>
+							<Column id="column0">
+								<header>
+									<Label text="{i18n>HeaderType}" id="label0"/>
 								</header>
 							</Column>
 							<Column id="column3">
@@ -35,29 +35,48 @@
 						<items>
 							<ColumnListItem id="item0" press="onNavToDetail" type="Active">
 								<cells>
-									<Label text="{path: 'salesModel>ART', formatter: '.formatter.antragArtText'}" id="label5"/>
 									<Label
 										text="{path: 'salesModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 										id="label6"/>
-									<Label text="{parts: [{path: 'salesModel>BETRAG'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label7"/>
+									<ObjectNumber
+										number="{ parts:[{path:'salesModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}" state="{= ${salesModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
+									<Label text="{path: 'salesModel>ART', formatter: '.formatter.antragArtText'}" id="label5"/>
 									<Label text="{salesModel>KATEGORIE}" id="label8"/>
+									<ObjectStatus text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}"
+										state="{path: 'salesModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
 									<Label text="{path: 'salesModel>STATUS', formatter: '.formatter.statusText'}" id="label9"/>
 								</cells>
 							</ColumnListItem>
 						</items>
+						
+						<headerToolbar>
+							<Toolbar width="100%" id="toolbar0">
+								<content>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="Zeitfenster wählen..."/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
+						
 					</Table>
 				</content>
 				<customHeader>
 					<Bar id="bar0">
 						<contentLeft>
-							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
+							<HBox>
+								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+							</HBox>
 						</contentLeft>
 						<contentMiddle>
-							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
-								text="{dbUserModel>/VORNAME} {dbUserModel>/NAME}" width="100%" id="nameLabel_copy"/>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="-" width="100%"
+								id="titleLabel"/>
 						</contentMiddle>
 						<contentRight>
-							<Label text="{parts: [{path:'dbUserModel>/GUTHABEN'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
+							<ObjectNumber
+								number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{i18n>currency}" state="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 						</contentRight>
 					</Bar>
 				</customHeader>

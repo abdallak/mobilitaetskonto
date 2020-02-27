@@ -1,0 +1,136 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration">
+	<App>
+		<pages>
+			<Page>
+				<content>
+					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
+						<sap.ui.layout.form:formContainers>
+							<sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}: {detailADModel>/UID}" id="container1">
+								<sap.ui.layout.form:formElements>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderMid}">
+										<sap.ui.layout.form:fields>
+											<Text width="50%" text="{detailADModel>/MID}" textAlign="Left"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderEmployee}">
+										<sap.ui.layout.form:fields>
+											<Text width="50%" text="{detailADUserModel>/VORNAME} {detailADUserModel>/NAME}" textAlign="Left"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
+										<sap.ui.layout.form:fields>
+											<Text width="50%"
+												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+												textAlign="Left"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{path: 'detailADModel>/ART', formatter: '.formatter.antragArtText'}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BEZEICHNUNG}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement id="FormElementAlt" label="Alter Betrag" visible="false">
+										<sap.ui.layout.form:fields>
+											<ObjectNumber id="textALT"
+												number="{ parts:[{path:'detailADModel>/ALTBETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{i18n>currency}" state="{= ${detailADModel>/ALTBETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderValue}">
+										<sap.ui.layout.form:fields>
+											<HBox width="100%" id="hbox0">
+												<items>
+													<ObjectNumber class="sapUiSmallMarginEnd"
+														number="{ parts:[{path:'detailADModel>/BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+														unit="{i18n>currency}" state="{= ${detailADModel>/BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
+													<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml"
+														xmlns:sap.ui.layout.form="sap.ui.layout.form" xmlns="sap.m" width="10%" icon="sap-icon://edit" tooltip="{i18n>TooltipValueEditButton}"
+														id="button0" press="onbuttonpress"/>
+												</items>
+											</HBox>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderAccountBalance}">
+										<sap.ui.layout.form:fields>
+											<ObjectNumber
+												number="{ parts:[{path:'detailADUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{i18n>currency}" state="{= ${detailADUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Resultierender Kontostand" id="resultingBalance">
+										<sap.ui.layout.form:fields>
+											<ObjectNumber
+												number="{ parts:[{path:'detailADModel>/RESULTBALANCE'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+												unit="{i18n>currency}" state="{= ${detailADModel>/RESULTBALANCE} &gt;= 0 ? 'Success' : 'Error' }"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderStatus}">
+										<sap.ui.layout.form:fields>
+											<ObjectStatus text="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusText'}"
+												state="{path: 'detailADModel>/STATUS', formatter: '.formatter.statusIndicator'}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BESCHREIBUNG}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
+										<sap.ui.layout.form:fields>
+											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="areaFeedback" width="50%" required="true"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailADModel>/ATTACHMENTS} !== undefined}">
+										<sap.ui.layout.form:fields>
+											<UploadCollection id="UploadCollection" multiple="false" change="onChange" selectionChange="onSelectChange" uploadButtonInvisible="true"
+												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailADModel>/ATTACHMENTS/'}" instantUpload="false">
+												<items>
+													<UploadCollectionItem documentId="{detailADModel>AID}" fileName="{detailADModel>FILENAME}" mimeType="text/plain" enableEdit="false"
+														enableDelete="false" visibleDelete="false" visibleEdit="false" selected="false"/>
+												</items>
+											</UploadCollection>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+								</sap.ui.layout.form:formElements>
+							</sap.ui.layout.form:FormContainer>
+						</sap.ui.layout.form:formContainers>
+						<sap.ui.layout.form:layout>
+							<sap.ui.layout.form:ResponsiveGridLayout id="layout0"/>
+						</sap.ui.layout.form:layout>
+					</sap.ui.layout.form:Form>
+				</content>
+				<customHeader>
+					<Bar id="bar0">
+						<contentLeft>
+							<HBox>
+								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+							</HBox>
+						</contentLeft>
+						<contentMiddle>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
+								text="{i18n>detailAdministration}" width="100%" id="titleLabel"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+				</customHeader>
+				<footer>
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+						<content>
+							<ToolbarSpacer id="spacer0"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen" press="approveRequestPressed"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen" press="rejectRequestPressed"/>
+						</content>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

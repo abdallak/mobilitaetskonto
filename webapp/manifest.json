@@ -43,7 +43,8 @@
 			"libs": {
 				"sap.ui.layout": {},
 				"sap.ui.core": {},
-				"sap.m": {}
+				"sap.m": {},
+				"sap.tnt": {}
 			}
 		},
 		"contentDensities": {
@@ -73,7 +74,6 @@
 			"requestTableModel": {
 				"type": "sap.ui.model.json.JSONModel"
 			}
-			
 		},
 		"resources": {
 			"css": [
@@ -93,35 +93,69 @@
 				"clearControlAggregation": false,
 				"transition": "fade"
 			},
-			"routes": [{
-				"name": "Startpage",
-				"pattern": "Startpage",
-				"target": ["Startpage"]
-			}, {
-				"name": "Request",
-				"pattern": "Request",
-				"target": ["Request"]
-			}, {
-				"name": "TableSales",
-				"pattern": "TableSales/{Target}",
-				"target": ["TableSales"]
-			}, {
-				"name": "DetailEmployee",
-				"pattern": "DetailEmDetailEmployee/{Detail}",
-				"target": ["DetailEmployee"]
-			}, {
-				"name": "TableRequests",
-				"pattern": "TableRequests",
-				"target": ["TableRequests"]
-			}, {
-				"name": "DetailAdministation",
-				"pattern": "DetailAdministation/{Detail}",
-				"target" : ["DetailAdministation"]
-			},
+			"routes": [
 				{
-				"name": "TableEmployees",
-				"pattern": "TableEmployees",
-				"target": ["TableEmployees"]
+					"name": "Startpage",
+					"pattern": "Startpage",
+					"target": [
+						"Startpage"
+					]
+				},
+				{
+					"name": "Request",
+					"pattern": "Request",
+					"target": [
+						"Request"
+					]
+				},
+				{
+					"name": "TableSales",
+					"pattern": "TableSales/{Target}",
+					"target": [
+						"TableSales"
+					]
+				},
+				{
+					"name": "DetailEmployee",
+					"pattern": "DetailEmDetailEmployee/{Detail}",
+					"target": [
+						"DetailEmployee"
+					]
+				},
+				{
+					"name": "TableRequests",
+					"pattern": "TableRequests",
+					"target": [
+						"TableRequests"
+					]
+				},
+				{
+					"name": "Settings",
+					"pattern": "Settings",
+					"target": [
+						"Settings"
+					]
+				},
+				{
+					"name": "DetailAdministration",
+					"pattern": "DetailAdministration/{Detail}",
+					"target": [
+						"DetailAdministration"
+					]
+				},
+				{
+					"name": "TableEmployees",
+					"pattern": "TableEmployees",
+					"target": [
+						"TableEmployees"
+					]
+				},
+				{
+					"name": "MessagePage",
+					"pattern": "MessagePage/{error}",
+					"target": [
+						"MessagePage"
+					]
 				}
 			],
 			"targets": {
@@ -145,13 +179,41 @@
 					"viewType": "XML",
 					"viewName": "TableRequests"
 				},
-				"DetailAdministation": {
-					"viewType" :"XML",
-					"viewName" : "DetailAdministation"
-                },
+				"DetailAdministration": {
+					"viewType": "XML",
+					"viewName": "DetailAdministration"
+				},
 				"TableEmployees": {
 					"viewType": "XML",
 					"viewName": "TableEmployees"
+				},
+				"Settings": {
+					"viewType": "XML",
+					"viewName": "Settings"
+				},
+				"SettingsLog": {
+					"viewType": "XML",
+					"viewName": "SettingsLog"
+				},
+				"SettingsCategory": {
+					"viewType": "XML",
+					"viewName": "SettingsCategory"
+				},
+				"SettingsEmployeeStatus": {
+					"viewType": "XML",
+					"viewName": "SettingsEmployeeStatus"
+				},
+				"MessagePage": {
+					"viewType": "XML",
+					"viewName": "MessagePage"
+				},
+				"SettingsAdministrationStatus": {
+					"viewType": "XML",
+					"viewName": "SettingsAdministrationStatus"
+				},
+				"SettingsAdministrationAssign": {
+					"viewType": "XML",
+					"viewName": "SettingsAdministrationAssign"
 				}
 			}
 		}

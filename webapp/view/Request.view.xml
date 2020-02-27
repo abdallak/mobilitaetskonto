@@ -1,8 +1,8 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
+	xmlns:l="sap.ui.layout" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
 	<App id="app">
 		<pages>
-			<Page title="{i18n>requestTitle}" showNavButton="true" floatingFooter="true" navButtonPress="onNavBack">
+			<Page floatingFooter="true">
 				<content>
 					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
 						<sap.ui.layout.form:formContainers>
@@ -22,14 +22,17 @@
 										<sap.ui.layout.form:fields>
 											<Select xmlns="sap.m" id="categorySelect" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect"
 												selectedKey="{oRequestModel>/kid}">
-												<items></items>
+												<items/>
 											</Select>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
-											<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
-												liveChange="onValueChanged"/>
+											<HBox width="100%" id="hbox0">
+												<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
+													liveChange="onValueChanged"/>
+												<core:Icon src="sap-icon://message-information" size="1.9em" id="icon0" tooltip="{i18n>requestInfoIcon}" class="sapUiSmallMarginBegin"/>
+											</HBox>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
@@ -39,6 +42,13 @@
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
+								<sap.ui.layout.form:FormElement label="Anhänge">
+									<sap.ui.layout.form:fields>
+										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
+											noDataDescription="Dateien hierherziehen oder den &quot;+&quot; Knopf zum Upload nutzen" change="onChange"
+											filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false"/>
+									</sap.ui.layout.form:fields>
+								</sap.ui.layout.form:FormElement>
 							</sap.ui.layout.form:FormContainer>
 						</sap.ui.layout.form:formContainers>
 						<sap.ui.layout.form:layout>
@@ -46,6 +56,22 @@
 						</sap.ui.layout.form:layout>
 					</sap.ui.layout.form:Form>
 				</content>
+				<customHeader>
+					<Bar id="bar0">
+						<contentLeft>
+							<HBox>
+								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+							</HBox>
+						</contentLeft>
+						<contentMiddle>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
+								text="{i18n>requestTitle}" width="100%" id="titleLabel"/>
+						</contentMiddle>
+						<contentRight></contentRight>
+					</Bar>
+				</customHeader>
 				<footer>
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>

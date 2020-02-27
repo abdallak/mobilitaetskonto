@@ -1,0 +1,39 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Log einsehen">
+				<content>
+					<Table id="table0" growing="true" items="{ path : 'logModel>/'}">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="{i18n>HeaderDetails}" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column3" width="70%">
+								<header>
+									<Label text="{i18n>HeaderAction}" id="label3"/>
+								</header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem id="item0" type="Active">
+								<cells>
+									<ObjectIdentifier title="{logModel>MID}"
+										text="{path: 'logModel>DATUM'}"
+										id="objectidentifier0"/>
+									<Text text="{logModel>AKTION}" id="text2"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<headerContent>
+					<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" id="button1_copy"
+						icon="sap-icon://synchronize" text="Log aktualisieren" press="onRefreshPressed"/>
+				</headerContent>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

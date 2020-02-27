@@ -4,27 +4,27 @@
 		<pages>
 			<Page title="TITEL" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}" mode="MultiSelect">
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>HeaderMid}" id="label0"/>
+									<Label text="{i18n>HeaderMid}" id="label0" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>HeaderEmployee}" id="label1"/>
+									<Label text="{i18n>HeaderEmployee}" id="label1" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>startpageSalesTileSub}" id="label2"/>
+									<Label text="{i18n>startpageSalesTileSub}" id="label2" textAlign="Center"/>
 									<!--//kontostand-->
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="{i18n>HeaderSummary}" id="label3"/>
+									<Label text="{i18n>HeaderSummary}" id="label3" textAlign="Center"/>
 								</header>
 							</Column>
 						</columns>
@@ -32,8 +32,10 @@
 							<ColumnListItem id="item0" type="Active">
 								<cells>
 									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
-									<Label text="{path: 'employeeTableModel>NAME'}, {path: 'employeeTableModel>VORNAME'}" id="label5"/>
-									<Label text="{parts: [{path: 'employeeTableModel>GUTHABEN'}, {path: 'i18n>currency'}], type: 'sap.ui.model.type.Currency'}" id="label6"/>
+									<Label text="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" id="label5"/>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label
 										text="{path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
 										id="label7"/>
@@ -45,18 +47,30 @@
 				<customHeader>
 					<Bar id="bar0">
 						<contentLeft>
-							<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack"/>
+							<HBox>
+								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+							</HBox>
 						</contentLeft>
 						<contentMiddle>
 							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
-								text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%" id="nameLabel_copy"/>
+								text="{i18n>tableEmployeesTitle}" width="100%"/>
 						</contentMiddle>
 						<contentRight>
-							<Label text="Freigabewert:" textAlign="Right"/>
-							<Label text="{parts:[{path:'dbUserModel>/VERWALTER'}, {path:'i18n>currency'}], type: 'sap.ui.model.type.Currency'}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
+				<footer>
+					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
+						<content>
+							<ToolbarSpacer id="spacer0"/>
+							<Button xmlns="sap.m" id="GuthabenButton" type = "Default" text="{i18n>guthabenButton}" press="dialogOpen($event, 'GuthabenDialog')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" type = "Default" text="{i18n>abschlussButton}" press="dialogOpen($event, 'AbschlussDialog')"/>
+							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
+						</content>
+					</OverflowToolbar>
+				</footer>
 			</Page>
 		</pages>
 	</App>

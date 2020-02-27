@@ -1,6 +1,7 @@
 sap.ui.define([
-	"sap/ui/test/Opa5"
-], function (Opa5) {
+	"sap/ui/test/Opa5",
+	"sap/ui/test/actions/Press"
+], function (Opa5, Press) {
 	"use strict";
 
 	var sViewName = "TableRequests";
@@ -9,7 +10,27 @@ sap.ui.define([
 	Opa5.createPageObjects({
 		onTheRequestTablePage: {
 
-			actions: {},
+			actions: {
+				
+				iClickOnTheColumnListItem: function () {
+					return this.waitFor({
+						controlType: "sap.m.ColumnListItem",
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "column list item cannot be pressed"
+					});
+				},
+				
+				iClickOnTheBackButton: function () {
+					return this.waitFor({
+						id: "backButton",
+						viewName: sViewName,
+						actions: [new Press()],
+						errorMessage: "back button cannot be pressed"
+					});
+				}
+				
+			},
 
 			assertions: {
 

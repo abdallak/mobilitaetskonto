@@ -40,19 +40,19 @@ sap.ui.define([
 		Then.iTeardownMyApp();
 	});
 
-	/*	opaTest("The detail view should be reachable from the sales view and show the datails", function (Given, When, Then) {
+		opaTest("The admin detail view should be reachable from the requestTable view and show the datails", function (Given, When, Then) {
 			// Arrangements
 			Given.iStartMyApp();
 
 			// Actions
-			When.onTheStartpage.iClickOnTheSalesTile();
+			When.onTheStartpage.iClickOnTheRequestTableTile();
 			When.onTheRequestTablePage.iClickOnTheColumnListItem();
-
+			
 			// Assertions
-			Then.onTheDetailPage.iShouldSeeTheApp();
-			Then.onTheDetailPage.iShouldSeeTheFormElement("form0");
+		//	Then.onTheDetailPage.iShouldSeeTheApp();
+		//	Then.onTheDetailPage.iShouldSeeTheFormElement("form0");
 
 			Then.iTeardownMyApp();
-		});*/
+		});
 
 });
