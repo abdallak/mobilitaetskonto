@@ -63,7 +63,7 @@ sap.ui.define([
 			this.bindFilters(filters);
 		},
 
-		onMarkAsTransacted: function (oEvent) {
+		onMarkAsTransacted: function () {
 			var oTab = this.byId("requestTableId");
 			var aSelected = [];
 
@@ -75,6 +75,7 @@ sap.ui.define([
 				}
 			});
 			if (aSelected.length === 0) {
+				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
 				return;
 			}
 
@@ -84,7 +85,7 @@ sap.ui.define([
 				midA: dbUserData.MID
 			};
 
-			sap.m.MessageBox.show(this.getView().getModel("i18n").getResourceBundle().getText("markAsTransactedMessageBox"), {
+			sap.m.MessageBox.show(this.getResourceBundle().getText("markAsTransactedMessageBox"), {
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				onClose: function (oAction) {
 					if (oAction === "YES") {

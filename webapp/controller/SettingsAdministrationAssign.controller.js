@@ -94,17 +94,17 @@ sap.ui.define([
 
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Freigeber des Mitarbeiters ändern",
+				title: that.getResourceBundle().getText("settingsAdministrationAssignDialogTitle"),
 				type: "Message",
 				content: [
 					new Input("newValueInput", {
 						width: "100%",
-						placeholder: "ID des Freigebers"
+						placeholder: that.getResourceBundle().getText("settingsAdministrationAssignDialogPlaceholder")
 					})
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: "Ändern",
+					text: that.getResourceBundle().getText("settingsAdministrationAssignDialogBegin"),
 					press: function () {
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
@@ -112,7 +112,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: "Abbrechen",
+					text: that.getResourceBundle().getText("settingsAdministrationAssignDialogEnd"),
 					press: function () {
 						oDialog.close();
 					}

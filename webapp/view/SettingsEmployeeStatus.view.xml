@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsEmployeeStatus" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Mitarbeiterstatus anpassen">
+			<Page title="{i18n>settingsEmployeeStatusTitle}">
 				<content>
 					<List id="list0" mode="MultiSelect" delete="onDeletePressed" items="{ path : 'employeeTableModel>/'}">
 						<items>
@@ -18,12 +18,12 @@
 				<footer>
 					<Toolbar width="100%" id="toolbar1">
 						<content>
-							<Label text="Ausgewählte Mitarbeiter:" width="100%" id="label0" textAlign="End"/>
-							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Freischalten"
+							<Label text="{i18n>selectedEmployees}" width="100%" id="label0" textAlign="End"/>
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>activeButton}"
 								id="button0" icon="sap-icon://employee-approvals" press="onAktivPressed"/>
-							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Inaktiv stellen"
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>inactiveButton}"
 								id="button0_copy" icon="sap-icon://employee-rejections" press="onInaktivPressed"/>
-							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="Löschen"
+							<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>deleteButton}"
 								id="button0_copy2" icon="sap-icon://delete" press="onDeletePressed"/>
 						</content>
 					</Toolbar>

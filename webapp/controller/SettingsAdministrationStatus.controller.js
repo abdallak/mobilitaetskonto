@@ -92,17 +92,17 @@ sap.ui.define([
 
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Freigabebetrag des Verwalters ändern",
+				title: that.getResourceBundle().getText("settingsAdministrationStatusDialogTitle"),
 				type: "Message",
 				content: [
 					new Input("newValueInput", {
 						width: "100%",
-						placeholder: "Neuer Freigabewert des Verwalters"
+						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
 					})
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: "Ändern",
+					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogBegin"),
 					press: function () {
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
@@ -110,7 +110,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: "Abbrechen",
+					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogEnd"),
 					press: function () {
 						oDialog.close();
 					}
