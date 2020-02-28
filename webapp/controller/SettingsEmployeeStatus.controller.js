@@ -39,10 +39,7 @@ sap.ui.define([
 		 * This function will update the employeeTableModel.
 		 */
 		getEmployeeData: function () {
-			var params = {};
-			params.mid = null;
-
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
