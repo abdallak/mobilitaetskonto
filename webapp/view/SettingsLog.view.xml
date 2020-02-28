@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Log einsehen">
+			<Page title="{i18n>settingsLogTitle}">
 				<content>
 					<Table id="table0" growing="true" items="{ path : 'logModel>/'}">
 						<columns>
@@ -31,7 +31,7 @@
 				</content>
 				<headerContent>
 					<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" id="button1_copy"
-						icon="sap-icon://synchronize" text="Log aktualisieren" press="onRefreshPressed"/>
+						icon="sap-icon://synchronize" text="{i18n>settingsLogRefreshButton}" press="onRefreshPressed"/>
 				</headerContent>
 			</Page>
 		</pages>

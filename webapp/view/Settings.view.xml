@@ -27,17 +27,17 @@
 		<tnt:sideContent>
 			<tnt:SideNavigation id="sideNavigation" selectedKey="manageEmployeeStatus" itemSelect=".onItemSelect">
 				<tnt:NavigationList>
-					<tnt:NavigationListItem text="Mitarbeiter verwalten" icon="sap-icon://user-edit">
-						<tnt:NavigationListItem text="Mitarbeiterstatus anpassen" key="manageEmployeeStatus"/>
-						<tnt:NavigationListItem text="Verwalterguthaben anpassen" key="manageVerwalterguthaben"/>
-						<tnt:NavigationListItem text="Verwalter zuordnen" key="assignAdministrators"/>
+					<tnt:NavigationListItem text="{i18n>manageEmployees}" icon="sap-icon://user-edit">
+						<tnt:NavigationListItem text="{i18n>settingsEmployeeStatusTitle}" key="manageEmployeeStatus"/>
+						<tnt:NavigationListItem text="{i18n>settingsAdministrationStatusTitle}" key="manageVerwalterguthaben"/>
+						<tnt:NavigationListItem text="{i18n>settingsAdministrationAssignTitle}" key="assignAdministrators"/>
 					</tnt:NavigationListItem>
-					<tnt:NavigationListItem text="Kategorien verwalten" icon="sap-icon://shelf" key="manageCategories"/>
-					<tnt:NavigationListItem text="Log einsehen" icon="sap-icon://customer-history" key="showLog"/>
+					<tnt:NavigationListItem text="{i18n>settingsCategoryTitle}" icon="sap-icon://shelf" key="manageCategories"/>
+					<tnt:NavigationListItem text="{i18n>settingsLogTitle}" icon="sap-icon://customer-history" key="showLog"/>
 				</tnt:NavigationList>
 				<tnt:fixedItem>
 					<tnt:NavigationList>
-						<tnt:NavigationListItem text="Datenschutz" icon="sap-icon://private" key="privacy"/>
+						<tnt:NavigationListItem text="{i18n>settingsDataProtectionTitle}" icon="sap-icon://private" key="privacy"/>
 					</tnt:NavigationList>
 				</tnt:fixedItem>
 			</tnt:SideNavigation>

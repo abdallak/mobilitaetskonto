@@ -95,7 +95,7 @@ sap.ui.define([
 			var oSelectedItems = oList.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
-				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
 				return;
 			}
 
@@ -112,7 +112,7 @@ sap.ui.define([
 			var oSelectedItems = oList.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
-				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
 				return;
 			}
 
@@ -129,7 +129,7 @@ sap.ui.define([
 			var oSelectedItems = oList.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
-				sap.m.MessageToast.show("Bitte mindestens ein Element auswählen");
+				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
 				return;
 			}
 
