@@ -18,9 +18,6 @@ sap.ui.define([
 		 */
 		onInit: function () {
 			this.getRouter().getRoute("Settings").attachMatched(this._onRoutePatternMatched, this);
-
-			var logModel = new JSONModel();
-			this.setGlobalModel(logModel, "logModel");
 		},
 
 		/**
@@ -28,9 +25,7 @@ sap.ui.define([
 		 * 
 		 * @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
-		_onRoutePatternMatched: function (oEvent) {
-			this.getLogData();
-		},
+		_onRoutePatternMatched: function (oEvent) {},
 
 		/**
 		 * This function hides or shows the SideNavigation.
@@ -50,22 +45,6 @@ sap.ui.define([
 			var navContainer = this.byId("navContainer");
 			var viewId = this.byId(oItem.getKey());
 			navContainer.to(viewId);
-		},
-
-		/**
-		 */
-		getLogData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_LOG_GET", "GET", null);
-
-			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					var logModel = that.getGlobalModel("logModel");
-					logModel.setData(response);
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleNetworkError(jqXHR);
-				});
 		}
 
 	});
