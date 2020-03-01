@@ -110,21 +110,21 @@ sap.ui.define([
 
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Bestätigen",
+				title: that.getResourceBundle().getText("settingsCategoryDeleteDialogTitle"),
 				type: "Message",
 				content: new Label({
-					text: "Sind Sie sich sicher, dass Sie die Kategorie löschen möchten?"
+					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogText")
 				}),
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: "Löschen",
+					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogBegin"),
 					press: function () {
 						that.changeCategory("delete", undefined, kid);
 						oDialog.close();
 					}
 				}),
 				endButton: new Button({
-					text: "Abbrechen",
+					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogEnd"),
 					press: function () {
 						oDialog.close();
 					}
@@ -152,17 +152,17 @@ sap.ui.define([
 
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Kategorie Namen ändern",
+				title: that.getResourceBundle().getText("settingsCategoryEditDialogTitle"),
 				type: "Message",
 				content: [
 					new Input("newCategoryNameInput", {
 						width: "100%",
-						placeholder: "Neuer Name der Kategorie"
+						placeholder: that.getResourceBundle().getText("settingsCategoryEditDialogPlaceholder")
 					})
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: "Ändern",
+					text: that.getResourceBundle().getText("settingsCategoryEditDialogBegin"),
 					press: function () {
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
 						that.changeCategory("edit", sText, kid);
@@ -170,7 +170,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: "Abbrechen",
+					text: that.getResourceBundle().getText("settingsCategoryEditDialogEnd"),
 					press: function () {
 						oDialog.close();
 					}
@@ -191,17 +191,17 @@ sap.ui.define([
 		onAddPressed: function (oEvent) {
 			var that = this;
 			var oDialog = new Dialog({
-				title: "Kategorie hinzufügen",
+				title: that.getResourceBundle().getText("settingsCategoryAddDialogTitle"),
 				type: "Message",
 				content: [
 					new Input("newCategoryNameInput", {
 						width: "100%",
-						placeholder: "Name der neuen Kategorie"
+						placeholder: that.getResourceBundle().getText("settingsCategoryAddDialogPlaceholder")
 					})
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: "Hinzufügen",
+					text: that.getResourceBundle().getText("settingsCategoryAddDialogBegin"),
 					press: function () {
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
 						that.changeCategory("add", sText);
@@ -209,7 +209,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: "Abbrechen",
+					text: that.getResourceBundle().getText("settingsCategoryAddDialogEnd"),
 					press: function () {
 						oDialog.close();
 					}

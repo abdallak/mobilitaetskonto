@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsCategory" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Kategorien verwalten">
+			<Page title="{i18n>settingsCategoryTitle}">
 				<content>
 					<List noDataText="Drop list items here" id="list0" mode="Delete" delete="onDeletePressed" items="{ path : 'dbCategoryModel>/'}">
 						<items>
@@ -16,7 +16,7 @@
 				</content>
 				<headerContent>
 					<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" id="button1_copy"
-						icon="sap-icon://add" text="Kategorie hinzufügen" press="onAddPressed"/>
+						icon="sap-icon://add" text="{i18n>settingsCategoryAddButton}" press="onAddPressed"/>
 				</headerContent>
 			</Page>
 		</pages>
