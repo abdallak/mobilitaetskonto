@@ -105,9 +105,9 @@ sap.ui.define([
 		
 		
 		/**
-		* This function is used for navigation and parameter passing between the employees detail view.
+		* This function is used for navigation and parameter passing between the actual view and the employee's detail view.
 		* The function will be triggered after selecting a single transaction inside the table.
-		* The data related to the selected transactions is passed as stringified JSON Object trough the router.
+		* The data related to the selected transactions is passed as stringified JSON Object through the router.
 		*/
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");
