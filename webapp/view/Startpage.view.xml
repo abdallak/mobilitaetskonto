@@ -3,7 +3,7 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
+				<Page id="page">
 					<content>
 						<sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="layout0_1580578104802">
 							<sap.ui.layout:content>

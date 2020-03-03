@@ -16,15 +16,6 @@
 						</items>
 					</List>
 				</content>
-				<footer>
-					<Toolbar width="100%" id="toolbar1">
-						<content>
-							<Text
-								text="Hinweis: Erstmal nur testweise so unübersichtlich. Id wird aktuell noch nicht geprüft und Input in Dialog wird noch durch ein Textfeld mit Namen (und Vorschlägen) ersetzt."
-								width="100%" id="label0"/>
-						</content>
-					</Toolbar>
-				</footer>
 			</Page>
 		</pages>
 	</App>
