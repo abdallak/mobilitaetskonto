@@ -41,12 +41,7 @@
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTableTile}" subheader="{i18n>startpageRequestTableTileSub}"
-											press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}">
-											<icon>
-												<sap.ui.core:Icon xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" src="sap-icon://monitor-payments" size="2em" xmlns:sap.ui.core="sap.ui.core"
-													id="icon0"/>
-											</icon>
-										</GenericTile>
+											press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}"/>
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}"

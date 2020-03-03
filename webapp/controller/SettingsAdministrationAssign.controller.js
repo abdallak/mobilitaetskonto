@@ -9,8 +9,9 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/ui/model/json/JSONModel"
-], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -78,9 +79,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -187,6 +190,8 @@ sap.ui.define([
 		handleClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts && aContexts.length) {
+			    BusyIndicator.show();
+			    
 				var selectedMID = this.getModel("selectedMIDModel").getData().mid;
 				var freigeberMID = aContexts[0].getObject().MID;
 
