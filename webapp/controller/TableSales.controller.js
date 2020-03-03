@@ -4,7 +4,7 @@ sap.ui.define([
 	"sap/ui/model/Filter",
 	"sap/ui/core/BusyIndicator",
 	"sap/ui/model/FilterOperator"
-], function (BaseController, formatter, Filter, FilterOperator) {
+], function (BaseController, formatter, Filter, BusyIndicator, FilterOperator) {
 	"use strict";
 
 	/**
