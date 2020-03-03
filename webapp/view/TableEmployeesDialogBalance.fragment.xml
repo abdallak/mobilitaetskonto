@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
-	<Dialog id="GuthabenDialog" title="Guthabeneinbuchung">
+	<Dialog id="balanceDialog" title="Guthabeneinbuchung">
 		<VBox class="sapUiSmallMargin">
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
@@ -14,7 +14,7 @@
 			<Button text="Guthaben Einbuchen" press=".onExecuteDialog('G')"/>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'GuthabenDialog')"/>
+			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'balanceDialog')"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>
