@@ -11,7 +11,7 @@
 			</f:SimpleForm>
 		</VBox>
 		<beginButton>
-			<Button text="Abschluss durchführen" press=".calcExpired"/>
+			<Button text="Abschluss durchführen" press=".onExecuteDialog('A')"/>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'AbschlussDialog')"/>

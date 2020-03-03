@@ -9,7 +9,8 @@ sap.ui.define([
 	"use strict";
 	var employeeTableModel;
 	var insertModel;
-
+	var OpendDialog;
+	
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
 		onInit: function () {
@@ -22,12 +23,12 @@ sap.ui.define([
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
 
-		//////MODELL INITIALISIEREN ODER SO??????
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 			this.getTableData();
 		},
-
+		
+		//fills the Table
 		getTableData: function (target) {
 			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
 			var that = this;
@@ -38,52 +39,38 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
-
-		setRequest: function (mid, GJ) {
+		
+		onNavToDetail: function (oEvent) {
+			var context = oEvent.getSource().getBindingContext("employeeTableModel");
+			var path = context.getPath();
+			var detail = JSON.stringify(context.getProperty(path));
+			this.getRouter().navTo("DetailEmployee", {
+				DetailEmployee: detail
+			});
+		},
+		
+		//sets the request Modell 
+		setRequest: function (mid, amount, describ) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
-			var staticModel = this.getModel("staticModel").getData();
-
-			console.log(staticModel);
-			console.log(staticModel.betrag);
-			//var betr = 1;
-			//var besch = "test";
-			var defaultRequest;
-			if (GJ === 0) {
-				var betr = staticModel.betragG;
-				var besch = staticModel.beschreibung;
-
-				defaultRequest = {
-					"MID": mid,
-					"art": 2,
-					"betrag": betr,
-					"beschreibung": besch,
-					"kid": 1,
-					"state": 2,
-					"MIDV": dbUserData.MID
-				};
-			} else {
-
-				defaultRequest = {
-					"MID": mid,
-					"art": 2,
-					"betrag": -1,
-					"beschreibung": "abgelaufenes Guthaben",
-					"kid": 1, //nicht schön
-					"state": 2,
-					"MIDV": dbUserData.MID
-				};
-
-			}
-
+			console.log("set request");
+			console.log(mid + amount + describ);
+			var defaultRequest = {
+				"MID": mid,
+				"art": 2,
+				"betrag": amount,
+				"beschreibung": describ,
+				"kid": 1,
+				"state": 2,
+				"MIDV": dbUserData.MID
+			};
 			insertModel = new JSONModel(defaultRequest);
 			this.setModel(insertModel, "insertModel");
-			console.log(insertModel);
 		},
 
+		//executes the request with the model set in setRequest
 		makeRequest: function (oEvent) {
+			console.log("make request");
 			var insertData = this.getModel("insertModel").getData();
-			console.log(insertData);
-
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(insertData));
 			var that = this;
 			$.ajax(settings)
@@ -94,44 +81,11 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-
-		calcExpired: function (mid, date) {
-			var params = {};
-			params.mid = "P2001828430";
-			params.date = "31.12.2017";
-
-			// console.log(staticModel);
-			// console.log(staticModel.betrag);
-
-			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
-			console.log(settings);
-			var that = this;
-			$.ajax(settings).done(function (response) {
-				console.log(settings);
-			}).fail(function (jqXHR, exception) {
-				that.handleNetworkError(jqXHR);
-			});
-
-			this.onAbortCloseDialog(1, "GuthabenDialog");
-
-			var ergebniss = 1;
-			this.getModel("staticModel").Betrag = (ergebniss > 0 ? ergebniss * (-1) : 0);
-
-		},
-
-		onNavToDetail: function (oEvent) {
-			var context = oEvent.getSource().getBindingContext("employeeTableModel");
-			var path = context.getPath();
-			var detail = JSON.stringify(context.getProperty(path));
-			this.getRouter().navTo("DetailEmployee", {
-				DetailEmployee: detail
-			});
-		},
-
+		
 		dialogOpen: function (oEvent, dialogId) {
-
 			var thisView = this.getView();
-
+			OpendDialog = dialogId;
+			
 			if (!this.byId(dialogId)) {
 				// load asynchronous XML fragment
 				Fragment.load({
@@ -145,35 +99,75 @@ sap.ui.define([
 				});
 			} else {
 				this.byId(dialogId).open();
-
 			}
+		},
+		
+		//executes Dialog functions (Guthaben/Jahresabschluss)
+		onExecuteDialog: function (GorA) {
+			var staticModel = this.getModel("staticModel").getData();
+			
+			console.log(GorA);
+			console.log(OpendDialog);
+			
+			var thisView = this.getView();
+			var SelectedItems = thisView.byId("table0").getSelectedItems();
+			
+			//TODO FEHLERMELDUNG bei keinen angewählten?
+			for (var i = 0; i < SelectedItems.length; i++) {
+
+				var context = SelectedItems[i].getBindingContext("employeeTableModel");
+				var path = context.getPath();
+				var mid = context.getProperty(path).MID;
+				console.log(mid);
+				
+				if(GorA === 'G'){//execute guthaben
+					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung);
+					this.makeRequest();
+				}
+				else{
+					console.log("check in if");
+					var date = staticModel.jahr1 - staticModel.jahr2;
+					console.log(date);
+					this.getExpired(mid, date);
+				}
+			}
+			//closing the dialog box
+			this.onAbortCloseDialog(1, OpendDialog);
+		},
+		
+		//calculates the expired amount via sql query
+		getExpired: function (mid, date) {
+			var params = {};
+			params.mid = mid;
+			params.date = date;
+			
+			console.log(params.mid);
+			console.log(params.date);
+			
+			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
+			
+			var that = this;
+			$.ajax(settings)
+				.done(function (response) {
+					var oResponse = JSON.parse(response);
+					
+					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
+					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
+					console.log(expired);
+					console.log(that.mid);
+					console.log(mid);
+					console.log(this.mid);
+					that.setRequest(mid, expired, "Abgelaufenes Guthaben");
+					that.makeRequest();
+					
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
 		},
 
 		onAbortCloseDialog: function (oEvent, dialogId) {
 			this.byId(dialogId).close();
 			this.byId(dialogId).destroy();
-		},
-
-		onExecuteAndCloseDialogG: function () {
-			//TODO FEHLERMELDUNG bei keinen angewählten?
-			var thisView = this.getView();
-			var SelectedItems = thisView.byId("table0").getSelectedItems();
-
-			var SelectedMID = []; //so lang machen wie selecteditems
-			for (var i = 0; i < SelectedItems.length; i++) {
-
-				var context = SelectedItems[i].getBindingContext("employeeTableModel");
-				var path = context.getPath();
-				SelectedMID.push(context.getProperty(path).MID);
-
-			}
-
-			for (var j = 0; j < SelectedMID.length; j++) {
-				this.setRequest(SelectedMID[j], 0);
-				this.makeRequest();
-			}
-			//closing the dialog box
-			this.onAbortCloseDialog(1, "GuthabenDialog");
 		}
 	});
 });
