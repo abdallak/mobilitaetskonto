@@ -29,7 +29,7 @@
 										<sap.ui.layout.form:fields>
 											<Text width="50%"
 												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'HH:mm' } }"/>
-											</sap.ui.layout.form:fields>
+										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
 										<sap.ui.layout.form:fields>
@@ -85,6 +85,11 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BESCHREIBUNG}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="Bearbeiter" visible="{= ${detailModel>/VERWALTER} !== null}">
+										<sap.ui.layout.form:fields>
+											<Text xmlns="sap.m" width="50%" text="{detailModel>/VERWALTER}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
