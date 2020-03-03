@@ -6,9 +6,9 @@
 				<content>
 					<Table id="requestTableId" growing="true" items="{ path : 'requestTableModel>/'}" growingScrollToLoad="true">
 						<columns>
-							<Column id="columnU" width="5em">
+							<Column id="columnU">
 								<header>
-									<Label text="Nr." id="labelU"/>
+									<Label text="Vorgangsnummer" id="labelU"/>
 								</header>
 							</Column>
 							<Column id="column0">
@@ -49,7 +49,7 @@
 										text="{ path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"/>
 									<ObjectNumber
 										number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
+										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} >= 0 ? 'Success' : 'Error' }"/>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
 									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"
 										state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
@@ -92,7 +92,7 @@
 						<contentRight>
 							<Label text="Freigabewert:" textAlign="Right"/>
 							<ObjectNumber
-								number="{ parts:[{path:'dbUserModel>/VERWALTER'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								number="{ parts:[{path:'dbUserModel>/VERWALTER'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{i18n>currency}"/>
 						</contentRight>
 					</Bar>
