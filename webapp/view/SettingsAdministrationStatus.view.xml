@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationStatus" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Verwalterstatus anpassen">
+			<Page title="{i18n>settingsAdministrationStatusTitle}">
 				<content>
 					<List id="list0" items="{ path : 'employeeTableModel>/'}">
 						<items>
