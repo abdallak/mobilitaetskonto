@@ -9,8 +9,9 @@ sap.ui.define([
 	"sap/m/Text",
 	"sap/m/MessageToast",
 	"sap/m/Button",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**

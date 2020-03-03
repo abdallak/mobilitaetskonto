@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/ui/core/format/FileSizeFormat",
 	"sap/m/upload/Uploader",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox"
-], function (BaseController, JSONModel, FileSizeFormat, Uploader, MessageToast, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, JSONModel, FileSizeFormat, Uploader, MessageToast, MessageBox, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -155,6 +156,7 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		submitRequest: function (oEvent) {
+			BusyIndicator.show();
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 
@@ -186,12 +188,14 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
+					BusyIndicator.hide();
 					that.getRouter().navTo("TableSales", {
 						Target: "SubmittedRequests"
 					});
 					that.resetRequest();
 				})
 				.fail(function (jqXHR, exception) {
+					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
 		},
@@ -225,10 +229,12 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onChange: function (oEvent) {
+			BusyIndicator.show();
 			var files = oEvent.getParameter("files");
 			for (var i = 0; i < files.length; i++) {
 				this.addAttachment(files[i]);
 			}
+			BusyIndicator.hide();
 		},
 
 		/**

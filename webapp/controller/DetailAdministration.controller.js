@@ -4,8 +4,9 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/m/MessageToast",
-	"sap/ui/core/Fragment"
-], function (JSONModel, BaseController, formatter, MessageToast, Fragment) {
+	"sap/ui/core/Fragment",
+	"sap/ui/core/BusyIndicator"
+], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
 	"use strict";
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
@@ -85,8 +86,10 @@ sap.ui.define([
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				that.onNavBack();
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -106,12 +109,14 @@ sap.ui.define([
 
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
+			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
 
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
+			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(0);
 		},
@@ -173,6 +178,7 @@ sap.ui.define([
 
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
+			BusyIndicator.show();
 			var params = {};
 			params.aid = aid;
 
@@ -181,6 +187,7 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
+					BusyIndicator.hide();
 					var oResponse = JSON.parse(response);
 					var link = document.createElement("a");
 					link.href = oResponse.DATA;
@@ -189,6 +196,7 @@ sap.ui.define([
 					link = null;
 				})
 				.fail(function (jqXHR, exception) {
+					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
 		},

@@ -4,8 +4,9 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, formatter, Filter, FilterOperator, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, formatter, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
