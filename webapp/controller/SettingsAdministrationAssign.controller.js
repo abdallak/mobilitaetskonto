@@ -78,9 +78,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -187,6 +189,8 @@ sap.ui.define([
 		handleClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts && aContexts.length) {
+			    BusyIndicator.show();
+			    
 				var selectedMID = this.getModel("selectedMIDModel").getData().mid;
 				var freigeberMID = aContexts[0].getObject().MID;
 

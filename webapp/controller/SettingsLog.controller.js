@@ -6,7 +6,8 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * 
+	 * This is a controller managing the view for the settings log. In the log you can see different kinds of
+	 * database activities, such as request submitting, employee/administration status changes or category changes.
 	 * @class SettingsLog
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog", {
@@ -22,6 +23,8 @@ sap.ui.define([
 		},
 
 		/**
+		 * Function called, when the Refresh button in the view is pressed. It calls the getLogData function to 
+		 * fetch new data from the Log table in the database.
 		 */
 		onRefreshPressed: function () {
 			BusyIndicator.show();
@@ -29,6 +32,7 @@ sap.ui.define([
 		},
 
 		/**
+		 * This function manages the logModel update via ajax request. 
 		 */
 		getLogData: function () {
 			var settings = this.prepareAjaxRequest("/MOB_LOG_GET", "GET");
