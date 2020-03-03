@@ -9,8 +9,9 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/ui/model/json/JSONModel"
-], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
