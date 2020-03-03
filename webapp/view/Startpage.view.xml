@@ -7,8 +7,6 @@
 					<content>
 						<sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="layout0_1580578104802">
 							<sap.ui.layout:content>
-								<Label class="startpageLabel" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" text="Mobilitätskonto"
-									width="100%" id="label0" displayOnly="true"/>
 								<sap.ui.layout:HorizontalLayout id="layout1" allowWrapping="true">
 									<sap.ui.layout:content>
 										<GenericTile xmlns="sap.m" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTile"
@@ -95,6 +93,16 @@
 							</sap.ui.layout:content>
 						</sap.ui.layout:VerticalLayout>
 					</content>
+					<customHeader>
+						<Bar id="bar0">
+							<contentLeft>
+								<Label class="startpageLabel" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" text="Mobilitätskonto"
+									width="100%" id="lbel0" displayOnly="true"/>
+							</contentLeft>
+							<contentMiddle></contentMiddle>
+							<contentRight></contentRight>
+						</Bar>
+					</customHeader>
 				</Page>
 			</pages>
 		</App>
