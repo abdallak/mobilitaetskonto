@@ -1,7 +1,8 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
