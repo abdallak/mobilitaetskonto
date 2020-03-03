@@ -28,9 +28,7 @@ sap.ui.define([
 		},
 
 		getTableData: function (target) {
-			var params = {};
-			params.mid = null;
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				employeeTableModel = that.getModel("employeeTableModel");
@@ -43,17 +41,16 @@ sap.ui.define([
 		setRequest: function (mid, GJ) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var staticModel = this.getModel("staticModel").getData();
-			
 
 			console.log(staticModel);
 			console.log(staticModel.betrag);
 			//var betr = 1;
 			//var besch = "test";
 			var defaultRequest;
-			if(GJ === 0){
+			if (GJ === 0) {
 				var betr = staticModel.betragG;
 				var besch = staticModel.beschreibung;
-				
+
 				defaultRequest = {
 					"MID": mid,
 					"art": 2,
@@ -62,9 +59,9 @@ sap.ui.define([
 					"kid": 1,
 					"state": 2,
 					"MIDV": dbUserData.MID
-			};}
-			else{
-				
+				};
+			} else {
+
 				defaultRequest = {
 					"MID": mid,
 					"art": 2,
@@ -73,10 +70,10 @@ sap.ui.define([
 					"kid": 1, //nicht schön
 					"state": 2,
 					"MIDV": dbUserData.MID
-			};
-				
+				};
+
 			}
-			
+
 			insertModel = new JSONModel(defaultRequest);
 			this.setModel(insertModel, "insertModel");
 			console.log(insertModel);
@@ -96,15 +93,15 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
-		calcExpired: function (mid, date){
+
+		calcExpired: function (mid, date) {
 			var params = {};
 			params.mid = "P2001828430";
 			params.date = "31.12.2017";
-			
+
 			// console.log(staticModel);
 			// console.log(staticModel.betrag);
-			
+
 			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
 			console.log(settings);
 			var that = this;
@@ -113,12 +110,12 @@ sap.ui.define([
 			}).fail(function (jqXHR, exception) {
 				that.handleNetworkError(jqXHR);
 			});
-			
+
 			this.onAbortCloseDialog(1, "GuthabenDialog");
-			
+
 			var ergebniss = 1;
-			this.getModel("staticModel").Betrag = (ergebniss > 0 ? ergebniss*(-1) : 0);
-			
+			this.getModel("staticModel").Betrag = (ergebniss > 0 ? ergebniss * (-1) : 0);
+
 		},
 
 		onNavToDetail: function (oEvent) {

@@ -2,7 +2,7 @@
 	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Verwalter zuordnen">
+			<Page title="{i18n>settingsAdministrationAssignTitle}">
 				<content>
 					<List id="list0" items="{ path : 'employeeTableModel>/'}">
 						<items>
