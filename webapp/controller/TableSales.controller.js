@@ -1,13 +1,22 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/Filter",
-	"sap/ui/model/FilterOperator",
-	"sap/m/MessageToast"
-], function (BaseController, formatter, Filter, FilterOperator) {
+	"sap/m/MessageToast",
+	"sap/ui/core/BusyIndicator",
+	"sap/ui/model/FilterOperator"
+], function (BaseController, formatter, Filter, BusyIndicator, FilterOperator) {
 	"use strict";
 
+	/**
+	 * The TableSales View is a table showing the employees transactions.
+	 * The View is used twice, beeing accessible from two different entry points.
+	 * A route paramter (target) is used to distinguish between the two display options.
+	 * The actual usage doesn't vary at all. The first option, connected to the "TableSales" paramter, accessed through the 'Kontostand' tile
+	 * displays transactions where the state is 'approved(genehmigt)' or 'carried out(durchgeführt)'.
+	 * The second option, accessed through the 'Anträge' tile, displays transactions with state beeing 'declined(abgelehnt)' or 'pending(ausstehend)'.
+	 * @class TableSales
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableSales", {
 		formatter: formatter,
 
@@ -15,11 +24,11 @@ sap.ui.define([
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
 			
 			var picker = this.getView().byId("rangepicker0");
-			picker.setMaxDate(new Date()); //Setzt MaxDatum zum aktuellen Zeitpunkt
+			picker.setMaxDate(new Date()); //set MaxDate of daterangepicker to todays date
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
-			var target = oEvent.getParameter("arguments").Target;
+			var target = oEvent.getParameter("arguments").Target; //tablename parameter to decide the content of the table 
 			this.updateUserModel();
 			this.getTableData();
 			
@@ -37,10 +46,14 @@ sap.ui.define([
 			}
 			oTitleLabel.setText(sTitle);
 			
-			this.getView().byId("rangepicker0").setValue(); //Datumwahl zuruecksetzen wenn View erneut aufgerufen
+			this.getView().byId("rangepicker0").setValue(); //clears date selection when reentering the view
 			this.filterTable();
 		},
 
+		/** 
+		 * Recieves ALL transactions related to the employees id.
+		 * Filtering is still required after retrieving the data.
+		 */
 		getTableData: function () {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
@@ -77,10 +90,14 @@ sap.ui.define([
 			}
 			
 			//STATE FILTER
-			var oFO = FilterOperator.LT; //echt kleiner als
-			if(this.salesTable === true) oFO = FilterOperator.GE; //groesser gleich
+			//This part filters the given transactions of the employee by their state.
+			//This is mandatory to show the right data, based on the "selected" view.
+			var oFO = FilterOperator.LT; //LT = lesser than
+			if(this.salesTable === true) oFO = FilterOperator.GE; //GE = greater or equal
 			
-			var oStateFilter = new Filter("STATUS", oFO, "2"); // Wert 2 damit entsprechnder Filteroperator die gewünschten Status zeigt
+			// transactionstates are stored as integers inside the database going from 0 to 3
+			// the 2 is used here so that the choosen filteroperator displays the right data
+			var oStateFilter = new Filter("STATUS", oFO, "2"); 
 			filters.push(oStateFilter);
 			
 			
@@ -88,7 +105,11 @@ sap.ui.define([
 		},
 		
 		
-
+		/**
+		* This function is used for navigation and parameter passing between the employees detail view.
+		* The function will be triggered after selecting a single transaction inside the table.
+		* The data related to the selected transactions is passed as stringified JSON Object trough the router.
+		*/
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath();

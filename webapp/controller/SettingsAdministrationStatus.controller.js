@@ -4,8 +4,9 @@ sap.ui.define([
 	"sap/m/ButtonType",
 	"sap/m/Input",
 	"sap/m/Button",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
