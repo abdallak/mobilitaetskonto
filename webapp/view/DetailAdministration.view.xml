@@ -21,9 +21,15 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDate}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%"
-												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"
 												textAlign="Left"/>
 										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderTime}">
+										<sap.ui.layout.form:fields>
+											<Text width="50%"
+												text="{ path: 'detailADModel>/DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'HH:mm' } }"/>
+											</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}">
 										<sap.ui.layout.form:fields>

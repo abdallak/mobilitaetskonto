@@ -46,7 +46,7 @@
 									<Label text="{requestTableModel>UID}"/>
 									<Label text="{requestTableModel>VORNAME} {requestTableModel>NAME}"/>
 									<Label
-										text="{path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"/>
+										text="{ path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"/>
 									<ObjectNumber
 										number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
