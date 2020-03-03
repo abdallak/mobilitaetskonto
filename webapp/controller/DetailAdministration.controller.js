@@ -158,7 +158,9 @@ sap.ui.define([
 
 			this.byId("FormElementAlt").setVisible(true);
 
-			this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
+			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
+			//Without it, the 'alter Kontostand' value remains as the original one.
+			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
 			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
