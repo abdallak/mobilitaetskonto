@@ -15,10 +15,10 @@ sap.ui.define([
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
-			this.filterStatus("1"); //Vorfiltern nach Status = ausstehend
-
+			this.filterTable(); //pre-filtering the table - the default selected status is 'pending(ausstehend)'
+			
 			var picker = this.getView().byId("rangepicker0");
-			picker.setMaxDate(new Date()); //Setzt MaxDatum zum aktuellen Zeitpunkt
+			picker.setMaxDate(new Date()); //declares the maximum date as todays date
 
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -27,6 +27,11 @@ sap.ui.define([
 			this.getTableData();
 		},
 
+
+		/**
+		* This function simply retrieves all available transactions and displays them in the table
+		* with the help of the model.
+		*/
 		getTableData: function () {
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_TABELLE", "GET");
 
@@ -41,7 +46,14 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-
+		
+		
+		
+		/**
+		* This function is used for navigation and parameter passing between the actual view and the administration's detail view.
+		* The function will be triggered after selecting a single transaction inside the table.
+		* The data related to the selected transactions is passed as stringified JSON Object through the router.
+		*/
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
 			var path = context.getPath();
@@ -52,19 +64,12 @@ sap.ui.define([
 			});
 		},
 
-		filterStatus: function (statusnummer) {
-
-			var FO = FilterOperator.EQ;
-			if (statusnummer === "4") {
-				FO = FilterOperator.LE;
-			}
-
-			var filters = [];
-			filters.push(new Filter("STATUS", FO, statusnummer));
-
-			this.bindFilters(filters);
-		},
-
+		/**
+		* The Function simply calls a confirmation dialog.
+		* After accepting, the function sets the status of the previously marked transactions to 'carried out (durchgeführt)'.
+		* Afterwards the table content is refreshed.
+		* In case of declining the confirmation dialog, the selected checkboxes will be resetted.
+		*/
 		onMarkAsTransacted: function () {
 			var oTab = this.byId("requestTableId");
 			var aSelected = [];
@@ -108,7 +113,11 @@ sap.ui.define([
 				}.bind(this)
 			});
 		},
-
+		
+		/**
+		* This Function is called after declining the JahresabschlussPopUp.
+		* After execution, all checked checkboxes are deselected.
+		*/
 		resetSelection: function () {
 			var oTab = this.byId("requestTableId");
 
@@ -118,6 +127,11 @@ sap.ui.define([
 			});
 		},
 
+		/**
+		* This Function is used by the three filter controls of the UI. The SearchBar, the DateRangePicker and the ActionSelect.
+		* Everytime one of these is used, this method gets called.
+		* The method provides a final filter consisting of several others, related to the input given by the controls.
+		*/
 		filterTable: function () {
 
 			var dateRangePicker = this.getView().byId("rangepicker0");
@@ -131,8 +145,9 @@ sap.ui.define([
 			var oFoState = FilterOperator.EQ;
 
 			//STATUS FILTER
+			//This is a special case, where the '-' in the ActionSelect is selected, a different Operator is required to show all the data. 
 			if (sStateKey === "4") {
-				oFoState = FilterOperator.LE; //alle Status(plural)
+				oFoState = FilterOperator.LE; // LE = Lesser or equal
 			}
 			var oStateFilter = new Filter("STATUS", oFoState, sStateKey);
 			singleFilters.push(oStateFilter);
