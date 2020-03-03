@@ -1,3 +1,4 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"sap/m/MessageToast",
@@ -22,7 +23,7 @@ sap.ui.define([
 		_onRoutePatternMatched: function (oEvent) {
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
-
+			console.log(detail);
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
 
