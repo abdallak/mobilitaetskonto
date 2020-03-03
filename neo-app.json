@@ -129,6 +129,12 @@
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/mitarbeiter/administration.xsjs"
 		}
+	}, {	"path": "/MOB_MITARBEITER_LOESCHEN",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/mitarbeiter/mitarbeiterLoeschen.xsjs"
+		}
 	}, {
 		"path": "/MOB_ABSCHLUSS",
 		"target": {
