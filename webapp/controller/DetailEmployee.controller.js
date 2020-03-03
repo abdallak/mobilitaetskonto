@@ -5,7 +5,13 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
 ], function (JSONModel, MessageToast, BaseController, formatter) {
 	"use strict";
-
+	
+	/**
+	 * This Class simply displays a detailed view of the selected transaction from the table,
+	 * providing extra information to the user, which is not shown in the table.
+	 * 
+	 * @class DetailEmployee
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
 
@@ -21,7 +27,7 @@ sap.ui.define([
 
 		_onRoutePatternMatched: function (oEvent) {
 			//ANTRAGSDATEN
-			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
+			var detail = JSON.parse(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
 			
@@ -29,9 +35,9 @@ sap.ui.define([
  			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
 			if (jQuery.isEmptyObject(detailModel.getData())) {
-				detailModel.setData(oStorage.get("salesLocalData"));
+				detailModel.setData(oStorage.get("employeeLocalData"));
 			} else {
-				oStorage.put("salesLocalData", detailModel.getData());
+				oStorage.put("employeeLocalData", detailModel.getData());
 			}
 		},
 

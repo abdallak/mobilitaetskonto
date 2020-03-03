@@ -34,9 +34,9 @@ sap.ui.define([
 
 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 			if (jQuery.isEmptyObject(detailADModel.getData())) {
-				detailADModel.setData(oStorage.get("requestTableLocalData"));
+				detailADModel.setData(oStorage.get("adminLocalData"));
 			} else {
-				oStorage.put("requestTableLocalData", detailADModel.getData());
+				oStorage.put("adminLocalData", detailADModel.getData());
 			}
 
 			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
