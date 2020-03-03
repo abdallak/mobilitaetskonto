@@ -35,6 +35,7 @@ sap.ui.define([
 				.done(function (response) {
 					var requestTableModel = that.getModel("requestTableModel");
 					requestTableModel.setData(response);
+					console.log(requestTableModel);
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
