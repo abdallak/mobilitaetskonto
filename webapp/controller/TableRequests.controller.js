@@ -91,14 +91,17 @@ sap.ui.define([
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				onClose: function (oAction) {
 					if (oAction === "YES") {
+						BusyIndicator.show();
 						var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DURCHGEFUEHRT", "POST", JSON.stringify(oSelected));
 
 						var that = this;
 						$.ajax(settings)
 							.done(function (response) {
+								BusyIndicator.hide();
 								that._onRoutePatternMatched(null);
 							})
 							.fail(function (jqXHR, exception) {
+								BusyIndicator.hide();
 								that.handleNetworkError(jqXHR);
 							});
 

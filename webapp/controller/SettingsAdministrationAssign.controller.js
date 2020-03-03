@@ -75,9 +75,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -104,6 +106,7 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsAdministrationAssignDialogBegin"),
 					press: function () {
+						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
 						oDialog.close();

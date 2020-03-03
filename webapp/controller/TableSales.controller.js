@@ -3,9 +3,8 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/m/MessageToast",
-	"sap/ui/core/BusyIndicator",
 	"sap/ui/model/FilterOperator"
-], function (BaseController, formatter, Filter, BusyIndicator, FilterOperator) {
+], function (BaseController, formatter, Filter, FilterOperator) {
 	"use strict";
 
 	/**
