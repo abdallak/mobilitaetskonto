@@ -89,8 +89,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onAktivPressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
@@ -106,8 +106,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onInaktivPressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
@@ -123,8 +123,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onDeletePressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
