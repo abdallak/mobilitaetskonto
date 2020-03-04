@@ -4,7 +4,7 @@
 		<pages>
 			<Page title="TITEL" floatingFooter="true">
 				<content>
-					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/'}" mode="MultiSelect">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" mode="MultiSelect">
 						<columns>
 							<Column id="column0">
 								<header>
