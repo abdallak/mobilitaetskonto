@@ -53,13 +53,6 @@
 			"entryPath": "/antrag/insertantrag.xsjs"
 		}
 	}, {
-		"path": "/MOB_GUTHABEN",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/Guthabensanzeige/guthaben.xsjs"
-		}
-	}, {
 		"path": "/MOB_MITARBEITER_GETCREATE",
 		"target": {
 			"type": "destination",
@@ -102,13 +95,6 @@
 			"entryPath": "/antrag/handleantrag.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_INSERT",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/insertantragintoantrag.xsjs"
-		}
-	}, {
 		"path": "/MOB_ANTRAG_DURCHGEFUEHRT",
 		"target": {
 			"type": "destination",
@@ -129,7 +115,8 @@
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/mitarbeiter/administration.xsjs"
 		}
-	}, {	"path": "/MOB_MITARBEITER_LOESCHEN",
+	}, {
+		"path": "/MOB_MITARBEITER_LOESCHEN",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
@@ -141,7 +128,7 @@
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/mitarbeiter/getExpired.xsjs"
-		}	
+		}
 	}, {
 		"path": "/MOB_LOG_GET",
 		"target": {

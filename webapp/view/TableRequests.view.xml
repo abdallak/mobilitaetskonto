@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests">
 	<App id="app">
 		<pages>
 			<Page title="" floatingFooter="true">
@@ -44,15 +43,11 @@
 							<ColumnListItem press="onNavToDetail" type="Active">
 								<cells>
 									<Label text="{requestTableModel>UID}"/>
-									<Label text="{requestTableModel>VORNAME} {requestTableModel>NAME}"/>
-									<Label
-										text="{ path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"/>
-									<ObjectNumber
-										number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-										unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} >= 0 ? 'Success' : 'Error' }"/>
+									<Label text="{requestTableModel>VORNAME} {requestTableModel&gt;NAME}"/>
+									<Label text="{ path: 'requestTableModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"/>
+									<ObjectNumber number="{ parts:[{path:'requestTableModel>BETRAG'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{i18n>currency}" state="{= ${requestTableModel>BETRAG} &gt;= 0 ? 'Success' : 'Error' }"/>
 									<Label text="{path: 'requestTableModel>ART', formatter: '.formatter.antragArtText'}"/>
-									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}"
-										state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
+									<ObjectStatus text="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusText'}" state="{path: 'requestTableModel>STATUS', formatter: '.formatter.statusIndicator'}"/>
 									<CheckBox id="checkBox0" selected="false" visible="{= ${requestTableModel>STATUS} === 2 &amp;&amp; ${requestTableModel>ART} === 0}"/>
 								</cells>
 							</ColumnListItem>
@@ -62,14 +57,29 @@
 								<content>
 									<SearchField placeholder="Betrag oder Name..." id="searchField0" width="40%" search="filterTable"/>
 									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="Zeitfenster wählen..."/>
-									<Label text="Status:" width="100%" id="label6" textAlign="End"/>
+									<ToolbarSpacer id="spacer0_1583343307107"/>
+									<Label text="Nur zugewiesene:" id="label" textAlign="End">
+										<layoutData>
+											<OverflowToolbarLayoutData priority="NeverOverflow"/>
+										</layoutData>
+									</Label>
+									<Switch id="switch0" type="AcceptReject" state="true" change="filterTable">
+										<layoutData>
+											<FlexItemData growFactor="1"/>
+										</layoutData>
+									</Switch>
+									<Label text="Status:" id="label6" textAlign="End">
+										<layoutData>
+											<OverflowToolbarLayoutData priority="NeverOverflow"/>
+										</layoutData>
+									</Label>
 									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
 											<core:ListItem text="Abgelehnt" id="item0" key="0"/>
 											<core:ListItem text="Ausstehend" id="item1" key="1"/>
 											<core:ListItem text="Genehmigt" id="item2" key="2"/>
 											<core:ListItem text="Durchgeführt" id="item3" key="3"/>
-											<core:ListItem text="-" id="item4" key="4"/>
+											<core:ListItem text="Alle" id="item4" key="4"/>
 										</items>
 									</ActionSelect>
 								</content>
@@ -82,8 +92,7 @@
 						<contentLeft>
 							<HBox>
 								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
-								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
-									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%" id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
 							</HBox>
 						</contentLeft>
 						<contentMiddle>
@@ -91,9 +100,7 @@
 						</contentMiddle>
 						<contentRight>
 							<Label text="Freigabewert:" textAlign="Right"/>
-							<ObjectNumber
-								number="{ parts:[{path:'dbUserModel>/FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-								unit="{i18n>currency}"/>
+							<ObjectNumber number="{ parts:[{path:'dbUserModel>/FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{i18n>currency}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
