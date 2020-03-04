@@ -8,18 +8,17 @@
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="{i18n>HeaderMid}" id="label0" textAlign="Center"/>
+									<Label text="{i18n>HeaderEmployee}" id="label0" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>HeaderEmployee}" id="label1" textAlign="Center"/>
+									<Label text="E-Mail Adresse" id="label1" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="{i18n>startpageSalesTileSub}" id="label2" textAlign="Center"/>
-									<!--//kontostand-->
+									<Label text="Kontostand" id="label2" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column3">
@@ -31,8 +30,9 @@
 						<items>
 							<ColumnListItem id="item0" type="Active">
 								<cells>
-									<Label text="{path: 'employeeTableModel>MID'}" id="label4"/>
-									<Label text="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" id="label5"/>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
+										id="objectidentifier0"/>
+									<Link text="{path: 'employeeTableModel>MAIL'}" subtle="true" href="mailto:{path: 'employeeTableModel>MAIL'}"/>
 									<ObjectNumber
 										number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
@@ -57,16 +57,15 @@
 							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
 								text="{i18n>tableEmployeesTitle}" width="100%"/>
 						</contentMiddle>
-						<contentRight>
-						</contentRight>
+						<contentRight></contentRight>
 					</Bar>
 				</customHeader>
 				<footer>
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="GuthabenButton" type = "Default" text="{i18n>guthabenButton}" press="dialogOpen($event, 'balanceDialog')"/>
-							<Button xmlns="sap.m" id="AbschlussButton" type = "Default" text="{i18n>abschlussButton}" press="dialogOpen($event, 'expiredDialog')"/>
+							<Button xmlns="sap.m" id="GuthabenButton" type="Default" text="{i18n>guthabenButton}" press="dialogOpen($event, 'balanceDialog')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" type="Default" text="{i18n>abschlussButton}" press="dialogOpen($event, 'expiredDialog')"/>
 							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
 						</content>
 					</OverflowToolbar>
