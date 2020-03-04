@@ -141,7 +141,8 @@ sap.ui.define([
 				var oSearchFilter = new Filter([
 						new Filter("NAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
-						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery))
+						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
+						new Filter("UID",FilterOperator.EQ, parseInt(sSearchQuery))
 					],
 					false);
 
