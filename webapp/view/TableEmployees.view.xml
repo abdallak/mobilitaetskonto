@@ -13,12 +13,12 @@
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="E-Mail Adresse" id="label1" textAlign="Center"/>
+									<Label text="{i18n>email}" id="label1" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="Kontostand" id="label2" textAlign="Center"/>
+									<Label text="{i18n>balance}" id="label2" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column3">
@@ -68,8 +68,7 @@
 								press="dialogOpen($event, 'balanceDialog')"/>
 							<Button xmlns="sap.m" id="AbschlussButton" type="Default" text="{i18n>abschlussButton}" icon="sap-icon://per-diem"
 								press="dialogOpen($event, 'expiredDialog')"/>
-							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... 
- -->
+							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical .....-->
 						</content>
 					</OverflowToolbar>
 				</footer>
