@@ -13,12 +13,12 @@
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="E-Mail Adresse" id="label1" textAlign="Center"/>
+									<Label text="{i18n>email}" id="label1" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="Kontostand" id="label2" textAlign="Center"/>
+									<Label text="{i18n>balance}" id="label2" textAlign="Center"/>
 								</header>
 							</Column>
 							<Column id="column3">
@@ -64,9 +64,11 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="GuthabenButton" type="Default" text="{i18n>guthabenButton}" press="dialogOpen($event, 'balanceDialog')"/>
-							<Button xmlns="sap.m" id="AbschlussButton" type="Default" text="{i18n>abschlussButton}" press="dialogOpen($event, 'expiredDialog')"/>
-							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
+							<Button xmlns="sap.m" id="GuthabenButton" type="Default" text="{i18n>guthabenButton}" icon="sap-icon://my-sales-order"
+								press="dialogOpen($event, 'balanceDialog')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" type="Default" text="{i18n>abschlussButton}" icon="sap-icon://per-diem"
+								press="dialogOpen($event, 'expiredDialog')"/>
+							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical .....-->
 						</content>
 					</OverflowToolbar>
 				</footer>
