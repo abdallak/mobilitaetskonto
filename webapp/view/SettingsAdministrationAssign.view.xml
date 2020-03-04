@@ -4,17 +4,44 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationAssignTitle}">
 				<content>
-					<List id="list0" items="{ path : 'employeeTableModel>/'}">
+					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'FREIGABEWERT' }}"
+						growingScrollToLoad="true">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="Name" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="Aktiv" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="Freigeber" id="label2"/>
+								</header>
+							</Column>
+							<Column id="column3">
+								<header>
+									<Label text="Freigabewert" id="label3"/>
+								</header>
+							</Column>
+						</columns>
 						<items>
-							<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" id="item0" detailPress="onEditPressed"
-								type="Detail"
-								description="MID: {path: 'employeeTableModel>MID'} Aktiv: {path: 'employeeTableModel>AKTIV'} Freigeber: {path: 'employeeTableModel>FREIGEBER'}">
-								<customData>
-									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
-								</customData>
-							</StandardListItem>
+							<ColumnListItem detailPress="onEditPressed" type="Detail">
+								<cells>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
+										id="objectidentifier0"/>
+									<Label text="{employeeTableModel>AKTIV}"/>
+									<Label text="{path: 'employeeTableModel>FREIGEBER'}"/>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}"/>
+								</cells>
+							</ColumnListItem>
 						</items>
-					</List>
+					</Table>
 				</content>
 			</Page>
 		</pages>
