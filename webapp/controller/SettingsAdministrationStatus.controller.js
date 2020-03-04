@@ -4,9 +4,11 @@ sap.ui.define([
 	"sap/m/ButtonType",
 	"sap/m/Input",
 	"sap/m/Button",
+	"sap/m/Text",
+	"sap/m/Label",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel, BusyIndicator) {
+], function (BaseController, Dialog, ButtonType, Input, Button, Text, Label, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -95,9 +97,17 @@ sap.ui.define([
 				title: that.getResourceBundle().getText("settingsAdministrationStatusDialogTitle"),
 				type: "Message",
 				content: [
+					new Text({
+						text: "Freigabewert 0 entspricht einem normalen Mitarbeiter.\n" +
+							"Freigabewerte größer 0 entsprechen dem Freigabewert eines Verwalters in Euro.\n"
+					}),
 					new Input("newValueInput", {
 						width: "100%",
+						type: "Number",
 						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
+					}),
+					new Label({
+						text: "Eingegebene Werte dürfen nur positive ganze Zahlen sein."
 					})
 				],
 				beginButton: new Button({
