@@ -18,12 +18,17 @@
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="Freigeber" id="label2"/>
+									<Label text="Verwalter" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
 									<Label text="Freigabewert" id="label3"/>
+								</header>
+							</Column>
+							<Column id="column4">
+								<header>
+									<Label text="Freigeber" id="label4"/>
 								</header>
 							</Column>
 						</columns>
@@ -35,11 +40,17 @@
 									<core:Icon src="{= ${employeeTableModel>AKTIV} === 'TRUE' ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon0"
 										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>AKTIV} === 'TRUE' ? '#228B22' : '#BF1616' }"
 										class="sapUiSmallMarginBegin"></core:Icon>
-									<Label text="{path: 'employeeTableModel>FREIGEBER'}"/>
+									<core:Icon src="{= ${employeeTableModel>FREIGABEWERT} > 0 ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon1"
+										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>FREIGABEWERT} > 0 ? '#228B22' : '#BF1616' }"
+										class="sapUiSmallMarginBegin"></core:Icon>
 									<ObjectNumber
 										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}"/>
+									<Label text="{path: 'employeeTableModel>FREIGEBER'}"/>
 								</cells>
+								<customData>
+									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
+								</customData>
 							</ColumnListItem>
 						</items>
 					</Table>
