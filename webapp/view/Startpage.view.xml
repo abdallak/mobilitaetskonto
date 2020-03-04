@@ -3,17 +3,23 @@
 	<Shell id="shell">
 		<App id="app">
 			<pages>
-				<Page id="page" title="{i18n>title}">
+				<Page id="page">
 					<content>
 						<sap.ui.layout:VerticalLayout width="100%" xmlns:sap.ui.layout="sap.ui.layout" id="layout0_1580578104802">
 							<sap.ui.layout:content>
-								<Label class="startpageLabel" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" text="Mobilitätskonto"
-									width="100%" id="label0" displayOnly="true"/>
 								<sap.ui.layout:HorizontalLayout id="layout1" allowWrapping="true">
 									<sap.ui.layout:content>
 										<GenericTile xmlns="sap.m" xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTile}" subheader="{i18n>startpageRequestTileSub}"
-											press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}" frameType="Auto"/>
+											press="onNavToRequest" visible="{= ${roleModel>/mitarbeiter}}" frameType="Auto">
+											<tileContent>
+												<TileContent>
+													<content>
+														<ImageContent src="sap-icon://create-form"/>
+													</content>
+												</TileContent>
+											</tileContent>
+										</GenericTile>
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 											header="{i18n>startpageSalesTile}" subheader="{i18n>startpageSalesTileSub}" id="salesTile" press="onNavToSales"
@@ -31,7 +37,15 @@
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 											id="employeeRequestTableTile" header="{i18n>startpageEmployeeRequestTableTile}" subheader="{i18n>startpageEmployeeRequestTableTileSub}"
-											press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}"/>
+											press="onNavToSubmittedRequests" visible="{= ${roleModel>/mitarbeiter}}">
+											<tileContent>
+												<TileContent>
+													<content>
+														<ImageContent src="sap-icon://batch-payments"/>
+													</content>
+												</TileContent>
+											</tileContent>
+										</GenericTile>
 									</sap.ui.layout:content>
 								</sap.ui.layout:HorizontalLayout>
 								<Label class="startpageLabel" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" text="Verwaltung" width="100%"
@@ -42,24 +56,53 @@
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="requestTableTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageRequestTableTile}" subheader="{i18n>startpageRequestTableTileSub}"
 											press="onNavToRequestTable" visible="{= ${roleModel>/verwalter}}">
-											<icon>
-												<sap.ui.core:Icon xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" src="sap-icon://monitor-payments" size="2em" xmlns:sap.ui.core="sap.ui.core"
-													id="icon0"/>
-											</icon>
+											<tileContent>
+												<TileContent>
+													<content>
+														<ImageContent src="sap-icon://approvals"/>
+													</content>
+												</TileContent>
+											</tileContent>
 										</GenericTile>
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="employeeTableTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageEmployeeTableTile}" subheader="{i18n>startpageEmployeeTableTileSub}"
-											press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}"/>
+											press="onNavToTableEmployees" visible="{= ${roleModel>/verwalter}}">
+											<tileContent>
+												<TileContent>
+													<content>
+														<ImageContent src="sap-icon://account"/>
+													</content>
+												</TileContent>
+											</tileContent>
+										</GenericTile>
 										<GenericTile xmlns:mvc="sap.ui.core.mvc" xmlns:sap.ui.layout="sap.ui.layout" xmlns="sap.m"
 											xmlns:action="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1" id="settingsTile"
 											class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="{i18n>startpageSettingsTile}" subheader="{i18n>startpageSettingsTileSub}"
-											press="onNavToSettings" visible="{= ${roleModel>/verwalter}}"/>
+											press="onNavToSettings" visible="{= ${roleModel>/verwalter}}">
+											<tileContent>
+												<TileContent>
+													<content>
+														<ImageContent src="sap-icon://action-settings"/>
+													</content>
+												</TileContent>
+											</tileContent>
+										</GenericTile>
 									</sap.ui.layout:content>
 								</sap.ui.layout:HorizontalLayout>
 							</sap.ui.layout:content>
 						</sap.ui.layout:VerticalLayout>
 					</content>
+					<customHeader>
+						<Bar id="bar0">
+							<contentLeft>
+								<Label class="startpageLabel" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:sap.ui.layout="sap.ui.layout" text="Mobilitätskonto"
+									width="100%" id="lbel0" displayOnly="true"/>
+							</contentLeft>
+							<contentMiddle></contentMiddle>
+							<contentRight></contentRight>
+						</Bar>
+					</customHeader>
 				</Page>
 			</pages>
 		</App>

@@ -9,8 +9,9 @@ sap.ui.define([
 	"sap/m/Text",
 	"sap/m/MessageToast",
 	"sap/m/Button",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -88,9 +89,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var dbCategoryModel = that.getModel("dbCategoryModel");
 				dbCategoryModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -119,6 +122,7 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogBegin"),
 					press: function () {
+						BusyIndicator.show();
 						that.changeCategory("delete", undefined, kid);
 						oDialog.close();
 					}
@@ -164,6 +168,7 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsCategoryEditDialogBegin"),
 					press: function () {
+						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
 						that.changeCategory("edit", sText, kid);
 						oDialog.close();
@@ -203,6 +208,7 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsCategoryAddDialogBegin"),
 					press: function () {
+						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
 						that.changeCategory("add", sText);
 						oDialog.close();

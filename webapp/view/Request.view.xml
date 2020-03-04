@@ -46,7 +46,7 @@
 									<sap.ui.layout.form:fields>
 										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
 											noDataDescription="Dateien hierherziehen oder den &quot;+&quot; Knopf zum Upload nutzen" change="onChange"
-											filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false"/>
+											filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false" numberOfAttachmentsText=" "/>
 									</sap.ui.layout.form:fields>
 								</sap.ui.layout.form:FormElement>
 							</sap.ui.layout.form:FormContainer>

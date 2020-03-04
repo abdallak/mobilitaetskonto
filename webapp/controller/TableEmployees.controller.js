@@ -3,8 +3,9 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/Fragment"
-], function (BaseController, formatter, JSONModel, Fragment) {
+	"sap/ui/core/Fragment",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, formatter, JSONModel, Fragment, BusyIndicator) {
 	"use strict";
 	var employeeTableModel;
 	var insertModel;

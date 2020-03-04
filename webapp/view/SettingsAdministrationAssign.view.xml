@@ -4,27 +4,58 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationAssignTitle}">
 				<content>
-					<List id="list0" items="{ path : 'employeeTableModel>/'}">
+					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="Name" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="Aktiv" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="Verwalter" id="label2"/>
+								</header>
+							</Column>
+							<Column id="column3">
+								<header>
+									<Label text="Freigabewert" id="label3"/>
+								</header>
+							</Column>
+							<Column id="column4">
+								<header>
+									<Label text="Freigeber" id="label4"/>
+								</header>
+							</Column>
+						</columns>
 						<items>
-							<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" id="item0" detailPress="onEditPressed"
-								type="Detail"
-								description="MID: {path: 'employeeTableModel>MID'} Aktiv: {path: 'employeeTableModel>AKTIV'} Freigeber: {path: 'employeeTableModel>FREIGEBER'}">
+							<ColumnListItem detailPress="onEditPressed" type="Detail">
+								<cells>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
+										id="objectidentifier0"/>
+									<core:Icon src="{= ${employeeTableModel>AKTIV} === 'TRUE' ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon0"
+										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>AKTIV} === 'TRUE' ? '#228B22' : '#BF1616' }"
+										class="sapUiSmallMarginBegin"></core:Icon>
+									<core:Icon src="{= ${employeeTableModel>FREIGABEWERT} > 0 ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon1"
+										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>FREIGABEWERT} > 0 ? '#228B22' : '#BF1616' }"
+										class="sapUiSmallMarginBegin"></core:Icon>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}"/>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
+										text="{path: 'employeeTableModel>FREIGEBER'}" id="objectidentifier1"/>
+								</cells>
 								<customData>
 									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
 								</customData>
-							</StandardListItem>
+							</ColumnListItem>
 						</items>
-					</List>
+					</Table>
 				</content>
-				<footer>
-					<Toolbar width="100%" id="toolbar1">
-						<content>
-							<Text
-								text="Hinweis: Erstmal nur testweise so unübersichtlich. Id wird aktuell noch nicht geprüft und Input in Dialog wird noch durch ein Textfeld mit Namen (und Vorschlägen) ersetzt."
-								width="100%" id="label0"/>
-						</content>
-					</Toolbar>
-				</footer>
 			</Page>
 		</pages>
 	</App>
