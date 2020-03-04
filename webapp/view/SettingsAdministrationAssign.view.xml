@@ -4,8 +4,7 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationAssignTitle}">
 				<content>
-					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'FREIGABEWERT' }}"
-						growingScrollToLoad="true">
+					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
@@ -33,7 +32,9 @@
 								<cells>
 									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
 										id="objectidentifier0"/>
-									<Label text="{employeeTableModel>AKTIV}"/>
+									<core:Icon src="{= ${employeeTableModel>AKTIV} === 'TRUE' ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon0"
+										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>AKTIV} === 'TRUE' ? '#228B22' : '#BF1616' }"
+										class="sapUiSmallMarginBegin"></core:Icon>
 									<Label text="{path: 'employeeTableModel>FREIGEBER'}"/>
 									<ObjectNumber
 										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
