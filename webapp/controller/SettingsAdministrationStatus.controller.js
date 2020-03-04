@@ -25,7 +25,7 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
-		 * @property {integer} VERWALTER - administration value
+		 * @property {integer} FREIGABEWERT - administration value
 		 */
 
 		/**

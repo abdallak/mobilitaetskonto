@@ -30,7 +30,7 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
-		 * @property {integer} VERWALTER - administration value
+		 * @property {integer} FREIGABEWERT - administration value
 		 * @property {string} FREIGEBER - assigned freigeber id
 		 */
 
@@ -166,7 +166,7 @@ sap.ui.define([
 
 			// clear the old search filter
 			this._oDialog.getBinding("items").filter([
-				new Filter("VERWALTER", FilterOperator.GT, 0)
+				new Filter("FREIGABEWERT", FilterOperator.GT, 0)
 			]);
 
 			// toggle compact style
@@ -184,7 +184,7 @@ sap.ui.define([
 			);
 
 			var oBinding = oEvent.getSource().getBinding("items");
-			oBinding.filter([oFilter, new Filter("VERWALTER", FilterOperator.GT, 0)]);
+			oBinding.filter([oFilter, new Filter("FREIGABEWERT", FilterOperator.GT, 0)]);
 		},
 
 		handleClose: function (oEvent) {
@@ -196,7 +196,7 @@ sap.ui.define([
 				var freigeberMID = aContexts[0].getObject().MID;
 
 				this.setEmployeeStatus(selectedMID, freigeberMID);
-				oEvent.getSource().getBinding("items").filter([new Filter("VERWALTER", FilterOperator.GT, 0)]);
+				oEvent.getSource().getBinding("items").filter([new Filter("FREIGABEWERT", FilterOperator.GT, 0)]);
 			}
 		}
 	});

@@ -4,7 +4,8 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationAssignTitle}">
 				<content>
-					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/'}" growingScrollToLoad="true">
+					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'FREIGABEWERT' }}"
+						growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
