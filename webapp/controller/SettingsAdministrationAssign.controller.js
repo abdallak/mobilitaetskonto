@@ -11,7 +11,8 @@ sap.ui.define([
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel, BusyIndicator) {
+], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel,
+	BusyIndicator) {
 	"use strict";
 
 	/**
@@ -190,8 +191,8 @@ sap.ui.define([
 		handleClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts && aContexts.length) {
-			    BusyIndicator.show();
-			    
+				BusyIndicator.show();
+
 				var selectedMID = this.getModel("selectedMIDModel").getData().mid;
 				var freigeberMID = aContexts[0].getObject().MID;
 

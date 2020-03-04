@@ -4,7 +4,8 @@
 		<pages>
 			<Page title="{i18n>settingsEmployeeStatusTitle}">
 				<content>
-					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" mode="MultiSelect"
+						growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
