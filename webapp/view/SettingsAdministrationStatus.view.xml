@@ -49,15 +49,6 @@
 						</items>
 					</Table>
 				</content>
-				<footer>
-					<Toolbar width="100%" id="toolbar1">
-						<content>
-							<Text
-								text="Hinweis: Erstmal nur testweise so unübersichtlich. Freigabewert 0 entspricht einem normalen Mitarbeiter. Werte größer 0 sind Verwalter. Eingegebene Werte dürfen nur ganze Zahlen sein."
-								width="100%" id="label12"/>
-						</content>
-					</Toolbar>
-				</footer>
 			</Page>
 		</pages>
 	</App>
