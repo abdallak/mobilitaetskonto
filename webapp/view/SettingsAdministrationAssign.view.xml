@@ -46,7 +46,8 @@
 									<ObjectNumber
 										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 										unit="{i18n>currency}"/>
-									<Label text="{path: 'employeeTableModel>FREIGEBER'}"/>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
+										text="{path: 'employeeTableModel>FREIGEBER'}" id="objectidentifier1"/>
 								</cells>
 								<customData>
 									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
