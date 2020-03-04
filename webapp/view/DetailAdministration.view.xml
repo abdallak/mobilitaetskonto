@@ -41,7 +41,7 @@
 											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BEZEICHNUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement id="FormElementAlt" label="Alter Betrag" visible="false">
+									<sap.ui.layout.form:FormElement id="FormElementAlt" label="{i18n>oldValue}" visible="false">
 										<sap.ui.layout.form:fields>
 											<ObjectNumber id="textALT"
 												number="{ parts:[{path:'detailADModel>/ALTBETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
@@ -69,7 +69,7 @@
 												unit="{i18n>currency}" state="{= ${detailADUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="Resultierender Kontostand" id="resultingBalance">
+									<sap.ui.layout.form:FormElement label="{i18n>resultingBalance}" id="resultingBalance">
 										<sap.ui.layout.form:fields>
 											<ObjectNumber
 												number="{ parts:[{path:'detailADModel>/RESULTBALANCE'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
@@ -137,8 +137,8 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen" press="approveRequestPressed"/>
-							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen" press="rejectRequestPressed"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" text="{i18n>acceptButton}" press="approveRequestPressed"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>denyButton}" press="rejectRequestPressed"/>
 						</content>
 					</OverflowToolbar>
 				</footer>

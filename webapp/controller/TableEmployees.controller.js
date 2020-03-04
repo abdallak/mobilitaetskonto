@@ -19,6 +19,7 @@ sap.ui.define([
 
 			var staticModel = new JSONModel();
 			this.setModel(staticModel, "staticModel");
+			staticModel.datum = new Date().toISOString();
 
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -50,7 +51,7 @@ sap.ui.define([
 		},
 		
 		//sets the request Modell 
-		setRequest: function (mid, amount, describ) {
+		setRequest: function (mid, amount, describ, date) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			console.log("set request");
 			console.log(mid + amount + describ);
@@ -59,6 +60,7 @@ sap.ui.define([
 				"art": 2,
 				"betrag": amount,
 				"beschreibung": describ,
+				"datum": date,
 				"kid": 1,
 				"state": 2,
 				"MIDV": dbUserData.MID
@@ -83,14 +85,16 @@ sap.ui.define([
 		},
 		
 		dialogOpen: function (oEvent, dialogId) {
-			var thisView = this.getView();
-			OpendDialog = dialogId;
 			
+			var thisView = this.getView();
+			console.log(thisView);
+			OpendDialog = dialogId;
+			console.log(OpendDialog);
 			if (!this.byId(dialogId)) {
 				// load asynchronous XML fragment
 				Fragment.load({
 					id: thisView.getId(),
-					name: "Mobilitaetskonto.Mobilitaetskonto.view.".concat(dialogId),
+					name: "Mobilitaetskonto.Mobilitaetskonto.view.TableEmployees".concat(dialogId),
 					controller: this
 				}).then(function (oDialog) {
 					// connect dialog to the root view of this component (models, lifecycle)
@@ -121,7 +125,7 @@ sap.ui.define([
 				console.log(mid);
 				
 				if(GorA === 'G'){//execute guthaben
-					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung);
+					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, staticModel.datum);
 					this.makeRequest();
 				}
 				else{
@@ -157,7 +161,8 @@ sap.ui.define([
 					console.log(that.mid);
 					console.log(mid);
 					console.log(this.mid);
-					that.setRequest(mid, expired, "Abgelaufenes Guthaben");
+					//TODO noch datum anpassen
+					that.setRequest(mid, expired, "Abgelaufenes Guthaben", "31.12.2017");
 					that.makeRequest();
 					
 			}).fail(function (jqXHR, exception) {

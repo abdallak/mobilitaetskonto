@@ -55,8 +55,8 @@
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar4">
 								<content>
-									<SearchField placeholder="Betrag oder Name..." id="searchField0" width="40%" search="filterTable"/>
-									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="Zeitfenster wählen..."/>
+									<SearchField placeholder="{i18n>placeHolderFilter}" id="searchField0" width="40%" search="filterTable"/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="{i18n>aplaceHolderChooseTime}"/>
 									<ToolbarSpacer id="spacer0_1583343307107"/>
 									<Label text="Nur zugewiesene:" id="label" textAlign="End">
 										<layoutData>
@@ -68,18 +68,18 @@
 											<FlexItemData growFactor="1"/>
 										</layoutData>
 									</Switch>
-									<Label text="Status:" id="label6" textAlign="End">
+									<Label text="Status:" width="100%" id="label6" textAlign="End">
 										<layoutData>
 											<OverflowToolbarLayoutData priority="NeverOverflow"/>
 										</layoutData>
 									</Label>
 									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
-											<core:ListItem text="Abgelehnt" id="item0" key="0"/>
-											<core:ListItem text="Ausstehend" id="item1" key="1"/>
-											<core:ListItem text="Genehmigt" id="item2" key="2"/>
-											<core:ListItem text="Durchgeführt" id="item3" key="3"/>
-											<core:ListItem text="Alle" id="item4" key="4"/>
+											<core:ListItem text="{i18n>antragStatusAbgelehnt}" id="item0" key="0"/>
+											<core:ListItem text="{i18n>antragStatusAusstehend}" id="item1" key="1"/>
+											<core:ListItem text="{i18n>antragStatusGenehmigt}" id="item2" key="2"/>
+											<core:ListItem text="{i18n>antragStatusDurchgeführt}" id="item3" key="3"/>
+											<core:ListItem text="{i18n>antragStatusAlle}" id="item4" key="4"/>
 										</items>
 									</ActionSelect>
 								</content>
@@ -99,8 +99,10 @@
 							<Label text="{i18n>requestTableTitle}" width="100%" id="nameLabel_copy"/>
 						</contentMiddle>
 						<contentRight>
-							<Label text="Freigabewert:" textAlign="Right"/>
-							<ObjectNumber number="{ parts:[{path:'dbUserModel>/FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{i18n>currency}"/>
+							<Label text="{i18n>acceptanceValue}:" textAlign="Right"/>
+							<ObjectNumber
+								number="{ parts:[{path:'dbUserModel>/FREIGABEWERT'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{i18n>currency}"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
@@ -109,8 +111,8 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="submitButton" type="Accept" text="Genehmigen" visible="false"/>
-							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="Ablehnen" visible="false"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" text="{i18n>acceptButton}" visible="false"/>
+							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>denyButton}" visible="false"/>
 							<Button xmlns="sap.m" press="onMarkAsTransacted" id="transactedButton" type="Accept" text="{i18n>markAsTransacted}"/>
 						</content>
 					</OverflowToolbar>
