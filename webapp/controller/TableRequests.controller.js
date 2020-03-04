@@ -133,6 +133,8 @@ sap.ui.define([
 		 * The method provides a final filter consisting of several others, related to the input given by the controls.
 		 */
 		filterTable: function () {
+			var assignedSwitch = this.getView().byId("switch0");
+			var assignedValue = assignedSwitch.getState();
 
 			var dateRangePicker = this.getView().byId("rangepicker0");
 			var minDate = dateRangePicker.getDateValue();
@@ -169,6 +171,13 @@ sap.ui.define([
 			if (minDate !== null && maxDate !== null) {
 				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
 				singleFilters.push(oDateFilter);
+			}
+
+			// ASSIGN FILTER
+			if (assignedValue === true) {
+				var dbUserData = this.getGlobalModel("dbUserModel").getData();
+				var oAssignedFilter = new Filter("FREIGEBER", FilterOperator.EQ, dbUserData.MID);
+				singleFilters.push(oAssignedFilter);
 			}
 
 			var oFinalFilter = new Filter(singleFilters, true);
