@@ -17,6 +17,7 @@ sap.ui.define([
 		 * It will attach the route pattern matcher to reload the current logModel.
 		 */
 		onInit: function () {
+			// FIXME: ersten view irgendwie auch von hier aus aktualisieren - vllt. eigenes event erstellen und an onItemSelect senden
 			this.getRouter().getRoute("Settings").attachMatched(this._onRoutePatternMatched, this);
 		},
 

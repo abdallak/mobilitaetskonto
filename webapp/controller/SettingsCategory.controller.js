@@ -38,21 +38,20 @@ sap.ui.define([
 		 * It will set an empty dbCategoryModel and triggers a model update.
 		 */
 		onInit: function () {
-			// FIXME: Funktioniert für den NavContainer nicht
-			// this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
 			this.setModel(new JSONModel(), "dbCategoryModel");
 
 			this.getEventBus().subscribe("manageCategories", "show", this.onBeforeShow, this);
 		},
 
+		/**
+		 * This is a workaround to update the navigation containers everytime the view appears
+		 * The main settings view sends an EventBus event to the viewId e.g. "showLog" with a "show" message.
+		 * 
+		 * @param{string} evt - viewId
+		 */
 		onBeforeShow: function (evt) {
 			this.changeCategory("get");
 		},
-
-		/**
-		 * @param{sap.ui.base.Event} [oEvent] - oEvent
-		 */
-		_onRoutePatternMatched: function (oEvent) {},
 
 		/**
 		 * This is a helper function which will prepare and perform the network requests.
