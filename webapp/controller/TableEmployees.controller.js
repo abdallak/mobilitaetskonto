@@ -77,9 +77,11 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
+					BusyIndicator.hide();
 					that.getTableData();
 				})
 				.fail(function (jqXHR, exception) {
+					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
 		},
@@ -108,6 +110,7 @@ sap.ui.define([
 		
 		//executes Dialog functions (Guthaben/Jahresabschluss)
 		onExecuteDialog: function (GorA) {
+			BusyIndicator.show();
 			var staticModel = this.getModel("staticModel").getData();
 			
 			console.log(GorA);

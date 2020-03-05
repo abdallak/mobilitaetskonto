@@ -1,6 +1,7 @@
 sap.ui.define([
-	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController"
-], function (BaseController) {
+	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -84,6 +85,7 @@ sap.ui.define([
 		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu den Konfigurationsmöglichkeiten für den Verwalter.
 		 */
 		onNavToSettings: function () {
+			//BusyIndicator.show();
 			this.getRouter().navTo("Settings");
 		}
 
