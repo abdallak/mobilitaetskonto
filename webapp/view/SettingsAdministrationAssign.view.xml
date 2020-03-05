@@ -43,11 +43,22 @@
 									<core:Icon src="{= ${employeeTableModel>FREIGABEWERT} > 0 ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon1"
 										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>FREIGABEWERT} > 0 ? '#228B22' : '#BF1616' }"
 										class="sapUiSmallMarginBegin"></core:Icon>
-									<ObjectNumber
-										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
-										unit="{i18n>currency}"/>
-									<ObjectIdentifier title="{path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
-										text="{path: 'employeeTableModel>FREIGEBER'}" id="objectidentifier1"/>
+									<HBox>
+										<ObjectNumber
+											number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+											unit="{i18n>currency}"/>
+										<core:Icon src="sap-icon://error" id="icon2" visible="{= ${employeeTableModel>FREIGABEWERT} > ${employeeTableModel>VERWALTERFREIGABEWERT} }"
+											tooltip="Freigabebetrag des nachfolgenden Freigebers darf nicht kleiner sein: {employeeTableModel>FREIGABEWERT} € > {employeeTableModel>VERWALTERFREIGABEWERT} €"
+											color="#BF1616" class="sapUiSmallMarginBegin"></core:Icon>
+									</HBox>
+									<HBox>
+										<ObjectIdentifier title="{path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
+											text="{path: 'employeeTableModel>FREIGEBER'}" id="objectidentifier1"/>
+										<ObjectNumber class="sapUiSmallMarginBegin"
+											tooltip="Freigabewert von {path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
+											number="{ parts:[{path:'employeeTableModel>VERWALTERFREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+											unit="{i18n>currency}" visible="{= ${employeeTableModel>FREIGABEWERT} > ${employeeTableModel>VERWALTERFREIGABEWERT} }" state="Error"/>
+									</HBox>
 								</cells>
 								<customData>
 									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
