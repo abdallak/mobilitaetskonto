@@ -11,7 +11,9 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel, BusyIndicator) {
+], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button,
+	JSONModel,
+	BusyIndicator) {
 	"use strict";
 
 	/**
@@ -39,6 +41,11 @@ sap.ui.define([
 			// FIXME: Funktioniert für den NavContainer nicht
 			// this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
 			this.setModel(new JSONModel(), "dbCategoryModel");
+
+			this.getEventBus().subscribe("manageCategories", "show", this.onBeforeShow, this);
+		},
+
+		onBeforeShow: function (evt) {
 			this.changeCategory("get");
 		},
 

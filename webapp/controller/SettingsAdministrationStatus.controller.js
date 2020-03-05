@@ -40,12 +40,17 @@ sap.ui.define([
 		onInit: function () {
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
-			this.getEmployeeData();
 
 			var oTable = this.getView().byId("table0");
 			var oBinding = oTable.getBinding("items");
 			var oFilter = new Filter("AKTIV", FilterOperator.EQ, "TRUE");
 			oBinding.filter([oFilter]);
+
+			this.getEventBus().subscribe("manageVerwalterguthaben", "show", this.onBeforeShow, this);
+		},
+
+		onBeforeShow: function (evt) {
+			this.getEmployeeData();
 		},
 
 		/**

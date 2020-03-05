@@ -43,6 +43,11 @@ sap.ui.define([
 		onInit: function () {
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
+
+			this.getEventBus().subscribe("assignAdministrators", "show", this.onBeforeShow, this);
+		},
+
+		onBeforeShow: function (evt) {
 			this.getEmployeeData();
 		},
 

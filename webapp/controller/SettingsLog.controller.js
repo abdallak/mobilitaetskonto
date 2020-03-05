@@ -19,6 +19,11 @@ sap.ui.define([
 		onInit: function () {
 			var logModel = new JSONModel();
 			this.setModel(logModel, "logModel");
+
+			this.getEventBus().subscribe("showLog", "show", this.onBeforeShow, this);
+		},
+
+		onBeforeShow: function (evt) {
 			this.getLogData();
 		},
 

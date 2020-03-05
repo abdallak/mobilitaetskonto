@@ -34,6 +34,12 @@ sap.ui.define([
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 			this.getEmployeeData();
+
+			this.getEventBus().subscribe("manageEmployeeStatus", "show", this.onBeforeShow, this);
+		},
+
+		onBeforeShow: function (evt) {
+			this.getEmployeeData();
 		},
 
 		/**

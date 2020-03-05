@@ -23,6 +23,12 @@ sap.ui.define([
 		},
 
 		/**
+		 */
+		getEventBus: function () {
+			return sap.ui.getCore().getEventBus();
+		},
+
+		/**
 		 * This is a convenience function to get a model.
 		 * 
 		 * @param {string} sName - model name
