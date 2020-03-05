@@ -174,6 +174,7 @@ sap.ui.define([
 		},
 
 		onAbortCloseDialog: function (oEvent, dialogId) {
+			BusyIndicator.hide();
 			this.byId(dialogId).close();
 			this.byId(dialogId).destroy();
 		}
