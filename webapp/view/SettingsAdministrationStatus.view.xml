@@ -4,7 +4,7 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationStatusTitle}">
 				<content>
-					<Table id="requestTableId" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
 						<columns>
 							<Column id="column0">
 								<header>
@@ -13,17 +13,12 @@
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="Aktiv" id="label1"/>
+									<Label text="Verwalter" id="label1"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="Verwalter" id="label2"/>
-								</header>
-							</Column>
-							<Column id="column3">
-								<header>
-									<Label text="Freigabewert" id="label3"/>
+									<Label text="Freigabewert" id="label2"/>
 								</header>
 							</Column>
 						</columns>
@@ -32,9 +27,6 @@
 								<cells>
 									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
 										id="objectidentifier0"/>
-									<core:Icon src="{= ${employeeTableModel>AKTIV} === 'TRUE' ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon0"
-										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>AKTIV} === 'TRUE' ? '#228B22' : '#BF1616' }"
-										class="sapUiSmallMarginBegin"></core:Icon>
 									<core:Icon src="{= ${employeeTableModel>FREIGABEWERT} > 0 ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon1"
 										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>FREIGABEWERT} > 0 ? '#228B22' : '#BF1616' }"
 										class="sapUiSmallMarginBegin"></core:Icon>

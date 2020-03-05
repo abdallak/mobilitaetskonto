@@ -6,9 +6,11 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/m/Text",
 	"sap/m/Label",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, Dialog, ButtonType, Input, Button, Text, Label, JSONModel, BusyIndicator) {
+], function (BaseController, Dialog, ButtonType, Input, Button, Text, Label, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -39,6 +41,11 @@ sap.ui.define([
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 			this.getEmployeeData();
+
+			var oTable = this.getView().byId("table0");
+			var oBinding = oTable.getBinding("items");
+			var oFilter = new Filter("AKTIV", FilterOperator.EQ, "TRUE");
+			oBinding.filter([oFilter]);
 		},
 
 		/**
