@@ -34,6 +34,18 @@ sap.ui.define([
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 			this.getEmployeeData();
+
+			this.getEventBus().subscribe("manageEmployeeStatus", "show", this.onBeforeShow, this);
+		},
+
+		/**
+		 * This is a workaround to update the navigation containers everytime the view appears
+		 * The main settings view sends an EventBus event to the viewId e.g. "showLog" with a "show" message.
+		 * 
+		 * @param{string} evt - viewId
+		 */
+		onBeforeShow: function (evt) {
+			this.getEmployeeData();
 		},
 
 		/**
