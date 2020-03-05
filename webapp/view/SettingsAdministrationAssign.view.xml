@@ -54,6 +54,8 @@
 									<HBox>
 										<ObjectIdentifier title="{path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
 											text="{path: 'employeeTableModel>FREIGEBER'}" id="objectidentifier1"/>
+										<core:Icon src="sap-icon://alert" id="icon3" visible="{= ${employeeTableModel>VERWALTERAKTIV} === 'FALSE' }"
+											tooltip="Mitarbeiter ist inaktiv" color="#FFA500" class="sapUiSmallMarginBegin"></core:Icon>
 										<ObjectNumber class="sapUiSmallMarginBegin"
 											tooltip="Freigabewert von {path: 'employeeTableModel>VERWALTERVORNAME'} {path: 'employeeTableModel>VERWALTERNAME'}"
 											number="{ parts:[{path:'employeeTableModel>VERWALTERFREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
