@@ -1,7 +1,8 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -20,7 +21,7 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
-		 * @property {integer} VERWALTER - administration value
+		 * @property {integer} FREIGABEWERT - administration value
 		 */
 
 		/**
@@ -88,8 +89,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onAktivPressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
@@ -105,8 +106,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onInaktivPressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
@@ -122,8 +123,8 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onDeletePressed: function (oEvent) {
-			var oList = this.byId("list0");
-			var oSelectedItems = oList.getSelectedItems();
+			var oTable = this.byId("table0");
+			var oSelectedItems = oTable.getSelectedItems();
 
 			if (oSelectedItems.length === 0) {
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));

@@ -1,11 +1,18 @@
 sap.ui.define([
+	"jquery.sap.global",
+	"sap/m/MessageToast",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
+	"sap/ui/core/Fragment",
 	"sap/m/Dialog",
 	"sap/m/ButtonType",
 	"sap/m/Input",
 	"sap/m/Button",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel) {
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel,
+	BusyIndicator) {
 	"use strict";
 
 	/**
@@ -24,7 +31,7 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
-		 * @property {integer} VERWALTER - administration value
+		 * @property {integer} FREIGABEWERT - administration value
 		 * @property {string} FREIGEBER - assigned freigeber id
 		 */
 
@@ -58,7 +65,6 @@ sap.ui.define([
 		 * This is a helper function which will prepare and perform the network requests.
 		 * 
 		 * @param{string} mid - Selected employee id
-		 * @param{integer} iValue - New administration value
 		 * @param{string} sFreigeberId - New freigeber id
 		 */
 		setEmployeeStatus: function (mid, sFreigeberId) {
@@ -74,9 +80,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -89,38 +97,108 @@ sap.ui.define([
 		onEditPressed: function (oEvent) {
 			var mid = oEvent.getSource().data("MID");
 
-			var that = this;
-			var oDialog = new Dialog({
-				title: that.getResourceBundle().getText("settingsAdministrationAssignDialogTitle"),
-				type: "Message",
-				content: [
-					new Input("newValueInput", {
-						width: "100%",
-						placeholder: that.getResourceBundle().getText("settingsAdministrationAssignDialogPlaceholder")
-					})
-				],
-				beginButton: new Button({
-					type: ButtonType.Emphasized,
-					text: that.getResourceBundle().getText("settingsAdministrationAssignDialogBegin"),
-					press: function () {
-						var sText = sap.ui.getCore().byId("newValueInput").getValue();
-						that.setEmployeeStatus(mid, sText);
-						oDialog.close();
-					}
-				}),
-				endButton: new Button({
-					text: that.getResourceBundle().getText("settingsAdministrationAssignDialogEnd"),
-					press: function () {
-						oDialog.close();
-					}
-				}),
-				afterClose: function () {
-					oDialog.destroy();
-				}
+			var selectedMIDModel = new JSONModel();
+			selectedMIDModel.setData({
+				mid: mid
 			});
+			this.setModel(selectedMIDModel, "selectedMIDModel");
 
-			oDialog.open();
+			var oButton = oEvent.getSource();
+			if (!this._oDialog) {
+				Fragment.load({
+					name: "Mobilitaetskonto.Mobilitaetskonto.view.SettingsAdministrationAssignDialog",
+					controller: this
+				}).then(function (oDialog) {
+					this._oDialog = oDialog;
+					this._oDialog.setModel(this.getModel("employeeTableModel"), "employeeTableModel");
+					this._configDialog(oButton);
+					this._oDialog.open();
+				}.bind(this));
+			} else {
+				this._oDialog.setModel(this.getModel("employeeTableModel"), "employeeTableModel");
+				this._configDialog(oButton);
+				this._oDialog.open();
+			}
+		},
+
+		_configDialog: function (oButton) {
+			// Multi-select if required
+			var bMultiSelect = !!oButton.data("multi");
+			this._oDialog.setMultiSelect(bMultiSelect);
+
+			var sCustomConfirmButtonText = oButton.data("confirmButtonText");
+			this._oDialog.setConfirmButtonText(sCustomConfirmButtonText);
+
+			// Remember selections if required
+			var bRemember = !!oButton.data("remember");
+			this._oDialog.setRememberSelections(bRemember);
+
+			//add Clear button if needed
+			var bShowClearButton = !!oButton.data("showClearButton");
+			this._oDialog.setShowClearButton(bShowClearButton);
+
+			// Set growing property
+			var bGrowing = oButton.data("growing");
+			this._oDialog.setGrowing(bGrowing == "true");
+
+			// Set growing threshold
+			var sGrowingThreshold = oButton.data("threshold");
+			if (sGrowingThreshold) {
+				this._oDialog.setGrowingThreshold(parseInt(sGrowingThreshold));
+			}
+
+			// Set draggable property
+			var bDraggable = oButton.data("draggable");
+			this._oDialog.setDraggable(bDraggable == "true");
+
+			// Set draggable property
+			var bResizable = oButton.data("resizable");
+			this._oDialog.setResizable(bResizable == "true");
+
+			// Set style classes
+			var sResponsiveStyleClasses =
+				"sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer";
+			var sResponsivePadding = oButton.data("responsivePadding");
+			if (sResponsivePadding) {
+				this._oDialog.addStyleClass(sResponsiveStyleClasses);
+			} else {
+				this._oDialog.removeStyleClass(sResponsiveStyleClasses);
+			}
+
+			// clear the old search filter
+			this._oDialog.getBinding("items").filter([
+				new Filter("FREIGABEWERT", FilterOperator.GT, 0)
+			]);
+
+			// toggle compact style
+			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
+		},
+
+		handleSearch: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+
+			var oFilter = new Filter([
+					new Filter("NAME", FilterOperator.Contains, sValue),
+					new Filter("VORNAME", FilterOperator.Contains, sValue)
+				],
+				false
+			);
+
+			var oBinding = oEvent.getSource().getBinding("items");
+			oBinding.filter([oFilter, new Filter("FREIGABEWERT", FilterOperator.GT, 0)]);
+		},
+
+		handleClose: function (oEvent) {
+			var aContexts = oEvent.getParameter("selectedContexts");
+			if (aContexts && aContexts.length) {
+				BusyIndicator.show();
+
+				var selectedMID = this.getModel("selectedMIDModel").getData().mid;
+				var freigeberMID = aContexts[0].getObject().MID;
+
+				this.setEmployeeStatus(selectedMID, freigeberMID);
+				oEvent.getSource().getBinding("items").filter([new Filter("FREIGABEWERT", FilterOperator.GT, 0)]);
+			}
 		}
-
 	});
 });

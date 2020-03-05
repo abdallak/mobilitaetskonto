@@ -4,8 +4,9 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, formatter, Filter, FilterOperator, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, formatter, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
@@ -14,10 +15,10 @@ sap.ui.define([
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
-			this.filterStatus("1"); //Vorfiltern nach Status = ausstehend
+			this.filterTable(); //pre-filtering the table - the default selected status is 'pending(ausstehend)'
 
 			var picker = this.getView().byId("rangepicker0");
-			picker.setMaxDate(new Date()); //Setzt MaxDatum zum aktuellen Zeitpunkt
+			picker.setMaxDate(new Date()); //declares the maximum date as todays date
 
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -26,6 +27,10 @@ sap.ui.define([
 			this.getTableData();
 		},
 
+		/**
+		 * This function simply retrieves all available transactions and displays them in the table
+		 * with the help of the model.
+		 */
 		getTableData: function () {
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_TABELLE", "GET");
 
@@ -34,12 +39,18 @@ sap.ui.define([
 				.done(function (response) {
 					var requestTableModel = that.getModel("requestTableModel");
 					requestTableModel.setData(response);
+					console.log(requestTableModel);
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
 				});
 		},
 
+		/**
+		 * This function is used for navigation and parameter passing between the actual view and the administration's detail view.
+		 * The function will be triggered after selecting a single transaction inside the table.
+		 * The data related to the selected transactions is passed as stringified JSON Object through the router.
+		 */
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
 			var path = context.getPath();
@@ -50,19 +61,12 @@ sap.ui.define([
 			});
 		},
 
-		filterStatus: function (statusnummer) {
-
-			var FO = FilterOperator.EQ;
-			if (statusnummer === "4") {
-				FO = FilterOperator.LE;
-			}
-
-			var filters = [];
-			filters.push(new Filter("STATUS", FO, statusnummer));
-
-			this.bindFilters(filters);
-		},
-
+		/**
+		 * The Function simply calls a confirmation dialog.
+		 * After accepting, the function sets the status of the previously marked transactions to 'carried out (durchgeführt)'.
+		 * Afterwards the table content is refreshed.
+		 * In case of declining the confirmation dialog, the selected checkboxes will be resetted.
+		 */
 		onMarkAsTransacted: function () {
 			var oTab = this.byId("requestTableId");
 			var aSelected = [];
@@ -89,14 +93,17 @@ sap.ui.define([
 				actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.NO],
 				onClose: function (oAction) {
 					if (oAction === "YES") {
+						BusyIndicator.show();
 						var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DURCHGEFUEHRT", "POST", JSON.stringify(oSelected));
 
 						var that = this;
 						$.ajax(settings)
 							.done(function (response) {
+								BusyIndicator.hide();
 								that._onRoutePatternMatched(null);
 							})
 							.fail(function (jqXHR, exception) {
+								BusyIndicator.hide();
 								that.handleNetworkError(jqXHR);
 							});
 
@@ -107,6 +114,10 @@ sap.ui.define([
 			});
 		},
 
+		/**
+		 * This Function is called after declining the JahresabschlussPopUp.
+		 * After execution, all checked checkboxes are deselected.
+		 */
 		resetSelection: function () {
 			var oTab = this.byId("requestTableId");
 
@@ -116,7 +127,14 @@ sap.ui.define([
 			});
 		},
 
+		/**
+		 * This Function is used by the three filter controls of the UI. The SearchBar, the DateRangePicker and the ActionSelect.
+		 * Everytime one of these is used, this method gets called.
+		 * The method provides a final filter consisting of several others, related to the input given by the controls.
+		 */
 		filterTable: function () {
+			var assignedSwitch = this.getView().byId("switch0");
+			var assignedValue = assignedSwitch.getState();
 
 			var dateRangePicker = this.getView().byId("rangepicker0");
 			var minDate = dateRangePicker.getDateValue();
@@ -129,8 +147,9 @@ sap.ui.define([
 			var oFoState = FilterOperator.EQ;
 
 			//STATUS FILTER
+			//This is a special case, where the 'alle' in the ActionSelect is selected, a different Operator is required to show all the data. 
 			if (sStateKey === "4") {
-				oFoState = FilterOperator.LE; //alle Status(plural)
+				oFoState = FilterOperator.LE; // LE = Lesser or equal
 			}
 			var oStateFilter = new Filter("STATUS", oFoState, sStateKey);
 			singleFilters.push(oStateFilter);
@@ -141,7 +160,8 @@ sap.ui.define([
 				var oSearchFilter = new Filter([
 						new Filter("NAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
-						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery))
+						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
+						new Filter("UID",FilterOperator.EQ, parseInt(sSearchQuery))
 					],
 					false);
 
@@ -152,6 +172,13 @@ sap.ui.define([
 			if (minDate !== null && maxDate !== null) {
 				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
 				singleFilters.push(oDateFilter);
+			}
+
+			// ASSIGN FILTER
+			if (assignedValue === true) {
+				var dbUserData = this.getGlobalModel("dbUserModel").getData();
+				var oAssignedFilter = new Filter("FREIGEBER", FilterOperator.EQ, dbUserData.MID);
+				singleFilters.push(oAssignedFilter);
 			}
 
 			var oFinalFilter = new Filter(singleFilters, true);

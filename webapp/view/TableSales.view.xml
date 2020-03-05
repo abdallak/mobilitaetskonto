@@ -36,7 +36,7 @@
 							<ColumnListItem id="item0" press="onNavToDetail" type="Active">
 								<cells>
 									<Label
-										text="{path: 'salesModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { style: 'long', source: { pattern: 'dd.MM.yyyy' } } }"
+										text="{ path: 'salesModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"
 										id="label6"/>
 									<ObjectNumber
 										number="{ parts:[{path:'salesModel>BETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"

@@ -1,5 +1,5 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:core="sap.ui.core">
-	<Dialog id="AbschlussDialog" title="Jahresabschluss">
+	<Dialog id="DialogExpired" title="Jahresabschluss">
 		<VBox class="sapUiSmallMargin">
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
@@ -11,10 +11,10 @@
 			</f:SimpleForm>
 		</VBox>
 		<beginButton>
-			<Button text="Abschluss durchführen" press=".calcExpired"/>
+			<Button text="Abschluss durchführen" press=".onExecuteDialog('A')"/>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'AbschlussDialog')"/>
+			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'DialogExpired')"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

@@ -86,7 +86,7 @@ sap.ui.define([
 
 					var roleModel = component.getModel("roleModel");
 					var roleData = roleModel.getData();
-					roleData.verwalter = response.VERWALTER !== 0;
+					roleData.verwalter = response.FREIGABEWERT > 0;
 					// FIXME: Keine Ahnung warum hier der Boolean der String "TRUE" ist statt 1 oder true..
 					// In XSJS Service gibt es scheinbar kein BOOLEAN Typ und wird auch nicht als Integer erkannt.
 					roleData.mitarbeiter = response.AKTIV === "TRUE";

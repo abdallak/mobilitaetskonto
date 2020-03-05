@@ -4,27 +4,43 @@
 		<pages>
 			<Page title="{i18n>settingsAdministrationStatusTitle}">
 				<content>
-					<List id="list0" items="{ path : 'employeeTableModel>/'}">
+					<Table id="table0" growing="true" items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" growingScrollToLoad="true">
+						<columns>
+							<Column id="column0">
+								<header>
+									<Label text="Name" id="label0"/>
+								</header>
+							</Column>
+							<Column id="column1">
+								<header>
+									<Label text="Verwalter" id="label1"/>
+								</header>
+							</Column>
+							<Column id="column2">
+								<header>
+									<Label text="Freigabewert" id="label2"/>
+								</header>
+							</Column>
+						</columns>
 						<items>
-							<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel&gt;NAME'}" id="item0" detailPress="onEditPressed"
-								type="Detail"
-								description="MID: {path: 'employeeTableModel>MID'} Aktiv: {path: 'employeeTableModel>AKTIV'} Verwalter: {path: 'employeeTableModel>VERWALTER'}">
+							<ColumnListItem detailPress="onEditPressed" type="Detail">
+								<cells>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
+										id="objectidentifier0"/>
+									<core:Icon src="{= ${employeeTableModel>FREIGABEWERT} > 0 ? 'sap-icon://accept' : 'sap-icon://decline' }" id="icon1"
+										tooltip="{employeeTableModel>AKTIV}" color="{= ${employeeTableModel>FREIGABEWERT} > 0 ? '#228B22' : '#BF1616' }"
+										class="sapUiSmallMarginBegin"></core:Icon>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>FREIGABEWERT'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}"/>
+								</cells>
 								<customData>
 									<core:CustomData key="MID" value="{employeeTableModel>MID}"/>
 								</customData>
-							</StandardListItem>
+							</ColumnListItem>
 						</items>
-					</List>
+					</Table>
 				</content>
-				<footer>
-					<Toolbar width="100%" id="toolbar1">
-						<content>
-							<Text
-								text="Hinweis: Erstmal nur testweise so unübersichtlich. Freigabewert 0 entspricht einem normalen Mitarbeiter. Werte größer 0 sind Verwalter. Eingegebene Werte dürfen nur ganze Zahlen sein."
-								width="100%" id="label0"/>
-						</content>
-					</Toolbar>
-				</footer>
 			</Page>
 		</pages>
 	</App>

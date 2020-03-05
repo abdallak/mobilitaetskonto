@@ -4,8 +4,13 @@ sap.ui.define([
 	"sap/m/ButtonType",
 	"sap/m/Input",
 	"sap/m/Button",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, Dialog, ButtonType, Input, Button, JSONModel) {
+	"sap/m/Text",
+	"sap/m/Label",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, Dialog, ButtonType, Input, Button, Text, Label, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -24,7 +29,7 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
-		 * @property {integer} VERWALTER - administration value
+		 * @property {integer} FREIGABEWERT - administration value
 		 */
 
 		/**
@@ -36,6 +41,11 @@ sap.ui.define([
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 			this.getEmployeeData();
+
+			var oTable = this.getView().byId("table0");
+			var oBinding = oTable.getBinding("items");
+			var oFilter = new Filter("AKTIV", FilterOperator.EQ, "TRUE");
+			oBinding.filter([oFilter]);
 		},
 
 		/**
@@ -72,9 +82,11 @@ sap.ui.define([
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
+				BusyIndicator.hide();
 				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
+				BusyIndicator.hide();
 				that.handleNetworkError(jqXHR);
 			});
 		},
@@ -92,15 +104,24 @@ sap.ui.define([
 				title: that.getResourceBundle().getText("settingsAdministrationStatusDialogTitle"),
 				type: "Message",
 				content: [
+					new Text({
+						text: "Freigabewert 0 entspricht einem normalen Mitarbeiter.\n" +
+							"Freigabewerte größer 0 entsprechen dem Freigabewert eines Verwalters in Euro.\n"
+					}),
 					new Input("newValueInput", {
 						width: "100%",
+						type: "Number",
 						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
+					}),
+					new Label({
+						text: "Eingegebene Werte dürfen nur positive ganze Zahlen sein."
 					})
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogBegin"),
 					press: function () {
+						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
 						oDialog.close();

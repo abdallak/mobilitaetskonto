@@ -5,7 +5,13 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter"
 ], function (JSONModel, MessageToast, BaseController, formatter) {
 	"use strict";
-
+	
+	/**
+	 * This Class simply displays a detailed view of the selected transaction from the table,
+	 * providing extra information to the user, which is not shown in the table.
+	 * 
+	 * @class DetailEmployee
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
 
@@ -15,46 +21,26 @@ sap.ui.define([
 			var detailModel = new JSONModel();
 			this.setModel(detailModel, "detailModel");
 
-			var detailUserModel = new JSONModel();
-			this.setModel(detailUserModel, "detailUserModel");
+			var dbUserModel = this.getGlobalModel("dbUserModel");
+			this.setModel(dbUserModel, "dbUserModel");
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
 			//ANTRAGSDATEN
-			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
-
+			var detail = JSON.parse(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
-
-			//USERDATEN
-			// FIXME: Wird das hier gebraucht? Name + Vorname müssten doch auch von dbUserModel reichen?
-			this.performRequestEmployee(detail.MID);
-
-			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
+			
+			
+ 			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
 			if (jQuery.isEmptyObject(detailModel.getData())) {
-				detailModel.setData(oStorage.get("salesLocalData"));
+				detailModel.setData(oStorage.get("employeeLocalData"));
 			} else {
-				oStorage.put("salesLocalData", detailModel.getData());
+				oStorage.put("employeeLocalData", detailModel.getData());
 			}
 		},
 
-		performRequestEmployee: function (mid) {
-			var params = {};
-			params.mid = mid;
-
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
-
-			var that = this;
-			$.ajax(settings)
-				.done(function (response) {
-					var detailUserModel = that.getModel("detailUserModel");
-					detailUserModel.setData(response);
-				})
-				.fail(function (jqXHR, exception) {
-					that.handleNetworkError(jqXHR);
-				});
-		},
 
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
