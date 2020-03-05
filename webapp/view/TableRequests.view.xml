@@ -113,7 +113,6 @@
 					</Bar>
 				</customHeader>
 				<footer>
-					<!-- Erstmal versteckt, weil hier kein Feedback gegeben werden kann -->
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
