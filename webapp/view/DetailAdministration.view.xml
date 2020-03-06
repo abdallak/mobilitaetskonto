@@ -38,7 +38,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BEZEICHNUNG}"/>
+											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/KATEGORIE}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement id="FormElementAlt" label="{i18n>oldValue}" visible="false">
