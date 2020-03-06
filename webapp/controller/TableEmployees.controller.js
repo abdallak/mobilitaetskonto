@@ -132,6 +132,9 @@ sap.ui.define([
 				else{
 					//check einbauen dass das jahr2 gefüllt ist. ansonste nstandardmäßig 3 nehmen
 					console.log(staticModel.jahr2);
+					if(staticModel.jahr2 == undefined || staticModel.jahr2 == "" || staticModel.jahr2 < 1){
+					//thorw error 
+					}
 					var year = datePicked.getYear() + 1900 - staticModel.jahr2;
 					
 					var date = "31.12." + year;
