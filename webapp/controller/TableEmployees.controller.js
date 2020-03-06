@@ -19,7 +19,7 @@ sap.ui.define([
 
 			var staticModel = new JSONModel();
 			this.setModel(staticModel, "staticModel");
-			//staticModel.datum = new Date().toISOString();
+			staticModel.jahr2 = 3;
 
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -130,10 +130,14 @@ sap.ui.define([
 					this.makeRequest();
 				}
 				else{
-					console.log("check in if");
-					var date = staticModel.jahr1 - staticModel.jahr2;
+					//check einbauen dass das jahr2 gefüllt ist. ansonste nstandardmäßig 3 nehmen
+					console.log(staticModel.jahr2);
+					var year = datePicked.getYear() + 1900 - staticModel.jahr2;
+					
+					var date = "31.12." + year;
+					//var date = datePicked - staticModel.jahr2;
 					console.log(date);
-					this.getExpired(mid, date);
+					//this.getExpired(mid, date);
 				}
 			}
 			//closing the dialog box
@@ -158,10 +162,6 @@ sap.ui.define([
 					
 					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
 					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
-					console.log(expired);
-					console.log(that.mid);
-					console.log(mid);
-					console.log(this.mid);
 					//TODO noch datum anpassen
 					that.setRequest(mid, expired, "Abgelaufenes Guthaben", "31.12.2017");
 					that.makeRequest();
