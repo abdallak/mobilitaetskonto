@@ -60,8 +60,8 @@
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar4">
 								<content>
-									<SearchField placeholder="{i18n>placeHolderFilter}" id="searchField0" width="40%" search="filterTable"/>
-									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="40%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
+									<SearchField placeholder="{i18n>placeHolderFilter}" id="searchField0" width="30%" search="filterTable"/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="20%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
 									<ToolbarSpacer id="spacer0_1583343307107"/>
 									<Label text="Nur zugewiesene:" id="label" textAlign="End">
 										<layoutData>
