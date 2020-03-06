@@ -8,7 +8,7 @@
 					<Label text="Bisheriger Betrag"/>
 					<Input id="field" value="{detailADModel>/BETRAG}" enabled="false"/>
 					<Label text="Neuer Betrag"/>
-					<Input id="field1" value="{detailADModel>/NEUBETRAG}"/>
+					<Input id="field1" value="{detailADModel>/NEUBETRAG}" liveChange="handleLiveChange"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

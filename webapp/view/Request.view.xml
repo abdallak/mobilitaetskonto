@@ -6,7 +6,7 @@
 				<content>
 					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
 						<sap.ui.layout.form:formContainers>
-							<sap.ui.layout.form:FormContainer title="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" id="container1">
+							<sap.ui.layout.form:FormContainer id="container1">
 								<sap.ui.layout.form:formElements>
 									<sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
 										<sap.ui.layout.form:fields>
@@ -69,7 +69,10 @@
 							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
 								text="{i18n>requestTitle}" width="100%" id="titleLabel"/>
 						</contentMiddle>
-						<contentRight></contentRight>
+						<contentRight>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
+								text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%"/>
+						</contentRight>
 					</Bar>
 				</customHeader>
 				<footer>

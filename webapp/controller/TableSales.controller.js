@@ -36,12 +36,15 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 			var oTitleLabel = this.byId("titleLabel");
 			var sTitle;
+			var balance = this.getView().byId("balanceDisplay");
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
 				this.salesTable = true;
+				balance.setVisible(true);
 			} else {
 				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
 				this.salesTable = false;
+				balance.setVisible(false);
 			}
 			oTitleLabel.setText(sTitle);
 			

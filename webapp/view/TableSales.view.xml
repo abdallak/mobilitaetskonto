@@ -75,7 +75,7 @@
 						</contentMiddle>
 						<contentRight>
 							<ObjectNumber
-								number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								id="balanceDisplay" number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{i18n>currency}" state="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 						</contentRight>
 					</Bar>
