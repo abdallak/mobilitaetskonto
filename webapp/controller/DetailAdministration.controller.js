@@ -217,11 +217,10 @@ sap.ui.define([
 			
 			console.log(input.length);
 			
-			if(isNaN(lastInput) && !(lastInput == "-" && input.length === 1))
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
 			{
 				oSource.setValue(input.slice(0, input.length-1));	
 			}
-				
 		}
 	});
 });
