@@ -90,7 +90,7 @@
 									<sap.ui.layout.form:FormElement label="Bearbeiter" visible="{= ${detailModel>/VERWALTER} !== null}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%"
-												text="{path: 'detailModel>/VERWALTERVORNAME'} {path: 'detailModel>/VERWALTERNAME'} ({detailModel>/VERWALTER})"/>
+												text="{path: 'detailADModel>/VERWALTERVORNAME'} {path: 'detailADModel>/VERWALTERNAME'} ({detailADModel>/VERWALTER})"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
