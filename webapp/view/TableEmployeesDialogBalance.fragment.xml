@@ -8,7 +8,7 @@
 					<Label text="Beschreibung" id="beschreibtext"/>
 					<Input width="100%" id="describe" placeholder="individuelle Gutschrift" required="true" type="Text" value="{staticModel>/beschreibung}"/>
 					<Label text="Datum der Buchung" id="datumtext"/>
-					<Input width="100%" id="date7" placeholder="heute" required="true" type="Text" value="{staticModel>/datum}"/>
+					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" placeholder="DATUM AUSWÄHLEN{i18n>placeHolderChooseTime}"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

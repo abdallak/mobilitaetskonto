@@ -142,6 +142,8 @@ sap.ui.define([
 			var sSearchQuery = this.getView().byId("searchField0").getProperty("value");
 			var sStateKey = this.getView().byId("select0").getProperty("selectedKey");
 
+			var toolbar = this.getView().byId("toolbar1");
+
 			var filters = [];
 			var singleFilters = [];
 			var oFoState = FilterOperator.EQ;
@@ -150,7 +152,13 @@ sap.ui.define([
 			//This is a special case, where the 'alle' in the ActionSelect is selected, a different Operator is required to show all the data. 
 			if (sStateKey === "4") {
 				oFoState = FilterOperator.LE; // LE = Lesser or equal
+				toolbar.setVisible(true);
 			}
+
+			// SHOW / HIDE TOOLBAR
+			// If all or genehmigt, show toolbar
+			toolbar.setVisible(sStateKey === "2" || sStateKey === "4");
+
 			var oStateFilter = new Filter("STATUS", oFoState, sStateKey);
 			singleFilters.push(oStateFilter);
 
@@ -161,7 +169,7 @@ sap.ui.define([
 						new Filter("NAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
-						new Filter("UID",FilterOperator.EQ, parseInt(sSearchQuery))
+						new Filter("UID", FilterOperator.EQ, parseInt(sSearchQuery))
 					],
 					false);
 

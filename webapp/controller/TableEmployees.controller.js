@@ -19,7 +19,7 @@ sap.ui.define([
 
 			var staticModel = new JSONModel();
 			this.setModel(staticModel, "staticModel");
-			staticModel.datum = new Date().toISOString();
+			staticModel.jahr2 = 3;
 
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -77,9 +77,11 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
+					BusyIndicator.hide();
 					that.getTableData();
 				})
 				.fail(function (jqXHR, exception) {
+					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
 		},
@@ -87,9 +89,8 @@ sap.ui.define([
 		dialogOpen: function (oEvent, dialogId) {
 			
 			var thisView = this.getView();
-			console.log(thisView);
 			OpendDialog = dialogId;
-			console.log(OpendDialog);
+
 			if (!this.byId(dialogId)) {
 				// load asynchronous XML fragment
 				Fragment.load({
@@ -104,17 +105,21 @@ sap.ui.define([
 			} else {
 				this.byId(dialogId).open();
 			}
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd.MM.YYYY" });   
+			var dateFormatted = dateFormat.format(new Date);
+			this.byId("datepicker0").setValue(dateFormatted);
 		},
 		
 		//executes Dialog functions (Guthaben/Jahresabschluss)
 		onExecuteDialog: function (GorA) {
+			BusyIndicator.show();
 			var staticModel = this.getModel("staticModel").getData();
-			
-			console.log(GorA);
-			console.log(OpendDialog);
 			
 			var thisView = this.getView();
 			var SelectedItems = thisView.byId("table0").getSelectedItems();
+			
+			var datePickerControl = this.byId("datepicker0");
+			var datePicked = datePickerControl.getDateValue();
 			
 			//TODO FEHLERMELDUNG bei keinen angewählten?
 			for (var i = 0; i < SelectedItems.length; i++) {
@@ -122,17 +127,23 @@ sap.ui.define([
 				var context = SelectedItems[i].getBindingContext("employeeTableModel");
 				var path = context.getPath();
 				var mid = context.getProperty(path).MID;
-				console.log(mid);
 				
 				if(GorA === 'G'){//execute guthaben
-					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, staticModel.datum);
+					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, datePicked);
 					this.makeRequest();
 				}
 				else{
-					console.log("check in if");
-					var date = staticModel.jahr1 - staticModel.jahr2;
+					//check einbauen dass das jahr2 gefüllt ist. ansonste nstandardmäßig 3 nehmen
+					console.log(staticModel.jahr2);
+					if(staticModel.jahr2 == undefined || staticModel.jahr2 == "" || staticModel.jahr2 < 1){
+					//thorw error 
+					}
+					var year = datePicked.getYear() + 1900 - staticModel.jahr2;
+					
+					var date = "31.12." + year;
+					//var date = datePicked - staticModel.jahr2;
 					console.log(date);
-					this.getExpired(mid, date);
+					//this.getExpired(mid, date);
 				}
 			}
 			//closing the dialog box
@@ -157,10 +168,6 @@ sap.ui.define([
 					
 					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
 					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
-					console.log(expired);
-					console.log(that.mid);
-					console.log(mid);
-					console.log(this.mid);
 					//TODO noch datum anpassen
 					that.setRequest(mid, expired, "Abgelaufenes Guthaben", "31.12.2017");
 					that.makeRequest();
@@ -171,6 +178,7 @@ sap.ui.define([
 		},
 
 		onAbortCloseDialog: function (oEvent, dialogId) {
+			BusyIndicator.hide();
 			this.byId(dialogId).close();
 			this.byId(dialogId).destroy();
 		}

@@ -1,3 +1,4 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
@@ -156,7 +157,6 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		submitRequest: function (oEvent) {
-			BusyIndicator.show();
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
 			oEvent.getSource().focus();
 
@@ -164,7 +164,8 @@ sap.ui.define([
 			var oRequestData = this.getModel("oRequestModel").getData();
 
 			this.checkAttachments(oRequestData);
-
+			console.log("test");
+			
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -173,7 +174,7 @@ sap.ui.define([
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBeschreibung"));
 				return;
 			}
-
+			
 			this.performRequestSubmit(oRequestData);
 		},
 
@@ -184,6 +185,8 @@ sap.ui.define([
 		 * @param{object} oRequestData - Data of oRequestModel
 		 */
 		performRequestSubmit: function (oRequestData) {
+			BusyIndicator.show();
+			
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)

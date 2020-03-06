@@ -11,7 +11,9 @@ sap.ui.define([
 	"sap/m/Button",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button, JSONModel, BusyIndicator) {
+], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button,
+	JSONModel,
+	BusyIndicator) {
 	"use strict";
 
 	/**
@@ -36,16 +38,20 @@ sap.ui.define([
 		 * It will set an empty dbCategoryModel and triggers a model update.
 		 */
 		onInit: function () {
-			// FIXME: Funktioniert für den NavContainer nicht
-			// this.getRouter().getRoute("SettingsCategory").attachMatched(this._onRoutePatternMatched, this);
 			this.setModel(new JSONModel(), "dbCategoryModel");
-			this.changeCategory("get");
+
+			this.getEventBus().subscribe("manageCategories", "show", this.onBeforeShow, this);
 		},
 
 		/**
-		 * @param{sap.ui.base.Event} [oEvent] - oEvent
+		 * This is a workaround to update the navigation containers everytime the view appears
+		 * The main settings view sends an EventBus event to the viewId e.g. "showLog" with a "show" message.
+		 * 
+		 * @param{string} evt - viewId
 		 */
-		_onRoutePatternMatched: function (oEvent) {},
+		onBeforeShow: function (evt) {
+			this.changeCategory("get");
+		},
 
 		/**
 		 * This is a helper function which will prepare and perform the network requests.

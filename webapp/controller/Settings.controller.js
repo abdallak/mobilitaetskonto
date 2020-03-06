@@ -1,7 +1,8 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
-	"sap/ui/model/json/JSONModel"
-], function (BaseController, JSONModel) {
+	"sap/ui/model/json/JSONModel",
+	"sap/ui/core/BusyIndicator"
+], function (BaseController, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -17,9 +18,14 @@ sap.ui.define([
 		 * It will attach the route pattern matcher to reload the current logModel.
 		 */
 		onInit: function () {
+			// FIXME: ersten view irgendwie auch von hier aus aktualisieren - vllt. eigenes event erstellen und an onItemSelect senden
 			this.getRouter().getRoute("Settings").attachMatched(this._onRoutePatternMatched, this);
 		},
-
+		
+		onAfterRendering: function () {
+			//BusyIndicator.hide();
+		},
+		
 		/**
 		 * If route pattern matched, this function will reload the logModel.
 		 * 
@@ -44,6 +50,7 @@ sap.ui.define([
 			var oItem = oEvent.getParameter("item");
 			var navContainer = this.byId("navContainer");
 			var viewId = this.byId(oItem.getKey());
+			this.getEventBus().publish(oItem.getKey(), "show", {});
 			navContainer.to(viewId);
 		}
 

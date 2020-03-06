@@ -34,6 +34,18 @@ sap.ui.define([
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 			this.getEmployeeData();
+
+			this.getEventBus().subscribe("manageEmployeeStatus", "show", this.onBeforeShow, this);
+		},
+
+		/**
+		 * This is a workaround to update the navigation containers everytime the view appears
+		 * The main settings view sends an EventBus event to the viewId e.g. "showLog" with a "show" message.
+		 * 
+		 * @param{string} evt - viewId
+		 */
+		onBeforeShow: function (evt) {
+			this.getEmployeeData();
 		},
 
 		/**
@@ -84,6 +96,37 @@ sap.ui.define([
 		},
 
 		/**
+		 * This is a helper function which will prepare and perform the network requests.
+		 * 
+		 * @param{sap.m.ListItemBase[]} oSelectedItems - Selected employee list items
+		 */
+		deleteEmployee: function (oSelectedItems) {
+			var dbUserData = this.getGlobalModel("dbUserModel").getData();
+			var paramData = [];
+
+			for (var i = 0; i < oSelectedItems.length; i++) {
+				var context = oSelectedItems[i].getBindingContext("employeeTableModel");
+				var path = context.getPath();
+				var employeeStatus = {};
+				employeeStatus.aktiv = context.getProperty(path).AKTIV === "TRUE";
+				employeeStatus.mid = context.getProperty(path).MID;
+				employeeStatus.amid = dbUserData.MID;
+				paramData.push(employeeStatus);
+			}
+
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_LOESCHEN", "POST", JSON.stringify(paramData));
+
+			var that = this;
+			$.ajax(settings).done(function (response) {
+				// var employeeTableModel = that.getModel("employeeTableModel");
+				// employeeTableModel.setData(response);
+				that.getEmployeeData();
+			}).fail(function (jqXHR, exception) {
+				that.handleNetworkError(jqXHR);
+			});
+		},
+ 
+		/**
 		 * This function will change the status of all selected employees to active.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
@@ -130,8 +173,8 @@ sap.ui.define([
 				sap.m.MessageToast.show(this.getResourceBundle().getText("selectAtLeastOne"));
 				return;
 			}
+			this.deleteEmployee(oSelectedItems);
 
-			sap.m.MessageToast.show("Noch nicht implementiert.");
 		}
 	});
 });
