@@ -4,7 +4,7 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="welches Jahr soll abgeschlossen werden??" id="jahrText"/>
-					<Input width="100%" id="jahr" placeholder="2018" required="true" type="Number" value="{staticModel>/jahr1}"/>
+					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" displayFormat="yyyy"/>
 					<Label text="Wie viele Jahre altes Guthaben soll ablaufen?" id="alterText"/>
 					<Input width="100%" id="alter" placeholder="3" required="true" type="Number" value="{staticModel>/jahr2}"/>
 				</f:content>
