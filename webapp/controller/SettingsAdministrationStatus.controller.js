@@ -150,6 +150,18 @@ sap.ui.define([
 			});
 
 			oDialog.open();
+		},
+		
+		handleLiveChange : function(oEvent){
+			var oSource = oEvent.getSource();
+			var input = oSource.getValue();
+			var lastInput = input.slice(-1); //retrieves last character
+			
+			//PUNKT UND KOMMA NOCH EINARBEITEN
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
+			{
+				oSource.setValue(input.slice(0, input.length-1));	
+			}
 		}
 
 	});
