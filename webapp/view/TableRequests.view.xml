@@ -8,7 +8,7 @@
 						<columns>
 							<Column id="columnU">
 								<header>
-									<Label text="Vorgangsnummer" id="labelU"/>
+									<Label text="{i18n>detailContainerTitle}" id="labelU"/>
 								</header>
 							</Column>
 							<Column id="column0">
@@ -63,7 +63,7 @@
 									<SearchField placeholder="{i18n>placeHolderFilter}" id="searchField0" width="30%" search="filterTable"/>
 									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="20%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
 									<ToolbarSpacer id="spacer0_1583343307107"/>
-									<Label text="Nur zugewiesene:" id="label" textAlign="End">
+									<Label text="{i18n>buttonOnlyAssigned}" id="label" textAlign="End">
 										<layoutData>
 											<OverflowToolbarLayoutData priority="NeverOverflow"/>
 										</layoutData>
@@ -73,7 +73,7 @@
 											<FlexItemData growFactor="1"/>
 										</layoutData>
 									</Switch>
-									<Label text="Status:" id="label6" textAlign="End">
+									<Label text="{i18n>HeaderStatus}:" id="label6" textAlign="End">
 										<layoutData>
 											<OverflowToolbarLayoutData priority="NeverOverflow"/>
 										</layoutData>
