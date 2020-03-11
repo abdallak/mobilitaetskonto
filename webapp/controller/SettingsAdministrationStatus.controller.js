@@ -157,8 +157,9 @@ sap.ui.define([
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
 			
-			//PUNKT UND KOMMA NOCH EINARBEITEN
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
+			
+			//Punkt und Komma sind mehrmals möglich
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ","))
 			{
 				oSource.setValue(input.slice(0, input.length-1));	
 			}

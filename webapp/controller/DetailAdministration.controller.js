@@ -161,7 +161,8 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
+			
+			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
 		},
@@ -215,9 +216,8 @@ sap.ui.define([
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
 			
-			console.log(input.length);
-			
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
+			//Punkt und Komma sind mehrmals möglich
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
 			{
 				oSource.setValue(input.slice(0, input.length-1));	
 			}
