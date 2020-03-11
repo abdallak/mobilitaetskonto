@@ -89,7 +89,7 @@ sap.ui.define([
 			}
 
 			if (settings === undefined) {
-				this.handleEmptyModel("Error: changeCategory settings === undefined");
+				this.handleEmptyModel()(this.getResourceBundle().getText("settingsCategoryError"));
 				return;
 			}
 
@@ -156,7 +156,7 @@ sap.ui.define([
 			var kid = oEvent.getSource().data("KID");
 
 			if (kid === "0") {
-				this.handleEmptyModel("Kategorie \"Sonstiges\" kann nicht geändert werden.");
+				this.handleEmptyModel(this.getResourceBundle().getText("settingsCategoryOnEditPressedError"));
 				return;
 			}
 

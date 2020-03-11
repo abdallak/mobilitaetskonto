@@ -116,8 +116,7 @@ sap.ui.define([
 				type: "Message",
 				content: [
 					new Text({
-						text: "Freigabewert 0 entspricht einem normalen Mitarbeiter.\n" +
-							"Freigabewerte größer 0 entsprechen dem Freigabewert eines Verwalters in Euro.\n"
+						text: that.getResourceBundle().getText("settingsAdministrationStatusInfo")
 					}),
 					new Input("newValueInput", {
 						width: "100%",
@@ -125,7 +124,7 @@ sap.ui.define([
 						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
 					}),
 					new Label({
-						text: "Eingegebene Werte dürfen nur positive ganze Zahlen sein."
+						text: that.getResourceBundle().getText("settingsAdministrationStatusInvalidValueWarning")
 					})
 				],
 				beginButton: new Button({
@@ -157,8 +156,9 @@ sap.ui.define([
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
 			
-			//PUNKT UND KOMMA NOCH EINARBEITEN
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
+			
+			//Punkt und Komma sind mehrmals möglich
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ","))
 			{
 				oSource.setValue(input.slice(0, input.length-1));	
 			}
