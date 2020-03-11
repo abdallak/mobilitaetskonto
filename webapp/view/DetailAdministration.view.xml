@@ -89,18 +89,18 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BESCHREIBUNG}"/>
+											<TextArea xmlns="sap.m" value="{detailADModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left" id="areaDescription" width="50%"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
+										<sap.ui.layout.form:fields>
+											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" growingMaxLines="4" growing="true" id="areaFeedback" width="50%" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>editor}" visible="{= ${detailModel>/VERWALTER} !== null}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%"
 												text="{path: 'detailADModel>/VERWALTERVORNAME'} {path: 'detailADModel>/VERWALTERNAME'} ({detailADModel>/VERWALTER})"/>
-										</sap.ui.layout.form:fields>
-									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">
-										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" value="{detailADModel>/FEEDBACK}" rows="4" id="areaFeedback" width="50%" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailADModel>/ATTACHMENTS} !== undefined}">

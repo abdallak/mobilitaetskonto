@@ -50,7 +50,7 @@ sap.ui.define([
 			if (detail.STATUS !== 1) {
 				edit.setEnabled(false);
 				resBalance.setVisible(false);
-				fb.setBlocked(true);
+				fb.setEditable(false);
 				fb.setRequired(false);
 				acc.setEnabled(false);
 				cnc.setEnabled(false);
@@ -58,7 +58,7 @@ sap.ui.define([
 				edit.setEnabled(true);
 				resBalance.setVisible(true);
 				this.calcNewBalance();
-				fb.setBlocked(false);
+				fb.setEditable(true);
 				fb.setRequired(true);
 				acc.setEnabled(true);
 				cnc.setEnabled(true);
