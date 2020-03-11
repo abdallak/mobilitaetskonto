@@ -185,7 +185,7 @@ sap.ui.define([
 			// ASSIGN FILTER
 			if (assignedValue === true) {
 				var dbUserData = this.getGlobalModel("dbUserModel").getData();
-				var oAssignedFilter = new Filter("FREIGEBER", FilterOperator.EQ, dbUserData.MID);
+				var oAssignedFilter = new Filter("VERWALTER", FilterOperator.EQ, dbUserData.MID);
 				singleFilters.push(oAssignedFilter);
 			}
 
