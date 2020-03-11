@@ -142,7 +142,7 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Text xmlns="sap.m" id="warningText" textAlign = "Left" text="ACHTUNG, Freigabewert kleiner als freizugebender Betrag!" visible="false"></Text>
+							<Text xmlns="sap.m" id="warningText" textAlign="Left" text="ACHTUNG, Freigabewert kleiner als freizugebender Betrag!" visible="false"></Text>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" text="{i18n>acceptButton}" press="approveRequestPressed"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>denyButton}" press="rejectRequestPressed"/>
 						</content>
