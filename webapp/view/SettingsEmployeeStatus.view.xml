@@ -9,22 +9,22 @@
 						<columns>
 							<Column id="column0">
 								<header>
-									<Label text="Name" id="label0"/>
+									<Label text="{i18n>HeaderName}" id="label0"/>
 								</header>
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="Aktiv" id="label1"/>
+									<Label text="{i18n>active}" id="label1"/>
 								</header>
 							</Column>
 							<Column id="column2">
 								<header>
-									<Label text="Verwalter" id="label2"/>
+									<Label text="{i18n>Administrator}" id="label2"/>
 								</header>
 							</Column>
 							<Column id="column3">
 								<header>
-									<Label text="Kontostand" id="label3"/>
+									<Label text="{i18n>balance}" id="label3"/>
 								</header>
 							</Column>
 						</columns>

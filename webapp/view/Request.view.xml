@@ -18,7 +18,7 @@
 											</SegmentedButton>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="Kategorie" id="element1">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}" id="element1">
 										<sap.ui.layout.form:fields>
 											<Select xmlns="sap.m" id="categorySelect" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect"
 												selectedKey="{oRequestModel>/kid}">
@@ -42,10 +42,10 @@
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
-								<sap.ui.layout.form:FormElement label="Anhänge">
+								<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}">
 									<sap.ui.layout.form:fields>
 										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
-											noDataDescription="Dateien hierherziehen oder den &quot;+&quot; Knopf zum Upload nutzen" change="onChange"
+											noDataDescription="{i18n>attachmentInfo}" change="onChange"
 											filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false" numberOfAttachmentsText=" "/>
 									</sap.ui.layout.form:fields>
 								</sap.ui.layout.form:FormElement>
@@ -80,7 +80,7 @@
 						<content>
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>cancelButton}" press="cancelButton"/>
-							<Button xmlns="sap.m" id="submitButton" type="Accept" press="submitRequest" text="{i18n>requestSubmitButton}"/>
+							<Button xmlns="sap.m" id="submitButton" type="Accept" text="{i18n>requestSubmitButton}" press="submitRequest" />
 						</content>
 					</OverflowToolbar>
 				</footer>
