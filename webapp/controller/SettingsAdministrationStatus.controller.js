@@ -116,8 +116,7 @@ sap.ui.define([
 				type: "Message",
 				content: [
 					new Text({
-						text: "Freigabewert 0 entspricht einem normalen Mitarbeiter.\n" +
-							"Freigabewerte größer 0 entsprechen dem Freigabewert eines Verwalters in Euro.\n"
+						text: that.getResourceBundle().getText("settingsAdministrationStatusInfo")
 					}),
 					new Input("newValueInput", {
 						width: "100%",
@@ -125,7 +124,7 @@ sap.ui.define([
 						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
 					}),
 					new Label({
-						text: "Eingegebene Werte dürfen nur positive ganze Zahlen sein."
+						text: that.getResourceBundle().getText("settingsAdministrationStatusInvalidValueWarning")
 					})
 				],
 				beginButton: new Button({
