@@ -10,6 +10,13 @@ sap.ui.define([
 	var employeeTableModel;
 	var insertModel;
 	var OpendDialog;
+	/**
+	*	sets the
+	*
+	*
+	* 
+	* 
+	*/
 	
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
@@ -51,17 +58,17 @@ sap.ui.define([
 		},
 		
 		//sets the request Modell 
-		setRequest: function (mid, amount, describ, date) {
+		setRequest: function (mid, amount, describ, date, kid) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			console.log("set request");
-			console.log(mid + amount + describ);
+			console.log(mid + " " + amount + " " + describ);
 			var defaultRequest = {
 				"MID": mid,
 				"art": 2,
 				"betrag": amount,
 				"beschreibung": describ,
 				"datum": date,
-				"kid": 1,
+				"kid": kid,
 				"state": 2,
 				"MIDV": dbUserData.MID
 			};
@@ -86,6 +93,21 @@ sap.ui.define([
 				});
 		},
 		
+		onValueChanged: function (oEvent) {
+			var oResourceBundle = this.getResourceBundle();
+			var sValue = oEvent.getParameter("value");
+			var oSource = oEvent.getSource();
+
+			var betragValue = parseFloat(sValue);
+			if (!isNaN(betragValue)) {
+				oSource.setValueState("Success");
+				oSource.setValueStateText(null);
+			} else {
+				oSource.setValueState("Error");
+				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
+			}
+		},
+		
 		dialogOpen: function (oEvent, dialogId) {
 			
 			var thisView = this.getView();
@@ -106,8 +128,16 @@ sap.ui.define([
 				this.byId(dialogId).open();
 			}
 			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd.MM.YYYY" });   
-			var dateFormatted = dateFormat.format(new Date);
+			var dateNotFormatted = new Date();
+			
+			if(dialogId === "DialogExpired"){
+				dateNotFormatted.setFullYear( dateNotFormatted.getFullYear() - 1 );
+				this.byId("datepicker0").setMaxDate(dateNotFormatted);
+			}
+			var dateFormatted = dateFormat.format(dateNotFormatted);
 			this.byId("datepicker0").setValue(dateFormatted);
+			this.byId("datepicker0").setMinDate(new Date(2000 , 1 , 1));
+			
 		},
 		
 		//executes Dialog functions (Guthaben/Jahresabschluss)
@@ -117,11 +147,16 @@ sap.ui.define([
 			
 			var thisView = this.getView();
 			var SelectedItems = thisView.byId("table0").getSelectedItems();
-			
+
 			var datePickerControl = this.byId("datepicker0");
+		
 			var datePicked = datePickerControl.getDateValue();
 			
-			//TODO FEHLERMELDUNG bei keinen angewählten?
+			//TODOs FEHLERMELDUNG bei keinen angewählten?
+			if(SelectedItems.length < 1){ 
+				//ERROR 
+			}
+			
 			for (var i = 0; i < SelectedItems.length; i++) {
 
 				var context = SelectedItems[i].getBindingContext("employeeTableModel");
@@ -129,21 +164,18 @@ sap.ui.define([
 				var mid = context.getProperty(path).MID;
 				
 				if(GorA === 'G'){//execute guthaben
-					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, datePicked);
+					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, datePicked, 1);
 					this.makeRequest();
 				}
 				else{
 					//check einbauen dass das jahr2 gefüllt ist. ansonste nstandardmäßig 3 nehmen
-					console.log(staticModel.jahr2);
-					if(staticModel.jahr2 == undefined || staticModel.jahr2 == "" || staticModel.jahr2 < 1){
-					//thorw error 
-					}
-					var year = datePicked.getYear() + 1900 - staticModel.jahr2;
+					var stepperControl = this.byId("stepper");
+					//var stepperValue = stepperControl.getValue();
 					
-					var date = "31.12." + year;
-					//var date = datePicked - staticModel.jahr2;
-					console.log(date);
-					//this.getExpired(mid, date);
+					var year1 = datePicked.getYear() + 1900;
+					var year2 = year1 - stepperControl.getValue();
+					
+					this.getExpired(mid, year1, year2);
 				}
 			}
 			//closing the dialog box
@@ -151,25 +183,29 @@ sap.ui.define([
 		},
 		
 		//calculates the expired amount via sql query
-		getExpired: function (mid, date) {
+		getExpired: function (mid, year1, year2) {
+			
 			var params = {};
 			params.mid = mid;
-			params.date = date;
-			
-			console.log(params.mid);
-			console.log(params.date);
+			params.date = "31.12." + year2;
 			
 			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
 			
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
+					console.log(response);
 					var oResponse = JSON.parse(response);
 					
 					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
+					console.log(oResponse);
 					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
-					//TODO noch datum anpassen
-					that.setRequest(mid, expired, "Abgelaufenes Guthaben", "31.12.2017");
+					
+					//Calculates date
+					var date = "31.12." + year1;
+					
+					//makes a new entry for the expired balance
+					that.setRequest(mid, expired, "Abgelaufenes Guthaben", date, 2);
 					that.makeRequest();
 					
 			}).fail(function (jqXHR, exception) {
