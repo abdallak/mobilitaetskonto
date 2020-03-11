@@ -66,7 +66,7 @@
 							<ToolbarSpacer id="spacer0"/>
 							<Button xmlns="sap.m" id="GuthabenButton" icon="sap-icon://my-sales-order" type="Default" text="{i18n>guthabenButton}"
 								press="dialogOpen($event, 'DialogBalance')"/>
-							<Button xmlns="sap.m" id="AbschlussButton" icon="sap-icon://per-diem" type="Default" text="{i18n>abschlussButton}"
+							<Button xmlns="sap.m" id="AbschlussButton" icon="sap-icon://per-diem" type="Default"  text="{i18n>abschlussButton}"
 								press="dialogOpen($event, 'DialogExpired')"/>
 							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
 						</content>

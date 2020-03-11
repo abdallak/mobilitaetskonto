@@ -19,6 +19,7 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
+	
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -62,6 +63,8 @@ sap.ui.define([
 				acc.setEnabled(true);
 				cnc.setEnabled(true);
 			}
+			this.byId("warningText").setVisible(false);
+			this.testDisableButton();
 		},
 
 		performRequestEmployee: function (mid) {
@@ -80,7 +83,7 @@ sap.ui.define([
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
 			if (!oRequestData.feedback || oRequestData.feedback.trim().length === 0) {
-				this.handleEmptyModel("Feedback Feld ung\xFCltig.");
+				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
@@ -155,15 +158,20 @@ sap.ui.define([
 
 		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
+			this.byId("submitButton").setEnabled(true);
+			this.byId("cancelButton").setEnabled(true);
+			this.byId("warningText").setVisible(false);
 
 			this.byId("FormElementAlt").setVisible(true);
 
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			this.getModel("detailADModel").setProperty("/BETRAG", this.getModel("detailADModel").getProperty("/NEUBETRAG"));
+			
+			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
+			this.testDisableButton();
 		},
 
 		calcNewBalance: function () {
@@ -202,6 +210,16 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
+		
+		testDisableButton: function(oEvent) {
+			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
+			{
+			this.byId("submitButton").setEnabled(false);
+			this.byId("cancelButton").setEnabled(false);
+			this.byId("warningText").setVisible(true);
+				
+			}
+		},
 
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
@@ -215,9 +233,8 @@ sap.ui.define([
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
 			
-			console.log(input.length);
-			
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1))
+			//Punkt und Komma sind mehrmals möglich
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
 			{
 				oSource.setValue(input.slice(0, input.length-1));	
 			}

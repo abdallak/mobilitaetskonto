@@ -41,7 +41,7 @@
 											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/KATEGORIE}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement id="FormElementAlt" label="{i18n>oldValue}" visible="false">
+									<sap.ui.layout.form:FormElement id="FormElementAlt" label="{i18n>oldAmount}" visible="false">
 										<sap.ui.layout.form:fields>
 											<ObjectNumber id="textALT"
 												number="{ parts:[{path:'detailADModel>/ALTBETRAG'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
@@ -87,7 +87,7 @@
 											<Text xmlns="sap.m" width="50%" textAlign="Left" text="{detailADModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="Bearbeiter" visible="{= ${detailModel>/VERWALTER} !== null}">
+									<sap.ui.layout.form:FormElement label="{i18n>editor}" visible="{= ${detailModel>/VERWALTER} !== null}">
 										<sap.ui.layout.form:fields>
 											<Text xmlns="sap.m" width="50%"
 												text="{path: 'detailADModel>/VERWALTERVORNAME'} {path: 'detailADModel>/VERWALTERNAME'} ({detailADModel>/VERWALTER})"/>
@@ -137,6 +137,7 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
+							<Text xmlns="sap.m" id="warningText" textAlign = "Left" text="ACHTUNG, Freigabewert kleiner als freizugebender Betrag!" visible="false"></Text>
 							<Button xmlns="sap.m" id="submitButton" type="Accept" text="{i18n>acceptButton}" press="approveRequestPressed"/>
 							<Button xmlns="sap.m" id="cancelButton" type="Reject" text="{i18n>denyButton}" press="rejectRequestPressed"/>
 						</content>

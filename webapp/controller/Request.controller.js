@@ -89,7 +89,7 @@ sap.ui.define([
 			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
 
 			if (settings === undefined) {
-				this.handleEmptyModel("Error: fetchCategory settings === undefined");
+				this.handleEmptyModel(this.getResourceBundle().getText("errorSettingsUndefined"));
 				return;
 			}
 
@@ -303,7 +303,7 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		onFilenameLengthExceed: function (oEvent) {
-			MessageToast.show("Event filenameLengthExceed triggered");
+			MessageToast.show(this.getResourceBundle().getText("errorFilenameLengthExceeded"));
 		}
 	});
 

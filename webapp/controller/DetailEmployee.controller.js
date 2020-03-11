@@ -25,6 +25,11 @@ sap.ui.define([
 			this.setModel(dbUserModel, "dbUserModel");
 		},
 
+		/**
+		* This function is called by the router everytime the view is accessed.
+		* The selected data from previous table view is set as model data here.
+		* The data is also stored.
+		*/
 		_onRoutePatternMatched: function (oEvent) {
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
@@ -32,6 +37,7 @@ sap.ui.define([
 			detailModel.setData(detail);
 			
 			
+			//storing the data during the session in case of a connectionlost resulting in a pagereload
  			var oStorage = jQuery.sap.storage(jQuery.sap.storage.Type.session);
 
 			if (jQuery.isEmptyObject(detailModel.getData())) {
@@ -41,7 +47,12 @@ sap.ui.define([
 			}
 		},
 
-
+		/**
+		* This function downloads the specific attachment to the given id
+		* and allows to user to store or open it on his device.
+		* 
+		* @param aid Attachment-ID
+		*/
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
 			var params = {};
@@ -63,7 +74,11 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-
+		
+		/**
+		* This function passes the id of the selected attachment to the performDownloadAttachment method.
+		* It also marks the clicked file as selected.
+		*/
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
 			this.performDownloadAttachment(aid);
