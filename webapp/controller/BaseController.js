@@ -171,7 +171,6 @@ sap.ui.define([
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(oResourceBundle.getText(sMessage), {
 				title: "Error",
-				id: "errorMessageBox",
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"
 			});
@@ -187,7 +186,6 @@ sap.ui.define([
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
 			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix"), {
 				title: "Error",
-				id: "errorMessageBox",
 				details: jqXHR.responseText + " (" + jqXHR.status + ")",
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"
