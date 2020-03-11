@@ -31,20 +31,22 @@ sap.ui.define([
 			this.updateUserModel();
 			this.getTableData();
 			
-			
 			// set title
 			var oResourceBundle = this.getResourceBundle();
 			var oTitleLabel = this.byId("titleLabel");
 			var sTitle;
 			var balance = this.getView().byId("balanceDisplay");
+			var status = this.getView().byId("select0");
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
 				this.salesTable = true;
 				balance.setVisible(true);
+				status.setVisible(false);
 			} else {
 				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
 				this.salesTable = false;
 				balance.setVisible(false);
+				status.setVisible(true);
 			}
 			oTitleLabel.setText(sTitle);
 			
@@ -75,6 +77,7 @@ sap.ui.define([
 		},
 		
 		filterTable: function(){
+			
 			//BindingContext
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");
@@ -91,15 +94,30 @@ sap.ui.define([
 				filters.push(oDateFilter);
 			}
 			
+			
 			//STATE FILTER
 			//This part filters the given transactions of the employee by their state.
 			//This is mandatory to show the right data, based on the "selected" view.
-			var oFO = FilterOperator.LT; //LT = lesser than
-			if(this.salesTable === true) oFO = FilterOperator.GE; //GE = greater or equal
 			
-			// transactionstates are stored as integers inside the database going from 0 to 3
-			// the 2 is used here so that the choosen filteroperator displays the right data
-			var oStateFilter = new Filter("STATUS", oFO, "2"); 
+			//Statusparameter
+			var sStateKey = this.getView().byId("select0").getProperty("selectedKey");
+			
+			var oFO;
+			if(this.salesTable === true){
+				 oFO = FilterOperator.GE; //GE = greater or equal
+				 
+				 // transactionstates are stored as integers inside the database going from 0 to 3
+				 // the 2 is used here so that the choosen filteroperator displays the right data
+				 sStateKey = "2";
+			}
+			else
+			{
+				if (sStateKey === "4") oFO = FilterOperator.LE; // LE = Lesser or equal
+				else oFO = FilterOperator.EQ; //EQ = equals
+			}
+			
+			
+			var oStateFilter = new Filter("STATUS", oFO, sStateKey); 
 			filters.push(oStateFilter);
 			
 			

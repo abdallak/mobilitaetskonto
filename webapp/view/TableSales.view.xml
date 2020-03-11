@@ -54,6 +54,16 @@
 							<Toolbar width="100%" id="toolbar0">
 								<content>
 									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="Zeitfenster wählen..."/>
+									<ToolbarSpacer id="spacer0_1583343307107"/>
+									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
+										<items>
+											<core:ListItem text="{i18n>antragStatusAbgelehnt}"  key="0"/>
+											<core:ListItem text="{i18n>antragStatusAusstehend}"  key="1"/>
+											<core:ListItem text="{i18n>antragStatusGenehmigt}"  key="2"/>
+											<core:ListItem text="{i18n>antragStatusDurchgefuehrt}" key="3"/>
+											<core:ListItem text="{i18n>antragStatusAlle}" key="4"/>
+										</items>
+									</ActionSelect>
 								</content>
 							</Toolbar>
 						</headerToolbar>
