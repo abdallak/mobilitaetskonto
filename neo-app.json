@@ -127,7 +127,7 @@
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/getExpired.xsjs"
+			"entryPath": "/mitarbeiter/getSetExpired.xsjs"
 		}
 	}, {
 		"path": "/MOB_LOG_GET",

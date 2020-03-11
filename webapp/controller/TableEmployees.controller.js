@@ -152,9 +152,9 @@ sap.ui.define([
 		
 			var datePicked = datePickerControl.getDateValue();
 			
-			//TODOs FEHLERMELDUNG bei keinen angewählten?
+			//ErrorMessage if no employees chosen  -- FEHLERMELDUNG bei keinen angewählten?
 			if(SelectedItems.length < 1){ 
-				//ERROR 
+				this.handleEmptyModel("bitte Mitarbeiter auswählen");
 			}
 			
 			for (var i = 0; i < SelectedItems.length; i++) {
@@ -194,11 +194,11 @@ sap.ui.define([
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
-					console.log(response);
 					var oResponse = JSON.parse(response);
 					
 					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
-					console.log(oResponse);
+
+					//oResponse.Valid
 					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
 					
 					//Calculates date
