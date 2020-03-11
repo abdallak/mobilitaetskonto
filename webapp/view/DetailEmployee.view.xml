@@ -55,7 +55,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" text="{detailModel>/BESCHREIBUNG}"/>
+											<Text xmlns="sap.m" renderWhitespace="true" wrapping="true" width="50%" text="{detailModel>/BESCHREIBUNG}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="Bearbeiter" visible="{= ${detailModel>/VERWALTER} !== null}">
@@ -66,7 +66,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" width="50%" text="{detailModel>/FEEDBACK}"/>
+											<Text xmlns="sap.m" renderWhitespace="true" wrapping="true" width="50%" text="{detailModel>/FEEDBACK}"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailModel>/ATTACHMENTS} !== undefined}">
