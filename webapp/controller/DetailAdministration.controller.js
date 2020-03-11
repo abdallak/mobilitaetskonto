@@ -19,6 +19,7 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
+	
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -62,6 +63,8 @@ sap.ui.define([
 				acc.setEnabled(true);
 				cnc.setEnabled(true);
 			}
+			this.byId("warningText").setVisible(false);
+			this.testDisableButton();
 		},
 
 		performRequestEmployee: function (mid) {
@@ -155,6 +158,9 @@ sap.ui.define([
 
 		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
+			this.byId("submitButton").setEnabled(true);
+			this.byId("cancelButton").setEnabled(true);
+			this.byId("warningText").setVisible(false);
 
 			this.byId("FormElementAlt").setVisible(true);
 
@@ -165,6 +171,7 @@ sap.ui.define([
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
+			this.testDisableButton();
 		},
 
 		calcNewBalance: function () {
@@ -202,6 +209,16 @@ sap.ui.define([
 					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
+		},
+		
+		testDisableButton: function(oEvent) {
+			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
+			{
+			this.byId("submitButton").setEnabled(false);
+			this.byId("cancelButton").setEnabled(false);
+			this.byId("warningText").setVisible(true);
+				
+			}
 		},
 
 		onSelectChange: function (oEvent) {
