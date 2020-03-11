@@ -36,17 +36,21 @@ sap.ui.define([
 			var oTitleLabel = this.byId("titleLabel");
 			var sTitle;
 			var balance = this.getView().byId("balanceDisplay");
+			var statusLabel = this.getView().byId("stateLabel");
 			var status = this.getView().byId("select0");
+			
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
 				this.salesTable = true;
 				balance.setVisible(true);
 				status.setVisible(false);
+				statusLabel.setVisible(false);
 			} else {
 				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
 				this.salesTable = false;
 				balance.setVisible(false);
 				status.setVisible(true);
+				statusLabel.setVisible(true);
 			}
 			oTitleLabel.setText(sTitle);
 			
