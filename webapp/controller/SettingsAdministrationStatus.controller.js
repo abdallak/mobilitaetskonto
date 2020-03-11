@@ -37,6 +37,7 @@ sap.ui.define([
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
 		 * 
 		 */
+
 		onInit: function () {
 			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
@@ -88,9 +89,13 @@ sap.ui.define([
 			employeeStatus.amid = dbUserData.MID;
 			employeeStatus.type = "value";
 			employeeStatus.administrationValue = iValue;
+			if (iValue < 0) {
+				this.handleEmptyModel("you cannt give a negative number");
+				return ;
+			}
 
 			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
-
+			BusyIndicator.show();
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
@@ -101,6 +106,25 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+		
+		/**
+		 * This function gets called if the amount input changes.
+		 * It will check if the given value is valid or not.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
+		onValueChanged: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oSource = oEvent.getSource();
+			var betragValue = parseFloat(sValue);
+			if (!isNaN(betragValue) && betragValue > 0.0) {
+				oSource.setValueState("Success");
+				oSource.setValueStateText(null);
+			} else {
+				oSource.setValueState("Error");
+			}
+		},
+
 
 		/**
 		 * This function will show a Dialog with an Input to change the adminsitration value.
@@ -109,7 +133,6 @@ sap.ui.define([
 		 */
 		onEditPressed: function (oEvent) {
 			var mid = oEvent.getSource().data("MID");
-
 			var that = this;
 			var oDialog = new Dialog({
 				title: that.getResourceBundle().getText("settingsAdministrationStatusDialogTitle"),
@@ -121,7 +144,9 @@ sap.ui.define([
 					new Input("newValueInput", {
 						width: "100%",
 						type: "Number",
-						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
+						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder"),
+						liveChange : that.onValueChanged,
+						valueLiveUpdate: true
 					}),
 					new Label({
 						text: that.getResourceBundle().getText("settingsAdministrationStatusInvalidValueWarning")
@@ -131,7 +156,6 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogBegin"),
 					press: function () {
-						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
 						oDialog.close();
