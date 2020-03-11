@@ -5,9 +5,9 @@
 			<f:SimpleForm id="SimpleFormDisplay354" editable="true" layout="ResponsiveGridLayout" labelSpanS="12" adjustLabelSpan="false" emptySpanS="0"
 				columnsM="1" singleContainerFullSize="false">
 				<f:content>
-					<Label text="Bisheriger Betrag"/>
+					<Label text="{i18n>oldAmount}"/>
 					<Input id="field" value="{detailADModel>/BETRAG}" enabled="false"/>
-					<Label text="Neuer Betrag"/>
+					<Label text="{i18n>newAmount}"/>
 					<Input id="field1" value="{detailADModel>/NEUBETRAG}" liveChange="handleLiveChange"/>
 				</f:content>
 			</f:SimpleForm>

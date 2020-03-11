@@ -53,7 +53,7 @@
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar0">
 								<content>
-									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="Zeitfenster wählen..."/>
+									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
 								</content>
 							</Toolbar>
 						</headerToolbar>

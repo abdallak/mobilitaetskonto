@@ -60,8 +60,8 @@
 					<Page id="showLog" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog"/>
 					</Page>
-					<Page id="privacy" title="Datenschutz">
-						<Text text="Datenschutz"/>
+					<Page id="privacy" title="{i18n>settingsDataProtectionTitle}">
+						<Text text="{i18n>settingsDataProtectionTitle}"/>
 					</Page>
 				</pages>
 			</NavContainer>

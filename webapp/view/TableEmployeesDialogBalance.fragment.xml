@@ -3,17 +3,17 @@
 		<VBox class="sapUiSmallMargin">
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
-					<Label text="Betrag" id="betragtext"/>
+					<Label text="{i18n>HeaderValue}" id="betragtext"/>
 					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}" liveChange="onValueChanged"/>
-					<Label text="Beschreibung" id="beschreibtext"/>
-					<Input width="100%" id="describe" placeholder="individuelle Gutschrift" required="true" type="Text" value="{staticModel>/beschreibung}"/>
-					<Label text="Datum der Buchung" id="datumtext"/>
-					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" placeholder="DATUM AUSWÄHLEN{i18n>placeHolderChooseTime}"/>
+					<Label text="{i18n>HeaderDescription}" id="beschreibtext"/>
+					<Input width="100%" id="describe" placeholder="{i18n>placeholderBalance}" required="true" type="Text" value="{staticModel>/beschreibung}"/>
+					<Label text="{i18n>dateOf}" id="datumtext"/>
+					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>
 		<beginButton>
-			<Button text="Guthaben Einbuchen" press=".onExecuteDialog('G')"/>
+			<Button text="{i18n>guthabenButton}" press=".onExecuteDialog('G')"/>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'DialogBalance')"/>
