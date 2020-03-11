@@ -55,7 +55,7 @@
 								<content>
 									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
 									<ToolbarSpacer id="spacer0_1583343307107"/>
-									<Label text="{i18n>HeaderStatus}:" textAlign="End">
+									<Label text="{i18n>HeaderStatus}:" id="stateLabel" textAlign="End">
 										<layoutData>
 											<OverflowToolbarLayoutData priority="NeverOverflow"/>
 										</layoutData>
