@@ -83,7 +83,7 @@ sap.ui.define([
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
 			if (!oRequestData.feedback || oRequestData.feedback.trim().length === 0) {
-				this.handleEmptyModel("Feedback Feld ung\xFCltig.");
+				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
