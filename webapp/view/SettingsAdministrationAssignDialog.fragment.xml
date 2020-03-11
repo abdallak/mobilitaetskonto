@@ -1,6 +1,6 @@
 <core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
-	<SelectDialog title="Freigeber auswählen" class="sapUiPopupWithPadding" items="{ path : 'employeeTableModel>/'}" search="handleSearch"
-		confirm="handleClose" cancel="handleClose">
+	<SelectDialog title="Freigeber auswählen" class="sapUiPopupWithPadding"
+		items="{ path : 'employeeTableModel>/', sorter : { path : 'VORNAME' }}" search="handleSearch" confirm="handleClose" cancel="handleClose">
 		<StandardListItem title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}"
 			description="Freigabewert: {path:'employeeTableModel>FREIGABEWERT'} €">
 			<customData>
