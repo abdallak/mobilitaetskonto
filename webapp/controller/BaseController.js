@@ -169,10 +169,8 @@ sap.ui.define([
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix"), {
+			MessageBox.error(oResourceBundle.getText(sMessage), {
 				title: "Error",
-				id: "errorMessageBox",
-				details: sMessage,
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"
 			});
@@ -184,7 +182,14 @@ sap.ui.define([
 		 * @param {object} jqXHR - jQuery xhr response object
 		 */
 		handleNetworkError: function (jqXHR) {
-			this.handleEmptyModel(jqXHR.responseText + " (" + jqXHR.status + ")");
+			var oResourceBundle = this.getResourceBundle();
+			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
+			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix"), {
+				title: "Error",
+				details: jqXHR.responseText + " (" + jqXHR.status + ")",
+				styleClass: bCompact ? "sapUiSizeCompact" : "",
+				contentWidth: "100px"
+			});
 		}
 
 	});
