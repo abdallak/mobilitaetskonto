@@ -8,7 +8,7 @@
 						<sap.ui.layout.form:formContainers>
 							<sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}" id="container1">
 								<sap.ui.layout.form:formElements>
-									 <sap.ui.layout.form:FormElement label="{i18n>HeaderUid}">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderUid}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%" text="{detailADModel>/UID}" textAlign="Left"/>
 										</sap.ui.layout.form:fields>
@@ -89,7 +89,8 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" value="{detailADModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left" id="areaDescription" width="50%"/>
+											<TextArea xmlns="sap.m" value="{detailADModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left"
+												id="areaDescription" width="50%"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}">

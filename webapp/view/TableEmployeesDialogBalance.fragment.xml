@@ -4,7 +4,8 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="{i18n>HeaderValue}" id="betragtext"/>
-					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}" liveChange="onValueChanged"/>
+					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}"
+						liveChange="onValueChanged"/>
 					<Label text="{i18n>HeaderDescription}" id="beschreibtext"/>
 					<Input width="100%" id="describe" placeholder="{i18n>placeholderBalance}" required="true" type="Text" value="{staticModel>/beschreibung}"/>
 					<Label text="{i18n>dateOf}" id="datumtext"/>

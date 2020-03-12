@@ -125,7 +125,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
- 
+
 		/**
 		 * This function will change the status of all selected employees to active.
 		 * 
