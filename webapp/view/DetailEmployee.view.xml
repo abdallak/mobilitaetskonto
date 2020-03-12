@@ -60,12 +60,14 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left" id="areaDescription" width="50%"/>
+											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left"
+												id="areaDescription" width="50%"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left" id="areaFeedback" width="50%"/>
+											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left"
+												id="areaFeedback" width="50%"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>editor}" visible="{= ${detailModel>/VERWALTER} !== null}">
