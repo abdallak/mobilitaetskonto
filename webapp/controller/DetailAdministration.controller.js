@@ -8,6 +8,7 @@ sap.ui.define([
 	"sap/ui/core/BusyIndicator"
 ], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
 
@@ -19,7 +20,6 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
-	
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
@@ -167,7 +167,7 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			
+
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
@@ -210,14 +210,13 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
-		testDisableButton: function(oEvent) {
-			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
-			{
-			this.byId("submitButton").setEnabled(false);
-			this.byId("cancelButton").setEnabled(false);
-			this.byId("warningText").setVisible(true);
-				
+
+		testDisableButton: function (oEvent) {
+			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
+				this.byId("submitButton").setEnabled(false);
+				this.byId("cancelButton").setEnabled(false);
+				this.byId("warningText").setVisible(true);
+
 			}
 		},
 
@@ -227,16 +226,15 @@ sap.ui.define([
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-		
-		handleLiveChange : function(oEvent){
+
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 	});

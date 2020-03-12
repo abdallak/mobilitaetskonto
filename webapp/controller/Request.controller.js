@@ -140,7 +140,7 @@ sap.ui.define([
 				"beschreibung": null,
 				"kid": null,
 				"attachments": [],
-				"freigeber" : dbUserData.FREIGEBER
+				"freigeber": dbUserData.FREIGEBER
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
@@ -165,7 +165,7 @@ sap.ui.define([
 
 			this.checkAttachments(oRequestData);
 			console.log("test");
-			
+
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -174,7 +174,7 @@ sap.ui.define([
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBeschreibung"));
 				return;
 			}
-			
+
 			this.performRequestSubmit(oRequestData);
 		},
 
@@ -186,7 +186,7 @@ sap.ui.define([
 		 */
 		performRequestSubmit: function (oRequestData) {
 			BusyIndicator.show();
-			
+
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)

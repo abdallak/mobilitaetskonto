@@ -91,7 +91,7 @@ sap.ui.define([
 			employeeStatus.administrationValue = iValue;
 			if (iValue < 0) {
 				this.handleEmptyModel("you cannt give a negative number");
-				return ;
+				return;
 			}
 
 			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
@@ -106,7 +106,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
-		
+
 		/**
 		 * This function gets called if the amount input changes.
 		 * It will check if the given value is valid or not.
@@ -124,7 +124,6 @@ sap.ui.define([
 				oSource.setValueState("Error");
 			}
 		},
-
 
 		/**
 		 * This function will show a Dialog with an Input to change the adminsitration value.
@@ -145,7 +144,7 @@ sap.ui.define([
 						width: "100%",
 						type: "Number",
 						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder"),
-						liveChange : that.onValueChanged,
+						liveChange: that.onValueChanged,
 						valueLiveUpdate: true
 					}),
 					new Label({
@@ -174,17 +173,15 @@ sap.ui.define([
 
 			oDialog.open();
 		},
-		
-		handleLiveChange : function(oEvent){
+
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ","))
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 
