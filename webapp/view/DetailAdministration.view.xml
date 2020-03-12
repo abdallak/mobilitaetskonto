@@ -107,7 +107,8 @@
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailADModel>/ATTACHMENTS} !== undefined}">
 										<sap.ui.layout.form:fields>
 											<UploadCollection id="UploadCollection" multiple="false" change="onChange" selectionChange="onSelectChange" uploadButtonInvisible="true"
-												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailADModel>/ATTACHMENTS/'}" instantUpload="false">
+												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailADModel>/ATTACHMENTS/'}" instantUpload="false"
+												numberOfAttachmentsText=" ">
 												<items>
 													<UploadCollectionItem documentId="{detailADModel>AID}" fileName="{detailADModel>FILENAME}" mimeType="text/plain" enableEdit="false"
 														enableDelete="false" visibleDelete="false" visibleEdit="false" selected="false"/>
