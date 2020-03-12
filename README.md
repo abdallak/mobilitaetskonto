@@ -6,7 +6,7 @@
 
 #### 1. Backend bzw. HANA DB einrichten
 
-Alle benötigten Daten können in folgendem Git Repository gefunden werden: https://gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto-db
+Alle benötigten Daten für das Backend können in diesem [Git Repository](https://gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto-db) gefunden werden.
 
 #### 2. Projekt in SAP WebIDE importieren
 
