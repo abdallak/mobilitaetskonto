@@ -35,11 +35,6 @@
 					<tnt:NavigationListItem text="{i18n>settingsCategoryTitle}" icon="sap-icon://shelf" key="manageCategories"/>
 					<tnt:NavigationListItem text="{i18n>settingsLogTitle}" icon="sap-icon://customer-history" key="showLog"/>
 				</tnt:NavigationList>
-				<tnt:fixedItem>
-					<tnt:NavigationList>
-						<tnt:NavigationListItem text="{i18n>settingsDataProtectionTitle}" icon="sap-icon://private" key="privacy"/>
-					</tnt:NavigationList>
-				</tnt:fixedItem>
 			</tnt:SideNavigation>
 		</tnt:sideContent>
 		<tnt:mainContents>
@@ -59,9 +54,6 @@
 					</Page>
 					<Page id="showLog" showHeader="false">
 						<mvc:XMLView viewName="Mobilitaetskonto.Mobilitaetskonto.view.SettingsLog"/>
-					</Page>
-					<Page id="privacy" title="{i18n>settingsDataProtectionTitle}">
-						<Text text="{i18n>settingsDataProtectionTitle}"/>
 					</Page>
 				</pages>
 			</NavContainer>
