@@ -6,13 +6,13 @@ sap.ui.define([], function () {
 		 * exact meaning.
 		 * @class formatter
 		 */
-		 
-		 /**
-		  * This function matches integers between 0 and 3 with a request status.
-		  * @param {integer} iStatus - status as integer
-		  * @returns {string} - matched status as string 
-		  * @returns {integer} iStatus - for invalid iStatus
-		  */
+
+		/**
+		 * This function matches integers between 0 and 3 with a request status.
+		 * @param {integer} iStatus - status as integer
+		 * @returns {string} - matched status as string 
+		 * @returns {integer} iStatus - for invalid iStatus
+		 */
 		statusText: function (iStatus) {
 			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 
@@ -29,13 +29,13 @@ sap.ui.define([], function () {
 				return iStatus;
 			}
 		},
-		
-		 /**
-		  * This function matches integers between 0 and 3 with an indication value.
-		  * @param {integer} iStatus - indication value as integer
-		  * @returns {string} - matched indication value as string 
-		  * @returns {string} "None" - for invalid iStatus
-		  */
+
+		/**
+		 * This function matches integers between 0 and 3 with an indication value.
+		 * @param {integer} iStatus - indication value as integer
+		 * @returns {string} - matched indication value as string 
+		 * @returns {string} "None" - for invalid iStatus
+		 */
 		statusIndicator: function (iStatus) {
 			switch (iStatus) {
 			case 0:
@@ -57,11 +57,11 @@ sap.ui.define([], function () {
 		},
 
 		/**
-		  * This function matches integers between 0 and 2 with a request type.
-		  * @param {integer} iAntragArt - request type as integer
-		  * @returns {string} - matched request type as string 
-		  * @returns {integer} iAntragArt - for invalid iAntragArt
-		  */
+		 * This function matches integers between 0 and 2 with a request type.
+		 * @param {integer} iAntragArt - request type as integer
+		 * @returns {string} - matched request type as string 
+		 * @returns {integer} iAntragArt - for invalid iAntragArt
+		 */
 		antragArtText: function (iAntragArt) {
 			var resourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
 

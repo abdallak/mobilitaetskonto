@@ -1,13 +1,9 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/format/FileSizeFormat",
-	"sap/m/upload/Uploader",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, JSONModel, FileSizeFormat, Uploader, MessageToast, MessageBox, BusyIndicator) {
+], function (BaseController, JSONModel, MessageToast, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -164,7 +160,6 @@ sap.ui.define([
 			var oRequestData = this.getModel("oRequestModel").getData();
 
 			this.checkAttachments(oRequestData);
-			console.log("test");
 
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));

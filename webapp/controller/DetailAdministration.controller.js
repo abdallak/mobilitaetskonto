@@ -1,12 +1,10 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
-	"sap/m/MessageToast",
 	"sap/ui/core/Fragment",
 	"sap/ui/core/BusyIndicator"
-], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
+], function (JSONModel, BaseController, formatter, Fragment, BusyIndicator) {
 	"use strict";
 
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
@@ -131,7 +129,6 @@ sap.ui.define([
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
 				this.getView().addDependent(this._oDialog);
-				console.log("Hallo");
 			}
 			return this._oDialog;
 		},
@@ -178,12 +175,10 @@ sap.ui.define([
 
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var val = this.getModel("detailADModel").getData().BETRAG;
-			console.log(val, accBalance);
 			var a = parseFloat(accBalance);
 			var b = parseFloat(val);
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", a + b);
-			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
 
 		performDownloadAttachment: function (aid) {

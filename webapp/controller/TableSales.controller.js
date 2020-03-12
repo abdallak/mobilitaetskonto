@@ -21,7 +21,7 @@ sap.ui.define([
 
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
-			
+
 			var picker = this.getView().byId("rangepicker0");
 			picker.setMaxDate(new Date()); //set MaxDate of daterangepicker to todays date
 		},
@@ -30,7 +30,7 @@ sap.ui.define([
 			var target = oEvent.getParameter("arguments").Target; //tablename parameter to decide the content of the table 
 			this.updateUserModel();
 			this.getTableData();
-			
+
 			// set title
 			var oResourceBundle = this.getResourceBundle();
 			var oTitleLabel = this.byId("titleLabel");
@@ -38,7 +38,7 @@ sap.ui.define([
 			var balance = this.getView().byId("balanceDisplay");
 			var statusLabel = this.getView().byId("stateLabel");
 			var status = this.getView().byId("select0");
-			
+
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
 				this.salesTable = true;
@@ -53,7 +53,7 @@ sap.ui.define([
 				statusLabel.setVisible(true);
 			}
 			oTitleLabel.setText(sTitle);
-			
+
 			this.getView().byId("rangepicker0").setValue(); //clears date selection when reentering the view
 			this.filterTable();
 		},
@@ -66,7 +66,7 @@ sap.ui.define([
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var params = {};
 			params.mid = dbUserData.MID;
-			
+
 			var settings = this.prepareAjaxRequest("/MOB_UMSATZ", "GET", params);
 
 			var that = this;
@@ -79,61 +79,55 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
-		filterTable: function(){
-			
+
+		filterTable: function () {
+
 			//BindingContext
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");
 			var filters = [];
-			
+
 			//Filterparameter
 			var dateRangePicker = this.getView().byId("rangepicker0");
 			var minDate = dateRangePicker.getDateValue();
 			var maxDate = dateRangePicker.getSecondDateValue();
-			
+
 			//DATE FILTER
 			if (minDate !== null && maxDate !== null) {
 				var oDateFilter = new Filter("DATUM", FilterOperator.BT, minDate.toISOString(), maxDate.toISOString());
 				filters.push(oDateFilter);
 			}
-			
-			
+
 			//STATE FILTER
 			//This part filters the given transactions of the employee by their state.
 			//This is mandatory to show the right data, based on the "selected" view.
-			
+
 			//Statusparameter
 			var sStateKey = this.getView().byId("select0").getProperty("selectedKey");
-			
+
 			var oFO;
-			if(this.salesTable === true){
-				 oFO = FilterOperator.GE; //GE = greater or equal
-				 
-				 // transactionstates are stored as integers inside the database going from 0 to 3
-				 // the 2 is used here so that the choosen filteroperator displays the right data
-				 sStateKey = "2";
-			}
-			else
-			{
+			if (this.salesTable === true) {
+				oFO = FilterOperator.GE; //GE = greater or equal
+
+				// transactionstates are stored as integers inside the database going from 0 to 3
+				// the 2 is used here so that the choosen filteroperator displays the right data
+				sStateKey = "2";
+			} else {
 				if (sStateKey === "4") oFO = FilterOperator.LE; // LE = Lesser or equal
 				else oFO = FilterOperator.EQ; //EQ = equals
 			}
-			
-			
-			var oStateFilter = new Filter("STATUS", oFO, sStateKey); 
+
+			var oStateFilter = new Filter("STATUS", oFO, sStateKey);
 			filters.push(oStateFilter);
-			
-			
+
 			binding.filter(filters);
 		},
-		
-		
+
 		/**
-		* This function is used for navigation and parameter passing between the actual view and the employee's detail view.
-		* The function will be triggered after selecting a single transaction inside the table.
-		* The data related to the selected transactions is passed as stringified JSON Object through the router.
-		*/
+		 * This function is used for navigation and parameter passing between the actual view and the employee's detail view.
+		 * The function will be triggered after selecting a single transaction inside the table.
+		 * The data related to the selected transactions is passed as stringified JSON Object through the router.
+		 */
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath();

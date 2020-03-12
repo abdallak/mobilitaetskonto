@@ -1,18 +1,14 @@
 sap.ui.define([
 	"jquery.sap.global",
-	"sap/m/MessageToast",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/core/Fragment",
 	"sap/m/Dialog",
-	"sap/m/ButtonType",
 	"sap/m/Input",
-	"sap/m/Button",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel,
-	BusyIndicator) {
+], function (jQuery, BaseController, Fragment, Dialog, Input, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
