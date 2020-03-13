@@ -20,7 +20,7 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationStatus", {
 
 		/**
-		 * A local JSON model which contains all active categories.
+		 * A global JSON model which contains the current users details.
 		 * 
 		 * @typedef employeeTableModel
 		 * @type {sap.ui.model.json.JSONModel}
