@@ -43,7 +43,7 @@
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/Umsatz/umsatz.xsjs"
+			"entryPath": "/umsatz/umsatz.xsjs"
 		}
 	}, {
 		"path": "/MOB_ANTRAG",
