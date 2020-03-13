@@ -23,10 +23,12 @@ sap.ui.define([
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
+			
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
+			
 			//USERDATEN
 			this.performRequestEmployee(detail.MID);
 			detailADModel.setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
@@ -39,27 +41,27 @@ sap.ui.define([
 			}
 
 			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
-			var acc = this.getView().byId("submitButton");
-			var cnc = this.getView().byId("cancelButton");
-			var fb = this.getView().byId("areaFeedback");
-			var edit = this.getView().byId("button0");
-			var resBalance = this.getView().byId("resultingBalance");
+			var submitButton = this.getView().byId("submitButton");
+			var cancelButton = this.getView().byId("cancelButton");
+			var feedbackArea = this.getView().byId("areaFeedback");
+			var editValueButton = this.getView().byId("button0");
+			var resultingBalance = this.getView().byId("resultingBalance");
 
 			if (detail.STATUS !== 1) {
-				edit.setEnabled(false);
-				resBalance.setVisible(false);
-				fb.setEditable(false);
-				fb.setRequired(false);
-				acc.setEnabled(false);
-				cnc.setEnabled(false);
+				editValueButton.setEnabled(false);
+				resultingBalance.setVisible(false);
+				feedbackArea.setEditable(false);
+				feedbackArea.setRequired(false);
+				submitButton.setEnabled(false);
+				cancelButton.setEnabled(false);
 			} else {
-				edit.setEnabled(true);
-				resBalance.setVisible(true);
+				editValueButton.setEnabled(true);
+				resultingBalance.setVisible(true);
 				this.calcNewBalance();
-				fb.setEditable(true);
-				fb.setRequired(true);
-				acc.setEnabled(true);
-				cnc.setEnabled(true);
+				feedbackArea.setEditable(true);
+				feedbackArea.setRequired(true);
+				submitButton.setEnabled(true);
+				cancelButton.setEnabled(true);
 			}
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
