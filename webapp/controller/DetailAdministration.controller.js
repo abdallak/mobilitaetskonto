@@ -86,6 +86,7 @@ sap.ui.define([
 			}
 			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
 			var that = this;
+			BusyIndicator.show();
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
 				that.onNavBack();
@@ -110,14 +111,12 @@ sap.ui.define([
 
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
-			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
 
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
-			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(0);
 		},
@@ -172,7 +171,6 @@ sap.ui.define([
 		},
 
 		calcNewBalance: function () {
-
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var val = this.getModel("detailADModel").getData().BETRAG;
 			var a = parseFloat(accBalance);
