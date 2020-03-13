@@ -285,6 +285,7 @@ sap.ui.define([
 
 			reader.onerror = function (e) {
 				// FIXME: ordentliche Fehlermeldung
+				BusyIndicator.hide();
 				sap.m.MessageToast.show("error");
 			};
 
