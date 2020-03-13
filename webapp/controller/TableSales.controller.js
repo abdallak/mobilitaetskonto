@@ -35,21 +35,21 @@ sap.ui.define([
 			var oResourceBundle = this.getResourceBundle();
 			var oTitleLabel = this.byId("titleLabel");
 			var sTitle;
-			var balance = this.getView().byId("balanceDisplay");
+			var balanceLabel = this.getView().byId("balanceDisplay");
 			var statusLabel = this.getView().byId("stateLabel");
-			var status = this.getView().byId("select0");
+			var statusActionSelect = this.getView().byId("select0");
 
 			if (target === "TableSales") {
 				sTitle = oResourceBundle.getText("salesTitle");
 				this.salesTable = true;
-				balance.setVisible(true);
-				status.setVisible(false);
+				balanceLabel.setVisible(true);
+				statusActionSelect.setVisible(false);
 				statusLabel.setVisible(false);
 			} else {
 				sTitle = oResourceBundle.getText("startpageEmployeeRequestTableTileSub");
 				this.salesTable = false;
-				balance.setVisible(false);
-				status.setVisible(true);
+				balanceLabel.setVisible(false);
+				statusActionSelect.setVisible(true);
 				statusLabel.setVisible(true);
 			}
 			oTitleLabel.setText(sTitle);
@@ -105,19 +105,19 @@ sap.ui.define([
 			//Statusparameter
 			var sStateKey = this.getView().byId("select0").getProperty("selectedKey");
 
-			var oFO;
+			var oFilterOperator;
 			if (this.salesTable === true) {
-				oFO = FilterOperator.GE; //GE = greater or equal
+				oFilterOperator = FilterOperator.GE; //GE = greater or equal
 
 				// transactionstates are stored as integers inside the database going from 0 to 3
 				// the 2 is used here so that the choosen filteroperator displays the right data
 				sStateKey = "2";
 			} else {
-				if (sStateKey === "4") oFO = FilterOperator.LE; // LE = Lesser or equal
-				else oFO = FilterOperator.EQ; //EQ = equals
+				if (sStateKey === "4") oFilterOperator = FilterOperator.LE; // LE = Lesser or equal
+				else oFilterOperator = FilterOperator.EQ; //EQ = equals
 			}
 
-			var oStateFilter = new Filter("STATUS", oFO, sStateKey);
+			var oStateFilter = new Filter("STATUS", oFilterOperator, sStateKey);
 			filters.push(oStateFilter);
 
 			binding.filter(filters);
