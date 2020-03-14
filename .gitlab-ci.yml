@@ -34,6 +34,7 @@ init-ci:
 code-validation: 
    stage: validation 
    script:
+     - rm -rf .git/refs/tags/neo-app.json
      - node_modules/grunt-cli/bin/grunt -d -v fiori-test
    dependencies:
     - init-ci
