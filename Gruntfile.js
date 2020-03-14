@@ -22,8 +22,6 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-openui5');
 
-	grunt.loadNpmTasks('grunt-javascript-obfuscator');
-
 	grunt.config.merge(config);
 
 	grunt.registerTask("check-lint", "Check validation", function () {
@@ -47,6 +45,5 @@ module.exports = function (grunt) {
 
 	grunt.registerTask("fiori-test", ["lint", "check-lint"]);
 	grunt.registerTask("buildapp", ["build"]);
-	grunt.registerTask("obfuscate", ["javascript_obfuscator"]);
 	grunt.registerTask("default", ["build"]);
 };
