@@ -152,7 +152,7 @@ sap.ui.define([
 			}
 
 			var settings = {
-				"url": "/MOB_MITARBEITER_GETCREATE",
+				"url": "/MOB_EMPLOYEE_GETCREATE",
 				"method": "GET",
 				"timeout": 0,
 				"data": oUserModel.getData()

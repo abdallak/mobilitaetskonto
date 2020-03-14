@@ -66,16 +66,16 @@ sap.ui.define([
 
 			switch (sType) {
 			case "add":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "delete":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "edit":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "get":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			default:
 				break;

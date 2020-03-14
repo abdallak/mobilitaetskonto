@@ -3,7 +3,7 @@
 sap.ui.define([], function () {
 	"use strict";
 
-	var destinationName = "MOB_ANTRAG";
+	var destinationName = "MOB_REQUEST_INSERT";
 
 	QUnit.module(destinationName + " Destination");
 

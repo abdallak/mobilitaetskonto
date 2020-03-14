@@ -3,7 +3,7 @@
 sap.ui.define([], function () {
 	"use strict";
 
-	var destinationName = "MOB_UMSATZ";
+	var destinationName = "MOB_TRANSACTION_EMPLOYEE";
 
 	QUnit.module(destinationName + " Destination");
 

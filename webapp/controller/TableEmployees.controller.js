@@ -38,7 +38,7 @@ sap.ui.define([
 		
 		//fills the Table
 		getTableData: function (target) {
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET");
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				employeeTableModel = that.getModel("employeeTableModel");
@@ -80,7 +80,7 @@ sap.ui.define([
 		makeRequest: function (oEvent) {
 			console.log("make request");
 			var insertData = this.getModel("insertModel").getData();
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(insertData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_INSERT", "POST", JSON.stringify(insertData));
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -189,7 +189,7 @@ sap.ui.define([
 			params.mid = mid;
 			params.date = "31.12." + year2;
 			
-			var settings = this.prepareAjaxRequest("/MOB_ABSCHLUSS", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_EXPIRED", "GET", params);
 			
 			var that = this;
 			$.ajax(settings)
