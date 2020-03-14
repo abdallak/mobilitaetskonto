@@ -4,7 +4,6 @@ stages:
   - init
   - validation
   - build
-  - obfuscate
   - deploy
  
 before_script:
@@ -40,14 +39,6 @@ code-validation:
    dependencies:
     - init-ci
     
-obfuscate: 
-   stage: obfuscate 
-   script:
-     - node_modules/grunt-cli/bin/grunt -d -v obfuscate
-   dependencies:
-     - init-ci
-     - build-app
-
 build-app: 
    stage: build 
    script: 
