@@ -39,7 +39,7 @@
 			"name": "userapi"
 		}
 	}, {
-		"path": "/MOB_KATEGORIE_CHANGE",
+		"path": "/MOB_CATEGORY_CHANGE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
@@ -53,35 +53,35 @@
 			"entryPath": "/employee/administration.xsjs"
 		}
 	}, {
-		"path": "/MOB_STATUS_AENDERN",
+		"path": "/MOB_EMPLOYEE_CHANGESTATE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/employee/changeState.xsjs"
 		}
 	}, {
-		"path": "/MOB_MITARBEITER_LOESCHEN",
+		"path": "/MOB_EMPLOYEE_DELETE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/employee/delete.xsjs"
 		}
 	}, {
-		"path": "/MOB_MITARBEITER_GET",
+		"path": "/MOB_EMPLOYEE_GET",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/employee/get.xsjs"
 		}
 	}, {
-		"path": "/MOB_MITARBEITER_GETCREATE",
+		"path": "/MOB_EMPLOYEE_GETCREATE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/employee/getOrCreate.xsjs"
 		}
 	}, {
-		"path": "/MOB_ABSCHLUSS",
+		"path": "/MOB_EMPLOYEE_EXPIRED",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
@@ -92,45 +92,45 @@
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/log/log.xsjs"
+			"entryPath": "/log/get.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_HANDLE",
+		"path": "/MOB_REQUEST_CHANGE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/request/change.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_DOWNLOAD",
+		"path": "/MOB_REQUEST_DOWNLOADATTACH",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/request/downloadAttachment.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG",
+		"path": "/MOB_REQUEST_INSERT",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/request/insert.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_DURCHGEFUEHRT",
+		"path": "/MOB_REQUEST_MARKTRANSACTED",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/request/markAsTransacted.xsjs"
 		}
 	}, {
-		"path": "/MOB_ANTRAG_TABELLE",
+		"path": "/MOB_TRANSACTION_ADMIN",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/transaction/administration.xsjs"
 		}
 	}, {
-		"path": "/MOB_UMSATZ",
+		"path": "/MOB_TRANSACTION_EMPLOYEE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",

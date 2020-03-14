@@ -31,7 +31,7 @@ sap.ui.define([
 		 * with the help of the model.
 		 */
 		getTableData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_TABELLE", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_TRANSACTION_ADMIN", "GET");
 
 			var that = this;
 			$.ajax(settings)
@@ -92,7 +92,7 @@ sap.ui.define([
 				onClose: function (oAction) {
 					if (oAction === "YES") {
 						BusyIndicator.show();
-						var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DURCHGEFUEHRT", "POST", JSON.stringify(oSelected));
+						var settings = this.prepareAjaxRequest("/MOB_REQUEST_MARKTRANSACTED", "POST", JSON.stringify(oSelected));
 
 						var that = this;
 						$.ajax(settings)

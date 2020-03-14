@@ -82,7 +82,7 @@ sap.ui.define([
 				type: "get"
 			};
 
-			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+			var settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 
 			if (settings === undefined) {
 				this.handleEmptyModel(this.getResourceBundle().getText("errorSettingsUndefined"));
@@ -182,7 +182,7 @@ sap.ui.define([
 		performRequestSubmit: function (oRequestData) {
 			BusyIndicator.show();
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_INSERT", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {

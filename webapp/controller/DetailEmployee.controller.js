@@ -56,7 +56,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)

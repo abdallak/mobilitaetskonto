@@ -67,7 +67,7 @@ sap.ui.define([
 			var params = {};
 			params.mid = dbUserData.MID;
 
-			var settings = this.prepareAjaxRequest("/MOB_UMSATZ", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_TRANSACTION_EMPLOYEE", "GET", params);
 
 			var that = this;
 			$.ajax(settings)

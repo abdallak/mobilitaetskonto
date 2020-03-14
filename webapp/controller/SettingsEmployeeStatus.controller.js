@@ -52,7 +52,7 @@ sap.ui.define([
 		 * This function will update the employeeTableModel.
 		 */
 		getEmployeeData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET");
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
@@ -84,7 +84,7 @@ sap.ui.define([
 				paramData.push(employeeStatus);
 			}
 
-			var settings = this.prepareAjaxRequest("/MOB_STATUS_AENDERN", "POST", JSON.stringify(paramData));
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_CHANGESTATE", "POST", JSON.stringify(paramData));
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
@@ -114,7 +114,7 @@ sap.ui.define([
 				paramData.push(employeeStatus);
 			}
 
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_LOESCHEN", "POST", JSON.stringify(paramData));
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_DELETE", "POST", JSON.stringify(paramData));
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
