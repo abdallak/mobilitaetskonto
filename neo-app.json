@@ -39,7 +39,7 @@
 			"name": "userapi"
 		}
 	}, {
-		"path": "/MOB_KATEGORIE_CHANGE",
+		"path": "/MOB_CATEGORY_CHANGE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
@@ -130,7 +130,7 @@
 			"entryPath": "/transaction/administration.xsjs"
 		}
 	}, {
-		"path": "/MOB_UMSATZ",
+		"path": "/MOB_TRANSACTION_EMPLOYEE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
