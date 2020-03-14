@@ -43,7 +43,7 @@ obfuscate:
    script:
      - node_modules/grunt-cli/bin/grunt -d -v obfuscate
    dependencies:
-    - init-ci
+    - build-app
 
 build-app: 
    stage: build 
