@@ -39,95 +39,53 @@
 			"name": "userapi"
 		}
 	}, {
-		"path": "/MOB_UMSATZ",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/umsatz/umsatz.xsjs"
-		}
-	}, {
-		"path": "/MOB_ANTRAG",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/insertantrag.xsjs"
-		}
-	}, {
-		"path": "/MOB_MITARBEITER_GETCREATE",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/getOrCreate.xsjs"
-		}
-	}, {
-		"path": "/MOB_ANTRAG_DOWNLOAD",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/downloadattachment.xsjs"
-		}
-	}, {
-		"path": "/MOB_ANTRAG_TABELLE",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/antragstabelle.xsjs"
-		}
-	}, {
-		"path": "/MOB_MITARBEITER_GET",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/getMitarbeiter.xsjs"
-		}
-	}, {
 		"path": "/MOB_KATEGORIE_CHANGE",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/kategorie/change.xsjs"
-		}
-	}, {
-		"path": "/MOB_ANTRAG_HANDLE",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/handleantrag.xsjs"
-		}
-	}, {
-		"path": "/MOB_ANTRAG_DURCHGEFUEHRT",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/antrag/antragdurchgefuehrt.xsjs"
-		}
-	}, {
-		"path": "/MOB_STATUS_AENDERN",
-		"target": {
-			"type": "destination",
-			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/statusAendern.xsjs"
+			"entryPath": "/category/change.xsjs"
 		}
 	}, {
 		"path": "/MOB_STATUS_ADMINISTRATION",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/administration.xsjs"
+			"entryPath": "/employee/administration.xsjs"
+		}
+	}, {
+		"path": "/MOB_STATUS_AENDERN",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/employee/changeState.xsjs"
 		}
 	}, {
 		"path": "/MOB_MITARBEITER_LOESCHEN",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/mitarbeiterLoeschen.xsjs"
+			"entryPath": "/employee/delete.xsjs"
+		}
+	}, {
+		"path": "/MOB_MITARBEITER_GET",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/employee/get.xsjs"
+		}
+	}, {
+		"path": "/MOB_MITARBEITER_GETCREATE",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/employee/getOrCreate.xsjs"
 		}
 	}, {
 		"path": "/MOB_ABSCHLUSS",
 		"target": {
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
-			"entryPath": "/mitarbeiter/getSetExpired.xsjs"
+			"entryPath": "/employee/getSetExpired.xsjs"
 		}
 	}, {
 		"path": "/MOB_LOG_GET",
@@ -135,6 +93,48 @@
 			"type": "destination",
 			"name": "MOBILITAETSKONTO",
 			"entryPath": "/log/log.xsjs"
+		}
+	}, {
+		"path": "/MOB_ANTRAG_HANDLE",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/request/change.xsjs"
+		}
+	}, {
+		"path": "/MOB_ANTRAG_DOWNLOAD",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/request/downloadAttachment.xsjs"
+		}
+	}, {
+		"path": "/MOB_ANTRAG",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/request/insert.xsjs"
+		}
+	}, {
+		"path": "/MOB_ANTRAG_DURCHGEFUEHRT",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/request/markAsTransacted.xsjs"
+		}
+	}, {
+		"path": "/MOB_ANTRAG_TABELLE",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/transaction/administration.xsjs"
+		}
+	}, {
+		"path": "/MOB_UMSATZ",
+		"target": {
+			"type": "destination",
+			"name": "MOBILITAETSKONTO",
+			"entryPath": "/transaction/employee.xsjs"
 		}
 	}],
 	"sendWelcomeFileRedirect": true
