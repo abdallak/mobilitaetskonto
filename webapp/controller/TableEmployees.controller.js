@@ -61,7 +61,7 @@ sap.ui.define([
 		setRequest: function (mid, amount, describ, date, kid) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			console.log("set request");
-			console.log(mid + " " + amount + " " + describ);
+			
 			var defaultRequest = {
 				"MID": mid,
 				"art": 2,
