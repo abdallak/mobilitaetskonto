@@ -1,4 +1,3 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -17,8 +16,8 @@ sap.ui.define([
 			this.setModel(requestTableModel, "requestTableModel");
 			this.filterTable(); //pre-filtering the table - the default selected status is 'pending(ausstehend)'
 
-			var picker = this.getView().byId("rangepicker0");
-			picker.setMaxDate(new Date()); //declares the maximum date as todays date
+			var dateRangePicker = this.getView().byId("rangepicker0");
+			dateRangePicker.setMaxDate(new Date()); //declares the maximum date as todays date
 
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
@@ -32,14 +31,13 @@ sap.ui.define([
 		 * with the help of the model.
 		 */
 		getTableData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_TABELLE", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_TRANSACTION_ADMIN", "GET");
 
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
 					var requestTableModel = that.getModel("requestTableModel");
 					requestTableModel.setData(response);
-					console.log(requestTableModel);
 				})
 				.fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
@@ -68,10 +66,10 @@ sap.ui.define([
 		 * In case of declining the confirmation dialog, the selected checkboxes will be resetted.
 		 */
 		onMarkAsTransacted: function () {
-			var oTab = this.byId("requestTableId");
+			var oTable = this.byId("requestTableId");
 			var aSelected = [];
 
-			oTab.getItems().forEach(function (item) { // loop over all the items in the table
+			oTable.getItems().forEach(function (item) { // loop over all the items in the table
 				var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
 				if (oCheckBoxCell.getSelected()) {
 					var iUID = oCheckBoxCell.getBindingContext("requestTableModel").getProperty("UID");
@@ -94,7 +92,7 @@ sap.ui.define([
 				onClose: function (oAction) {
 					if (oAction === "YES") {
 						BusyIndicator.show();
-						var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DURCHGEFUEHRT", "POST", JSON.stringify(oSelected));
+						var settings = this.prepareAjaxRequest("/MOB_REQUEST_MARKTRANSACTED", "POST", JSON.stringify(oSelected));
 
 						var that = this;
 						$.ajax(settings)
@@ -119,9 +117,9 @@ sap.ui.define([
 		 * After execution, all checked checkboxes are deselected.
 		 */
 		resetSelection: function () {
-			var oTab = this.byId("requestTableId");
+			var oTable = this.byId("requestTableId");
 
-			oTab.getItems().forEach(function (item) { // loop over all the items in the table
+			oTable.getItems().forEach(function (item) { // loop over all the items in the table
 				var oCheckBoxCell = item.getCells()[6]; //fetch the cell which holds the checkbox for that row.
 				oCheckBoxCell.setSelected(false);
 			});
@@ -146,12 +144,12 @@ sap.ui.define([
 
 			var filters = [];
 			var singleFilters = [];
-			var oFoState = FilterOperator.EQ;
+			var oFilterOperator = FilterOperator.EQ;
 
 			//STATUS FILTER
 			//This is a special case, where the 'alle' in the ActionSelect is selected, a different Operator is required to show all the data. 
 			if (sStateKey === "4") {
-				oFoState = FilterOperator.LE; // LE = Lesser or equal
+				oFilterOperator = FilterOperator.LE; // LE = Lesser or equal
 				toolbar.setVisible(true);
 			}
 
@@ -159,7 +157,7 @@ sap.ui.define([
 			// If all or genehmigt, show toolbar
 			toolbar.setVisible(sStateKey === "2" || sStateKey === "4");
 
-			var oStateFilter = new Filter("STATUS", oFoState, sStateKey);
+			var oStateFilter = new Filter("STATUS", oFilterOperator, sStateKey);
 			singleFilters.push(oStateFilter);
 
 			//SEARCHBAR FILTER
@@ -169,8 +167,8 @@ sap.ui.define([
 						new Filter("NAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
-						new Filter("UID", FilterOperator.EQ, parseInt(sSearchQuery))
-					],
+						new Filter("UID", FilterOperator.EQ, parseInt(sSearchQuery, 10))
+						],
 					false);
 
 				singleFilters.push(oSearchFilter);

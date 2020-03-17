@@ -20,7 +20,7 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationStatus", {
 
 		/**
-		 * A local JSON model which contains all active categories.
+		 * A global JSON model which contains the current users details.
 		 * 
 		 * @typedef employeeTableModel
 		 * @type {sap.ui.model.json.JSONModel}
@@ -63,7 +63,7 @@ sap.ui.define([
 		 * This function will update the employeeTableModel.
 		 */
 		getEmployeeData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET");
 
 			var that = this;
 			$.ajax(settings).done(function (response) {
@@ -88,9 +88,13 @@ sap.ui.define([
 			employeeStatus.amid = dbUserData.MID;
 			employeeStatus.type = "value";
 			employeeStatus.administrationValue = iValue;
+			if (iValue < 0) {
+				this.handleEmptyModel("you cannt give a negative number");
+				return;
+			}
 
 			var settings = this.prepareAjaxRequest("/MOB_STATUS_ADMINISTRATION", "POST", JSON.stringify(employeeStatus));
-
+			BusyIndicator.show();
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
@@ -103,13 +107,30 @@ sap.ui.define([
 		},
 
 		/**
+		 * This function gets called if the amount input changes.
+		 * It will check if the given value is valid or not.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
+		onValueChanged: function (oEvent) {
+			var sValue = oEvent.getParameter("value");
+			var oSource = oEvent.getSource();
+			var betragValue = parseFloat(sValue);
+			if (!isNaN(betragValue) && betragValue > 0.0) {
+				oSource.setValueState("Success");
+				oSource.setValueStateText(null);
+			} else {
+				oSource.setValueState("Error");
+			}
+		},
+
+		/**
 		 * This function will show a Dialog with an Input to change the adminsitration value.
 		 * 
 		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onEditPressed: function (oEvent) {
 			var mid = oEvent.getSource().data("MID");
-
 			var that = this;
 			var oDialog = new Dialog({
 				title: that.getResourceBundle().getText("settingsAdministrationStatusDialogTitle"),
@@ -121,7 +142,9 @@ sap.ui.define([
 					new Input("newValueInput", {
 						width: "100%",
 						type: "Number",
-						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder")
+						placeholder: that.getResourceBundle().getText("settingsAdministrationStatusDialogPlaceholder"),
+						liveChange: that.onValueChanged,
+						valueLiveUpdate: true
 					}),
 					new Label({
 						text: that.getResourceBundle().getText("settingsAdministrationStatusInvalidValueWarning")
@@ -131,7 +154,6 @@ sap.ui.define([
 					type: ButtonType.Emphasized,
 					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogBegin"),
 					press: function () {
-						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
 						oDialog.close();
@@ -150,17 +172,15 @@ sap.ui.define([
 
 			oDialog.open();
 		},
-		
-		handleLiveChange : function(oEvent){
+
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ","))
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 

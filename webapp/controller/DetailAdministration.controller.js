@@ -1,13 +1,12 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
-	"sap/m/MessageToast",
 	"sap/ui/core/Fragment",
 	"sap/ui/core/BusyIndicator"
-], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
+], function (JSONModel, BaseController, formatter, Fragment, BusyIndicator) {
 	"use strict";
+
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
 
@@ -19,16 +18,17 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
-	
 		},
 
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
+			
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
+			
 			//USERDATEN
 			this.performRequestEmployee(detail.MID);
 			detailADModel.setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
@@ -41,27 +41,27 @@ sap.ui.define([
 			}
 
 			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
-			var acc = this.getView().byId("submitButton");
-			var cnc = this.getView().byId("cancelButton");
-			var fb = this.getView().byId("areaFeedback");
-			var edit = this.getView().byId("button0");
-			var resBalance = this.getView().byId("resultingBalance");
+			var submitButton = this.getView().byId("submitButton");
+			var cancelButton = this.getView().byId("cancelButton");
+			var feedbackArea = this.getView().byId("areaFeedback");
+			var editValueButton = this.getView().byId("button0");
+			var resultingBalance = this.getView().byId("resultingBalance");
 
 			if (detail.STATUS !== 1) {
-				edit.setEnabled(false);
-				resBalance.setVisible(false);
-				fb.setBlocked(true);
-				fb.setRequired(false);
-				acc.setEnabled(false);
-				cnc.setEnabled(false);
+				editValueButton.setEnabled(false);
+				resultingBalance.setVisible(false);
+				feedbackArea.setEditable(false);
+				feedbackArea.setRequired(false);
+				submitButton.setEnabled(false);
+				cancelButton.setEnabled(false);
 			} else {
-				edit.setEnabled(true);
-				resBalance.setVisible(true);
+				editValueButton.setEnabled(true);
+				resultingBalance.setVisible(true);
 				this.calcNewBalance();
-				fb.setBlocked(false);
-				fb.setRequired(true);
-				acc.setEnabled(true);
-				cnc.setEnabled(true);
+				feedbackArea.setEditable(true);
+				feedbackArea.setRequired(true);
+				submitButton.setEnabled(true);
+				cancelButton.setEnabled(true);
 			}
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
@@ -70,7 +70,7 @@ sap.ui.define([
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET", params);
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var detailADUserModel = that.getModel("detailADUserModel");
@@ -86,8 +86,9 @@ sap.ui.define([
 				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_CHANGE", "POST", JSON.stringify(oRequestData));
 			var that = this;
+			BusyIndicator.show();
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
 				that.onNavBack();
@@ -112,14 +113,12 @@ sap.ui.define([
 
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
-			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
 
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
-			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(0);
 		},
@@ -131,7 +130,6 @@ sap.ui.define([
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
 				this.getView().addDependent(this._oDialog);
-				console.log("Hallo");
 			}
 			return this._oDialog;
 		},
@@ -167,7 +165,7 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			
+
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
@@ -175,15 +173,12 @@ sap.ui.define([
 		},
 
 		calcNewBalance: function () {
-
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var val = this.getModel("detailADModel").getData().BETRAG;
-			console.log(val, accBalance);
 			var a = parseFloat(accBalance);
 			var b = parseFloat(val);
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", a + b);
-			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
 
 		performDownloadAttachment: function (aid) {
@@ -192,7 +187,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
@@ -210,14 +205,13 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
-		testDisableButton: function(oEvent) {
-			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
-			{
-			this.byId("submitButton").setEnabled(false);
-			this.byId("cancelButton").setEnabled(false);
-			this.byId("warningText").setVisible(true);
-				
+
+		testDisableButton: function (oEvent) {
+			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
+				this.byId("submitButton").setEnabled(false);
+				this.byId("cancelButton").setEnabled(false);
+				this.byId("warningText").setVisible(true);
+
 			}
 		},
 
@@ -227,16 +221,15 @@ sap.ui.define([
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-		
-		handleLiveChange : function(oEvent){
+
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 	});

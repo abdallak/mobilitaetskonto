@@ -6,8 +6,13 @@
 				<content>
 					<sap.ui.layout.form:Form xmlns:sap.ui.layout.form="sap.ui.layout.form" editable="true" id="form0">
 						<sap.ui.layout.form:formContainers>
-							<sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}: {detailModel>/UID}" id="container1">
+							<sap.ui.layout.form:FormContainer title="{i18n>detailContainerTitle}" id="container1">
 								<sap.ui.layout.form:formElements>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderUid}">
+										<sap.ui.layout.form:fields>
+											<Text width="50%" text="{detailModel>/UID}"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderMid}">
 										<sap.ui.layout.form:fields>
 											<Text width="50%" text="{detailModel>/MID}"/>
@@ -55,7 +60,14 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderDescription}">
 										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" renderWhitespace="true" wrapping="true" width="50%" text="{detailModel>/BESCHREIBUNG}"/>
+											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left"
+												id="areaDescription" width="50%"/>
+										</sap.ui.layout.form:fields>
+									</sap.ui.layout.form:FormElement>
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
+										<sap.ui.layout.form:fields>
+											<TextArea xmlns="sap.m" value="{detailModel>/BESCHREIBUNG}" growingMaxLines="4" growing="true" editable="false" textAlign="Left"
+												id="areaFeedback" width="50%"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>editor}" visible="{= ${detailModel>/VERWALTER} !== null}">
@@ -64,15 +76,11 @@
 												text="{path: 'detailModel>/VERWALTERVORNAME'} {path: 'detailModel>/VERWALTERNAME'} ({detailModel>/VERWALTER})"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
-									<sap.ui.layout.form:FormElement label="{i18n>HeaderFeedback}" visible="{= ${detailModel>/FEEDBACK} !== null}">
-										<sap.ui.layout.form:fields>
-											<Text xmlns="sap.m" renderWhitespace="true" wrapping="true" width="50%" text="{detailModel>/FEEDBACK}"/>
-										</sap.ui.layout.form:fields>
-									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}" visible="{= ${detailModel>/ATTACHMENTS} !== undefined}">
 										<sap.ui.layout.form:fields>
 											<UploadCollection id="UploadCollection" multiple="false" change="onChange" selectionChange="onSelectChange" uploadButtonInvisible="true"
-												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailModel>/ATTACHMENTS/'}" instantUpload="false">
+												uploadEnabled="false" mode="SingleSelectMaster" items="{ path: 'detailModel>/ATTACHMENTS/'}" instantUpload="false"
+												numberOfAttachmentsText=" ">
 												<items>
 													<UploadCollectionItem documentId="{detailModel>AID}" fileName="{detailModel>FILENAME}" mimeType="text/plain" enableEdit="false"
 														enableDelete="false" visibleDelete="false" visibleEdit="false" selected="false"/>

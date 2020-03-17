@@ -1,18 +1,14 @@
 sap.ui.define([
 	"jquery.sap.global",
-	"sap/m/MessageToast",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/core/Fragment",
 	"sap/m/Dialog",
-	"sap/m/ButtonType",
 	"sap/m/Input",
-	"sap/m/Button",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (jQuery, MessageToast, BaseController, Fragment, Dialog, ButtonType, Input, Button, Filter, FilterOperator, JSONModel,
-	BusyIndicator) {
+], function (jQuery, BaseController, Fragment, Dialog, Input, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -22,7 +18,7 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsAdministrationAssign", {
 
 		/**
-		 * A local JSON model which contains all active categories.
+		 * A global JSON model which contains the current users details.
 		 * 
 		 * @typedef employeeTableModel
 		 * @type {sap.ui.model.json.JSONModel}
@@ -61,7 +57,7 @@ sap.ui.define([
 		 * This function will update the employeeTableModel.
 		 */
 		getEmployeeData: function () {
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET");
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET");
 
 			var that = this;
 			$.ajax(settings).done(function (response) {

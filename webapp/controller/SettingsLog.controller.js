@@ -1,8 +1,10 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, JSONModel, BusyIndicator) {
+], function (BaseController, JSONModel, Filter, FilterOperator, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -59,6 +61,35 @@ sap.ui.define([
 					BusyIndicator.hide();
 					that.handleNetworkError(jqXHR);
 				});
+		},
+
+		/**
+		 * This Function is used by the SearchBar control of the UI.
+		 * Everytime one of these is used, this method gets called.
+		 */
+		filterTable: function () {
+			var sSearchQuery = this.getView().byId("searchField0").getProperty("value");
+			var filters = [];
+
+			//SEARCHBAR FILTER
+			if (sSearchQuery !== "") {
+				var oSearchFilter = new Filter([
+						new Filter("MID", FilterOperator.Contains, sSearchQuery),
+						new Filter("DATUM", FilterOperator.Contains, sSearchQuery),
+						new Filter("AKTION", FilterOperator.Contains, sSearchQuery)
+					],
+					false);
+
+				filters.push(oSearchFilter);
+			}
+
+			this.bindFilters(filters);
+		},
+
+		bindFilters: function (filterArr) {
+			var list = this.getView().byId("table0");
+			var binding = list.getBinding("items");
+			binding.filter(filterArr);
 		}
 
 	});

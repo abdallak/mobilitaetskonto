@@ -169,7 +169,7 @@ sap.ui.define([
 		handleEmptyModel: function (sMessage) {
 			var oResourceBundle = this.getResourceBundle();
 			var bCompact = !!this.getView().$().closest(".sapUiSizeCompact").length;
-			MessageBox.error(oResourceBundle.getText(sMessage), {
+			MessageBox.error(oResourceBundle.getText("errorMessageGeneralPrefix") + ":\n" + sMessage, {
 				title: "Error",
 				styleClass: bCompact ? "sapUiSizeCompact" : "",
 				contentWidth: "100px"

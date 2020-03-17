@@ -31,7 +31,8 @@
 				</content>
 				<headerContent>
 					<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" id="button1_copy"
-						icon="sap-icon://synchronize" text="{i18n>settingsLogRefreshButton}" press="onRefreshPressed"/>
+						icon="sap-icon://synchronize" text="{i18n>settingsLogRefreshButton}" press="onRefreshPressed" width="40%"/>
+					<SearchField placeholder="Log durchsuchen" id="searchField0" search="filterTable" width="60%"/>
 				</headerContent>
 			</Page>
 		</pages>

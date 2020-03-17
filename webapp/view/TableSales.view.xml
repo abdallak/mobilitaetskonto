@@ -49,22 +49,21 @@
 								</cells>
 							</ColumnListItem>
 						</items>
-						
 						<headerToolbar>
 							<Toolbar width="100%" id="toolbar0">
 								<content>
 									<DateRangeSelection xmlns="sap.m" id="rangepicker0" width="25%" change="filterTable" placeholder="{i18n>placeHolderChooseTime}"/>
 									<ToolbarSpacer id="spacer0_1583343307107"/>
-									<Label text="{i18n>HeaderStatus}:" textAlign="End">
+									<Label text="{i18n>HeaderStatus}:" id="stateLabel" textAlign="End">
 										<layoutData>
 											<OverflowToolbarLayoutData priority="NeverOverflow"/>
 										</layoutData>
 									</Label>
 									<ActionSelect id="select0" change="filterTable" forceSelection="false" selectedKey="1">
 										<items>
-											<core:ListItem text="{i18n>antragStatusAbgelehnt}"  key="0"/>
-											<core:ListItem text="{i18n>antragStatusAusstehend}"  key="1"/>
-											<core:ListItem text="{i18n>antragStatusGenehmigt}"  key="2"/>
+											<core:ListItem text="{i18n>antragStatusAbgelehnt}" key="0"/>
+											<core:ListItem text="{i18n>antragStatusAusstehend}" key="1"/>
+											<core:ListItem text="{i18n>antragStatusGenehmigt}" key="2"/>
 											<core:ListItem text="{i18n>antragStatusDurchgefuehrt}" key="3"/>
 											<core:ListItem text="{i18n>antragStatusAlle}" key="4"/>
 										</items>
@@ -72,7 +71,6 @@
 								</content>
 							</Toolbar>
 						</headerToolbar>
-						
 					</Table>
 				</content>
 				<customHeader>
@@ -89,8 +87,8 @@
 								id="titleLabel"/>
 						</contentMiddle>
 						<contentRight>
-							<ObjectNumber
-								id="balanceDisplay" number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+							<ObjectNumber id="balanceDisplay"
+								number="{ parts:[{path:'dbUserModel>/GUTHABEN'},{path:'i18n>currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
 								unit="{i18n>currency}" state="{= ${dbUserModel>/GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
 						</contentRight>
 					</Bar>

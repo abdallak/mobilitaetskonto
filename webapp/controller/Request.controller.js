@@ -1,13 +1,9 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/ui/model/json/JSONModel",
-	"sap/ui/core/format/FileSizeFormat",
-	"sap/m/upload/Uploader",
 	"sap/m/MessageToast",
-	"sap/m/MessageBox",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, JSONModel, FileSizeFormat, Uploader, MessageToast, MessageBox, BusyIndicator) {
+], function (BaseController, JSONModel, MessageToast, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -86,7 +82,7 @@ sap.ui.define([
 				type: "get"
 			};
 
-			var settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+			var settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 
 			if (settings === undefined) {
 				this.handleEmptyModel(this.getResourceBundle().getText("errorSettingsUndefined"));
@@ -140,7 +136,7 @@ sap.ui.define([
 				"beschreibung": null,
 				"kid": null,
 				"attachments": [],
-				"freigeber" : dbUserData.FREIGEBER
+				"freigeber": dbUserData.FREIGEBER
 			};
 			var oRequestModel = new JSONModel(defaultRequest);
 			this.setModel(oRequestModel, "oRequestModel");
@@ -164,8 +160,7 @@ sap.ui.define([
 			var oRequestData = this.getModel("oRequestModel").getData();
 
 			this.checkAttachments(oRequestData);
-			console.log("test");
-			
+
 			if (!oRequestData.betrag || oRequestData.betrag === "0" || oRequestData.betrag.includes("-") || oRequestData.betrag.includes("e")) {
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBetrag"));
 				return;
@@ -174,7 +169,7 @@ sap.ui.define([
 				this.handleEmptyModel(oResourceBundle.getText("requestInvalidBeschreibung"));
 				return;
 			}
-			
+
 			this.performRequestSubmit(oRequestData);
 		},
 
@@ -186,8 +181,8 @@ sap.ui.define([
 		 */
 		performRequestSubmit: function (oRequestData) {
 			BusyIndicator.show();
-			
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG", "POST", JSON.stringify(oRequestData));
+
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_INSERT", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -290,6 +285,7 @@ sap.ui.define([
 
 			reader.onerror = function (e) {
 				// FIXME: ordentliche Fehlermeldung
+				BusyIndicator.hide();
 				sap.m.MessageToast.show("error");
 			};
 

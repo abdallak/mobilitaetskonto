@@ -1,19 +1,13 @@
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"sap/m/Dialog",
-	"sap/ui/layout/HorizontalLayout",
-	"sap/ui/layout/VerticalLayout",
 	"sap/m/ButtonType",
 	"sap/m/Input",
 	"sap/m/Label",
-	"sap/m/Text",
-	"sap/m/MessageToast",
 	"sap/m/Button",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/BusyIndicator"
-], function (BaseController, Dialog, HorizontalLayout, VerticalLayout, ButtonType, Input, Label, Text, MessageToast, Button,
-	JSONModel,
-	BusyIndicator) {
+], function (BaseController, Dialog, ButtonType, Input, Label, Button, JSONModel, BusyIndicator) {
 	"use strict";
 
 	/**
@@ -39,7 +33,6 @@ sap.ui.define([
 		 */
 		onInit: function () {
 			this.setModel(new JSONModel(), "dbCategoryModel");
-
 			this.getEventBus().subscribe("manageCategories", "show", this.onBeforeShow, this);
 		},
 
@@ -73,16 +66,16 @@ sap.ui.define([
 
 			switch (sType) {
 			case "add":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "delete":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "edit":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			case "get":
-				settings = this.prepareAjaxRequest("/MOB_KATEGORIE_CHANGE", "GET", data);
+				settings = this.prepareAjaxRequest("/MOB_CATEGORY_CHANGE", "GET", data);
 				break;
 			default:
 				break;
