@@ -7,21 +7,19 @@ sap.ui.define([
 	"sap/ui/core/BusyIndicator"
 ], function (BaseController, formatter, JSONModel, Fragment, BusyIndicator) {
 	"use strict";
-	var employeeTableModel;
-	var insertModel;
-	var OpendDialog;
+	var OpendDialog; //either DialogExpired    or     DialogBalance
+
 	/**
-	*	sets the
-	*
-	*
+	*	this Pages shows information on all Employees and offers the functionalities of
+	* 1: giving employees individual amounts of money (also negative)
 	* 
+	* and 2: calculating and writing the expired Balance of employees
 	* 
 	*/
-	
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
 		onInit: function () {
-			employeeTableModel = new JSONModel();
+			var employeeTableModel = new JSONModel();
 			this.setModel(employeeTableModel, "employeeTableModel");
 
 			var staticModel = new JSONModel();
@@ -41,13 +39,13 @@ sap.ui.define([
 			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET");
 			var that = this;
 			$.ajax(settings).done(function (response) {
-				employeeTableModel = that.getModel("employeeTableModel");
+				var employeeTableModel = that.getModel("employeeTableModel");
 				employeeTableModel.setData(response);
 			}).fail(function (jqXHR, exception) {
 				that.handleNetworkError(jqXHR);
 			});
 		},
-		
+		/* Function can be used in the future if a functionality for clicking on one table entry is ever implemented
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("employeeTableModel");
 			var path = context.getPath();
@@ -56,8 +54,9 @@ sap.ui.define([
 				DetailEmployee: detail
 			});
 		},
+		*/
 		
-		//sets the request Modell 
+		//sets the request Modell (expired Balance, or individual entry)
 		setRequest: function (mid, amount, describ, date, kid) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			console.log("set request");
@@ -72,13 +71,12 @@ sap.ui.define([
 				"state": 2,
 				"MIDV": dbUserData.MID
 			};
-			insertModel = new JSONModel(defaultRequest);
+			var insertModel = new JSONModel(defaultRequest);
 			this.setModel(insertModel, "insertModel");
 		},
 
 		//executes the request with the model set in setRequest
 		makeRequest: function (oEvent) {
-			console.log("make request");
 			var insertData = this.getModel("insertModel").getData();
 			var settings = this.prepareAjaxRequest("/MOB_REQUEST_INSERT", "POST", JSON.stringify(insertData));
 			var that = this;
@@ -93,6 +91,13 @@ sap.ui.define([
 				});
 		},
 		
+		/**
+		 * This function gets called whenever the amount input changes,
+		 * and automatically checks wether the current value is valid or not.
+		 * meanning: checking for everything that is not a Number, point or comma
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
 		onValueChanged: function (oEvent) {
 			var oResourceBundle = this.getResourceBundle();
 			var sValue = oEvent.getParameter("value");
@@ -108,6 +113,16 @@ sap.ui.define([
 			}
 		},
 		
+		/**
+		 *  is called when one of the dialogbuttons is clicked.
+		 *  opens the corresponding dialog window and makes adjustments to the date picker 
+		 *  depending on which of the dialogs was opend.
+		 * 
+		 * TODO read dialogId directly out of oEvent?
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 * @param{String} dialogId - the name of the opend Dialog (DialogBalance or DialogExpired)
+		 */
 		dialogOpen: function (oEvent, dialogId) {
 			
 			var thisView = this.getView();
@@ -130,7 +145,7 @@ sap.ui.define([
 			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd.MM.YYYY" });   
 			var dateNotFormatted = new Date();
 			
-			if(dialogId === "DialogExpired"){
+			if(OpendDialog === "DialogExpired"){
 				dateNotFormatted.setFullYear( dateNotFormatted.getFullYear() - 1 );
 				this.byId("datepicker0").setMaxDate(dateNotFormatted);
 			}
@@ -140,8 +155,13 @@ sap.ui.define([
 			
 		},
 		
-		//executes Dialog functions (Guthaben/Jahresabschluss)
-		onExecuteDialog: function (GorA) {
+		/**
+		 * executes the Dialog functions (Guthaben/Jahresabschluss)
+		 * first gets all selected employees and gives a Error message if no one is selected
+		 * then performs the chosen function for each of them
+		 */
+		//onExecuteDialog: function (GorA) {
+		onExecuteDialog: function () {
 			BusyIndicator.show();
 			var staticModel = this.getModel("staticModel").getData();
 			
@@ -152,9 +172,9 @@ sap.ui.define([
 		
 			var datePicked = datePickerControl.getDateValue();
 			
-			//ErrorMessage if no employees chosen  -- FEHLERMELDUNG bei keinen angewählten?
+			//ErrorMessage if no employee is chosen
 			if(SelectedItems.length < 1){ 
-				this.handleEmptyModel("bitte Mitarbeiter auswählen");
+				this.handleEmptyModel(this.getResourceBundle().getText("chooseEmployee"));
 			}
 			
 			for (var i = 0; i < SelectedItems.length; i++) {
@@ -163,14 +183,13 @@ sap.ui.define([
 				var path = context.getPath();
 				var mid = context.getProperty(path).MID;
 				
-				if(GorA === 'G'){//execute guthaben
+				//if(GorA === 'G'){
+				if(OpendDialog === 'DialogBalance'){
 					this.setRequest(mid, staticModel.betragG, 	staticModel.beschreibung, datePicked, 1);
 					this.makeRequest();
 				}
 				else{
-					//check einbauen dass das jahr2 gefüllt ist. ansonste nstandardmäßig 3 nehmen
 					var stepperControl = this.byId("stepper");
-					//var stepperValue = stepperControl.getValue();
 					
 					var year1 = datePicked.getYear() + 1900;
 					var year2 = year1 - stepperControl.getValue();
@@ -179,10 +198,17 @@ sap.ui.define([
 				}
 			}
 			//closing the dialog box
-			this.onAbortCloseDialog(1, OpendDialog);
+			this.onAbortCloseDialog(1);
 		},
 		
-		//calculates the expired amount via sql query
+		/** is called when expiredButton was clicked
+		 * calculates the expired amount via sql query
+		 * also calles function 'setRequest' and 'makeRequest' to insert new entry into sales table
+		 * 
+		 * @param{String} mid - the MID of the employee for whom the expired value should be calculated
+		 * @param{String} year1 - the Year which should be 
+		 * @param{String} year2 - the latest year
+		 */
 		getExpired: function (mid, year1, year2) {
 			
 			var params = {};
@@ -197,11 +223,9 @@ sap.ui.define([
 					var oResponse = JSON.parse(response);
 					
 					// sets the value of expired either to 0 if its negative  or to -1*expired if its postive
-
-					//oResponse.Valid
 					var expired = (oResponse.EXPIRED > 0 ? oResponse.EXPIRED * (-1) : 0);
 					
-					//Calculates date
+					//sets the expiaration date
 					var date = "31.12." + year1;
 					
 					//makes a new entry for the expired balance
@@ -212,11 +236,16 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
-
-		onAbortCloseDialog: function (oEvent, dialogId) {
+		
+		/** is called on the abort buttons of the dialog and
+		 *  closes opend dialog
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
+		onAbortCloseDialog: function (oEvent) {
 			BusyIndicator.hide();
-			this.byId(dialogId).close();
-			this.byId(dialogId).destroy();
+			this.byId(OpendDialog).close();
+			this.byId(OpendDialog).destroy();
 		}
 	});
 });

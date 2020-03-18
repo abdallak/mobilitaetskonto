@@ -67,7 +67,7 @@
 							<Button xmlns="sap.m" id="GuthabenButton" icon="sap-icon://my-sales-order" type="Default" text="{i18n>guthabenButton}"
 								press="dialogOpen($event, 'DialogBalance')"/>
 							<Button xmlns="sap.m" id="AbschlussButton" icon="sap-icon://per-diem" type="Default" text="{i18n>abschlussButton}"
-								press="dialogOpen($event, 'DialogExpired')"/>
+								press="dialogOpen($event, 'DialogExpired')" tooltip="{i18n>expiredToolTip}"/>
 							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
 						</content>
 					</OverflowToolbar>
