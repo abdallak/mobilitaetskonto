@@ -14,6 +14,23 @@ Alle benötigten Daten für das Backend können in diesem [Git Repository](https
 
 Dann mit `Clone` importieren.
 
+#### 3. App öffnen und dann ersten Nutzer manuell in HANA Catalog freischalten und als Verwalter setzen:
+
+In HANA Catalog Toolbar `Open SQL Console` auswählen und folgenden Code einfügen:
+
+``` SQL
+UPDATE "MOBILITAETSKONTO"."MITARBEITER"
+SET FREIGABEWERT = 1, AKTIV = true;
+```
+
+**Achtung**: *Dieser Befehl verleiht allen in dieser Mitarbeitertabelle vorhandenen Mitarbeitern einen aktiven Status, sowie die Verwalterrolle. Sollten Sie nicht der erste und einzige Eintrag in der Tabelle sein, dann nutzen Sie bitte den folgenden SQL Befehl und setzen Ihre MID in Zeile 3 ein. Diese MID können Sie in der Content Ansicht der Mitarbeitertabelle sehen.*
+
+``` SQL
+UPDATE "MOBILITAETSKONTO"."MITARBEITER"
+SET FREIGABEWERT = 1, AKTIV = true
+WHERE mid = 'IHRE-MID';
+```
+
 ### Weitere Ressourcen
 
 #### Script zum automatischen Starten der HANA DB
