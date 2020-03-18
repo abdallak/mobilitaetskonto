@@ -119,7 +119,7 @@ sap.ui.define([
 				}),
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogBegin"),
+					text: that.getResourceBundle().getText("deleteButton"),
 					press: function () {
 						BusyIndicator.show();
 						that.changeCategory("delete", undefined, kid);
@@ -127,7 +127,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: that.getResourceBundle().getText("settingsCategoryDeleteDialogEnd"),
+					text: that.getResourceBundle().getText("cancelButton"),
 					press: function () {
 						oDialog.close();
 					}
@@ -165,7 +165,7 @@ sap.ui.define([
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: that.getResourceBundle().getText("settingsCategoryEditDialogBegin"),
+					text: that.getResourceBundle().getText("changeButton"),
 					press: function () {
 						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
@@ -174,7 +174,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: that.getResourceBundle().getText("settingsCategoryEditDialogEnd"),
+					text: that.getResourceBundle().getText("cancelButton"),
 					press: function () {
 						oDialog.close();
 					}
@@ -205,7 +205,7 @@ sap.ui.define([
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: that.getResourceBundle().getText("settingsCategoryAddDialogBegin"),
+					text: that.getResourceBundle().getText("addButton"),
 					press: function () {
 						BusyIndicator.show();
 						var sText = sap.ui.getCore().byId("newCategoryNameInput").getValue();
@@ -214,7 +214,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: that.getResourceBundle().getText("settingsCategoryAddDialogEnd"),
+					text: that.getResourceBundle().getText("cancelButton"),
 					press: function () {
 						oDialog.close();
 					}
