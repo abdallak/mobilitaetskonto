@@ -49,27 +49,27 @@ sap.ui.define([
 			}
 
 			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
-			var acc = this.getView().byId("submitButton");
-			var cnc = this.getView().byId("rejectButton");
-			var fb = this.getView().byId("areaFeedback");
+			var submitButton = this.getView().byId("submitButton");
+			var rejectButton = this.getView().byId("rejectButton");
+			var feedback = this.getView().byId("areaFeedback");
 			var edit = this.getView().byId("button0");
 			var resBalance = this.getView().byId("resultingBalance");
 
 			if (detail.STATUS !== 1) {
 				edit.setEnabled(false);
 				resBalance.setVisible(false);
-				fb.setEditable(false);
-				fb.setRequired(false);
-				acc.setEnabled(false);
-				cnc.setEnabled(false);
+				feedback.setEditable(false);
+				feedback.setRequired(false);
+				submitButton.setEnabled(false);
+				rejectButton.setEnabled(false);
 			} else {
 				edit.setEnabled(true);
 				resBalance.setVisible(true);
 				this.calcNewBalance();
-				fb.setEditable(true);
-				fb.setRequired(true);
-				acc.setEnabled(true);
-				cnc.setEnabled(true);
+				feedback.setEditable(true);
+				feedback.setRequired(true);
+				submitButton.setEnabled(true);
+				rejectButton.setEnabled(true);
 			}
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
