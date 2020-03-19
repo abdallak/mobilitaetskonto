@@ -152,7 +152,7 @@ sap.ui.define([
 				],
 				beginButton: new Button({
 					type: ButtonType.Emphasized,
-					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogBegin"),
+					text: that.getResourceBundle().getText("changeButton"),
 					press: function () {
 						var sText = sap.ui.getCore().byId("newValueInput").getValue();
 						that.setEmployeeStatus(mid, sText);
@@ -160,7 +160,7 @@ sap.ui.define([
 					}
 				}),
 				endButton: new Button({
-					text: that.getResourceBundle().getText("settingsAdministrationStatusDialogEnd"),
+					text: that.getResourceBundle().getText("cancelButton"),
 					press: function () {
 						oDialog.close();
 					}
