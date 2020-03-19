@@ -17,7 +17,7 @@
 			<Button text="{i18n>guthabenButton}" press=".onExecuteDialog('G')"/>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'DialogBalance')"/>
+			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event)"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>

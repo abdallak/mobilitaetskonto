@@ -15,7 +15,7 @@
 			<Button text="{i18n>abschlussButton}" press=".onExecuteDialog('A')"/>
 		</beginButton>
 		<endButton>
-			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event, 'DialogExpired')"/>
+			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event)"/>
 		</endButton>
 	</Dialog>
 </core:FragmentDefinition>
