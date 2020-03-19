@@ -1,12 +1,20 @@
+/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
+	"sap/m/MessageToast",
 	"sap/ui/core/Fragment",
 	"sap/ui/core/BusyIndicator"
-], function (JSONModel, BaseController, formatter, Fragment, BusyIndicator) {
+], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
 	"use strict";
-
+	
+	/**
+	 * This Class simply displays a detailed view of the selected transaction from the table,
+	 * providing extra information to the user, which is not shown in the table.
+	 * 
+	 * @class DetailAdministration
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
 
@@ -18,17 +26,17 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
+	
 		},
-
+		/** This Function is called everytime the DetailAdminstration View gets called
+		*/
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
-			
 			//ANTRAGSDATEN
 			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
-			
 			//USERDATEN
 			this.performRequestEmployee(detail.MID);
 			detailADModel.setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
@@ -41,36 +49,39 @@ sap.ui.define([
 			}
 
 			//STATUSAENDERUNGEN VERMEIDEN, WENN ANTRAG NICHT AUSSTEHEND IST
-			var submitButton = this.getView().byId("submitButton");
-			var cancelButton = this.getView().byId("cancelButton");
-			var feedbackArea = this.getView().byId("areaFeedback");
-			var editValueButton = this.getView().byId("button0");
-			var resultingBalance = this.getView().byId("resultingBalance");
+			var acc = this.getView().byId("submitButton");
+			var cnc = this.getView().byId("rejectButton");
+			var fb = this.getView().byId("areaFeedback");
+			var edit = this.getView().byId("button0");
+			var resBalance = this.getView().byId("resultingBalance");
 
 			if (detail.STATUS !== 1) {
-				editValueButton.setEnabled(false);
-				resultingBalance.setVisible(false);
-				feedbackArea.setEditable(false);
-				feedbackArea.setRequired(false);
-				submitButton.setEnabled(false);
-				cancelButton.setEnabled(false);
+				edit.setEnabled(false);
+				resBalance.setVisible(false);
+				fb.setEditable(false);
+				fb.setRequired(false);
+				acc.setEnabled(false);
+				cnc.setEnabled(false);
 			} else {
-				editValueButton.setEnabled(true);
-				resultingBalance.setVisible(true);
+				edit.setEnabled(true);
+				resBalance.setVisible(true);
 				this.calcNewBalance();
-				feedbackArea.setEditable(true);
-				feedbackArea.setRequired(true);
-				submitButton.setEnabled(true);
-				cancelButton.setEnabled(true);
+				fb.setEditable(true);
+				fb.setRequired(true);
+				acc.setEnabled(true);
+				cnc.setEnabled(true);
 			}
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
 		},
-
+		/**
+		 * Requests xsjs Service from DB to get relevant employee information.
+		 * Binds Data to detailADUserModel
+		 */
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
-			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var detailADUserModel = that.getModel("detailADUserModel");
@@ -79,16 +90,17 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
-
+		/**
+		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
+		 */
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
 			if (!oRequestData.feedback || oRequestData.feedback.trim().length === 0) {
 				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
-			var settings = this.prepareAjaxRequest("/MOB_REQUEST_CHANGE", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
 			var that = this;
-			BusyIndicator.show();
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
 				that.onNavBack();
@@ -97,7 +109,9 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
-
+		/**
+		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
+		 */
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
 			var detailADData = this.getModel("detailADModel").getData();
@@ -110,30 +124,36 @@ sap.ui.define([
 			oRequestData.state = state.toString();
 			return oRequestData;
 		},
-
+		/**
+		 * Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
+		 */
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
+			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
-
+		/**
+		 * Called when reject Button is pressed. Initiates Request Update
+		 */
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
+			BusyIndicator.show();
 			oEvent.getSource().focus();
 			this.performRequestUpdate(0);
 		},
 
-		/**
-		 *@memberOf Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration
-		 */
-		_getDialog: function () {
+	/*	_getDialog: function () {
 			if (!this._oDialog) {
 				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
 				this.getView().addDependent(this._oDialog);
+				console.log("Hallo");
 			}
 			return this._oDialog;
-		},
-
+		}, Old Function, not needed anymore*/
+		/**
+		 * Funciton called when edit button is pressed. Gets the edit fragment and opens the dialog
+		 */
 		onbuttonpress: function () {
 			var thisView = this.getView();
 			if (!this._oDialog) {
@@ -149,15 +169,20 @@ sap.ui.define([
 				this.byId("openDialog").open();
 			}
 		},
-
+		/** This function is called when cancel Button is pressed in edit fragment.
+		 * Destroys the dialog
+		 */
 		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
 		},
-
+		/** This funciton is called when update Button is pressed in edit fragment.
+		 * reenables submit and cancel Button should they be disabled.
+		 * Updates data in detailADModel with data from Fragment
+		 */
 		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
 			this.byId("submitButton").setEnabled(true);
-			this.byId("cancelButton").setEnabled(true);
+			this.byId("rejectButton").setEnabled(true);
 			this.byId("warningText").setVisible(false);
 
 			this.byId("FormElementAlt").setVisible(true);
@@ -165,29 +190,34 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-
+			
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
 			this.testDisableButton();
 		},
-
+		/** Function to calculate Account Balance after Request would be approved
+		 */
 		calcNewBalance: function () {
+
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
-			var val = this.getModel("detailADModel").getData().BETRAG;
-			var a = parseFloat(accBalance);
-			var b = parseFloat(val);
+			var requestValue = this.getModel("detailADModel").getData().BETRAG;
+			console.log(requestValue, accBalance);
+			var parsedAccBalance = parseFloat(accBalance);
+			var parsedRequestValue = parseFloat(requestValue);
 
-			this.getModel("detailADModel").setProperty("/RESULTBALANCE", a + b);
+			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
+			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
-
+		/** Function to Download Attachment of Request. Requests XSJS from DB
+		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
 			BusyIndicator.show();
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
@@ -205,31 +235,38 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-
-		testDisableButton: function (oEvent) {
-			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
-				this.byId("submitButton").setEnabled(false);
-				this.byId("cancelButton").setEnabled(false);
-				this.byId("warningText").setVisible(true);
-
+		/** Funcito to check whether Administrator is allowed to approve Request.
+		 * If RequestValue > MaxApprovalValue the submit and reject Button will be disabled and a warning text displayed.
+		 */
+		testDisableButton: function(oEvent) {
+			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
+			{
+			this.byId("submitButton").setEnabled(false);
+			this.byId("rejectButton").setEnabled(false);
+			this.byId("warningText").setVisible(true);
+				
 			}
 		},
-
+		/** Function to perform Download when attachment is select.
+		 * 
+		 */
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
 			this.performDownloadAttachment(aid);
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-
-		handleLiveChange: function (oEvent) {
+		/** Fairly sure function is not needed.
+		 */
+		handleLiveChange : function(oEvent){
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-
+			
 			//Punkt und Komma sind mehrmals möglich
-			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
-				oSource.setValue(input.slice(0, input.length - 1));
+			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
+			{
+				oSource.setValue(input.slice(0, input.length-1));	
 			}
 		}
 	});
