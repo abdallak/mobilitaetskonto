@@ -5,6 +5,9 @@ sap.ui.define([
 ], function (UIComponent, Device, models) {
 	"use strict";
 
+	/**
+	 * @class TableSales
+	 */
 	return UIComponent.extend("Mobilitaetskonto.Mobilitaetskonto.Component", {
 
 		metadata: {
