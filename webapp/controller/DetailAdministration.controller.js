@@ -17,7 +17,31 @@ sap.ui.define([
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
-
+		/**
+		 * A local JSON model which contains the current request details.
+		 * 
+		 * @typedef detailADModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {integer} BETRAG - Request value
+		 * @property {integer} ALTBETRAG - Original request value
+		 * @property {integer} MID - Employee id
+		 * @property {integer} UID - Request id
+		 * @property {integer} STATE - Current request state
+		 * @property {string} FEEDBACK - Feedback given to request
+		 * @property {integer} NEUBETRAG - Changed request value
+		 * @property {integer} RESULTBALANCE - Employee account balance after request would be approved
+		 * @property {integer} GUTHABEN - Employee  account balance
+		*/
+		/**
+		 * A local JSON model which contains employee details of request.
+		 * 
+		 * @typedef detailADUserModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {string} Vorname - First name of employee
+		 * @property {string} NAME - Last name of employee
+		 * @property {integer} GUTHABEN - Employee account balance
+	
+		*/
 		onInit: function () {
 			this.getRouter().getRoute("DetailAdministration").attachMatched(this._onRoutePatternMatched, this);
 			var detailADModel = new JSONModel();
