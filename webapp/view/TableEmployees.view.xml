@@ -28,7 +28,7 @@
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem id="item0" type="Active">
+							<ColumnListItem id="item0">
 								<cells>
 									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel>NAME'}" text="{path: 'employeeTableModel>MID'}"
 										id="objectidentifier0"/>
