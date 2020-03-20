@@ -172,8 +172,11 @@ sap.ui.define([
 			oDialog.open();
 		},
 
-		/**
-		 * TODO
+		/** 
+		 * Function limits the input when entering a new value.
+		 * Only numbers, '.' and ',' are valid.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();

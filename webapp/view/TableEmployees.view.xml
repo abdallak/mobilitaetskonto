@@ -1,4 +1,5 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
+	controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees">
 	<App>
 		<pages>
 			<Page title="TITEL" floatingFooter="true">
@@ -29,33 +30,39 @@
 						<items>
 							<ColumnListItem id="item0">
 								<cells>
-									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel&gt;NAME'}" text="{path: 'employeeTableModel>MID'}" id="objectidentifier0"/>
+									<ObjectIdentifier title="{path: 'employeeTableModel>VORNAME'} {path: 'employeeTableModel&gt;NAME'}" text="{path: 'employeeTableModel>MID'}"
+										id="objectidentifier0"/>
 									<Link text="{path: 'employeeTableModel>MAIL'}" subtle="true" href="mailto:{path: 'employeeTableModel>MAIL'}"/>
-									<ObjectNumber number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }" unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
-									<Label text="{ path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }" id="label7"/>
+									<ObjectNumber
+										number="{ parts:[{path:'employeeTableModel>GUTHABEN'},{path:'i18n&gt;currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+										unit="{i18n>currency}" state="{= ${employeeTableModel>GUTHABEN} &gt;= 0 ? 'Success' : 'Error' }"/>
+									<Label
+										text="{ path: 'employeeTableModel>JAHRESABSCHLUSS', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy' } }"
+										id="label7"/>
 								</cells>
 							</ColumnListItem>
 						</items>
-					<headerToolbar>
-					    <Toolbar width="35%">
-					        <content>
-					            <SearchField xmlns="sap.m" placeholder="Suche nach Mitarbeiternamen oder ID..." id="searchField0" search="filterTable"/>
-					        </content>
-					    </Toolbar>
-					</headerToolbar>
+						<headerToolbar>
+							<Toolbar width="35%">
+								<content>
+									<SearchField xmlns="sap.m" placeholder="Suche nach Mitarbeiternamen oder ID..." id="searchField0" search="filterTable"/>
+								</content>
+							</Toolbar>
+						</headerToolbar>
 					</Table>
-	
 				</content>
 				<customHeader>
 					<Bar id="bar0">
 						<contentLeft>
 							<HBox>
 								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
-								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%" id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
+									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
 							</HBox>
 						</contentLeft>
 						<contentMiddle>
-							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>tableEmployeesTitle}" width="100%"/>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
+								text="{i18n>tableEmployeesTitle}" width="100%"/>
 						</contentMiddle>
 						<contentRight/>
 					</Bar>
@@ -64,9 +71,10 @@
 					<OverflowToolbar class="sapContrast sapContrastPlus" width="100%" id="toolbar1">
 						<content>
 							<ToolbarSpacer id="spacer0"/>
-							<Button xmlns="sap.m" id="GuthabenButton" icon="sap-icon://my-sales-order" type="Default" text="{i18n>guthabenButton}" press="dialogOpen($event, 'DialogBalance')"/>
-							<Button xmlns="sap.m" id="AbschlussButton" icon="sap-icon://per-diem" type="Default" text="{i18n>abschlussButton}" press="dialogOpen($event, 'DialogExpired')" tooltip="{i18n>expiredToolTip}"/>
-							<!--Button types:  Rejct, Emphasized, Unstyled, Accept, Back, Default, Critical ..... -->
+							<Button xmlns="sap.m" id="GuthabenButton" icon="sap-icon://my-sales-order" type="Default" text="{i18n>guthabenButton}"
+								press="dialogOpen($event, 'DialogBalance')"/>
+							<Button xmlns="sap.m" id="AbschlussButton" icon="sap-icon://per-diem" type="Default" text="{i18n>abschlussButton}"
+								press="dialogOpen($event, 'DialogExpired')" tooltip="{i18n>expiredToolTip}"/>
 						</content>
 					</OverflowToolbar>
 				</footer>
