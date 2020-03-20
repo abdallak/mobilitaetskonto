@@ -21,8 +21,27 @@ sap.ui.define([
 		formatter: formatter,
 
 		/**
-		 * TODO
+		 * A global JSON model which contains the current users details.
+		 * 
+		 * @typedef dbUserModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {string} VORNAME - Employee firstname
+		 * @property {string} NAME - Employee lastname
+		 * @property {string} MID - Employee id
 		 */
+
+		/**
+		 * A local JSON model which contains all request details.
+		 * 
+		 * @typedef oRequestModel
+		 * @property {date} date - datum
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {(string|integer)} art - art
+		 * @property {number} betrag - betrag
+		 * @property {integer} kid - kid
+		 * @property {integer} state - status
+		 */
+		 
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
 

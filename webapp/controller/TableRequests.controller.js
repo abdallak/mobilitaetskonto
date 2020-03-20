@@ -16,8 +16,30 @@ sap.ui.define([
 		formatter: formatter,
 
 		/**
-		 * TODO
+		 * A global JSON model which contains the current users details.
+		 * 
+		 * @typedef dbUserModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {string} VORNAME - Employee firstname
+		 * @property {string} NAME - Employee lastname
+		 * @property {string} MID - Employee id
 		 */
+
+		/**
+		 * A local JSON model which contains all request details.
+		 * 
+		 * @typedef oRequestModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {integer} uid - umsatzid
+		 * @property {string} vorname - vorname
+		 * @property {string} name - name
+		 * @property {date} date - datum
+		 * @property {(string|integer)} art - art
+		 * @property {number} betrag - betrag
+		 * @property {integer} kid - kid
+		 * @property {integer} state - status
+		 */
+		 
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
