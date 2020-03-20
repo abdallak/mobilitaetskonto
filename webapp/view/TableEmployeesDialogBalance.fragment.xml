@@ -7,9 +7,11 @@
 					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}"
 						liveChange="onValueChanged"/>
 					<Label text="{i18n>HeaderDescription}" id="beschreibtext"/>
-					<Input width="100%" id="describe" placeholder="{i18n>placeholderBalance}" required="true" type="Text" value="{staticModel>/beschreibung}"/>
+					<TextArea xmlns="sap.m" placeholder="{i18n>placeholderBalance}" value="{staticModel>/beschreibung}" growingMaxLines="4" growing="true"
+						editable="true" textAlign="Left" id="areaDescription"/>
+					<!--Input width="100%" id="describe" placeholder="{i18n>placeholderBalance}" required="true" type="Text" value="{staticModel>/beschreibung}"/-->
 					<Label text="{i18n>dateOf}" id="datumtext"/>
-					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate"/>
+					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" value="{staticModel>/dateBalance}"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

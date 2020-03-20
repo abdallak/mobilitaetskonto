@@ -33,7 +33,7 @@ sap.ui.define([
 		 * @typedef detailADModel
 		 * @type {sap.ui.model.json.JSONModel}
 		 * @property {integer} uid - umsatzid
-		 * @property {integer} mid - mitarbeiterid
+		 * @property {string} mid - mitarbeiterid
 		 * @property {string} vorname - vorname
 		 * @property {string} name - name
 		 * @property {(string|integer)} art - art
