@@ -23,6 +23,9 @@ sap.ui.define([
 		},
 
 		/**
+		 * This is a convenience function which returns the EventBus
+		 * 
+		 * @return {sap.ui.core.EventBus} EventBus
 		 */
 		getEventBus: function () {
 			return sap.ui.getCore().getEventBus();
