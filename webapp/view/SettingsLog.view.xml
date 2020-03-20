@@ -18,7 +18,7 @@
 							</Column>
 						</columns>
 						<items>
-							<ColumnListItem id="item0" type="Active">
+							<ColumnListItem id="item0">
 								<cells>
 									<ObjectIdentifier title="{logModel>MID}"
 										text="{ path: 'logModel>DATUM', type: 'sap.ui.model.type.Date', formatOptions: { source: { pattern: 'yyyy-MM-ddTHH:mm:ss.SSSZ' }, pattern: 'dd.MM.yyyy HH:mm:ss' } }"

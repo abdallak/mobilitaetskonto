@@ -3,8 +3,10 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/Fragment",
-	"sap/ui/core/BusyIndicator"
-], function (BaseController, formatter, JSONModel, Fragment, BusyIndicator) {
+	"sap/ui/core/BusyIndicator", 
+	"sap/ui/model/Filter",
+	"sap/ui/model/FilterOperator"
+], function (BaseController, formatter, JSONModel, Fragment, BusyIndicator, Filter, FilterOperator) {
 	"use strict";
 	var opendDialog; //either DialogExpired    or     DialogBalance
 
@@ -331,6 +333,35 @@ sap.ui.define([
 				}).fail(function (jqXHR, exception) {
 					that.handleNetworkError(jqXHR);
 				});
+		},
+		
+		
+		/**
+		 * This Function is used by the three filter controls of the UI. The SearchBar, the DateRangePicker and the ActionSelect.
+		 * Everytime one of these is used, this method gets called.
+		 * The method provides a final filter consisting of several others, related to the input given by the controls.
+		 */
+		filterTable: function () {
+			
+			var list = this.getView().byId("employeeTable");
+			var binding = list.getBinding("items");
+			
+			var sSearchQuery = this.getView().byId("searchField0").getProperty("value");
+			var filters = [];
+			
+			//SEARCHBAR FILTER
+			if (sSearchQuery !== "") {
+				var oSearchFilter = new Filter([
+						new Filter("NAME", FilterOperator.Contains, sSearchQuery),
+						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
+						new Filter("MID", FilterOperator.Contains, sSearchQuery)
+					],
+					false);
+					
+				filters.push(oSearchFilter);
+			}
+			
+			binding.filter(filters);
 		},
 
 		/** 
