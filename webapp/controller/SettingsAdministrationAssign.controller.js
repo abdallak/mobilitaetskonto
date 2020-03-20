@@ -128,6 +128,9 @@ sap.ui.define([
 			}
 		},
 
+		/**
+		 * TODO
+		 */
 		_configDialog: function (oButton) {
 			// Multi-select if required
 			var bMultiSelect = !!oButton.data("multi");
@@ -181,6 +184,9 @@ sap.ui.define([
 			jQuery.sap.syncStyleClass("sapUiSizeCompact", this.getView(), this._oDialog);
 		},
 
+		/**
+		 * TODO
+		 */
 		handleSearch: function (oEvent) {
 			var sValue = oEvent.getParameter("value");
 
@@ -195,6 +201,9 @@ sap.ui.define([
 			oBinding.filter([oFilter, new Filter("FREIGABEWERT", FilterOperator.GT, 0)]);
 		},
 
+		/**
+		 * TODO
+		 */
 		handleClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");
 			if (aContexts && aContexts.length) {

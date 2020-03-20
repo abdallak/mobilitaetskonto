@@ -1,4 +1,3 @@
-/* eslint-disable no-console, no-alert */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -10,12 +9,12 @@ sap.ui.define([
 	var opendDialog; //either DialogExpired    or     DialogBalance
 
 	/**
-	*	this Pages shows information on all Employees and offers the functionalities of
-	* 1: giving employees individual amounts of money (also negative)
-	* 
-	* and 2: calculating and writing the expired Balance of employees
-	* 
-	*/
+	 * this Pages shows information on all Employees and offers the functionalities of
+	 * 1: giving employees individual amounts of money (also negative)
+	 * and 2: calculating and writing the expired Balance of employees
+	 * 
+	 * @class TableEmployees
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
 		onInit: function () {
@@ -29,6 +28,9 @@ sap.ui.define([
 			this.getRouter().getRoute("TableEmployees").attachMatched(this._onRoutePatternMatched, this);
 		},
 
+		/**
+		 * TODO
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 			this.getTableData();
@@ -103,7 +105,7 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
+
 		/**
 		 * This function gets called whenever the amount input changes,
 		 * and automatically checks wether the current value is valid or not.
@@ -125,7 +127,7 @@ sap.ui.define([
 				oSource.setValueStateText(oResourceBundle.getText("errorEmptyBetrag"));
 			}
 		},
-		
+
 		/**
 		 *  is called when one of the dialogbuttons is clicked.
 		 *  opens the corresponding dialog window and makes adjustments to the date picker 
@@ -137,7 +139,7 @@ sap.ui.define([
 		 * @param{String} dialogId - the name of the opend Dialog (DialogBalance or DialogExpired)
 		 */
 		dialogOpen: function (oEvent, dialogId) {
-			
+
 			var thisView = this.getView();
 			opendDialog = dialogId;
 
@@ -155,7 +157,9 @@ sap.ui.define([
 			} else {
 				this.byId(dialogId).open();
 			}
-			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern : "dd.MM.YYYY" });   
+			var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+				pattern: "dd.MM.YYYY"
+			});
 			var dateNotFormatted = new Date();
 			
 			if(opendDialog === "DialogExpired"){
@@ -164,10 +168,10 @@ sap.ui.define([
 			}
 			var dateFormatted = dateFormat.format(dateNotFormatted);
 			this.byId("datepicker0").setValue(dateFormatted);
-			this.byId("datepicker0").setMinDate(new Date(2000 , 1 , 1));
-			
+			this.byId("datepicker0").setMinDate(new Date(2000, 1, 1));
+
 		},
-		
+
 		/**
 		 * executes the Dialog functions (Guthaben/Jahresabschluss) (individual balance/expired Balance)
 		 * first gets all selected employees and gives a Error message if no one is selected
@@ -179,14 +183,14 @@ sap.ui.define([
 			var errorMsgNumber = 0; //number of IDs in errorMsgString
 			
 			var staticModel = this.getModel("staticModel").getData();
-			
+
 			var thisView = this.getView();
 			var selectedItems = thisView.byId("table0").getSelectedItems();
 
 			var datePickerControl = this.byId("datepicker0");
-		
+
 			var datePicked = datePickerControl.getDateValue();
-			
+
 			//ErrorMessage if no employee is chosen
 			if(selectedItems.length < 1){ 
 				this.handleEmptyModel(this.getResourceBundle().getText("chooseEmployee"));
@@ -208,7 +212,7 @@ sap.ui.define([
 					
 					
 					var stepperControl = this.byId("stepper");
-					
+
 					var year1 = datePicked.getYear() + 1900;
 					var yearCalculated = year1 - stepperControl.getValue();
 					
@@ -236,7 +240,7 @@ sap.ui.define([
 				this.handleEmptyModel(descriptionText);
 			}
 		},
-		
+
 		/** is called when expiredButton was clicked
 		 * calculates the expired amount via sql query
 		 * also calles function 'setRequest' and 'makeRequest' to insert new entry into sales table
@@ -252,7 +256,7 @@ sap.ui.define([
 			params.dateInitial = "31.12." + year1;
 			
 			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_EXPIRED", "GET", params);
-			
+
 			var that = this;
 			$.ajax(settings)
 				.done(function (response) {
@@ -264,17 +268,17 @@ sap.ui.define([
 					
 					//sets the expiaration date
 					var date = "31.12." + year1;
-					
+
 					//makes a new entry for the expired balance
 					var descriptionText = that.getResourceBundle().getText("expiredDescription1") + " " + params.dateCalculated + " " + that.getResourceBundle().getText("expiredDescription2");
 					that.setRequest(mid, expired, descriptionText, date, 2);
 					that.makeRequest();
-					
-			}).fail(function (jqXHR, exception) {
-				that.handleNetworkError(jqXHR);
-			});
+
+				}).fail(function (jqXHR, exception) {
+					that.handleNetworkError(jqXHR);
+				});
 		},
-		
+
 		/** is called on the abort buttons of the dialog and
 		 *  closes opend dialog
 		 * 

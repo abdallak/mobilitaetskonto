@@ -4,45 +4,51 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * Die Startpage ist der erste View der von dieser App geladen wird.
-	 * Er zeigt je nach Rolle nur die Mitarbeiter Kacheln an oder auch die der Verwaltung.
+	 * This is the first loaded view of this application.
+	 * It hides tiles depending on an users roles e.g. administration.
 	 * @class Startpage
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.Startpage", {
 		/**
-		 * Globales JSON Model mit den aktuellen Mitarbeiter Daten aus der Datenbank
+		 * A global JSON model which contains the current users details.
+		 * 
 		 * @typedef dbUserModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {number} GUTHABEN - Guthaben des aktuellen Nutzers
+		 * @property {number} GUTHABEN - current balance
+		 * @property {boolean} AKTIV - isActive
+		 * @property {integer} FREIGABEWERT - administration value
 		 */
 
 		/**
-		 * Globales JSON Model mit den Rollen des aktuellen Nutzers
+		 * A global JSON model which contains the current users roles.
+		 * 
 		 * @typedef roleModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {boolean} mitarbeiter Ist aktueller Nutzer ein Mitarbeiter
-		 * @property {boolean} verwalter Ist aktueller Nutzer ein Verwalter
+		 * @property {boolean} mitarbeiter - is current user an employee
+		 * @property {boolean} verwalter - is current user an administration 
 		 */
 
 		/**
-		 * Diese Funktion wird gerufen, nachdem der View erstellt wurde.
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 * 
+		 * It will attach the route pattern matcher to always reload the currently available usermodel.
 		 */
 		onInit: function () {
 			this.getRouter().getRoute("Startpage").attachMatched(this._onRoutePatternMatched, this);
 		},
 
 		/**
-		 * Wenn die Seite erneut aufgerufen wird, dann wird diese Funktion ausgeführt.
-		 * Sie aktualsiert das dbUserModel, damit der angezeigte Kontostand aktuell ist.
+		 * If the route pattern matched, this function will reload the current users balance.
 		 * 
-		 * @param {sap.ui.base.Event} [oEvent] The SAPUI5 event object
+		 * @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.updateUserModel();
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zur Umsatzübersicht des Mitarbeiters.
+		 * This function will navigate to the TableSales view to show all transactions of this user.
 		 */
 		onNavToSales: function () {
 			this.getRouter().navTo("TableSales", {
@@ -51,7 +57,7 @@ sap.ui.define([
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu den gestellten Anträgen des Mitarbeiters.
+		 * This function will navigate to the TableSales view to show all requests of this user.
 		 */
 		onNavToSubmittedRequests: function () {
 			this.getRouter().navTo("TableSales", {
@@ -60,28 +66,28 @@ sap.ui.define([
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu einem neuen Antrag.
+		 * This function will navigate to the Request view.
 		 */
 		onNavToRequest: function () {
 			this.getRouter().navTo("Request");
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu der Übersicht der Anträge für die Verwaltung.
+		 * This function will navigate to the TableRequest view for administration tasks.
 		 */
 		onNavToRequestTable: function () {
 			this.getRouter().navTo("TableRequests");
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu der Liste der aktiven Mitarbeiter.
+		 * This function will navigate to the TableEmployees view for administration tasks.
 		 */
 		onNavToTableEmployees: function () {
 			this.getRouter().navTo("TableEmployees");
 		},
 
 		/**
-		 * Diese Funktion wird über eine Kachel gerufen und navigiert zu den Konfigurationsmöglichkeiten für den Verwalter.
+		 * This function will navigate to the Settings view for administration tasks.
 		 */
 		onNavToSettings: function () {
 			this.getRouter().navTo("Settings");
