@@ -4,10 +4,9 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="{i18n>expiredYearQuestion}" id="jahrText"/>
-					<DatePicker xmlns="sap.m"  id="datepicker0" width="100px" change="setDate" textAlign="End" displayFormat="yyyy"  />
-					<Label text="{i18n>expiredDurationQuestion}" id="alterText" />
-					<StepInput id="stepper" value="3" min="1" max="10" width="100px" textAlign="Center" />
-					<!--ncoh einfügen welches jahr das dann genau ist?    "alles älter als ... läfut  jetzt ab"-->
+					<DatePicker xmlns="sap.m" id="datepicker0" width="100px" change="setDate" textAlign="End" displayFormat="yyyy"/>
+					<Label text="{i18n>expiredDurationQuestion}" id="alterText"/>
+					<StepInput id="stepper" value="3" min="1" max="10" width="100px" textAlign="Center"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>

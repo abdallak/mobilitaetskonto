@@ -4,7 +4,7 @@ sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
 	"sap/ui/model/json/JSONModel",
 	"sap/ui/core/Fragment",
-	"sap/ui/core/BusyIndicator", 
+	"sap/ui/core/BusyIndicator",
 	"sap/ui/model/Filter",
 	"sap/ui/model/FilterOperator"
 ], function (BaseController, formatter, JSONModel, Fragment, BusyIndicator, Filter, FilterOperator) {
@@ -20,7 +20,7 @@ sap.ui.define([
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableEmployees", {
 		formatter: formatter,
-		
+
 		/**
 		 * A global JSON model which contains the current users details.
 		 * 
@@ -28,8 +28,8 @@ sap.ui.define([
 		 * @type {sap.ui.model.json.JSONModel}
 		 * @property {string} MID - Employee id
 		 */
-		 
-		 /**
+
+		/**
 		 * A global JSON model which contains the employee details.
 		 * 
 		 * @typedef employeeTableModel
@@ -39,8 +39,8 @@ sap.ui.define([
 		 * @property {string} MID - employee id
 		 * @property {number} GUTHABEN - current balance
 		 */
-		 
-		 /**
+
+		/**
 		 * A local JSON model which contains the details of the new transaction to be written into the database.
 		 * 
 		 * @typedef insertModel
@@ -54,7 +54,7 @@ sap.ui.define([
 		 * @property {integer} state - state of the transaction  (always 2 - accepted)
 		 * @property {string} MIDV - id of the administrator writing the entry (for logging purposes)
 		 */
-		
+
 		/**
 		 * A local JSON model which contains values of the dialog inputs.
 		 *  
@@ -64,7 +64,7 @@ sap.ui.define([
 		 * @property {string} dateBalance - date on which the individual balance entry should be dated
 		 * @property {string} description - description of the individual balance
 		 */
-		
+
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
 		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
@@ -223,7 +223,9 @@ sap.ui.define([
 				this.byId("datepicker0").setValue(dateValue);
 			} else {
 				maxdate = new Date(dateNotFormatted.getFullYear() + 20, 11, 31);
-				var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({pattern: "dd.MM.YYYY"});
+				var dateFormat = sap.ui.core.format.DateFormat.getDateInstance({
+					pattern: "dd.MM.YYYY"
+				});
 				dateValue = dateFormat.format(dateNotFormatted);
 
 				if (staticModel.dateBalance === undefined) {
@@ -330,21 +332,20 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		
-		
+
 		/**
 		 * This Function is used by the three filter controls of the UI. The SearchBar, the DateRangePicker and the ActionSelect.
 		 * Everytime one of these is used, this method gets called.
 		 * The method provides a final filter consisting of several others, related to the input given by the controls.
 		 */
 		filterTable: function () {
-			
+
 			var list = this.getView().byId("employeeTable");
 			var binding = list.getBinding("items");
-			
+
 			var sSearchQuery = this.getView().byId("searchField0").getProperty("value");
 			var filters = [];
-			
+
 			//SEARCHBAR FILTER
 			if (sSearchQuery !== "") {
 				var oSearchFilter = new Filter([
@@ -353,10 +354,10 @@ sap.ui.define([
 						new Filter("MID", FilterOperator.Contains, sSearchQuery)
 					],
 					false);
-					
+
 				filters.push(oSearchFilter);
 			}
-			
+
 			binding.filter(filters);
 		},
 

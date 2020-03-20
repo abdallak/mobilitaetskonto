@@ -129,7 +129,9 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function will config all properties of the SettingsAdministrationAssignDialog
+		 * 
+		 * @param{sap.ui.base.Button} oButton - oButton
 		 */
 		_configDialog: function (oButton) {
 			// Multi-select if required
@@ -185,7 +187,9 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function will filter the table as the user types something into the searchfield.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		handleSearch: function (oEvent) {
 			var sValue = oEvent.getParameter("value");
@@ -202,7 +206,9 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function will either submit the changes or cancel the dialog.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		handleClose: function (oEvent) {
 			var aContexts = oEvent.getParameter("selectedContexts");

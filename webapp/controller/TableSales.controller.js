@@ -41,7 +41,7 @@ sap.ui.define([
 		 * @property {integer} kid - kid
 		 * @property {integer} state - status
 		 */
-		 
+
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
 
@@ -169,7 +169,7 @@ sap.ui.define([
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath();
 			var detail = JSON.stringify(context.getProperty(path));
-			
+
 			var encodedVal = encodeURIComponent(detail);
 
 			this.getRouter().navTo("DetailEmployee", {

@@ -64,7 +64,7 @@ sap.ui.define([
 			//ANTRAGSDATEN 
 			var decodedVal = decodeURIComponent(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
 			var detail = JSON.parse(decodedVal);
-			
+
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
 

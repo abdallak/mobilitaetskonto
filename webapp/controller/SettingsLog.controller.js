@@ -97,7 +97,10 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function binds the given filterArray to the list.
+		 * Basically applys the passed filter.
+		 * 
+		 * @param{[Filter]} filterArr - Array which contains multiple filters
 		 */
 		bindFilters: function (filterArr) {
 			var list = this.getView().byId("table0");

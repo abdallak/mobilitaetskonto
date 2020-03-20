@@ -9,7 +9,6 @@
 					<Label text="{i18n>HeaderDescription}" id="beschreibtext"/>
 					<TextArea xmlns="sap.m" placeholder="{i18n>placeholderBalance}" value="{staticModel>/descrip}" growingMaxLines="4" growing="true"
 						editable="true" textAlign="Left" id="areaDescription"/>
-					<!--Input width="100%" id="describe" placeholder="{i18n>placeholderBalance}" required="true" type="Text" value="{staticModel>/beschreibung}"/-->
 					<Label text="{i18n>dateOf}" id="datumtext"/>
 					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" value="{staticModel>/dateBalance}"/>
 				</f:content>
