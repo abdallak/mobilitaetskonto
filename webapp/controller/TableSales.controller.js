@@ -34,8 +34,8 @@ sap.ui.define([
 		 * A local JSON model which contains all request details.
 		 * 
 		 * @typedef oRequestModel
-		 * @property {date} date - datum
 		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {date} date - datum
 		 * @property {(string|integer)} art - art
 		 * @property {number} betrag - betrag
 		 * @property {integer} kid - kid
@@ -50,7 +50,11 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function is called everytime the router comes across the view.
+		 * Depended upon the the target view, controls are hidden or displayed.
+		 * The function also chooses the right title for the displayed view.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			var target = oEvent.getParameter("arguments").Target; //tablename parameter to decide the content of the table 
@@ -107,7 +111,10 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This Function is used by the two filter controls of the UI. The DateRangePicker and the ActionSelect.
+		 * Everytime one of these is used, this method gets called.
+		 * The method provides a final filter consisting of couple others, related to the input given by the controls.
+		 * The ActionSelect is only shown inside the 'Anträge' View.
 		 */
 		filterTable: function () {
 			//BindingContext
@@ -155,6 +162,8 @@ sap.ui.define([
 		 * This function is used for navigation and parameter passing between the actual view and the employee's detail view.
 		 * The function will be triggered after selecting a single transaction inside the table.
 		 * The data related to the selected transactions is passed as stringified JSON Object through the router.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");

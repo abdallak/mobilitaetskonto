@@ -57,6 +57,8 @@ sap.ui.define([
 		 * This function is called by the router everytime the view is accessed.
 		 * The selected data from previous table view is set as model data here.
 		 * The data is also stored.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvents
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			//ANTRAGSDATEN
@@ -78,7 +80,7 @@ sap.ui.define([
 		 * This function downloads the specific attachment to the given id
 		 * and allows to user to store or open it on his device.
 		 * 
-		 * @param aid Attachment-ID
+		 * @param{int} aid Attachment-ID
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
@@ -105,6 +107,8 @@ sap.ui.define([
 		/**
 		 * This function passes the id of the selected attachment to the performDownloadAttachment method.
 		 * It also marks the clicked file as selected.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
