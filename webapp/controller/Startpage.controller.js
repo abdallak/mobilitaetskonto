@@ -14,14 +14,9 @@ sap.ui.define([
 		 * 
 		 * @typedef dbUserModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {string} VORNAME - firstname
-		 * @property {string} NAME - lastname
-		 * @property {string} MID - employee id
-		 * @property {string} MAIL - employee mail
 		 * @property {number} GUTHABEN - current balance
 		 * @property {boolean} AKTIV - isActive
 		 * @property {integer} FREIGABEWERT - administration value
-		 * @property {string} JAHRESABSCHLUSS - expired balance date
 		 */
 
 		/**
