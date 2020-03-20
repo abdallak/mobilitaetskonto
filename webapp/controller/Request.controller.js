@@ -276,17 +276,16 @@ sap.ui.define([
 				var raw = e.target.result;
 				var fileItem = {};
 
-				fileItem.uid = 2; // FIXME: warum hier 2?
 				fileItem.name = name;
 				fileItem.data = raw;
 
 				oRequestData.attachments.push(fileItem);
 			};
 
+			var oResourceBundle = this.getResourceBundle();
 			reader.onerror = function (e) {
-				// FIXME: ordentliche Fehlermeldung
 				BusyIndicator.hide();
-				sap.m.MessageToast.show("error");
+				that.handleEmptyModel(oResourceBundle.getText("attachmentError"));
 			};
 
 			reader.readAsDataURL(file);

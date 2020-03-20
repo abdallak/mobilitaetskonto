@@ -8,9 +8,38 @@ sap.ui.define([
 ], function (BaseController, formatter, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
+	/**
+	 * TODO
+	 * @class TableRequests
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
 		formatter: formatter,
 
+		/**
+		 * A global JSON model which contains the current users details.
+		 * 
+		 * @typedef dbUserModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {string} VORNAME - Employee firstname
+		 * @property {string} NAME - Employee lastname
+		 * @property {string} MID - Employee id
+		 */
+
+		/**
+		 * A local JSON model which contains all request details.
+		 * 
+		 * @typedef oRequestModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {integer} uid - umsatzid
+		 * @property {string} vorname - vorname
+		 * @property {string} name - name
+		 * @property {date} date - datum
+		 * @property {(string|integer)} art - art
+		 * @property {number} betrag - betrag
+		 * @property {integer} kid - kid
+		 * @property {integer} state - status
+		 */
+		 
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
@@ -22,6 +51,9 @@ sap.ui.define([
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
 
+		/**
+		 * TODO
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.getTableData();
 		},
@@ -168,7 +200,7 @@ sap.ui.define([
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
 						new Filter("UID", FilterOperator.EQ, parseInt(sSearchQuery, 10))
-						],
+					],
 					false);
 
 				singleFilters.push(oSearchFilter);
@@ -193,6 +225,9 @@ sap.ui.define([
 			this.bindFilters(filters);
 		},
 
+		/**
+		 * TODO
+		 */
 		bindFilters: function (filterArr) {
 			var list = this.getView().byId("requestTableId");
 			var binding = list.getBinding("items");

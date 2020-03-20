@@ -13,6 +13,16 @@ sap.ui.define([
 	 * @class SettingsLog
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.SettingsLog", {
+		/**
+		 * @typedef logModel
+		 * @type {sap.ui.model.json.JSONModel}
+		 * @property {integer} LID - log ID
+		 * @property {string} MID - administraton member ID
+		 * @property {string} NAME - name of administration member
+		 * @property {string} VORNAME - firstname of administration member
+		 * @property {string} AKTION - database activity
+		 * @property {string} DATUM - date and time of activity as sap hana date time
+		 */
 
 		/**
 		 * Called when a controller is instantiated and its View controls (if available) are already created.
@@ -86,6 +96,9 @@ sap.ui.define([
 			this.bindFilters(filters);
 		},
 
+		/**
+		 * TODO
+		 */
 		bindFilters: function (filterArr) {
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");

@@ -1,4 +1,3 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
@@ -8,7 +7,7 @@ sap.ui.define([
 	"sap/ui/core/BusyIndicator"
 ], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
 	"use strict";
-	
+
 	/**
 	 * This Class simply displays a detailed view of the selected transaction from the table,
 	 * providing extra information to the user, which is not shown in the table.
@@ -17,31 +16,36 @@ sap.ui.define([
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailAdministration", {
 		formatter: formatter,
+
 		/**
-		 * A local JSON model which contains the current request details.
+		 * A global JSON model which contains the current users details.
 		 * 
-		 * @typedef detailADModel
+		 * @typedef dbUserModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {integer} BETRAG - Request value
-		 * @property {integer} ALTBETRAG - Original request value
-		 * @property {integer} MID - Employee id
-		 * @property {integer} UID - Request id
-		 * @property {integer} STATE - Current request state
-		 * @property {string} FEEDBACK - Feedback given to request
-		 * @property {integer} NEUBETRAG - Changed request value
-		 * @property {integer} RESULTBALANCE - Employee account balance after request would be approved
-		 * @property {integer} GUTHABEN - Employee  account balance
-		*/
+		 * @property {string} VORNAME - Employee firstname
+		 * @property {string} NAME - Employee lastname
+		 * @property {string} MID - Employee id
+		 */
+
 		/**
-		 * A local JSON model which contains employee details of request.
+		 * A local JSON model which contains all request details.
 		 * 
-		 * @typedef detailADUserModel
+		 * @typedef detailModel
 		 * @type {sap.ui.model.json.JSONModel}
-		 * @property {string} Vorname - First name of employee
-		 * @property {string} NAME - Last name of employee
-		 * @property {integer} GUTHABEN - Employee account balance
-	
-		*/
+		 * @property {integer} uid - umsatzid
+		 * @property {integer} mid - mitarbeiterid
+		 * @property {string} vorname - vorname
+		 * @property {string} name - name
+		 * @property {(string|integer)} art - art
+		 * @property {number} betrag - betrag
+		 * @property {integer} state - status
+		 * @property {integer} kid - kid
+		 * @property {date} date - datum + zeit
+		 * @property {string} beschreibung - beschreibung
+		 * @property {string} feedback - feedback
+		 * @property {string} verwalter - verwalter
+		 */
+
 		onInit: function () {
 			this.getRouter().getRoute("DetailAdministration").attachMatched(this._onRoutePatternMatched, this);
 			var detailADModel = new JSONModel();
@@ -50,7 +54,6 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
-	
 		},
 		/** This Function is called everytime the DetailAdminstration View gets called
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
@@ -99,6 +102,7 @@ sap.ui.define([
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
 		},
+
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
 		 * Binds Data to detailADUserModel
@@ -107,7 +111,7 @@ sap.ui.define([
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET", params);
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var detailADUserModel = that.getModel("detailADUserModel");
@@ -116,6 +120,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
 		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
@@ -126,7 +131,7 @@ sap.ui.define([
 				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_CHANGE", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
@@ -136,6 +141,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
 		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
@@ -152,6 +158,7 @@ sap.ui.define([
 			oRequestData.state = state.toString();
 			return oRequestData;
 		},
+
 		/**
 		* Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
@@ -163,6 +170,7 @@ sap.ui.define([
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
+
 		/**
 		 * Called when reject Button is pressed. Initiates Request Update
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
@@ -174,14 +182,6 @@ sap.ui.define([
 			this.performRequestUpdate(0);
 		},
 
-	/*	_getDialog: function () {
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
-				this.getView().addDependent(this._oDialog);
-				console.log("Hallo");
-			}
-			return this._oDialog;
-		}, Old Function, not needed anymore*/
 		/**
 		 * Funciton called when edit button is pressed. Gets the edit fragment and opens the dialog
 		 */
@@ -200,13 +200,16 @@ sap.ui.define([
 				this.byId("openDialog").open();
 			}
 		},
-		/** This function is called when cancel Button is pressed in edit fragment.
+
+		/** 
+		 * This function is called when cancel Button is pressed in edit fragment.
 		 * Destroys the dialog
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
 		},
+
 		/** This funciton is called when update Button is pressed in edit fragment.
 		 * reenables submit and cancel Button should they be disabled.
 		 * Updates data in detailADModel with data from Fragment
@@ -223,24 +226,23 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			
+
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
 			this.testDisableButton();
 		},
-		/** Function to calculate Account Balance after Request would be approved
+
+		/** 
+		 * Function to calculate Account Balance after Request would be approved
 		 */
 		calcNewBalance: function () {
-
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var requestValue = this.getModel("detailADModel").getData().BETRAG;
-			console.log(requestValue, accBalance);
 			var parsedAccBalance = parseFloat(accBalance);
 			var parsedRequestValue = parseFloat(requestValue);
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
-			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
 		/** Function to Download Attachment of Request. Requests XSJS from DB
 		* @param{integer} aid - id of attachment to be downloaded
@@ -251,7 +253,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
@@ -269,17 +271,17 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		/** Funcito to check whether Administrator is allowed to approve Request.
+
+		/** 
+		 * Funciton to check whether Administrator is allowed to approve Request.
 		 * If RequestValue > MaxApprovalValue the submit and reject Button will be disabled and a warning text displayed.
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
-		testDisableButton: function(oEvent) {
-			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
-			{
-			this.byId("submitButton").setEnabled(false);
-			this.byId("rejectButton").setEnabled(false);
-			this.byId("warningText").setVisible(true);
-				
+		testDisableButton: function (oEvent) {
+			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
+				this.byId("submitButton").setEnabled(false);
+				this.byId("rejectButton").setEnabled(false);
+				this.byId("warningText").setVisible(true);
 			}
 		},
 		/** Function to perform Download when attachment is select.
@@ -295,15 +297,14 @@ sap.ui.define([
 		/** Function checks whether input in edit fragment is valid
 		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
-		handleLiveChange : function(oEvent){
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 	});
