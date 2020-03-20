@@ -39,7 +39,7 @@ sap.ui.define([
 		 * @property {integer} kid - kid
 		 * @property {integer} state - status
 		 */
-		 
+
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
@@ -91,8 +91,10 @@ sap.ui.define([
 			var path = context.getPath();
 			var detail = JSON.stringify(context.getProperty(path));
 
+			var encodedVal = encodeURIComponent(detail);
+
 			this.getRouter().navTo("DetailAdministration", {
-				Detail: detail
+				Detail: encodedVal
 			});
 		},
 

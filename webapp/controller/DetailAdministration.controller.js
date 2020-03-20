@@ -63,7 +63,8 @@ sap.ui.define([
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
 			//ANTRAGSDATEN
-			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
+			var decodedVal = decodeURIComponent(oEvent.getParameter("arguments").Detail);
+			var detail = JSON.parse(decodedVal);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
 			//USERDATEN
@@ -106,9 +107,8 @@ sap.ui.define([
 
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
-		 * Binds Data to detailADUserModel.
-		 * 
-		 * @param{int} mid - mitarbeiterid
+		 * Binds Data to detailADUserModel
+		 * @paramm{integer} mid   -- mid of employee
 		 */
 		performRequestEmployee: function (mid) {
 			var params = {};
@@ -125,8 +125,7 @@ sap.ui.define([
 
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
-		 * 
-		 * @param{int} state - status
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
@@ -147,8 +146,7 @@ sap.ui.define([
 
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
-		 * 
-		 * @param{int} state - status
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
@@ -251,11 +249,8 @@ sap.ui.define([
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
 		},
-
-		/** 
-		 * Function to Download Attachment of Request. Requests XSJS from DB
-		 * 
-		 * @param{int} aid - attachmentId
+		/** Function to Download Attachment of Request. Requests XSJS from DB
+		 * @param{integer} aid - id of attachment to be downloaded
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
