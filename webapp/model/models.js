@@ -173,10 +173,10 @@ sap.ui.define([
 					roleData.verwalter = response.FREIGABEWERT > 0 && roleData.mitarbeiter;
 
 					roleModel.refresh(true);
-
+					
 					if (response.AKTIV !== "TRUE") {
-						that.onNavMessagePageWorkaround(component, "message-warning", this.getResourceBundle().getText("sapErrorMessageUpdateUserModelAjax"),
-							this.getResourceBundle().getText("sapErrorDetailUpdateUserModelAjax"),
+						that.onNavMessagePageWorkaround(component, "message-warning", "Keine Berechtigung.",
+							"Evtl. sind Sie noch nicht für dieses Programm freigeschaltet worden.\n\nBitte wenden Sie sich an den jeweiligen Ansprechpartner bzw. Verwalter.",
 							false);
 					}
 				})
