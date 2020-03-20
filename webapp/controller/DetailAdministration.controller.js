@@ -63,7 +63,8 @@ sap.ui.define([
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
 			//ANTRAGSDATEN
-			var detail = JSON.parse(oEvent.getParameter("arguments").Detail);
+			var decodedVal = decodeURIComponent(oEvent.getParameter("arguments").Detail);
+			var detail = JSON.parse(decodedVal);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
 			//USERDATEN
@@ -249,7 +250,7 @@ sap.ui.define([
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
 		},
 		/** Function to Download Attachment of Request. Requests XSJS from DB
-		* @param{integer} aid - id of attachment to be downloaded
+		 * @param{integer} aid - id of attachment to be downloaded
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
