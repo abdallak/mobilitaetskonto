@@ -30,7 +30,7 @@ sap.ui.define([
 		/**
 		 * A local JSON model which contains all request details.
 		 * 
-		 * @typedef detailModel
+		 * @typedef detailADModel
 		 * @type {sap.ui.model.json.JSONModel}
 		 * @property {integer} uid - umsatzid
 		 * @property {integer} mid - mitarbeiterid
@@ -52,8 +52,6 @@ sap.ui.define([
 			this.setModel(detailADModel, "detailADModel");
 			var detailADUserModel = new JSONModel();
 			this.setModel(detailADUserModel, "detailADUserModel");
-			var editADModel = new JSONModel();
-			this.setModel(editADModel, "editADModel");
 		},
 
 		/** 
