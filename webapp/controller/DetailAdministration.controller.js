@@ -29,6 +29,7 @@ sap.ui.define([
 	
 		},
 		/** This Function is called everytime the DetailAdminstration View gets called
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		*/
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
@@ -77,6 +78,7 @@ sap.ui.define([
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
 		 * Binds Data to detailADUserModel
+		 * @paramm{integer} mid   -- mid of employee
 		 */
 		performRequestEmployee: function (mid) {
 			var params = {};
@@ -92,6 +94,7 @@ sap.ui.define([
 		},
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
@@ -111,6 +114,7 @@ sap.ui.define([
 		},
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
@@ -125,7 +129,9 @@ sap.ui.define([
 			return oRequestData;
 		},
 		/**
-		 * Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
+		* Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
+
 		 */
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
@@ -135,6 +141,7 @@ sap.ui.define([
 		},
 		/**
 		 * Called when reject Button is pressed. Initiates Request Update
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
@@ -171,6 +178,7 @@ sap.ui.define([
 		},
 		/** This function is called when cancel Button is pressed in edit fragment.
 		 * Destroys the dialog
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
@@ -178,6 +186,7 @@ sap.ui.define([
 		/** This funciton is called when update Button is pressed in edit fragment.
 		 * reenables submit and cancel Button should they be disabled.
 		 * Updates data in detailADModel with data from Fragment
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
@@ -210,6 +219,7 @@ sap.ui.define([
 			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
 		/** Function to Download Attachment of Request. Requests XSJS from DB
+		* @param{integer} aid - id of attachment to be downloaded
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
@@ -237,6 +247,7 @@ sap.ui.define([
 		},
 		/** Funcito to check whether Administrator is allowed to approve Request.
 		 * If RequestValue > MaxApprovalValue the submit and reject Button will be disabled and a warning text displayed.
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		testDisableButton: function(oEvent) {
 			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
@@ -248,6 +259,7 @@ sap.ui.define([
 			}
 		},
 		/** Function to perform Download when attachment is select.
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 * 
 		 */
 		onSelectChange: function (oEvent) {
@@ -256,7 +268,8 @@ sap.ui.define([
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-		/** Fairly sure function is not needed.
+		/** Function checks whether input in edit fragment is valid
+		* @param{sap.ui.base.Event} [oEvent] - oEvent
 		 */
 		handleLiveChange : function(oEvent){
 			var oSource = oEvent.getSource();
