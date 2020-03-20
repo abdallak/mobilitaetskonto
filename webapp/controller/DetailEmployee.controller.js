@@ -13,7 +13,7 @@ sap.ui.define([
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
-		
+
 		/**
 		 * A global JSON model which contains the current users details.
 		 * 
@@ -85,7 +85,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
