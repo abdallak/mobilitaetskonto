@@ -61,8 +61,10 @@ sap.ui.define([
 		 * @param{sap.ui.base.Event} oEvent - oEvents
 		 */
 		_onRoutePatternMatched: function (oEvent) {
-			//ANTRAGSDATEN
-			var detail = JSON.parse(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
+			//ANTRAGSDATEN 
+			var decodedVal = decodeURIComponent(oEvent.getParameter("arguments").Detail); //retrieving the passed transaction data from the table
+			var detail = JSON.parse(decodedVal);
+			
 			var detailModel = this.getModel("detailModel");
 			detailModel.setData(detail);
 
