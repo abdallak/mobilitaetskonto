@@ -1,4 +1,3 @@
-/* eslint-disable */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -263,10 +262,10 @@ sap.ui.define([
 				var lastExpiredDate = context.getProperty(path).JAHRESABSCHLUSS;
 				var lastExpiredYear = new Date(lastExpiredDate).getFullYear();
 
-				if(opendDialog === 'DialogBalance'){
+				if (opendDialog === "DialogBalance") {
 					this.setRequest(mid, staticModel.amount, staticModel.descrip, staticModel.dateBalance, 1);
 					this.makeRequest();
-				} else{
+				} else {
 					var datePicked = this.byId("datepicker0").getDateValue();
 					var stepperControl = this.byId("stepper");
 
@@ -277,7 +276,7 @@ sap.ui.define([
 					if (year1 <= lastExpiredYear) {
 						errorMsgString = errorMsgString + mid + ", ";
 						errorMsgNumber++;
-					} else{
+					} else {
 						this.getExpired(mid, year1, yearCalculated);
 					}
 				}
@@ -323,8 +322,8 @@ sap.ui.define([
 					var date = "31.12." + year1;
 
 					//makes a new entry for the expired balance
-					var descriptionText = that.getResourceBundle().getText("expiredDescription1") + " " + 
-								params.dateCalculated + " " + that.getResourceBundle().getText("expiredDescription2");
+					var descriptionText = that.getResourceBundle().getText("expiredDescription1") + " " +
+						params.dateCalculated + " " + that.getResourceBundle().getText("expiredDescription2");
 					that.setRequest(mid, expired, descriptionText, date, 2);
 					that.makeRequest();
 

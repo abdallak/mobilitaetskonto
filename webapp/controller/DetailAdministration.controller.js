@@ -46,6 +46,10 @@ sap.ui.define([
 		 * @property {string} verwalter - verwalter
 		 */
 
+		/**
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 */
 		onInit: function () {
 			this.getRouter().getRoute("DetailAdministration").attachMatched(this._onRoutePatternMatched, this);
 			var detailADModel = new JSONModel();
@@ -108,7 +112,8 @@ sap.ui.define([
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
 		 * Binds Data to detailADUserModel
-		 * @paramm{integer} mid   -- mid of employee
+		 * 
+		 * @param{integer} mid - mid of employee
 		 */
 		performRequestEmployee: function (mid) {
 			var params = {};
@@ -125,7 +130,8 @@ sap.ui.define([
 
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
-		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
+		 * 
+		 * @param{integer} state - integer representation of state(accepted/rejected) of given request
 		 */
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
@@ -146,7 +152,8 @@ sap.ui.define([
 
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
-		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
+		 * 
+		 * @param{integer} state - integer representation of state(accepted/rejected) of given request
 		 */
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
@@ -214,7 +221,8 @@ sap.ui.define([
 			this.byId("openDialog").destroy();
 		},
 
-		/** This funciton is called when update Button is pressed in edit fragment.
+		/** 
+		 * This funciton is called when update Button is pressed in edit fragment.
 		 * reenables submit and cancel Button should they be disabled.
 		 * Updates data in detailADModel with data from Fragment
 		 * 
@@ -249,7 +257,10 @@ sap.ui.define([
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
 		},
-		/** Function to Download Attachment of Request. Requests XSJS from DB
+
+		/** 
+		 * Function to Download Attachment of Request. Requests XSJS from DB
+		 * 
 		 * @param{integer} aid - id of attachment to be downloaded
 		 */
 		performDownloadAttachment: function (aid) {

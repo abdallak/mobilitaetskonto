@@ -42,6 +42,10 @@ sap.ui.define([
 		 * @property {integer} state - status
 		 */
 
+		/**
+		 * Called when a controller is instantiated and its View controls (if available) are already created.
+		 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
+		 */
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
 
@@ -148,8 +152,11 @@ sap.ui.define([
 				// the 2 is used here so that the choosen filteroperator displays the right data
 				sStateKey = "2";
 			} else {
-				if (sStateKey === "4") oFilterOperator = FilterOperator.LE; // LE = Lesser or equal
-				else oFilterOperator = FilterOperator.EQ; //EQ = equals
+				if (sStateKey === "4") {
+					oFilterOperator = FilterOperator.LE; // LE = Lesser or equal
+				} else {
+					oFilterOperator = FilterOperator.EQ; //EQ = equals
+				}
 			}
 
 			var oStateFilter = new Filter("STATUS", oFilterOperator, sStateKey);
