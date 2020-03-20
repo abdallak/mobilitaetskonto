@@ -1,3 +1,4 @@
+/* eslint-disable */
 sap.ui.define([
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
 	"Mobilitaetskonto/Mobilitaetskonto/model/formatter",
@@ -241,18 +242,13 @@ sap.ui.define([
 		 * then performs the chosen function for each of them
 		 */
 		onExecuteDialog: function () {
-			BusyIndicator.show();
 			var errorMsgString = "";
 			var errorMsgNumber = 0; //number of IDs in errorMsgString
 
 			var staticModel = this.getModel("staticModel").getData();
 
 			var thisView = this.getView();
-			var selectedItems = thisView.byId("table0").getSelectedItems();
-
-			var datePickerControl = this.byId("datepicker0");
-
-			var datePicked = datePickerControl.getDateValue();
+			var selectedItems = thisView.byId("employeeTable").getSelectedItems();
 
 			//ErrorMessage if no employee is chosen
 			if (selectedItems.length < 1) {
@@ -267,21 +263,21 @@ sap.ui.define([
 				var lastExpiredDate = context.getProperty(path).JAHRESABSCHLUSS;
 				var lastExpiredYear = new Date(lastExpiredDate).getFullYear();
 
-				if (opendDialog === 'DialogBalance') {
-					this.setRequest(mid, staticModel.amount, staticModel.description, staticModel.dateBalance, 1);
+				if(opendDialog === 'DialogBalance'){
+					this.setRequest(mid, staticModel.amount, staticModel.descrip, staticModel.dateBalance, 1);
 					this.makeRequest();
-				} else {
-
+				} else{
+					var datePicked = this.byId("datepicker0").getDateValue();
 					var stepperControl = this.byId("stepper");
 
-					var year1 = datePicked.getYear() + 1900;
+					var year1 = datePicked.getFullYear();
 					var yearCalculated = year1 - stepperControl.getValue();
 
 					//if the picked year is less than the year the employee had its last expred calculation his ID is added to the error message
 					if (year1 <= lastExpiredYear) {
 						errorMsgString = errorMsgString + mid + ", ";
 						errorMsgNumber++;
-					} else {
+					} else{
 						this.getExpired(mid, year1, yearCalculated);
 					}
 				}
@@ -327,8 +323,8 @@ sap.ui.define([
 					var date = "31.12." + year1;
 
 					//makes a new entry for the expired balance
-					var descriptionText = that.getResourceBundle().getText("expiredDescription1") + " " + params.dateCalculated + " " + that.getResourceBundle()
-						.getText("expiredDescription2");
+					var descriptionText = that.getResourceBundle().getText("expiredDescription1") + " " + 
+								params.dateCalculated + " " + that.getResourceBundle().getText("expiredDescription2");
 					that.setRequest(mid, expired, descriptionText, date, 2);
 					that.makeRequest();
 

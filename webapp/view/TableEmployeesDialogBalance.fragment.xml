@@ -4,10 +4,10 @@
 			<f:SimpleForm id="simpleformid" layout="ResponsiveGridLayout">
 				<f:content>
 					<Label text="{i18n>HeaderValue}" id="betragtext"/>
-					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/betragG}"
+					<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{staticModel>/amount}"
 						liveChange="onValueChanged"/>
 					<Label text="{i18n>HeaderDescription}" id="beschreibtext"/>
-					<TextArea xmlns="sap.m" placeholder="{i18n>placeholderBalance}" value="{staticModel>/beschreibung}" growingMaxLines="4" growing="true"
+					<TextArea xmlns="sap.m" placeholder="{i18n>placeholderBalance}" value="{staticModel>/descrip}" growingMaxLines="4" growing="true"
 						editable="true" textAlign="Left" id="areaDescription"/>
 					<Label text="{i18n>dateOf}" id="datumtext"/>
 					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" value="{staticModel>/dateBalance}"/>

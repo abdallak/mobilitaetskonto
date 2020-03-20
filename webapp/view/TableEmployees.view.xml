@@ -42,13 +42,13 @@
 								</cells>
 							</ColumnListItem>
 						</items>
-						<headerToolbar>
-							<Toolbar width="35%">
-								<content>
-									<SearchField xmlns="sap.m" placeholder="Suche nach Mitarbeiternamen oder ID..." id="searchField0" search="filterTable"/>
-								</content>
-							</Toolbar>
-						</headerToolbar>
+					<headerToolbar>
+					    <Toolbar width="35%">
+					        <content>
+					            <SearchField xmlns="sap.m" placeholder="{i18n>searchBarPlaceHolder}" id="searchField0" search="filterTable"/>
+					        </content>
+					    </Toolbar>
+					</headerToolbar>
 					</Table>
 				</content>
 				<customHeader>
