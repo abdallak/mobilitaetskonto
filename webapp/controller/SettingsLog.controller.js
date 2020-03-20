@@ -21,7 +21,7 @@ sap.ui.define([
 		 * @property {string} NAME - name of administration member
 		 * @property {string} VORNAME - firstname of administration member
 		 * @property {string} AKTION - database activity
-		 * @property {string} - date and time of activity as sap hana date time
+		 * @property {string} DATUM - date and time of activity as sap hana date time
 		 */
 
 
