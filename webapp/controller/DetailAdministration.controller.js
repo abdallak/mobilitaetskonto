@@ -64,7 +64,6 @@ sap.ui.define([
 			this.byId("FormElementAlt").setVisible(false);
 			//ANTRAGSDATEN
 			var decodedVal = decodeURIComponent(oEvent.getParameter("arguments").Detail);
-
 			var detail = JSON.parse(decodedVal);
 			var detailADModel = this.getModel("detailADModel");
 			detailADModel.setData(detail);
