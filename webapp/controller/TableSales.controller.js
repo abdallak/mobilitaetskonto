@@ -168,11 +168,12 @@ sap.ui.define([
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("salesModel");
 			var path = context.getPath();
-
 			var detail = JSON.stringify(context.getProperty(path));
+			
+			var encodedVal = encodeURIComponent(detail);
 
 			this.getRouter().navTo("DetailEmployee", {
-				Detail: detail
+				Detail: encodedVal
 			});
 		}
 	});
