@@ -97,7 +97,7 @@ sap.ui.define([
 					oUserModel.fireEvent("modelUpdated");
 				})
 				.fail(function (jqXHR, exception) {
-					var sErrorMessage = "Ein Fehler beim Laden des SAP Benutzerprofils ist aufgetreten";
+					var sErrorMessage = this.getResourceBundle().getText("sapErrorMessage");
 					var sDetailMessage = jqXHR.responseText + " (" + jqXHR.status + ")";
 					this.onNavMessagePageWorkaround(component, "", sErrorMessage, sDetailMessage);
 				});
@@ -146,8 +146,8 @@ sap.ui.define([
 			// wenn keine Daten in userModel, dann error anzeigen
 			if (oUserModel.getData().name === undefined) {
 				// FIXME: Wird manchmal angezeigt obwohl Daten da
-				this.onNavMessagePageWorkaround(component, "", "SAP Benutzerdaten wurden nicht gefunden.",
-					"Sollte es sich dabei um einen Fehler handeln, bitte Seite erneut laden.");
+				this.onNavMessagePageWorkaround(component, "", this.getResourceBundle().getText("sapErrorMessageUpdateUserModel"),
+					this.getResourceBundle().getText("sapErrorDetailUpdateUserModel"));
 				return;
 			}
 
@@ -175,8 +175,8 @@ sap.ui.define([
 					roleModel.refresh(true);
 
 					if (response.AKTIV !== "TRUE") {
-						that.onNavMessagePageWorkaround(component, "message-warning", "Keine Berechtigung",
-							"Evtl. sind Sie noch nicht für dieses Programm freigeschaltet worden.\n\nBitte wenden Sie sich an den jeweiligen Ansprechpartner bzw. Verwalter.",
+						that.onNavMessagePageWorkaround(component, "message-warning", this.getResourceBundle().getText("sapErrorMessageUpdateUserModelAjax"),
+							this.getResourceBundle().getText("sapErrorDetailUpdateUserModelAjax"),
 							false);
 					}
 				})

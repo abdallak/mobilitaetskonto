@@ -13,7 +13,7 @@
 							</Column>
 							<Column id="column1">
 								<header>
-									<Label text="{i18n>Administrator}" id="label1"/>
+									<Label text="{i18n>administrator}" id="label1"/>
 								</header>
 							</Column>
 							<Column id="column2">
