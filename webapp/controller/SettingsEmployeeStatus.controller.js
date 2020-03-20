@@ -66,7 +66,7 @@ sap.ui.define([
 		/**
 		 * This is a helper function which will prepare and perform the network requests.
 		 * 
-		 * @param{sap.m.ListItemBase[]} oSelectedItems - Selected employee list items
+		 * @param{[sap.m.ListItemBase]} oSelectedItems - Selected employee list items
 		 * @param{boolean} bStatus - New status
 		 */
 		setEmployeeStatus: function (oSelectedItems, bStatus) {
@@ -98,7 +98,7 @@ sap.ui.define([
 		/**
 		 * This is a helper function which will prepare and perform the network requests.
 		 * 
-		 * @param{sap.m.ListItemBase[]} oSelectedItems - Selected employee list items
+		 * @param{[sap.m.ListItemBase]} oSelectedItems - Selected employee list items
 		 */
 		deleteEmployee: function (oSelectedItems) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();

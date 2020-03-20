@@ -9,6 +9,8 @@ sap.ui.define([
 	"use strict";
 
 	/**
+	 * This controller provides a list of all requests for administration members.
+	 * 
 	 * @class TableRequests
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
