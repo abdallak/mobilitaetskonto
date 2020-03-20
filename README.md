@@ -35,5 +35,5 @@ WHERE MID = 'IHRE-MID';
 #### Aktueller Release aus master Branch
 [Mobilitätskonto](https://mobilitaetskonto-p2001828414trial.dispatcher.hanatrial.ondemand.com/index.html)
 
-#### Liste von Übersetzungen
-[Dictionary](https://gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto/-/wikis/Dictionary)
+#### Gruppenmitglieder
+[Übersicht](https://gitlab.informatik.hu-berlin.de/sp_fs_2019_mob/mobilitaetskonto/-/wikis/Contacts)
