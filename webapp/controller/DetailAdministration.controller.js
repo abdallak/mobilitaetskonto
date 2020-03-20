@@ -106,14 +106,13 @@ sap.ui.define([
 
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
-		 * Binds Data to detailADUserModel.
-		 * 
-		 * @param{int} mid - mitarbeiterid
+		 * Binds Data to detailADUserModel
+		 * @paramm{integer} mid   -- mid of employee
 		 */
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET", params);
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var detailADUserModel = that.getModel("detailADUserModel");
@@ -125,8 +124,7 @@ sap.ui.define([
 
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
-		 * 
-		 * @param{int} state - status
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		performRequestUpdate: function (state) {
 			var oRequestData = this.prepareRequestData(state);
@@ -134,7 +132,7 @@ sap.ui.define([
 				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_CHANGE", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
@@ -147,8 +145,7 @@ sap.ui.define([
 
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
-		 * 
-		 * @param{int} state - status
+		 * @param{integer} state -- integer representation of state(accepted/rejected) of given request
 		 */
 		prepareRequestData: function (state) {
 			var dbUserData = this.getGlobalModel("dbUserModel").getData();
@@ -251,11 +248,8 @@ sap.ui.define([
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
 		},
-
-		/** 
-		 * Function to Download Attachment of Request. Requests XSJS from DB
-		 * 
-		 * @param{int} aid - attachmentId
+		/** Function to Download Attachment of Request. Requests XSJS from DB
+		* @param{integer} aid - id of attachment to be downloaded
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
@@ -263,7 +257,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)

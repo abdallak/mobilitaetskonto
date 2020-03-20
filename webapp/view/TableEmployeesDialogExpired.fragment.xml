@@ -12,7 +12,7 @@
 			</f:SimpleForm>
 		</VBox>
 		<beginButton>
-			<Button text="{i18n>abschlussButton}" press=".onExecuteDialog('A')"/>
+			<Button text="{i18n>abschlussButton}" press=".onExecuteDialog()"/>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event)"/>
