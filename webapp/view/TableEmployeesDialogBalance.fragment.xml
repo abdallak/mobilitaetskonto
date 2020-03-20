@@ -14,7 +14,7 @@
 			</f:SimpleForm>
 		</VBox>
 		<beginButton>
-			<Button text="{i18n>guthabenButton}" press=".onExecuteDialog('G')"/>
+			<Button text="{i18n>guthabenButton}" press=".onExecuteDialog()"/>
 		</beginButton>
 		<endButton>
 			<Button text="{i18n>cancelButton}" press=".onAbortCloseDialog($event)"/>
