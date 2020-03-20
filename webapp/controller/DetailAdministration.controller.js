@@ -30,7 +30,7 @@ sap.ui.define([
 		/**
 		 * A local JSON model which contains all request details.
 		 * 
-		 * @typedef detailModel
+		 * @typedef detailADModel
 		 * @type {sap.ui.model.json.JSONModel}
 		 * @property {integer} uid - umsatzid
 		 * @property {integer} mid - mitarbeiterid
@@ -52,12 +52,13 @@ sap.ui.define([
 			this.setModel(detailADModel, "detailADModel");
 			var detailADUserModel = new JSONModel();
 			this.setModel(detailADUserModel, "detailADUserModel");
-			var editADModel = new JSONModel();
-			this.setModel(editADModel, "editADModel");
 		},
-		/** This Function is called everytime the DetailAdminstration View gets called
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
-		*/
+
+		/** 
+		 * This Function is called everytime the DetailAdminstration View gets called
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
@@ -160,9 +161,9 @@ sap.ui.define([
 		},
 
 		/**
-		* Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
-
+		 * Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		approveRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
@@ -173,7 +174,8 @@ sap.ui.define([
 
 		/**
 		 * Called when reject Button is pressed. Initiates Request Update
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		rejectRequestPressed: function (oEvent) {
 			// workaround für: wenn Textfeld noch ausgewählt, also cursor blinkt, dann werden Änderungen nicht im Model übernommen
@@ -204,7 +206,8 @@ sap.ui.define([
 		/** 
 		 * This function is called when cancel Button is pressed in edit fragment.
 		 * Destroys the dialog
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
@@ -213,7 +216,8 @@ sap.ui.define([
 		/** This funciton is called when update Button is pressed in edit fragment.
 		 * reenables submit and cancel Button should they be disabled.
 		 * Updates data in detailADModel with data from Fragment
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		updateDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
@@ -275,7 +279,8 @@ sap.ui.define([
 		/** 
 		 * Funciton to check whether Administrator is allowed to approve Request.
 		 * If RequestValue > MaxApprovalValue the submit and reject Button will be disabled and a warning text displayed.
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		testDisableButton: function (oEvent) {
 			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
@@ -284,9 +289,11 @@ sap.ui.define([
 				this.byId("warningText").setVisible(true);
 			}
 		},
-		/** Function to perform Download when attachment is select.
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+
+		/** 
+		 * Function to perform Download when attachment is select.
 		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
@@ -294,8 +301,12 @@ sap.ui.define([
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-		/** Function checks whether input in edit fragment is valid
-		* @param{sap.ui.base.Event} [oEvent] - oEvent
+
+		/** 
+		 * Function limits the input when entering a new value.
+		 * Only numbers, '.' and ',' are valid.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();

@@ -52,7 +52,10 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function is called everytime the router comes across the view.
+		 * Inside the function, the getTableData() is called.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.getTableData();
@@ -80,6 +83,8 @@ sap.ui.define([
 		 * This function is used for navigation and parameter passing between the actual view and the administration's detail view.
 		 * The function will be triggered after selecting a single transaction inside the table.
 		 * The data related to the selected transactions is passed as stringified JSON Object through the router.
+		 * 
+		 * @param{sap.ui.base.Event} oEvent - oEvent
 		 */
 		onNavToDetail: function (oEvent) {
 			var context = oEvent.getSource().getBindingContext("requestTableModel");
@@ -226,7 +231,10 @@ sap.ui.define([
 		},
 
 		/**
-		 * TODO
+		 * This function binds the given filterArray to the list.
+		 * Basically applys the passed filter.
+		 * 
+		 * @param{[]Filter} filterArr - Array which contains multiple filters
 		 */
 		bindFilters: function (filterArr) {
 			var list = this.getView().byId("requestTableId");
