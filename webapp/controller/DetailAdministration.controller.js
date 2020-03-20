@@ -1,4 +1,3 @@
-/*eslint-disable no-console, no-alert */
 sap.ui.define([
 	"sap/ui/model/json/JSONModel",
 	"Mobilitaetskonto/Mobilitaetskonto/controller/BaseController",
@@ -8,7 +7,7 @@ sap.ui.define([
 	"sap/ui/core/BusyIndicator"
 ], function (JSONModel, BaseController, formatter, MessageToast, Fragment, BusyIndicator) {
 	"use strict";
-	
+
 	/**
 	 * This Class simply displays a detailed view of the selected transaction from the table,
 	 * providing extra information to the user, which is not shown in the table.
@@ -26,10 +25,11 @@ sap.ui.define([
 			this.setModel(detailADUserModel, "detailADUserModel");
 			var editADModel = new JSONModel();
 			this.setModel(editADModel, "editADModel");
-	
 		},
-		/** This Function is called everytime the DetailAdminstration View gets called
-		*/
+
+		/** 
+		 * This Function is called everytime the DetailAdminstration View gets called
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			//Alter Betrag reset
 			this.byId("FormElementAlt").setVisible(false);
@@ -74,6 +74,7 @@ sap.ui.define([
 			this.byId("warningText").setVisible(false);
 			this.testDisableButton();
 		},
+
 		/**
 		 * Requests xsjs Service from DB to get relevant employee information.
 		 * Binds Data to detailADUserModel
@@ -90,6 +91,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		/**
 		 * Passes updated request data to xsjs from DB to update the data of Request in DB.
 		 */
@@ -109,6 +111,7 @@ sap.ui.define([
 				that.handleNetworkError(jqXHR);
 			});
 		},
+
 		/**
 		 * Prepares Request Data to send to XSJS in DB through performRequestUpdate
 		 */
@@ -124,6 +127,7 @@ sap.ui.define([
 			oRequestData.state = state.toString();
 			return oRequestData;
 		},
+
 		/**
 		 * Called when the approve Button is pressed. Initiates Request Update with Status "approved" passed
 		 */
@@ -133,6 +137,7 @@ sap.ui.define([
 			oEvent.getSource().focus();
 			this.performRequestUpdate(2);
 		},
+
 		/**
 		 * Called when reject Button is pressed. Initiates Request Update
 		 */
@@ -143,14 +148,6 @@ sap.ui.define([
 			this.performRequestUpdate(0);
 		},
 
-	/*	_getDialog: function () {
-			if (!this._oDialog) {
-				this._oDialog = sap.ui.xmlfragment("Mobilitaetskonto.Mobilitaetskonto.view.Edit");
-				this.getView().addDependent(this._oDialog);
-				console.log("Hallo");
-			}
-			return this._oDialog;
-		}, Old Function, not needed anymore*/
 		/**
 		 * Funciton called when edit button is pressed. Gets the edit fragment and opens the dialog
 		 */
@@ -169,12 +166,15 @@ sap.ui.define([
 				this.byId("openDialog").open();
 			}
 		},
-		/** This function is called when cancel Button is pressed in edit fragment.
+
+		/** 
+		 * This function is called when cancel Button is pressed in edit fragment.
 		 * Destroys the dialog
 		 */
 		closeDialog: function (oEvent) {
 			this.byId("openDialog").destroy();
 		},
+
 		/** This funciton is called when update Button is pressed in edit fragment.
 		 * reenables submit and cancel Button should they be disabled.
 		 * Updates data in detailADModel with data from Fragment
@@ -190,26 +190,27 @@ sap.ui.define([
 			//Inlcuding the following line results in automatically updating the 'alter Kontostand' to the previously entered 'Betrag'.
 			//Without it, the 'alter Kontostand' value remains as the original one.
 			//this.getModel("detailADModel").setProperty("/ALTBETRAG", this.getModel("detailADModel").getProperty("/BETRAG"));
-			
+
 			this.getModel("detailADModel").setProperty("/BETRAG", parseFloat(this.getModel("detailADModel").getProperty("/NEUBETRAG")));
 			this.getModel("detailADModel").setProperty("/NEUBETRAG", 0);
 			this.calcNewBalance();
 			this.testDisableButton();
 		},
-		/** Function to calculate Account Balance after Request would be approved
+
+		/** 
+		 * Function to calculate Account Balance after Request would be approved
 		 */
 		calcNewBalance: function () {
-
 			var accBalance = this.getModel("detailADModel").getData().GUTHABEN;
 			var requestValue = this.getModel("detailADModel").getData().BETRAG;
-			console.log(requestValue, accBalance);
 			var parsedAccBalance = parseFloat(accBalance);
 			var parsedRequestValue = parseFloat(requestValue);
 
 			this.getModel("detailADModel").setProperty("/RESULTBALANCE", parsedAccBalance + parsedRequestValue);
-			console.log(this.getModel("detailADModel").getProperty("/RESULTBALANCE"));
 		},
-		/** Function to Download Attachment of Request. Requests XSJS from DB
+
+		/** 
+		 * Function to Download Attachment of Request. Requests XSJS from DB
 		 */
 		performDownloadAttachment: function (aid) {
 			// TODO: vielleicht in detailModel speichern als Art Cache, damit nicht immer wieder neu geladen wird?
@@ -235,20 +236,21 @@ sap.ui.define([
 					that.handleNetworkError(jqXHR);
 				});
 		},
-		/** Funcito to check whether Administrator is allowed to approve Request.
+
+		/** 
+		 * Funciton to check whether Administrator is allowed to approve Request.
 		 * If RequestValue > MaxApprovalValue the submit and reject Button will be disabled and a warning text displayed.
 		 */
-		testDisableButton: function(oEvent) {
-			if(Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT"))
-			{
-			this.byId("submitButton").setEnabled(false);
-			this.byId("rejectButton").setEnabled(false);
-			this.byId("warningText").setVisible(true);
-				
+		testDisableButton: function (oEvent) {
+			if (Math.abs(this.getModel("detailADModel").getProperty("/BETRAG")) > this.getModel("dbUserModel").getProperty("/FREIGABEWERT")) {
+				this.byId("submitButton").setEnabled(false);
+				this.byId("rejectButton").setEnabled(false);
+				this.byId("warningText").setVisible(true);
 			}
 		},
-		/** Function to perform Download when attachment is select.
-		 * 
+
+		/** 
+		 * Function to perform Download when attachment is select.
 		 */
 		onSelectChange: function (oEvent) {
 			var aid = oEvent.getParameters().selectedItem.getProperty("documentId");
@@ -256,17 +258,18 @@ sap.ui.define([
 			// deselect item again
 			oEvent.getParameters().selectedItem.setSelected();
 		},
-		/** Fairly sure function is not needed.
+
+		/** 
+		 * Fairly sure function is not needed.
 		 */
-		handleLiveChange : function(oEvent){
+		handleLiveChange: function (oEvent) {
 			var oSource = oEvent.getSource();
 			var input = oSource.getValue();
 			var lastInput = input.slice(-1); //retrieves last character
-			
+
 			//Punkt und Komma sind mehrmals möglich
-			if(isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",") )
-			{
-				oSource.setValue(input.slice(0, input.length-1));	
+			if (isNaN(lastInput) && !(lastInput === "-" && input.length === 1) && !(lastInput === "." || lastInput === ",")) {
+				oSource.setValue(input.slice(0, input.length - 1));
 			}
 		}
 	});

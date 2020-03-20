@@ -8,9 +8,16 @@ sap.ui.define([
 ], function (BaseController, formatter, Filter, FilterOperator, JSONModel, BusyIndicator) {
 	"use strict";
 
+	/**
+	 * TODO
+	 * @class TableRequests
+	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableRequests", {
 		formatter: formatter,
 
+		/**
+		 * TODO
+		 */
 		onInit: function () {
 			var requestTableModel = new JSONModel();
 			this.setModel(requestTableModel, "requestTableModel");
@@ -22,6 +29,9 @@ sap.ui.define([
 			this.getRouter().getRoute("TableRequests").attachMatched(this._onRoutePatternMatched, this);
 		},
 
+		/**
+		 * TODO
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			this.getTableData();
 		},
@@ -168,7 +178,7 @@ sap.ui.define([
 						new Filter("VORNAME", FilterOperator.Contains, sSearchQuery),
 						new Filter("BETRAG", FilterOperator.EQ, parseFloat(sSearchQuery)),
 						new Filter("UID", FilterOperator.EQ, parseInt(sSearchQuery, 10))
-						],
+					],
 					false);
 
 				singleFilters.push(oSearchFilter);
@@ -193,6 +203,9 @@ sap.ui.define([
 			this.bindFilters(filters);
 		},
 
+		/**
+		 * TODO
+		 */
 		bindFilters: function (filterArr) {
 			var list = this.getView().byId("requestTableId");
 			var binding = list.getBinding("items");

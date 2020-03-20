@@ -14,6 +14,9 @@ sap.ui.define([
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.DetailEmployee", {
 		formatter: formatter,
 
+		/**
+		 * TODO
+		 */
 		onInit: function () {
 			this.getRouter().getRoute("DetailEmployee").attachMatched(this._onRoutePatternMatched, this);
 

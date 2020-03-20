@@ -14,11 +14,15 @@ sap.ui.define([
 	 * The actual usage doesn't vary at all. The first option, connected to the "TableSales" paramter, accessed through the 'Kontostand' tile
 	 * displays transactions where the state is 'approved(genehmigt)' or 'carried out(durchgeführt)'.
 	 * The second option, accessed through the 'Anträge' tile, displays transactions with state beeing 'declined(abgelehnt)' or 'pending(ausstehend)'.
+	 * 
 	 * @class TableSales
 	 */
 	return BaseController.extend("Mobilitaetskonto.Mobilitaetskonto.controller.TableSales", {
 		formatter: formatter,
 
+		/**
+		 * TODO
+		 */
 		onInit: function () {
 			this.getRouter().getRoute("TableSales").attachMatched(this._onRoutePatternMatched, this);
 
@@ -26,6 +30,9 @@ sap.ui.define([
 			picker.setMaxDate(new Date()); //set MaxDate of daterangepicker to todays date
 		},
 
+		/**
+		 * TODO
+		 */
 		_onRoutePatternMatched: function (oEvent) {
 			var target = oEvent.getParameter("arguments").Target; //tablename parameter to decide the content of the table 
 			this.updateUserModel();
@@ -80,8 +87,10 @@ sap.ui.define([
 				});
 		},
 
+		/**
+		 * TODO
+		 */
 		filterTable: function () {
-
 			//BindingContext
 			var list = this.getView().byId("table0");
 			var binding = list.getBinding("items");
