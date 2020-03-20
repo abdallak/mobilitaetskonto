@@ -21,7 +21,7 @@ In HANA Catalog Toolbar `Open SQL Console` auswählen, nutzen Sie bitte den folg
 ``` SQL
 UPDATE "MOBILITAETSKONTO"."MITARBEITER"
 SET FREIGABEWERT = 1000, AKTIV = true, FREIGEBER = 'IHRE-MID'
-WHERE mid = 'IHRE-MID';
+WHERE MID = 'IHRE-MID';
 ```
 
 ### Weitere Ressourcen
