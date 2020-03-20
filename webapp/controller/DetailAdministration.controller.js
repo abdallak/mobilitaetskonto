@@ -82,7 +82,7 @@ sap.ui.define([
 		performRequestEmployee: function (mid) {
 			var params = {};
 			params.mid = mid;
-			var settings = this.prepareAjaxRequest("/MOB_MITARBEITER_GET", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_EMPLOYEE_GET", "GET", params);
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				var detailADUserModel = that.getModel("detailADUserModel");
@@ -101,7 +101,7 @@ sap.ui.define([
 				this.handleEmptyModel(this.getResourceBundle().getText("FeedbackInvalid"));
 				return;
 			}
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_HANDLE", "POST", JSON.stringify(oRequestData));
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_CHANGE", "POST", JSON.stringify(oRequestData));
 			var that = this;
 			$.ajax(settings).done(function (response) {
 				BusyIndicator.hide();
@@ -218,7 +218,7 @@ sap.ui.define([
 			var params = {};
 			params.aid = aid;
 
-			var settings = this.prepareAjaxRequest("/MOB_ANTRAG_DOWNLOAD", "GET", params);
+			var settings = this.prepareAjaxRequest("/MOB_REQUEST_DOWNLOADATTACH", "GET", params);
 
 			var that = this;
 			$.ajax(settings)
