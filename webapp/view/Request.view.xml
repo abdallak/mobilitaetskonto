@@ -1,5 +1,4 @@
-<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml"
-	xmlns:l="sap.ui.layout" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" controllerName="Mobilitaetskonto.Mobilitaetskonto.controller.Request" busyIndicatorSize="Auto">
 	<App id="app">
 		<pages>
 			<Page floatingFooter="true">
@@ -8,7 +7,7 @@
 						<sap.ui.layout.form:formContainers>
 							<sap.ui.layout.form:FormContainer id="container1">
 								<sap.ui.layout.form:formElements>
-									<sap.ui.layout.form:FormElement label="Art" id="element1_1574960390335">
+									<sap.ui.layout.form:FormElement label="{i18n>HeaderType}" id="element1_1574960390335">
 										<sap.ui.layout.form:fields>
 											<SegmentedButton xmlns="sap.m" selectedKey="{oRequestModel>/art}" id="art">
 												<items>
@@ -20,8 +19,7 @@
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>HeaderCategory}" id="element1">
 										<sap.ui.layout.form:fields>
-											<Select xmlns="sap.m" id="categorySelect" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect"
-												selectedKey="{oRequestModel>/kid}">
+											<Select xmlns="sap.m" id="categorySelect" busyIndicatorSize="Auto" maxWidth="30%" change="KategorieSelect" selectedKey="{oRequestModel>/kid}">
 												<items/>
 											</Select>
 										</sap.ui.layout.form:fields>
@@ -29,24 +27,20 @@
 									<sap.ui.layout.form:FormElement label="{i18n>requestAmount}" id="element0">
 										<sap.ui.layout.form:fields>
 											<HBox width="100%" id="hbox0">
-												<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}"
-													liveChange="onValueChanged"/>
+												<Input width="100%" id="amount" placeholder="{i18n>requestPlaceholder}" required="true" type="Number" value="{oRequestModel>/betrag}" liveChange="onValueChanged"/>
 												<core:Icon src="sap-icon://message-information" size="1.9em" id="icon0" tooltip="{i18n>requestInfoIcon}" class="sapUiSmallMarginBegin"/>
 											</HBox>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 									<sap.ui.layout.form:FormElement label="{i18n>requestDescription}" id="element3">
 										<sap.ui.layout.form:fields>
-											<TextArea xmlns="sap.m" id="description" rows="6" value="{oRequestModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto"
-												required="true"/>
+											<TextArea xmlns="sap.m" id="description" rows="6" value="{oRequestModel>/beschreibung}" wrapping="Soft" busyIndicatorSize="Auto" required="true"/>
 										</sap.ui.layout.form:fields>
 									</sap.ui.layout.form:FormElement>
 								</sap.ui.layout.form:formElements>
 								<sap.ui.layout.form:FormElement label="{i18n>HeaderAttachment}">
 									<sap.ui.layout.form:fields>
-										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false"
-											noDataDescription="{i18n>attachmentInfo}" change="onChange" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed"
-											instantUpload="false" numberOfAttachmentsText=" "/>
+										<UploadCollection id="UploadCollection" maximumFilenameLength="55" maximumFileSize="10" multiple="true" sameFilenameAllowed="false" noDataDescription="{i18n>attachmentInfo}" change="onChange" filenameLengthExceed="onFilenameLengthExceed" fileSizeExceed="onFileSizeExceed" instantUpload="false" numberOfAttachmentsText=" "/>
 									</sap.ui.layout.form:fields>
 								</sap.ui.layout.form:FormElement>
 							</sap.ui.layout.form:FormContainer>
@@ -61,17 +55,14 @@
 						<contentLeft>
 							<HBox>
 								<Button width="100%" id="backButton" icon="sap-icon://nav-back" press="onNavBack" tooltip="{i18n>navBackTip}"/>
-								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%"
-									id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
+								<Button xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" width="100%" id="startpageButton" icon="sap-icon://home" press="onNavStartpage" tooltip="{i18n>navStartpageTip}"/>
 							</HBox>
 						</contentLeft>
 						<contentMiddle>
-							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
-								text="{i18n>requestTitle}" width="100%" id="titleLabel"/>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{i18n>requestTitle}" width="100%" id="titleLabel"/>
 						</contentMiddle>
 						<contentRight>
-							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m"
-								text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%"/>
+							<Label xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns:html="http://www.w3.org/1999/xhtml" xmlns="sap.m" text="{dbUserModel>/VORNAME} {dbUserModel&gt;/NAME}" width="100%"/>
 						</contentRight>
 					</Bar>
 				</customHeader>
