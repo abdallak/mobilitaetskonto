@@ -10,7 +10,7 @@
 					<TextArea xmlns="sap.m" placeholder="{i18n>placeholderBalance}" value="{staticModel>/descrip}" growingMaxLines="4" growing="true"
 						editable="true" textAlign="Left" id="areaDescription"/>
 					<Label text="{i18n>dateOf}" id="datumtext"/>
-					<DatePicker xmlns="sap.m" id="datepicker0" change="setDate" value="{staticModel>/dateBalance}"/>
+					<DatePicker xmlns="sap.m" id="datepicker0" valueFormat="dd.MM.yyyy" displayFormat="dd.MM.yyyy" change="setDate" value="{staticModel>/dateBalance}"/>
 				</f:content>
 			</f:SimpleForm>
 		</VBox>
