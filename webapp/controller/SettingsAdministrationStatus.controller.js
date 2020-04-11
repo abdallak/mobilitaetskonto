@@ -115,7 +115,7 @@ sap.ui.define([
 			var sValue = oEvent.getParameter("value");
 			var oSource = oEvent.getSource();
 			var betragValue = parseFloat(sValue);
-			if (!isNaN(betragValue) && betragValue > 0.0) {
+			if (!isNaN(betragValue) && betragValue >= 0.0) {
 				oSource.setValueState("Success");
 				oSource.setValueStateText(null);
 			} else {
