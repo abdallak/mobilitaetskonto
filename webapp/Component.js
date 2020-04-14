@@ -6,7 +6,7 @@ sap.ui.define([
 	"use strict";
 
 	/**
-	 * @class TableSales
+	 * @class Component
 	 */
 	return UIComponent.extend("Mobilitaetskonto.Mobilitaetskonto.Component", {
 
