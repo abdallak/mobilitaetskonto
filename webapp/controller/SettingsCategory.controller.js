@@ -106,7 +106,7 @@ sap.ui.define([
 			var kid = oEvent.getParameter("listItem").data("KID");
 
 			if (kid === 0) {
-				this.handleEmptyModel("Kategorie \"Sonstiges\" kann nicht gelöscht werden.");
+				this.handleEmptyModel(this.getResourceBundle().getText("settingsCategoryOnEditPressedError"));
 				return;
 			}
 
